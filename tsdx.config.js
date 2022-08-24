@@ -8,7 +8,7 @@ module.exports = {
       postcss({
         plugins: [
           tailwindcss({
-            content: ['./src/**/*.{js,jsx,ts,tsx}', './stories/*'],
+            content: ['./src/**/*.{js,jsx,ts,tsx}'],
             theme: {
               extend: {},
             },

@@ -22,7 +22,7 @@ jobs:
       - name: Install deps and build (with cache)
         uses: bahmutov/npm-install@v1
         with:
-          install-command: yarn --frozen-lockfile --silent --ignore-engines
+          install-command: yarn --ignore-engines
 
       - name: Lint
         run: yarn lint
