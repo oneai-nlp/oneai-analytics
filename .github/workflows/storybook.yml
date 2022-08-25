@@ -1,7 +1,10 @@
 name: Build and Deploy
 on:
-  push:
-    paths: ['stories/**', 'src/**'] # Trigger the action only when files change in the folders defined here
+  workflow_run:
+    workflows: ['CI']
+    branches: [main]
+    types:
+      - completed
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
