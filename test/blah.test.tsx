@@ -1,10 +1,10 @@
 import React from 'react';
-import { Default as Thing } from '../stories/Thing.stories';
+import { Treemap } from '../stories/Thing.stories';
 import { render } from '@testing-library/react';
 
-describe('Thing', () => {
+describe('Treemap', () => {
   it('renders without crashing', () => {
-    const component = render(<Thing />);
+    const component = render(<Treemap />);
     component.unmount();
   });
 });

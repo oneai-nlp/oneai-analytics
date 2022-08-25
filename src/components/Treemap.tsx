@@ -1,5 +1,5 @@
 import { FC, useEffect, useMemo, useState } from 'react';
-import * as d3 from 'd3';
+import { treemap, hierarchy } from 'd3';
 import { TreemapNode } from '../types/clusters';
 import { TreemapProps } from '../types/components';
 import React from 'react';
@@ -31,21 +31,18 @@ export const Treemap: FC<TreemapProps> = ({
     });
   }, [clusters]);
 
-  const hierarchy = useMemo(() => {
-    return d3
-      .hierarchy(mainCluster, d =>
-        d.children?.sort((c1, c2) => c2.items_count - c1.items_count)
-      )
-      .sum(d => d.items_count);
+  const treeHierarchy = useMemo(() => {
+    return hierarchy(mainCluster, d =>
+      d.children?.sort((c1, c2) => c2.items_count - c1.items_count)
+    ).sum(d => d.items_count);
   }, [mainCluster]);
 
   const root = useMemo(() => {
-    const treeGenerator = d3
-      .treemap<TreemapNode>()
+    const treeGenerator = treemap<TreemapNode>()
       .size([width, height])
       .padding(1);
-    return treeGenerator(hierarchy);
-  }, [hierarchy, width, height]);
+    return treeGenerator(treeHierarchy);
+  }, [treeHierarchy, width, height]);
 
   const allShapes = root.leaves().map((leaf, index) => {
     const fontSize = calculateFontSize(leaf.y1 - leaf.y0, leaf.x1 - leaf.x0);
