@@ -37,12 +37,12 @@ export const OneAiAnalytics: FC<{ clusters: TreemapNode[] }> = ({
     <div className="h-full w-full flex flex-col">
       {clickedClusters.length > 0 && (
         <div className="bg-slate-600 h-1/6 w-full ">
-          <div className="flex flex-row relative items-center p-5 justify-between">
-            <div className="flex flex-row items-center">
+          <div className="flex flex-row items-center p-5 justify-between h-full">
+            <div className="flex flex-row  w-11/12">
               <button
                 type="button"
                 onClick={goBack}
-                className="text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center"
+                className="text-white p-2 bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm text-center inline-flex items-center"
               >
                 <svg
                   className="h-4 w-4 text-gray-500 mr-1"
@@ -61,7 +61,7 @@ export const OneAiAnalytics: FC<{ clusters: TreemapNode[] }> = ({
                 </svg>
                 BACK
               </button>
-              <div className="ml-4 text-xl text-gray-300 font-bold">
+              <div className="ml-4 text-gray-300 font-bold truncate">
                 {clickedClusters.at(-1)!.text}
               </div>
             </div>

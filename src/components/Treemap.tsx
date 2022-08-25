@@ -14,7 +14,7 @@ export const Treemap: FC<TreemapProps> = ({
   const [mainCluster, setMainCluster] = useState({
     type: 'Node',
     id: '',
-    children: clusters.map(c => {
+    children: clusters.slice(0, 30).map(c => {
       return { ...c, children: [] };
     }),
     items_count: 0,
@@ -24,7 +24,7 @@ export const Treemap: FC<TreemapProps> = ({
     setMainCluster({
       type: 'Node',
       id: '',
-      children: clusters.map(c => {
+      children: clusters.slice(0, 30).map(c => {
         return { ...c, children: [] };
       }),
       items_count: 0,
@@ -73,7 +73,7 @@ export const Treemap: FC<TreemapProps> = ({
               </div>
             </div>
             <div
-              className="justify-center text-center items-center h-full flex"
+              className="justify-center text-center items-center h-full w-full flex"
               style={{
                 fontSize: fontSize,
               }}
