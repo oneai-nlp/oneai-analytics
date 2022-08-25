@@ -1,10 +1,11 @@
-import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { Example } from '../src/components/Example';
+import React from 'react';
+import { OneAiAnalytics } from '../src/components/OneAiAnalytics';
+import { clusters } from './data/clusters';
 
 const meta: Meta = {
-  title: 'Welcome',
-  component: Example,
+  title: 'One Ai Analytics',
+  component: OneAiAnalytics,
   parameters: {
     controls: { expanded: true },
   },
@@ -12,10 +13,14 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story = args => <Example text={''} {...args} />;
+const Template: Story = args => (
+  <div className="h-96 w-full">
+    <OneAiAnalytics clusters={[]} {...args} />
+  </div>
+);
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
-export const Default = Template.bind({});
+export const Treemap = Template.bind({});
 
-Default.args = { text: 'hi' };
+Treemap.args = { clusters: clusters };

@@ -1,4 +1,5 @@
 import './index.css';
-import { Example } from './components/Example';
+import './common/polyfill';
+import { OneAiAnalytics } from './components/OneAiAnalytics';
 
-export { Example };
+export { OneAiAnalytics };
