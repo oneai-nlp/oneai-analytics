@@ -1,14 +1,19 @@
 import React, { FC, useState } from 'react';
 import ContainerDimensions from 'react-container-dimensions';
 import { TreemapNode } from '../types/clusters';
+import { OneAiAnalyticsProps } from '../types/components';
+import { ItemsListDisplay } from './ItemsListDisplay';
 import { Treemap } from './Treemap';
 // Please do not use types off of a default export module or else Storybook Docs will suffer.
 // see: https://github.com/storybookjs/storybook/issues/9556
 /**
  * One Ai Analytics Component
  */
-export const OneAiAnalytics: FC<{ clusters: TreemapNode[] }> = ({
+export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   clusters = [],
+  itemsDisplay = ItemsListDisplay,
+  darkestColor = '#031f38',
+  treemapCountFontSize = 14,
 }) => {
   const [currentClusters, setCurrentClusters] = useState(clusters);
   const [clickedClusters, setClickedClusters] = useState([] as TreemapNode[]);
@@ -36,9 +41,9 @@ export const OneAiAnalytics: FC<{ clusters: TreemapNode[] }> = ({
   return (
     <div className="h-full w-full flex flex-col">
       {clickedClusters.length > 0 && (
-        <div className="bg-slate-600 h-1/6 w-full ">
+        <div className="h-1/6 w-full" style={{ backgroundColor: darkestColor }}>
           <div className="flex flex-row items-center p-5 justify-between h-full">
-            <div className="flex flex-row  w-11/12">
+            <div className="flex flex-row w-11/12">
               <button
                 type="button"
                 onClick={goBack}
@@ -61,7 +66,7 @@ export const OneAiAnalytics: FC<{ clusters: TreemapNode[] }> = ({
                 </svg>
                 BACK
               </button>
-              <div className="ml-4 text-gray-300 font-bold truncate">
+              <div className="ml-4 text-gray-300 font-bold truncate self-center">
                 {clickedClusters.at(-1)!.text}
               </div>
             </div>
@@ -74,17 +79,15 @@ export const OneAiAnalytics: FC<{ clusters: TreemapNode[] }> = ({
 
       <div
         className={`${
-          clickedClusters.length > 0 ? 'h-full' : 'h-5/6'
+          clickedClusters.length === 0 ? 'h-full' : 'h-5/6'
         } w-full overflow-auto`}
       >
         {clickedClusters && clickedClusters.at(-1)?.type === 'Phrase' ? (
-          <div>
-            {clickedClusters.at(-1)!.items?.map(item => (
-              <div key={item.text}>
-                {item.text} - {item.count}
-              </div>
-            ))}
-          </div>
+          <>
+            {itemsDisplay({
+              items: clickedClusters.at(-1)!.items ?? [],
+            })}
+          </>
         ) : (
           <ContainerDimensions>
             {({ height, width }) => (
@@ -93,6 +96,8 @@ export const OneAiAnalytics: FC<{ clusters: TreemapNode[] }> = ({
                 height={height}
                 width={width}
                 nodeClicked={nodeClicked}
+                darkestColor={darkestColor}
+                countFontSize={treemapCountFontSize}
               />
             )}
           </ContainerDimensions>

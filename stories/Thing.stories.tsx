@@ -23,4 +23,4 @@ const Template: Story = args => (
 // https://storybook.js.org/docs/react/workflows/unit-testing
 export const Treemap = Template.bind({});
 
-Treemap.args = { clusters: clusters };
+Treemap.args = { clusters: clusters.slice(0, 30) };

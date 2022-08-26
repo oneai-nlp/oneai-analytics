@@ -1,5 +1,5 @@
 import { FC, useEffect, useMemo, useState } from 'react';
-import { treemap, hierarchy } from 'd3';
+import { treemap, hierarchy, scaleLog } from 'd3';
 import { TreemapNode } from '../types/clusters';
 import { TreemapProps } from '../types/components';
 import React from 'react';
@@ -10,11 +10,13 @@ export const Treemap: FC<TreemapProps> = ({
   height,
   width,
   nodeClicked,
+  darkestColor = '#031f38',
+  countFontSize = 14,
 }) => {
   const [mainCluster, setMainCluster] = useState({
     type: 'Node',
     id: '',
-    children: clusters.slice(0, 30).map(c => {
+    children: clusters.map(c => {
       return { ...c, children: [] };
     }),
     items_count: 0,
@@ -24,7 +26,7 @@ export const Treemap: FC<TreemapProps> = ({
     setMainCluster({
       type: 'Node',
       id: '',
-      children: clusters.slice(0, 30).map(c => {
+      children: clusters.map(c => {
         return { ...c, children: [] };
       }),
       items_count: 0,
@@ -32,20 +34,35 @@ export const Treemap: FC<TreemapProps> = ({
   }, [clusters]);
 
   const treeHierarchy = useMemo(() => {
-    return hierarchy(mainCluster, d =>
-      d.children?.sort((c1, c2) => c2.items_count - c1.items_count)
-    ).sum(d => d.items_count);
+    const elementsValues = mainCluster.children!.map(item => item.items_count);
+    const maxElementValue = Math.max(...elementsValues);
+    const minElementValue = Math.min(...elementsValues);
+    const dataScale = scaleLog()
+      .domain([minElementValue, maxElementValue])
+      .range([
+        Math.max(minElementValue, maxElementValue * 0.4),
+        maxElementValue,
+      ]);
+    return hierarchy(mainCluster).sum(d => {
+      return dataScale(d.items_count);
+    });
   }, [mainCluster]);
 
   const root = useMemo(() => {
     const treeGenerator = treemap<TreemapNode>()
       .size([width, height])
-      .padding(1);
+      .padding(0);
     return treeGenerator(treeHierarchy);
   }, [treeHierarchy, width, height]);
 
   const allShapes = root.leaves().map((leaf, index) => {
-    const fontSize = calculateFontSize(leaf.y1 - leaf.y0, leaf.x1 - leaf.x0);
+    const height = leaf.y1 - leaf.y0;
+    const width = leaf.x1 - leaf.x0;
+    const fontSize = calculateFontSize(height, width);
+    const lineHeight = fontSize * 1.1 + 5;
+    const paddingY = 10;
+    let lines = Math.floor((height - paddingY + 20) / lineHeight) - 3; // -2 is for the d.data.value and <br />, 20 is for the value absolute top padding
+    lines = Math.max(lines, 1);
     return (
       <g
         key={index}
@@ -55,42 +72,45 @@ export const Treemap: FC<TreemapProps> = ({
         <rect
           x={leaf.x0}
           y={leaf.y0}
-          width={leaf.x1 - leaf.x0}
-          height={leaf.y1 - leaf.y0}
+          width={width}
+          height={height}
           stroke="transparent"
-          fill={lightenDarkenColor('#031f38', 10 + 5 * ((index % 25) + 1))}
+          fill={lightenDarkenColor(darkestColor, 10 + 5 * ((index % 25) + 1))}
         />
-        <foreignObject
-          x={leaf.x0}
-          y={leaf.y0}
-          width={leaf.x1 - leaf.x0}
-          height={leaf.y1 - leaf.y0}
-        >
-          <div className="flex flex-col h-full text-white">
-            <div className="text-center flex">
-              <div className="font-bold" style={{ fontSize: fontSize }}>
-                {leaf.value}
-              </div>
-            </div>
-            <div
-              className="justify-center text-center items-center h-full w-full flex"
+        <foreignObject x={leaf.x0} y={leaf.y0} width={width} height={height}>
+          <span
+            className="relative h-full p-1 items-center flex justify-center text-gray-200"
+            style={{ fontSize: `${fontSize}px` }}
+          >
+            <span
+              data-element="rect-text"
+              className="overflow-hidden mt-1"
               style={{
-                fontSize: fontSize,
+                lineHeight: `${lineHeight}px`,
+                wordBreak: 'break-word',
+                WebkitLineClamp: lines,
+                WebkitTouchCallout: 'none',
+                display: '-webkit-box',
+                WebkitBoxOrient: 'vertical',
               }}
             >
               {leaf.data.text}
-            </div>
-          </div>
+            </span>
+            <span
+              className="absolute top-1 left-1"
+              style={{ fontSize: `${countFontSize}px` }}
+            >
+              {leaf.data.items_count}
+            </span>
+          </span>
         </foreignObject>
       </g>
     );
   });
 
   return (
-    <div>
-      <svg width={width} height={height}>
-        {allShapes}
-      </svg>
-    </div>
+    <svg width={width} height={height}>
+      {allShapes}
+    </svg>
   );
 };
