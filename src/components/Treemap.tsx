@@ -1,9 +1,8 @@
-import { FC, useEffect, useMemo, useState } from 'react';
-import { treemap, hierarchy, scaleLog } from 'd3';
+import { hierarchy, scaleLog, treemap } from 'd3';
+import React, { FC, useEffect, useMemo, useState } from 'react';
+import { calculateFontSize, lightenDarkenColor } from '../common/utils';
 import { TreemapNode } from '../types/clusters';
 import { TreemapProps } from '../types/components';
-import React from 'react';
-import { calculateFontSize, lightenDarkenColor } from '../common/utils';
 
 export const Treemap: FC<TreemapProps> = ({
   clusters,
@@ -41,7 +40,7 @@ export const Treemap: FC<TreemapProps> = ({
       .domain([minElementValue, maxElementValue])
       .range([
         Math.max(minElementValue, maxElementValue * 0.4),
-        maxElementValue,
+        maxElementValue * 3,
       ]);
     return hierarchy(mainCluster).sum(d => {
       return dataScale(d.items_count);
@@ -84,7 +83,7 @@ export const Treemap: FC<TreemapProps> = ({
           >
             <span
               data-element="rect-text"
-              className="overflow-hidden mt-1"
+              className="overflow-hidden mt-1 text-center"
               style={{
                 lineHeight: `${lineHeight}px`,
                 wordBreak: 'break-word',
