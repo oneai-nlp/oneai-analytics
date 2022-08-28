@@ -12,8 +12,11 @@ import { Treemap } from './Treemap';
 export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   clusters = [],
   itemsDisplay = ItemsListDisplay,
-  darkestColor = '#031f38',
+  treemapBigColor = '#031f38',
+  treemapSmallColor = '#72b1ca',
   treemapCountFontSize = 14,
+  treemapFontFamily = 'sans-serif',
+  navbarColor = treemapBigColor,
 }) => {
   const [currentClusters, setCurrentClusters] = useState(clusters);
   const [clickedClusters, setClickedClusters] = useState([] as TreemapNode[]);
@@ -41,7 +44,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   return (
     <div className="h-full w-full flex flex-col">
       {clickedClusters.length > 0 && (
-        <div className="h-1/6 w-full" style={{ backgroundColor: darkestColor }}>
+        <div className="h-1/6 w-full" style={{ backgroundColor: navbarColor }}>
           <div className="flex flex-row items-center p-5 justify-between h-full">
             <div className="flex flex-row w-11/12">
               <button
@@ -96,8 +99,10 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 height={height}
                 width={width}
                 nodeClicked={nodeClicked}
-                darkestColor={darkestColor}
+                bigColor={treemapBigColor}
+                smallColor={treemapSmallColor}
                 countFontSize={treemapCountFontSize}
+                fontFamily={treemapFontFamily}
               />
             )}
           </ContainerDimensions>

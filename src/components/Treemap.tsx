@@ -1,6 +1,7 @@
-import { hierarchy, scaleLog, treemap } from 'd3';
+import { scale } from 'chroma-js';
+import { hierarchy, treemap } from 'd3';
 import React, { FC, useEffect, useMemo, useState } from 'react';
-import { calculateFontSize, lightenDarkenColor } from '../common/utils';
+import { calculateFontSize } from '../common/utils';
 import { TreemapNode } from '../types/clusters';
 import { TreemapProps } from '../types/components';
 
@@ -9,8 +10,10 @@ export const Treemap: FC<TreemapProps> = ({
   height,
   width,
   nodeClicked,
-  darkestColor = '#031f38',
+  bigColor = '#031f38',
+  smallColor = '#72b1ca',
   countFontSize = 14,
+  fontFamily = 'sans-serif',
 }) => {
   const [mainCluster, setMainCluster] = useState({
     type: 'Node',
@@ -35,16 +38,21 @@ export const Treemap: FC<TreemapProps> = ({
   const treeHierarchy = useMemo(() => {
     const elementsValues = mainCluster.children!.map(item => item.items_count);
     const maxElementValue = Math.max(...elementsValues);
-    const minElementValue = Math.min(...elementsValues);
-    const dataScale = scaleLog()
-      .domain([minElementValue, maxElementValue])
-      .range([
-        Math.max(minElementValue, maxElementValue * 0.4),
-        maxElementValue * 3,
-      ]);
-    return hierarchy(mainCluster).sum(d => {
-      return dataScale(d.items_count);
-    });
+    const elementsSum = elementsValues.reduce(
+      (a: number, b: number) => a + b,
+      0
+    );
+    const growFactor =
+      maxElementValue > elementsSum * 0.9
+        ? 0.1 / (1 - maxElementValue / elementsSum)
+        : 1;
+    return hierarchy(mainCluster)
+      .sum(d => {
+        return maxElementValue === d.items_count
+          ? d.items_count
+          : d.items_count * growFactor;
+      })
+      .sort((n1, n2) => n2.data.items_count - n1.data.items_count);
   }, [mainCluster]);
 
   const root = useMemo(() => {
@@ -53,6 +61,11 @@ export const Treemap: FC<TreemapProps> = ({
       .padding(0);
     return treeGenerator(treeHierarchy);
   }, [treeHierarchy, width, height]);
+
+  const colors = useMemo(() => {
+    const len = root.leaves().length;
+    return scale([bigColor, smallColor]).domain([0, len]);
+  }, [root, bigColor, smallColor]);
 
   const allShapes = root.leaves().map((leaf, index) => {
     const height = leaf.y1 - leaf.y0;
@@ -74,12 +87,12 @@ export const Treemap: FC<TreemapProps> = ({
           width={width}
           height={height}
           stroke="transparent"
-          fill={lightenDarkenColor(darkestColor, 10 + 5 * ((index % 25) + 1))}
+          fill={colors(index).hex()}
         />
         <foreignObject x={leaf.x0} y={leaf.y0} width={width} height={height}>
           <span
             className="relative h-full p-1 items-center flex justify-center text-gray-200"
-            style={{ fontSize: `${fontSize}px` }}
+            style={{ fontSize: `${fontSize}px`, fontFamily: fontFamily }}
           >
             <span
               data-element="rect-text"
