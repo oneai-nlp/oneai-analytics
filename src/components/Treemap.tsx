@@ -1,17 +1,20 @@
-import { scale } from 'chroma-js';
+import { scale, valid } from 'chroma-js';
 import { hierarchy, treemap } from 'd3';
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { calculateFontSize } from '../common/utils';
 import { TreemapNode } from '../types/clusters';
 import { TreemapProps } from '../types/components';
 
+const BIG_COLOR_DEFAULT = '#031f38';
+const SMALL_COLOR_DEFAULT = '#72b1ca';
+
 export const Treemap: FC<TreemapProps> = ({
   clusters,
   height,
   width,
   nodeClicked,
-  bigColor = '#031f38',
-  smallColor = '#72b1ca',
+  bigColor = BIG_COLOR_DEFAULT,
+  smallColor = SMALL_COLOR_DEFAULT,
   countFontSize = 14,
   fontFamily = 'sans-serif',
 }) => {
@@ -64,6 +67,9 @@ export const Treemap: FC<TreemapProps> = ({
 
   const colors = useMemo(() => {
     const len = root.leaves().length;
+    if (!(valid(bigColor) && valid(smallColor)))
+      return scale([BIG_COLOR_DEFAULT, SMALL_COLOR_DEFAULT]).domain([0, len]);
+
     return scale([bigColor, smallColor]).domain([0, len]);
   }, [root, bigColor, smallColor]);
 

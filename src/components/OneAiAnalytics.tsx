@@ -44,7 +44,10 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   return (
     <div className="h-full w-full flex flex-col">
       {clickedClusters.length > 0 && (
-        <div className="h-1/6 w-full" style={{ backgroundColor: navbarColor }}>
+        <div
+          className="max-h-20 w-full"
+          style={{ backgroundColor: navbarColor, height: '15%' }}
+        >
           <div className="flex flex-row items-center p-5 justify-between h-full">
             <div className="flex flex-row w-11/12">
               <button
@@ -81,9 +84,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
       )}
 
       <div
-        className={`${
-          clickedClusters.length === 0 ? 'h-full' : 'h-5/6'
-        } w-full overflow-auto`}
+        className={`w-full overflow-auto`}
+        style={{ height: clickedClusters.length === 0 ? '100%' : '85%' }}
       >
         {clickedClusters && clickedClusters.at(-1)?.type === 'Phrase' ? (
           <>

@@ -14,7 +14,7 @@ const meta: Meta = {
 export default meta;
 
 const Template: Story = args => (
-  <div className="h-screen w-full">
+  <div className="h-96 w-full">
     <OneAiAnalytics clusters={[]} {...args} />
   </div>
 );
