@@ -1,17 +1,19 @@
 import React from 'react';
 import { FC } from 'react';
-import { ItemsDisplayComponentProps } from '../types/configurations';
+import { ItemsDisplayComponentProps } from '../common/types/configurations';
 
-export const ItemsListDisplay: FC<ItemsDisplayComponentProps> = ({ items }) => {
+export const ItemsListDisplay: FC<ItemsDisplayComponentProps> = ({
+  items,
+  bgColor,
+  textColor,
+}) => {
   return (
-    <div>
-      {items
-        .sort((i1, i2) => i2.count - i1.count)
-        .map(item => (
-          <div key={item.text}>
-            {item.text} - {item.count}
-          </div>
-        ))}
+    <div style={{ backgroundColor: bgColor, color: textColor }}>
+      {items.map(item => (
+        <div className="p-2" key={item}>
+          {item}
+        </div>
+      ))}
     </div>
   );
 };

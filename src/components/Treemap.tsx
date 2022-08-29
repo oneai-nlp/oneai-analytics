@@ -1,9 +1,9 @@
 import { scale, valid } from 'chroma-js';
 import { hierarchy, treemap } from 'd3';
 import React, { FC, useEffect, useMemo, useState } from 'react';
-import { calculateFontSize } from '../common/utils';
-import { TreemapNode } from '../types/clusters';
-import { TreemapProps } from '../types/components';
+import { calculateFontSize } from '../common/utils/utils';
+import { TreemapNode } from '../common/types/modals';
+import { TreemapProps } from '../common/types/components';
 
 const BIG_COLOR_DEFAULT = '#031f38';
 const SMALL_COLOR_DEFAULT = '#72b1ca';
@@ -17,6 +17,7 @@ export const Treemap: FC<TreemapProps> = ({
   smallColor = SMALL_COLOR_DEFAULT,
   countFontSize = 14,
   fontFamily = 'sans-serif',
+  textColor = 'white',
 }) => {
   const [mainCluster, setMainCluster] = useState({
     type: 'Node',
@@ -49,6 +50,7 @@ export const Treemap: FC<TreemapProps> = ({
       maxElementValue > elementsSum * 0.9
         ? 0.1 / (1 - maxElementValue / elementsSum)
         : 1;
+
     return hierarchy(mainCluster)
       .sum(d => {
         return maxElementValue === d.items_count
@@ -98,7 +100,11 @@ export const Treemap: FC<TreemapProps> = ({
         <foreignObject x={leaf.x0} y={leaf.y0} width={width} height={height}>
           <span
             className="relative h-full p-1 items-center flex justify-center text-gray-200"
-            style={{ fontSize: `${fontSize}px`, fontFamily: fontFamily }}
+            style={{
+              fontSize: `${fontSize}px`,
+              fontFamily: fontFamily,
+              color: textColor,
+            }}
           >
             <span
               data-element="rect-text"

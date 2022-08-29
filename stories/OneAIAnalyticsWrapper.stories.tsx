@@ -1,11 +1,11 @@
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
-import { OneAiAnalytics } from '../src/components/OneAiAnalytics';
-import { clusters } from './data/clusters';
+import { OneAIAnalyticsItemsWrapper } from '../src/components/OneAIAnalyticsItemsWrapper';
+import { items } from './data/items';
 
 const meta: Meta = {
-  title: 'One Ai Analytics',
-  component: OneAiAnalytics,
+  title: 'One AI Analytics Wrapper',
+  component: OneAIAnalyticsItemsWrapper,
   parameters: {
     controls: { expanded: true },
   },
@@ -15,7 +15,7 @@ export default meta;
 
 const Template: Story = args => (
   <div className="h-screen w-full">
-    <OneAiAnalytics clusters={[]} {...args} />
+    <OneAIAnalyticsItemsWrapper items={[]} {...args} />
   </div>
 );
 
@@ -23,4 +23,4 @@ const Template: Story = args => (
 // https://storybook.js.org/docs/react/workflows/unit-testing
 export const Treemap = Template.bind({});
 
-Treemap.args = { clusters: clusters.slice(0, 30) };
+Treemap.args = { items: items };

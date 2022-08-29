@@ -1,0 +1,22 @@
+export function calculateFontSize(height: number, width: number) {
+  const area = height * width;
+  let fontSize = 10 + (32 * area) / (250000 - 15000);
+  fontSize = Math.max(fontSize, 10);
+  fontSize = Math.min(fontSize, 60);
+  return fontSize;
+}
+
+export function groupBy<T, K extends keyof any>(
+  arr: T[],
+  key: (i: T) => K
+): Map<K, T[]> {
+  const map: Map<K, T[]> = new Map();
+  arr.forEach(item => {
+    const currentKey = key(item);
+    const savedCluster = map.get(currentKey) || [];
+    savedCluster.push(item);
+    map.set(currentKey, savedCluster);
+  });
+
+  return map;
+}

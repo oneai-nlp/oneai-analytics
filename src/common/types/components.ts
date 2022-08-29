@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { TreemapNode } from './clusters';
+import { Item, TreemapNode } from './modals';
 import { ItemsDisplayComponentProps } from './configurations';
 
 export interface TreemapProps {
@@ -11,6 +11,7 @@ export interface TreemapProps {
   smallColor: string;
   countFontSize: number;
   fontFamily: string;
+  textColor: string;
 }
 
 export interface OneAiAnalyticsProps {
@@ -18,7 +19,13 @@ export interface OneAiAnalyticsProps {
   treemapSmallColor?: string;
   treemapCountFontSize?: number;
   treemapFontFamily?: string;
+  treemapTextColor?: string;
   navbarColor?: string;
   clusters: TreemapNode[];
   itemsDisplay?: FC<ItemsDisplayComponentProps>;
 }
+
+export type OneAIAnalyticsItemsWrapperProps = Omit<
+  OneAiAnalyticsProps & { items: Item[] },
+  'clusters'
+>;

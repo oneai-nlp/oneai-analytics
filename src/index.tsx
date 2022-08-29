@@ -1,5 +1,5 @@
 import './index.css';
-import './common/polyfill';
+import './common/utils/polyfill';
 import { OneAiAnalytics } from './components/OneAiAnalytics';
 
 export { OneAiAnalytics };

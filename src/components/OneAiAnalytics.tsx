@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import ContainerDimensions from 'react-container-dimensions';
-import { TreemapNode } from '../types/clusters';
-import { OneAiAnalyticsProps } from '../types/components';
+import { OneAiAnalyticsProps } from '../common/types/components';
+import { TreemapNode } from '../common/types/modals';
 import { ItemsListDisplay } from './ItemsListDisplay';
 import { Treemap } from './Treemap';
 // Please do not use types off of a default export module or else Storybook Docs will suffer.
@@ -16,6 +16,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   treemapSmallColor = '#72b1ca',
   treemapCountFontSize = 14,
   treemapFontFamily = 'sans-serif',
+  treemapTextColor = 'white',
   navbarColor = treemapBigColor,
 }) => {
   const [currentClusters, setCurrentClusters] = useState(clusters);
@@ -88,11 +89,11 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
         style={{ height: clickedClusters.length === 0 ? '100%' : '85%' }}
       >
         {clickedClusters && clickedClusters.at(-1)?.type === 'Phrase' ? (
-          <>
-            {itemsDisplay({
-              items: clickedClusters.at(-1)!.items ?? [],
-            })}
-          </>
+          itemsDisplay({
+            items: clickedClusters.at(-1)!.items ?? [],
+            bgColor: treemapSmallColor,
+            textColor: treemapBigColor,
+          })
         ) : (
           <ContainerDimensions>
             {({ height, width }) => (
@@ -105,6 +106,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 smallColor={treemapSmallColor}
                 countFontSize={treemapCountFontSize}
                 fontFamily={treemapFontFamily}
+                textColor={treemapTextColor}
               />
             )}
           </ContainerDimensions>
