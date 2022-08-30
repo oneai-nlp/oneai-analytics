@@ -18,6 +18,8 @@ export const Treemap: FC<TreemapProps> = ({
   countFontSize = 14,
   fontFamily = 'sans-serif',
   textColor = 'white',
+  borderWidth = 0,
+  borderColor = textColor,
 }) => {
   const [mainCluster, setMainCluster] = useState({
     type: 'Node',
@@ -104,6 +106,8 @@ export const Treemap: FC<TreemapProps> = ({
               fontSize: `${fontSize}px`,
               fontFamily: fontFamily,
               color: textColor,
+              borderWidth: `${borderWidth}px`,
+              borderColor: borderColor,
             }}
           >
             <span

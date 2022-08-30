@@ -17,6 +17,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   treemapCountFontSize = 14,
   treemapFontFamily = 'sans-serif',
   treemapTextColor = 'white',
+  treemapBorderWidth = 0,
+  treemapBorderColor = treemapTextColor,
   navbarColor = treemapBigColor,
 }) => {
   const [currentClusters, setCurrentClusters] = useState(clusters);
@@ -107,6 +109,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 countFontSize={treemapCountFontSize}
                 fontFamily={treemapFontFamily}
                 textColor={treemapTextColor}
+                borderWidth={treemapBorderWidth}
+                borderColor={treemapBorderColor}
               />
             )}
           </ContainerDimensions>

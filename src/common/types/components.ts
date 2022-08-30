@@ -7,11 +7,13 @@ export interface TreemapProps {
   width: number;
   height: number;
   nodeClicked: (node: TreemapNode) => void;
-  bigColor: string;
-  smallColor: string;
-  countFontSize: number;
-  fontFamily: string;
-  textColor: string;
+  bigColor?: string;
+  smallColor?: string;
+  countFontSize?: number;
+  fontFamily?: string;
+  textColor?: string;
+  borderWidth?: number;
+  borderColor?: string;
 }
 
 export interface OneAiAnalyticsProps {
@@ -20,6 +22,8 @@ export interface OneAiAnalyticsProps {
   treemapCountFontSize?: number;
   treemapFontFamily?: string;
   treemapTextColor?: string;
+  treemapBorderWidth?: number;
+  treemapBorderColor?: string;
   navbarColor?: string;
   clusters: TreemapNode[];
   itemsDisplay?: FC<ItemsDisplayComponentProps>;
