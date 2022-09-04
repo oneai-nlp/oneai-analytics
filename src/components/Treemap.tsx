@@ -1,15 +1,16 @@
 import { scale, valid } from 'chroma-js';
 import { hierarchy, treemap } from 'd3';
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, useMemo } from 'react';
+import { TreemapDataNode, TreemapProps } from '../common/types/components';
 import { calculateFontSize } from '../common/utils/utils';
-import { TreemapNode } from '../common/types/modals';
-import { TreemapProps } from '../common/types/components';
+
+type TreemapNode = TreemapDataNode & { children: TreemapNode[] };
 
 const BIG_COLOR_DEFAULT = '#031f38';
 const SMALL_COLOR_DEFAULT = '#72b1ca';
 
 export const Treemap: FC<TreemapProps> = ({
-  clusters,
+  dataNodes,
   height,
   width,
   nodeClicked,
@@ -21,28 +22,18 @@ export const Treemap: FC<TreemapProps> = ({
   borderWidth = 0,
   borderColor = textColor,
 }) => {
-  const [mainCluster, setMainCluster] = useState({
-    type: 'Node',
-    id: '',
-    children: clusters.map(c => {
-      return { ...c, children: [] };
-    }),
-    items_count: 0,
-  } as TreemapNode);
-
-  useEffect(() => {
-    setMainCluster({
-      type: 'Node',
+  const mainNode: TreemapNode = useMemo(() => {
+    return {
       id: '',
-      children: clusters.map(c => {
+      children: dataNodes.map(c => {
         return { ...c, children: [] };
       }),
-      items_count: 0,
-    });
-  }, [clusters]);
+      amount: 0,
+    };
+  }, [dataNodes]);
 
   const treeHierarchy = useMemo(() => {
-    const elementsValues = mainCluster.children!.map(item => item.items_count);
+    const elementsValues = mainNode.children!.map(item => item.amount);
     const maxElementValue = Math.max(...elementsValues);
     const elementsSum = elementsValues.reduce(
       (a: number, b: number) => a + b,
@@ -53,17 +44,15 @@ export const Treemap: FC<TreemapProps> = ({
         ? 0.1 / (1 - maxElementValue / elementsSum)
         : 1;
 
-    return hierarchy(mainCluster)
+    return hierarchy(mainNode)
       .sum(d => {
-        return maxElementValue === d.items_count
-          ? d.items_count
-          : d.items_count * growFactor;
+        return maxElementValue === d.amount ? d.amount : d.amount * growFactor;
       })
-      .sort((n1, n2) => n2.data.items_count - n1.data.items_count);
-  }, [mainCluster]);
+      .sort((n1, n2) => n2.data.amount - n1.data.amount);
+  }, [mainNode]);
 
   const root = useMemo(() => {
-    const treeGenerator = treemap<TreemapNode>()
+    const treeGenerator = treemap<TreemapDataNode>()
       .size([width, height])
       .padding(0);
     return treeGenerator(treeHierarchy);
@@ -128,7 +117,7 @@ export const Treemap: FC<TreemapProps> = ({
               className="absolute top-1 left-1"
               style={{ fontSize: `${countFontSize}px` }}
             >
-              {leaf.data.items_count}
+              {leaf.data.amount}
             </span>
           </span>
         </foreignObject>

@@ -1,12 +1,3 @@
-export interface TreemapNode {
-  type: 'Node' | 'Cluster' | 'Phrase';
-  id: string;
-  items_count: number;
-  text?: string;
-  items?: string[];
-  children?: TreemapNode[];
-}
-
 export interface Item {
   id: number;
   create_date: string;
@@ -21,6 +12,13 @@ export interface Item {
     id: number;
     text: string;
   };
+}
+
+export interface Phrase {
+  phrase_id: number;
+  items_count: number;
+  metadata: {} | null;
+  text: string;
 }
 
 export interface Cluster {

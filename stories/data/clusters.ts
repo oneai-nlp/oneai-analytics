@@ -1,6 +1,6 @@
-import { TreemapNode } from '../../src/common/types/modals';
+import { ExampleNode } from '../../src/common/types/components';
 
-export const clusters: TreemapNode[] = [
+export const clusters: ExampleNode[] = [
   {
     type: 'Cluster',
     id: 'Buy the dip',
@@ -499,10 +499,10 @@ export const clusters: TreemapNode[] = [
       },
       {
         type: 'Phrase',
-        id: 'BUY DIP &amp; CASHAPP',
-        text: 'BUY DIP &amp; CASHAPP',
+        id: 'BUY DIP CASHAPP',
+        text: 'BUY DIP CASHAPP',
         items_count: 1,
-        items: ['BUY DIP &amp; CASHAPP'],
+        items: ['BUY DIP CASHAPP'],
       },
       {
         type: 'Phrase',
@@ -647,28 +647,28 @@ export const clusters: TreemapNode[] = [
   },
   {
     type: 'Cluster',
-    id: 'GME &amp; AMC buy restrictions lifted on Revolut!',
-    text: 'GME &amp; AMC buy restrictions lifted on Revolut!',
+    id: 'GME AMC buy restrictions lifted on Revolut!',
+    text: 'GME AMC buy restrictions lifted on Revolut!',
     items_count: 186,
     children: [
       {
         type: 'Phrase',
-        id: 'Revolut stopping GME &amp; AMC Buys',
-        text: 'Revolut stopping GME &amp; AMC Buys',
+        id: 'Revolut stopping GME AMC Buys',
+        text: 'Revolut stopping GME AMC Buys',
         items_count: 34,
         items: [
-          'Revolut stopping GME &amp; AMC Buys',
+          'Revolut stopping GME AMC Buys',
           'Revolut suspends Buying GME AMC',
           'Revolut is suspending buying on $GME and $AMC',
           'Revolut prevent the purchase of gme and amc shares too',
           'Revolut stop trading AMC and GME',
           'REVOLUT BLOCKED BUYING GME AND AMC',
-          'Revolut stops BUY on GME &amp; AMC!',
-          'Revolut block us from buying GME &amp; AMC',
+          'Revolut stops BUY on GME AMC!',
+          'Revolut block us from buying GME AMC',
 
           'Revolut is preventing people from purchasing stock in AMC and GME',
 
-          'Revolut has stopped buying (not selling) of GME &amp; AMC due to increased capital requirements by DTC.',
+          'Revolut has stopped buying (not selling) of GME AMC due to increased capital requirements by DTC.',
 
           'Revolut blocks buying GME and AMC. We need to buy somewhere else',
           'Revolut trading stops GME and AMC buys',
@@ -678,14 +678,14 @@ export const clusters: TreemapNode[] = [
           'Revolut blocks GME and AMC new buys. Who could be behind this ?',
           'Revolut bans buying GME and AMC shares',
           'Revolut blocks AMC and GME buy',
-          'REVOLUT SHUTS DOWN GME &amp; AMC BUY. ONLY ALLOW TO SELL',
+          'REVOLUT SHUTS DOWN GME AMC BUY. ONLY ALLOW TO SELL',
           'Revolut stop buying of GME and AMC too',
           'Revolut stops GME and AMC buys',
           'Revolut just stopped GME and AMC from buying only.',
           'REVOLUT stopping Buys for GME and AMC!',
-          'Revolut stopped buys for GME &amp; AMC',
+          'Revolut stopped buys for GME AMC',
           'Revolut stop all buys of AMC and GME',
-          'Revolut halting buying of GME &amp; AMC',
+          'Revolut halting buying of GME AMC',
           'Revolut blocks buying GME and AMC',
           'Revolut blocked purchase of GME And AMC',
           'Revolut also blocking purchasing of GME and AMC shares.',
@@ -694,18 +694,18 @@ export const clusters: TreemapNode[] = [
           'Revolut just blocked buying GME and AMC',
           'Revolut blocks GME and AMC buying',
           'Revolut shut down buying gme and amc',
-          'Revolut stopped the buying of AMC &amp; GME',
+          'Revolut stopped the buying of AMC GME',
         ],
       },
       {
         type: 'Phrase',
         id:
-          'Revolut has been blocked by broker-dealer so now cannot buy GME &amp; AMC on that platform. 💎🙌',
+          'Revolut has been blocked by broker-dealer so now cannot buy GME AMC on that platform. 💎🙌',
         text:
-          'Revolut has been blocked by broker-dealer so now cannot buy GME &amp; AMC on that platform. 💎🙌',
+          'Revolut has been blocked by broker-dealer so now cannot buy GME AMC on that platform. 💎🙌',
         items_count: 32,
         items: [
-          'Revolut has been blocked by broker-dealer so now cannot buy GME &amp; AMC on that platform. 💎🙌',
+          'Revolut has been blocked by broker-dealer so now cannot buy GME AMC on that platform. 💎🙌',
 
           'Revolut no longer allow the buying of GME and AMC. You can only sell.',
           "Revolut won't let you buy GME or AMC anymore. (Europe)",
@@ -715,7 +715,7 @@ export const clusters: TreemapNode[] = [
 
           'Revolut has stopped selling GME and AMC! Just wanted to look for some more GME now that it’s on sale. Time to switch to a real trading platform.',
           'Revolut does not allow me to buy AMC and GME!',
-          'GME &amp; AMC Sell only via Revolut',
+          'GME AMC Sell only via Revolut',
 
           'Revolut just blocked GME and AMC purchase. You can only sell now',
           'GME and AMC restricted to buy only on eToro and Revolut.',
@@ -734,7 +734,7 @@ export const clusters: TreemapNode[] = [
 
           "Not only Revolut won't allow purchase of GME and AMC, I now can not withdraw any of my investment money I was about to spend today on GME.",
           'Revolut are no longer allowing buying of either GME or AMC',
-          'Revolut no longer allows buying GME &amp; AMC',
+          'Revolut no longer allows buying GME AMC',
           'Revolut no longer allows you to buy GME or AMC shares',
 
           'Revolut disabled the Buy option for GME and AMC. HOLD THE LINE 💎🖐🏻',
@@ -749,22 +749,22 @@ export const clusters: TreemapNode[] = [
       },
       {
         type: 'Phrase',
-        id: 'Revolut has set GME &amp; AMC as sell only. When buy only ?',
-        text: 'Revolut has set GME &amp; AMC as sell only. When buy only ?',
+        id: 'Revolut has set GME AMC as sell only. When buy only ?',
+        text: 'Revolut has set GME AMC as sell only. When buy only ?',
         items_count: 16,
         items: [
-          'Revolut has set GME &amp; AMC as sell only. When buy only ?',
+          'Revolut has set GME AMC as sell only. When buy only ?',
           'Revolut makes $GME and $AMC sell only',
           'REVOLUT now has GME and AMC as sell only',
           'REVOLUT SET AMC AND GME TO SELL ONLY',
           'Revolut Disable Buys in GME and AMC',
           'AMC and GME set to "Sell Only" on Revolut',
           'Revolut sets GME and AMC to sell only',
-          'Revolut sets GME &amp; AMC to sell only.',
+          'Revolut sets GME AMC to sell only.',
           'Revolut is only allowing Sells for GME and AMC',
           'Revolut set GME and AMC to sell only',
-          'Revolut sets GME &amp; AMC to Sell only.',
-          'Revolut sets GME &amp; AMC to Sell only',
+          'Revolut sets GME AMC to Sell only.',
+          'Revolut sets GME AMC to Sell only',
           'UPDATE: Revolut has changed to sell-only for GME and AMC',
 
           'REVOLUT JUST RESTRICTED AMC AND GME TO SELL ONLY - YOU CANNOT BUY',
@@ -778,7 +778,7 @@ export const clusters: TreemapNode[] = [
         items_count: 15,
         items: [
           "Revolut won't let you buy any more GME and AMC.",
-          'Can’t buy GME &amp; AMC on Revolut!',
+          'Can’t buy GME AMC on Revolut!',
           'Warning: Revolut does not allow buying GME and AMC anymore',
           'Revolut has removed the option to buy either GME or AMC.',
           "Revolut won't let me buy more GME or AMC",
@@ -806,11 +806,11 @@ export const clusters: TreemapNode[] = [
           'Revolut is now sell only for GME',
           'Revolut is sell only for GME and AMC.',
           'Revolut is only allowing to SELL GME and AMC',
-          'Revolut Only Allows You To Sell GME &amp; AMC',
+          'Revolut Only Allows You To Sell GME AMC',
           'Revolut is now sell only on GME!',
 
           'Announcement: Revolut have now turned their back on us as well, setting both $GME and $AMC to sell only, just as many users were about to buy in due to the low price.',
-          'REVOLUT has stopped buying for GME &amp; AMC! Sell only',
+          'REVOLUT has stopped buying for GME AMC! Sell only',
           'Revolut gone to sell only on GME and AMC :(',
           'REVOLUT no longer offers buys $GME and $AMC only SELL',
         ],
@@ -829,9 +829,9 @@ export const clusters: TreemapNode[] = [
 
           'DriveWealth no longer offering buys for GME or AMC, effecting Revolut traders.',
 
-          'Broker DriveWealth blocks Revolut customers from buying shares in GME &amp; AMC only. HOLD💎🤲',
+          'Broker DriveWealth blocks Revolut customers from buying shares in GME AMC only. HOLD💎🤲',
 
-          'Revolut (DriveWealth) have stopped GME &amp; AMC buying, it’s now sell only.',
+          'Revolut (DriveWealth) have stopped GME AMC buying, it’s now sell only.',
 
           'Revolut’s broker-dealer (DriveWealth) just shut down buying AMC and GME stock',
 
@@ -840,7 +840,7 @@ export const clusters: TreemapNode[] = [
           'Revolut announced buying $GME and $AMC has been blocked by their broker-dealer DriveWealth 😡',
           "Revolut's GME and AMC buying shut down by DriveWealth.",
 
-          'Revolut have been forced to block buying on GME &amp; AMC by DriveWealth, this is disappointing.',
+          'Revolut have been forced to block buying on GME AMC by DriveWealth, this is disappointing.',
         ],
       },
       {
@@ -857,18 +857,18 @@ export const clusters: TreemapNode[] = [
           "Revolut just disabled the option to buy GME and AMC stocks. They're only alowing us to sell right now.",
 
           'Revolut is now limiting amc and gme stocks 😤😤😤 ... still holding!!',
-          '⚠️⚠️ REVOLUT STOPPED TRADING GME &amp; AMC',
+          '⚠️⚠️ REVOLUT STOPPED TRADING GME AMC',
         ],
       },
       {
         type: 'Phrase',
-        id: 'GME &amp; AMC buy restrictions lifted on Revolut!',
-        text: 'GME &amp; AMC buy restrictions lifted on Revolut!',
+        id: 'GME AMC buy restrictions lifted on Revolut!',
+        text: 'GME AMC buy restrictions lifted on Revolut!',
         items_count: 5,
         items: [
-          'GME &amp; AMC buy restrictions lifted on Revolut!',
+          'GME AMC buy restrictions lifted on Revolut!',
           'Revolut removes buy restrictions on GME and AMC!',
-          'Revolute Europe just restricted buying GME &amp; AMC',
+          'Revolute Europe just restricted buying GME AMC',
           'GME and AMC buys now blocked on Revolut (UK and Europe)',
 
           'Revolut just announced they are disabling Buy for GME and AMC',
@@ -940,11 +940,11 @@ export const clusters: TreemapNode[] = [
       },
       {
         type: 'Phrase',
-        id: 'Revolut (UK) Stop GME &amp; AMC Purchases',
-        text: 'Revolut (UK) Stop GME &amp; AMC Purchases',
+        id: 'Revolut (UK) Stop GME AMC Purchases',
+        text: 'Revolut (UK) Stop GME AMC Purchases',
         items_count: 3,
         items: [
-          'Revolut (UK) Stop GME &amp; AMC Purchases',
+          'Revolut (UK) Stop GME AMC Purchases',
           'Revolut halting Buying on GME and AMC',
           'Revolut has now prevented users from buying GME and AMC',
         ],
@@ -956,7 +956,7 @@ export const clusters: TreemapNode[] = [
         items_count: 3,
         items: [
           'Revolut set to Sell only the GME and AMC Stocks!',
-          'Revolut just stop trading GME &amp; AMC',
+          'Revolut just stop trading GME AMC',
           'Revolut just set GME and AMC stocks to sell only!',
         ],
       },
@@ -999,7 +999,7 @@ export const clusters: TreemapNode[] = [
         items_count: 2,
         items: [
           'Revolut banned AMC and GME buying. Total bullshit.',
-          'Revolut bans purchase or AMC &amp; GME',
+          'Revolut bans purchase or AMC GME',
         ],
       },
       {
@@ -1899,16 +1899,16 @@ export const clusters: TreemapNode[] = [
       },
       {
         type: 'Phrase',
-        id: 'HOLDING GME &amp; AMC',
-        text: 'HOLDING GME &amp; AMC',
+        id: 'HOLDING GME AMC',
+        text: 'HOLDING GME AMC',
         items_count: 5,
         items: [
-          'HOLDING GME &amp; AMC',
+          'HOLDING GME AMC',
           'Still holding $GME $AMC',
 
-          'Still holding... Got no other option at this point. GME &amp; AMC',
-          'Here’s why you should HOLD GME &amp; AMC.',
-          'Here’s why you should hold GME &amp; AMC.',
+          'Still holding... Got no other option at this point. GME AMC',
+          'Here’s why you should HOLD GME AMC.',
+          'Here’s why you should hold GME AMC.',
         ],
       },
       {
@@ -1973,10 +1973,10 @@ export const clusters: TreemapNode[] = [
       },
       {
         type: 'Phrase',
-        id: 'Buy and Hold AMC &amp; NOK',
-        text: 'Buy and Hold AMC &amp; NOK',
+        id: 'Buy and Hold AMC NOK',
+        text: 'Buy and Hold AMC NOK',
         items_count: 2,
-        items: ['Buy and Hold AMC &amp; NOK', '$AMC $GME $NOK BUY AND HOLD'],
+        items: ['Buy and Hold AMC NOK', '$AMC $GME $NOK BUY AND HOLD'],
       },
       {
         type: 'Phrase',
@@ -2314,10 +2314,10 @@ export const clusters: TreemapNode[] = [
       },
       {
         type: 'Phrase',
-        id: 'DIAMONDS LAST 444EVA💎 HANDS TO INFINITY♾&amp;BEYOND',
-        text: 'DIAMONDS LAST 444EVA💎 HANDS TO INFINITY♾&amp;BEYOND',
+        id: 'DIAMONDS LAST 444EVA💎 HANDS TO INFINITYBEYOND',
+        text: 'DIAMONDS LAST 444EVA💎 HANDS TO INFINITYBEYOND',
         items_count: 1,
-        items: ['DIAMONDS LAST 444EVA💎 HANDS TO INFINITY♾&amp;BEYOND'],
+        items: ['DIAMONDS LAST 444EVA💎 HANDS TO INFINITYBEYOND'],
       },
       {
         type: 'Phrase',
@@ -2658,8 +2658,8 @@ export const clusters: TreemapNode[] = [
         items: [
           'GME and AMC',
           'Which one is AMC, which one is GME?',
-          'GME &amp; AMC',
-          'GME &amp; AMC 🚀🚀🚀',
+          'GME AMC',
+          'GME AMC 🚀🚀🚀',
           'GME or AMC?',
           'Gme and amc',
           'Amc and gme',
@@ -2856,10 +2856,10 @@ export const clusters: TreemapNode[] = [
       },
       {
         type: 'Phrase',
-        id: 'GME &amp; AMC **** UPS',
-        text: 'GME &amp; AMC **** UPS',
+        id: 'GME AMC **** UPS',
+        text: 'GME AMC **** UPS',
         items_count: 1,
-        items: ['GME &amp; AMC **** UPS'],
+        items: ['GME AMC **** UPS'],
       },
       {
         type: 'Phrase',
@@ -2891,10 +2891,10 @@ export const clusters: TreemapNode[] = [
       },
       {
         type: 'Phrase',
-        id: 'Payday = GME &amp; AMC',
-        text: 'Payday = GME &amp; AMC',
+        id: 'Payday = GME AMC',
+        text: 'Payday = GME AMC',
         items_count: 1,
-        items: ['Payday = GME &amp; AMC'],
+        items: ['Payday = GME AMC'],
       },
       {
         type: 'Phrase',
@@ -3639,8 +3639,8 @@ export const clusters: TreemapNode[] = [
         items_count: 4,
         items: [
           'AMC, GME TO THE MOON',
-          'GME &amp; AMC to the moon you said',
-          'GME &amp; AMC to the moon!!',
+          'GME AMC to the moon you said',
+          'GME AMC to the moon!!',
           'GME AMC TO THE MOON 🌝🚀🚀',
         ],
       },
@@ -3692,10 +3692,10 @@ export const clusters: TreemapNode[] = [
       },
       {
         type: 'Phrase',
-        id: 'GME &amp; AMC APES TO MOON 🦍🚀💎',
-        text: 'GME &amp; AMC APES TO MOON 🦍🚀💎',
+        id: 'GME AMC APES TO MOON 🦍🚀💎',
+        text: 'GME AMC APES TO MOON 🦍🚀💎',
         items_count: 1,
-        items: ['GME &amp; AMC APES TO MOON 🦍🚀💎'],
+        items: ['GME AMC APES TO MOON 🦍🚀💎'],
       },
       {
         type: 'Phrase',
@@ -4488,12 +4488,12 @@ export const clusters: TreemapNode[] = [
       {
         type: 'Phrase',
         id:
-          'GME 💎🖐🏻 WE HOLD!!! Down $13.5k &amp; I don’t know what an exit strategy is! I like the stock!',
+          'GME 💎🖐🏻 WE HOLD!!! Down $13.5k I don’t know what an exit strategy is! I like the stock!',
         text:
-          'GME 💎🖐🏻 WE HOLD!!! Down $13.5k &amp; I don’t know what an exit strategy is! I like the stock!',
+          'GME 💎🖐🏻 WE HOLD!!! Down $13.5k I don’t know what an exit strategy is! I like the stock!',
         items_count: 1,
         items: [
-          'GME 💎🖐🏻 WE HOLD!!! Down $13.5k &amp; I don’t know what an exit strategy is! I like the stock!',
+          'GME 💎🖐🏻 WE HOLD!!! Down $13.5k I don’t know what an exit strategy is! I like the stock!',
         ],
       },
       {
@@ -4572,13 +4572,11 @@ export const clusters: TreemapNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "My Position &amp; GME Technical Analysis; I'm not **** selling 🚀💎🙌",
-        text:
-          "My Position &amp; GME Technical Analysis; I'm not **** selling 🚀💎🙌",
+        id: "My Position GME Technical Analysis; I'm not **** selling 🚀💎🙌",
+        text: "My Position GME Technical Analysis; I'm not **** selling 🚀💎🙌",
         items_count: 1,
         items: [
-          "My Position &amp; GME Technical Analysis; I'm not **** selling 🚀💎🙌",
+          "My Position GME Technical Analysis; I'm not **** selling 🚀💎🙌",
         ],
       },
     ],
@@ -4912,12 +4910,12 @@ export const clusters: TreemapNode[] = [
       {
         type: 'Phrase',
         id:
-          'Melvin &amp; Co underestimate how collectively stubborn and smooth brained we are. Apes, together strong, we will HOLD, they will PAY 💎 👐',
+          'Melvin Co underestimate how collectively stubborn and smooth brained we are. Apes, together strong, we will HOLD, they will PAY 💎 👐',
         text:
-          'Melvin &amp; Co underestimate how collectively stubborn and smooth brained we are. Apes, together strong, we will HOLD, they will PAY 💎 👐',
+          'Melvin Co underestimate how collectively stubborn and smooth brained we are. Apes, together strong, we will HOLD, they will PAY 💎 👐',
         items_count: 1,
         items: [
-          'Melvin &amp; Co underestimate how collectively stubborn and smooth brained we are. Apes, together strong, we will HOLD, they will PAY 💎 👐',
+          'Melvin Co underestimate how collectively stubborn and smooth brained we are. Apes, together strong, we will HOLD, they will PAY 💎 👐',
         ],
       },
     ],
@@ -5168,7 +5166,7 @@ export const clusters: TreemapNode[] = [
           'I’m here to ask if I should buy/hold GME and AMC dips this morning.',
 
           'Buy AMC and GME when it dips!!!! Hold Hold Hold and Buy Buy Buy!!!',
-          'GME &amp; AMC - BUY &amp; HOLD ON THE DIP 💎🦍🙌🏼🦍💎',
+          'GME AMC - BUY HOLD ON THE DIP 💎🦍🙌🏼🦍💎',
 
           'AMC and GME to the **** MOON!!! 🚀💎🙌 HOLD HOLD HOLD BUY THE DIP',
         ],
@@ -5274,10 +5272,10 @@ export const clusters: TreemapNode[] = [
       },
       {
         type: 'Phrase',
-        id: 'GME &amp; AMC FELLOW APES 🦍 BUY &amp; HOLD 🚀🚀💎💎💎',
-        text: 'GME &amp; AMC FELLOW APES 🦍 BUY &amp; HOLD 🚀🚀💎💎💎',
+        id: 'GME AMC FELLOW APES 🦍 BUY HOLD 🚀🚀💎💎💎',
+        text: 'GME AMC FELLOW APES 🦍 BUY HOLD 🚀🚀💎💎💎',
         items_count: 1,
-        items: ['GME &amp; AMC FELLOW APES 🦍 BUY &amp; HOLD 🚀🚀💎💎💎'],
+        items: ['GME AMC FELLOW APES 🦍 BUY HOLD 🚀🚀💎💎💎'],
       },
       {
         type: 'Phrase',
@@ -6583,7 +6581,7 @@ export const clusters: TreemapNode[] = [
           'Revolut halts GME trading',
           'Revolut stops trading on AMC and GME 🤬🤬',
           'Revolut has stopped AMC and GME trading',
-          'Revolut Halts Trading on $GME &amp; $AMC',
+          'Revolut Halts Trading on $GME $AMC',
         ],
       },
       {
@@ -6962,27 +6960,27 @@ export const clusters: TreemapNode[] = [
       },
       {
         type: 'Phrase',
-        id: 'Revolut App sets GME &amp; AMC to Sell Only',
-        text: 'Revolut App sets GME &amp; AMC to Sell Only',
+        id: 'Revolut App sets GME AMC to Sell Only',
+        text: 'Revolut App sets GME AMC to Sell Only',
         items_count: 5,
         items: [
-          'Revolut App sets GME &amp; AMC to Sell Only',
+          'Revolut App sets GME AMC to Sell Only',
           'Revolut set GME and AMC to sell only',
-          'GME &amp; AMC set to trade only on Revolut app',
+          'GME AMC set to trade only on Revolut app',
           'Revolut sets GME and AMC to "sell only"',
           'Revolut sets GME and AMC to buy only',
         ],
       },
       {
         type: 'Phrase',
-        id: '"GME &amp; AMC set to Sell Only" - Revolut',
-        text: '"GME &amp; AMC set to Sell Only" - Revolut',
+        id: '"GME AMC set to Sell Only" - Revolut',
+        text: '"GME AMC set to Sell Only" - Revolut',
         items_count: 4,
         items: [
-          '"GME &amp; AMC set to Sell Only" - Revolut',
-          '(UK) REVOLUT - GME &amp; AMC set to sell only',
+          '"GME AMC set to Sell Only" - Revolut',
+          '(UK) REVOLUT - GME AMC set to sell only',
           'Revolut set to sell only for AMC and GME!',
-          'GME &amp; AMC set to sell only on revolut',
+          'GME AMC set to sell only on revolut',
         ],
       },
       {
@@ -7032,13 +7030,11 @@ export const clusters: TreemapNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut - GME &amp; AMC set to Sell Only... another bullshit platform',
-        text:
-          'Revolut - GME &amp; AMC set to Sell Only... another bullshit platform',
+        id: 'Revolut - GME AMC set to Sell Only... another bullshit platform',
+        text: 'Revolut - GME AMC set to Sell Only... another bullshit platform',
         items_count: 1,
         items: [
-          'Revolut - GME &amp; AMC set to Sell Only... another bullshit platform',
+          'Revolut - GME AMC set to Sell Only... another bullshit platform',
         ],
       },
       {
@@ -7180,10 +7176,10 @@ export const clusters: TreemapNode[] = [
       },
       {
         type: 'Phrase',
-        id: 'DO YOU LIKE THIS STOCK? I LIKE THIS STOCK!!! BUY &amp; HOLD!',
-        text: 'DO YOU LIKE THIS STOCK? I LIKE THIS STOCK!!! BUY &amp; HOLD!',
+        id: 'DO YOU LIKE THIS STOCK? I LIKE THIS STOCK!!! BUY HOLD!',
+        text: 'DO YOU LIKE THIS STOCK? I LIKE THIS STOCK!!! BUY HOLD!',
         items_count: 1,
-        items: ['DO YOU LIKE THIS STOCK? I LIKE THIS STOCK!!! BUY &amp; HOLD!'],
+        items: ['DO YOU LIKE THIS STOCK? I LIKE THIS STOCK!!! BUY HOLD!'],
       },
       {
         type: 'Phrase',
@@ -8103,7 +8099,7 @@ export const clusters: TreemapNode[] = [
         id: 'AMC NOK',
         text: 'AMC NOK',
         items_count: 2,
-        items: ['AMC NOK', 'AMC &amp; NOK'],
+        items: ['AMC NOK', 'AMC NOK'],
       },
       {
         type: 'Phrase',
@@ -9274,7 +9270,7 @@ export const clusters: TreemapNode[] = [
         items_count: 11,
         items: [
           'Buy and HOLD',
-          'Hold &amp; Buy more',
+          'Hold Buy more',
           'Buy hold',
           'Buy and Hold 💎🙌',
           'HOLD AND BUY',
@@ -9504,7 +9500,7 @@ export const clusters: TreemapNode[] = [
         items_count: 5,
         items: [
           'Hold hold hold',
-          'HOLD, HOLD &amp; HOLD!',
+          'HOLD, HOLD HOLD!',
           'HOLD HOLD HOLD',
           'Hold hold hold!',
         ],
@@ -9576,14 +9572,14 @@ export const clusters: TreemapNode[] = [
       {
         type: 'Phrase',
         id:
-          'Robinhood now allowing purchases of up to 500 shares of GME &amp; 5500 of AMC!',
+          'Robinhood now allowing purchases of up to 500 shares of GME 5500 of AMC!',
         text:
-          'Robinhood now allowing purchases of up to 500 shares of GME &amp; 5500 of AMC!',
+          'Robinhood now allowing purchases of up to 500 shares of GME 5500 of AMC!',
         items_count: 5,
         items: [
-          'Robinhood now allowing purchases of up to 500 shares of GME &amp; 5500 of AMC!',
+          'Robinhood now allowing purchases of up to 500 shares of GME 5500 of AMC!',
 
-          'Robinhood increased shares available to buy! **** Robinhood but take advantage if you haven’t switched over to another broker. $AMC &amp; $GME I just like these stocks',
+          'Robinhood increased shares available to buy! **** Robinhood but take advantage if you haven’t switched over to another broker. $AMC $GME I just like these stocks',
           'Robinhood now allows 100 shares of gme and 1250 of amc',
           'ROBINHOOD HAS OPENED FULL TRADING ON GME!!',
 
@@ -10435,12 +10431,12 @@ export const clusters: TreemapNode[] = [
       {
         type: 'Phrase',
         id:
-          'Fourth time today Revolut reminded me that GME price is going down! It never happened to me before. Somebody truly started bleeding!! Buy &amp; hold, history is being written! Dawaj Maniek to już sie KAMERUJE! !',
+          'Fourth time today Revolut reminded me that GME price is going down! It never happened to me before. Somebody truly started bleeding!! Buy hold, history is being written! Dawaj Maniek to już sie KAMERUJE! !',
         text:
-          'Fourth time today Revolut reminded me that GME price is going down! It never happened to me before. Somebody truly started bleeding!! Buy &amp; hold, history is being written! Dawaj Maniek to już sie KAMERUJE! !',
+          'Fourth time today Revolut reminded me that GME price is going down! It never happened to me before. Somebody truly started bleeding!! Buy hold, history is being written! Dawaj Maniek to już sie KAMERUJE! !',
         items_count: 1,
         items: [
-          'Fourth time today Revolut reminded me that GME price is going down! It never happened to me before. Somebody truly started bleeding!! Buy &amp; hold, history is being written! Dawaj Maniek to już sie KAMERUJE! !',
+          'Fourth time today Revolut reminded me that GME price is going down! It never happened to me before. Somebody truly started bleeding!! Buy hold, history is being written! Dawaj Maniek to już sie KAMERUJE! !',
         ],
       },
       {
@@ -10886,9 +10882,9 @@ export const clusters: TreemapNode[] = [
 
           'GME just got put on the NSYE Short Sale Restrictions List with an anticipated deactivation date of 2/3/2021, which means tomorrow the hedgies wont be able to continue their short ladder attacks!',
 
-          'BIG NEWS READ &amp; REPOST! GME just got put on the NSYE Short Sale Restrictions List with an anticipated deactivation date of 2/3/2021, which means tomorrow the hedgies wont be able to continue their short ladder attacks!',
+          'BIG NEWS READ REPOST! GME just got put on the NSYE Short Sale Restrictions List with an anticipated deactivation date of 2/3/2021, which means tomorrow the hedgies wont be able to continue their short ladder attacks!',
 
-          'BIG NEWS READ &amp; REPOST! GME just got put on the NSYE Short Sale Restrictions List with an anticipated deactivation date of 2/3/2021',
+          'BIG NEWS READ REPOST! GME just got put on the NSYE Short Sale Restrictions List with an anticipated deactivation date of 2/3/2021',
 
           'GME added to NSYE Short Sale Restrictions List - No more shorts as of tomorrow!',
           'GME just got put on the NSYE Short Sale Restrictions List',
@@ -11220,13 +11216,11 @@ export const clusters: TreemapNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'GME &amp; AMC 🚀🚀🚀🚀 (update in the past 10 mins) 💎 BUY &amp; HOLD 🦍',
-        text:
-          'GME &amp; AMC 🚀🚀🚀🚀 (update in the past 10 mins) 💎 BUY &amp; HOLD 🦍',
+        id: 'GME AMC 🚀🚀🚀🚀 (update in the past 10 mins) 💎 BUY HOLD 🦍',
+        text: 'GME AMC 🚀🚀🚀🚀 (update in the past 10 mins) 💎 BUY HOLD 🦍',
         items_count: 2,
         items: [
-          'GME &amp; AMC 🚀🚀🚀🚀 (update in the past 10 mins) 💎 BUY &amp; HOLD 🦍',
+          'GME AMC 🚀🚀🚀🚀 (update in the past 10 mins) 💎 BUY HOLD 🦍',
           'AMC and GME Buy as Hold ✊🏽',
         ],
       },
@@ -12350,30 +12344,30 @@ export const clusters: TreemapNode[] = [
         items_count: 2,
         items: [
           'Drivewealth pulls Revolut access to AMC and GME share buys!',
-          'DriveWealth blocks AMC &amp; GME buys',
+          'DriveWealth blocks AMC GME buys',
         ],
       },
       {
         type: 'Phrase',
         id:
-          'LOOK A THIS MESS, DriveWealth blocks BUYS and removes GME &amp; AMC from stock search‼️🔎💎',
+          'LOOK A THIS MESS, DriveWealth blocks BUYS and removes GME AMC from stock search‼️🔎💎',
         text:
-          'LOOK A THIS MESS, DriveWealth blocks BUYS and removes GME &amp; AMC from stock search‼️🔎💎',
+          'LOOK A THIS MESS, DriveWealth blocks BUYS and removes GME AMC from stock search‼️🔎💎',
         items_count: 2,
         items: [
-          'LOOK A THIS MESS, DriveWealth blocks BUYS and removes GME &amp; AMC from stock search‼️🔎💎',
+          'LOOK A THIS MESS, DriveWealth blocks BUYS and removes GME AMC from stock search‼️🔎💎',
           'DriveWealth BLOCKS BUY POSITIONS ON GME and AMC‼️',
         ],
       },
       {
         type: 'Phrase',
         id:
-          'Revolut no longer offers GME &amp; AMC - DriveWealth is blocking them to do so',
+          'Revolut no longer offers GME AMC - DriveWealth is blocking them to do so',
         text:
-          'Revolut no longer offers GME &amp; AMC - DriveWealth is blocking them to do so',
+          'Revolut no longer offers GME AMC - DriveWealth is blocking them to do so',
         items_count: 2,
         items: [
-          'Revolut no longer offers GME &amp; AMC - DriveWealth is blocking them to do so',
+          'Revolut no longer offers GME AMC - DriveWealth is blocking them to do so',
 
           'Revolut stopped by DriveWealth from offering GME and AMC in europe',
         ],
@@ -12403,12 +12397,12 @@ export const clusters: TreemapNode[] = [
       {
         type: 'Phrase',
         id:
-          'Revolut broker-dealer DriveWealth preventing users buying GME &amp; AMC 💎👐💎',
+          'Revolut broker-dealer DriveWealth preventing users buying GME AMC 💎👐💎',
         text:
-          'Revolut broker-dealer DriveWealth preventing users buying GME &amp; AMC 💎👐💎',
+          'Revolut broker-dealer DriveWealth preventing users buying GME AMC 💎👐💎',
         items_count: 1,
         items: [
-          'Revolut broker-dealer DriveWealth preventing users buying GME &amp; AMC 💎👐💎',
+          'Revolut broker-dealer DriveWealth preventing users buying GME AMC 💎👐💎',
         ],
       },
       {
@@ -12558,12 +12552,12 @@ export const clusters: TreemapNode[] = [
       {
         type: 'Phrase',
         id:
-          "At the very least, hold till 02/09 when the official short interest data is published. It'll be a mad scramble for GME if it shows all the projections of &lt; 50% SI were bad analytics at best &amp; blatant lies at worst.",
+          "At the very least, hold till 02/09 when the official short interest data is published. It'll be a mad scramble for GME if it shows all the projections of &lt; 50% SI were bad analytics at best blatant lies at worst.",
         text:
-          "At the very least, hold till 02/09 when the official short interest data is published. It'll be a mad scramble for GME if it shows all the projections of &lt; 50% SI were bad analytics at best &amp; blatant lies at worst.",
+          "At the very least, hold till 02/09 when the official short interest data is published. It'll be a mad scramble for GME if it shows all the projections of &lt; 50% SI were bad analytics at best blatant lies at worst.",
         items_count: 1,
         items: [
-          "At the very least, hold till 02/09 when the official short interest data is published. It'll be a mad scramble for GME if it shows all the projections of &lt; 50% SI were bad analytics at best &amp; blatant lies at worst.",
+          "At the very least, hold till 02/09 when the official short interest data is published. It'll be a mad scramble for GME if it shows all the projections of &lt; 50% SI were bad analytics at best blatant lies at worst.",
         ],
       },
       {
@@ -12762,10 +12756,10 @@ export const clusters: TreemapNode[] = [
       },
       {
         type: 'Phrase',
-        id: 'Great international attention on $GME &amp; $ AMC!!!',
-        text: 'Great international attention on $GME &amp; $ AMC!!!',
+        id: 'Great international attention on $GME $ AMC!!!',
+        text: 'Great international attention on $GME $ AMC!!!',
         items_count: 1,
-        items: ['Great international attention on $GME &amp; $ AMC!!!'],
+        items: ['Great international attention on $GME $ AMC!!!'],
       },
       {
         type: 'Phrase',
@@ -12868,17 +12862,17 @@ export const clusters: TreemapNode[] = [
 
           'REVOLUT DOESNT ALLOW TO BUY GME AND AMC!!!! We are still strong',
 
-          'Revolut has now stopped buying of GME &amp; AMC. Hold you beautiful 💎👐🦍',
+          'Revolut has now stopped buying of GME AMC. Hold you beautiful 💎👐🦍',
           'Revolut has just stopped the purchase of GME/AMC :(',
         ],
       },
       {
         type: 'Phrase',
-        id: '!!! Revolut BLOCKING GME &amp; AMC buying !!!',
-        text: '!!! Revolut BLOCKING GME &amp; AMC buying !!!',
+        id: '!!! Revolut BLOCKING GME AMC buying !!!',
+        text: '!!! Revolut BLOCKING GME AMC buying !!!',
         items_count: 4,
         items: [
-          '!!! Revolut BLOCKING GME &amp; AMC buying !!!',
+          '!!! Revolut BLOCKING GME AMC buying !!!',
 
           'REVOLUT just blocked GME and AMC buys! This is unacceptable.',
           'Revolut has blocked GME and AMC buys...',
@@ -13727,7 +13721,7 @@ export const clusters: TreemapNode[] = [
         items: [
           'Revolut blocking buying option for GME and AMC 5 minutes before market opening.',
 
-          '10 minutes before markets open - Revolut broker-dealer disables buys on AMC &amp; GME...',
+          '10 minutes before markets open - Revolut broker-dealer disables buys on AMC GME...',
 
           'Revolut disabling buying of GME and AMC 10 minutes before market open',
         ],
@@ -13758,10 +13752,10 @@ export const clusters: TreemapNode[] = [
       },
       {
         type: 'Phrase',
-        id: 'Revolut (UK) stop traders buying GME &amp; AMC',
-        text: 'Revolut (UK) stop traders buying GME &amp; AMC',
+        id: 'Revolut (UK) stop traders buying GME AMC',
+        text: 'Revolut (UK) stop traders buying GME AMC',
         items_count: 1,
-        items: ['Revolut (UK) stop traders buying GME &amp; AMC'],
+        items: ['Revolut (UK) stop traders buying GME AMC'],
       },
       {
         type: 'Phrase',
@@ -13808,12 +13802,12 @@ export const clusters: TreemapNode[] = [
       {
         type: 'Phrase',
         id:
-          'Revolut just took away buying options for $GME &amp; $AMC. Switch broker, buy the dip and HOLD 💎🖐🏼',
+          'Revolut just took away buying options for $GME $AMC. Switch broker, buy the dip and HOLD 💎🖐🏼',
         text:
-          'Revolut just took away buying options for $GME &amp; $AMC. Switch broker, buy the dip and HOLD 💎🖐🏼',
+          'Revolut just took away buying options for $GME $AMC. Switch broker, buy the dip and HOLD 💎🖐🏼',
         items_count: 1,
         items: [
-          'Revolut just took away buying options for $GME &amp; $AMC. Switch broker, buy the dip and HOLD 💎🖐🏼',
+          'Revolut just took away buying options for $GME $AMC. Switch broker, buy the dip and HOLD 💎🖐🏼',
         ],
       },
     ],
@@ -13833,7 +13827,7 @@ export const clusters: TreemapNode[] = [
           'BUY AND HOLD!!! TO THE MOON🚀🚀🚀',
           'BUY AND HOLD SOLDIERS🚀',
           'Buy. Hold. Hold. Hold.💎🚀✋💎🚀✋💎🚀💎✋',
-          'EVERYTHING IS SIMPLE - BUY &amp; HOLD 💎. ALL TIME.',
+          'EVERYTHING IS SIMPLE - BUY HOLD 💎. ALL TIME.',
         ],
       },
       {
@@ -13859,10 +13853,10 @@ export const clusters: TreemapNode[] = [
       },
       {
         type: 'Phrase',
-        id: 'HOLD &amp; BUY 💎🤲🏻💎 &gt; 🧻🤲🏻🧻',
-        text: 'HOLD &amp; BUY 💎🤲🏻💎 &gt; 🧻🤲🏻🧻',
+        id: 'HOLD BUY 💎🤲🏻💎 &gt; 🧻🤲🏻🧻',
+        text: 'HOLD BUY 💎🤲🏻💎 &gt; 🧻🤲🏻🧻',
         items_count: 1,
-        items: ['HOLD &amp; BUY 💎🤲🏻💎 &gt; 🧻🤲🏻🧻'],
+        items: ['HOLD BUY 💎🤲🏻💎 &gt; 🧻🤲🏻🧻'],
       },
       {
         type: 'Phrase',
