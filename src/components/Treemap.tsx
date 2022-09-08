@@ -1,10 +1,10 @@
 import { scale, valid } from 'chroma-js';
 import { hierarchy, treemap } from 'd3';
 import React, { FC, useMemo } from 'react';
-import { TreemapDataNode, TreemapProps } from '../common/types/components';
+import { DataNode, TreemapProps } from '../common/types/components';
 import { calculateFontSize } from '../common/utils/utils';
 
-type TreemapNode = TreemapDataNode & { children: TreemapNode[] };
+type TreemapNode = DataNode & { children: TreemapNode[] };
 
 const BIG_COLOR_DEFAULT = '#031f38';
 const SMALL_COLOR_DEFAULT = '#72b1ca';
@@ -52,7 +52,7 @@ export const Treemap: FC<TreemapProps> = ({
   }, [mainNode]);
 
   const root = useMemo(() => {
-    const treeGenerator = treemap<TreemapDataNode>()
+    const treeGenerator = treemap<DataNode>()
       .size([width, height])
       .padding(0);
     return treeGenerator(treeHierarchy);

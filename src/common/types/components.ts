@@ -2,17 +2,17 @@ import { FC } from 'react';
 import { Cluster, Item, Phrase } from './modals';
 import { ItemsDisplayComponentProps } from './configurations';
 
-export interface TreemapDataNode {
+export interface DataNode {
   id: string;
   amount: number;
   text?: string;
 }
 
 export interface TreemapProps {
-  dataNodes: TreemapDataNode[];
+  dataNodes: DataNode[];
   width: number;
   height: number;
-  nodeClicked: (node: TreemapDataNode) => void;
+  nodeClicked: (node: DataNode) => void;
   bigColor?: string;
   smallColor?: string;
   countFontSize?: number;
@@ -20,6 +20,15 @@ export interface TreemapProps {
   textColor?: string;
   borderWidth?: number;
   borderColor?: string;
+}
+
+export interface BarChartProps {
+  dataNodes: DataNode[];
+  width: number;
+  height: number;
+  nodeClicked: (node: DataNode) => void;
+  fontFamily?: string;
+  textColor?: string;
 }
 
 export type NodeType = 'Cluster' | 'Phrase' | 'Item';

@@ -1,12 +1,13 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import ContainerDimensions from 'react-container-dimensions';
-import {
-  OneAiAnalyticsProps,
-  TreemapDataNode,
-} from '../common/types/components';
+import { OneAiAnalyticsProps, DataNode } from '../common/types/components';
 import { Cluster, Item, Phrase } from '../common/types/modals';
+import { BarChart } from './BarChart';
 import { ItemsListDisplay } from './ItemsListDisplay';
 import { Treemap } from './Treemap';
+
+export type Displays = 'Treemap' | 'BarChart';
+
 // Please do not use types off of a default export module or else Storybook Docs will suffer.
 // see: https://github.com/storybookjs/storybook/issues/9556
 /**
@@ -31,6 +32,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   treemapBorderColor = treemapTextColor,
   navbarColor = treemapBigColor,
 }) => {
+  const [display, setDisplay] = useState('Treemap' as Displays);
+
   const navBarText = currentNode
     ? currentNode.type === 'Cluster'
       ? (currentNode.data as Cluster).cluster_phrase
@@ -46,7 +49,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
       ? (currentNode.data as Phrase).items_count
       : 1;
 
-  const treemapNodes: TreemapDataNode[] = dataNodes.map(d => {
+  const treemapNodes: DataNode[] = dataNodes.map(d => {
     return {
       id: (d.type === 'Cluster'
         ? (d.data as Cluster).cluster_id
@@ -71,13 +74,13 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
 
   return (
     <div className="h-full w-full flex flex-col">
-      {currentNode && (
-        <div
-          className="max-h-20 w-full"
-          style={{ backgroundColor: navbarColor, height: '15%' }}
-        >
-          <div className="flex flex-row items-center p-5 justify-between h-full">
-            <div className="flex flex-row w-11/12">
+      <div
+        className="max-h-20 w-full"
+        style={{ backgroundColor: navbarColor, height: '15%' }}
+      >
+        <div className="flex flex-row items-center p-5 justify-between h-full">
+          <div className="flex flex-row w-11/12">
+            {currentNode && (
               <button
                 type="button"
                 onClick={goBackClicked}
@@ -100,29 +103,64 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 </svg>
                 BACK
               </button>
-              <div className="ml-4 text-gray-300 font-bold truncate self-center">
-                {navBarText}
-              </div>
-            </div>
-            <div className="text-xl text-gray-300 font-bold">{navBarCount}</div>
-          </div>
-        </div>
-      )}
+            )}
 
-      <div
-        className="w-full h-full overflow-auto"
-        style={{ height: currentNode ? '85%' : '100%' }}
-      >
+            <div className="ml-4 text-gray-300 font-bold truncate self-center">
+              {navBarText}
+            </div>
+          </div>
+          <div className="flex">
+            <svg
+              className="h-8 w-8 text-teal-500 hover:cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:text-indigo-500 duration-300"
+              onClick={() => setDisplay('Treemap')}
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              {' '}
+              <path stroke="none" d="M0 0h24v24H0z" />{' '}
+              <rect x="4" y="4" width="16" height="16" rx="2" />{' '}
+              <line x1="4" y1="10" x2="20" y2="10" />{' '}
+              <line x1="10" y1="4" x2="10" y2="20" />
+            </svg>
+
+            <svg
+              className="h-8 w-8 text-teal-500  hover:cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:text-indigo-500 duration-300"
+              onClick={() => setDisplay('BarChart')}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+              />
+            </svg>
+          </div>
+          {currentNode && (
+            <div className="text-xl text-gray-300 font-bold">{navBarCount}</div>
+          )}
+        </div>
+      </div>
+
+      <div className="w-full h-full overflow-auto" style={{ height: '85%' }}>
         <div className="flex flex-row w-full h-full">
           {currentPage > 0 && (
             <div
-              className="h-full flex items-center justify-center"
-              style={{ width: '2%' }}
+              className="h-full flex items-center justify-center hover:cursor-pointer"
+              onClick={prevPageClicked}
+              style={{ width: '3%' }}
             >
               <button
                 type="button"
-                onClick={prevPageClicked}
-                className="text-blue-500 hover:text-blue-700 font-medium rounded-lg text-sm  text-center inline-flex items-center"
+                className="text-slate-500 hover:text-slate-700 font-medium rounded-lg text-sm  text-center inline-flex items-center"
               >
                 <svg
                   aria-hidden="true"
@@ -152,41 +190,63 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
             ) : (
               <ContainerDimensions>
                 {({ height, width }) => (
-                  <Treemap
-                    dataNodes={treemapNodes}
-                    height={height}
-                    width={width}
-                    nodeClicked={node =>
-                      nodeClicked({
-                        type: !currentNode
-                          ? 'Cluster'
-                          : currentNode.type === 'Cluster'
-                          ? 'Phrase'
-                          : 'Item',
-                        id: node.id,
-                      })
-                    }
-                    bigColor={treemapBigColor}
-                    smallColor={treemapSmallColor}
-                    countFontSize={treemapCountFontSize}
-                    fontFamily={treemapFontFamily}
-                    textColor={treemapTextColor}
-                    borderWidth={treemapBorderWidth}
-                    borderColor={treemapBorderColor}
-                  />
+                  <>
+                    {display === 'Treemap' ? (
+                      <Treemap
+                        dataNodes={treemapNodes}
+                        height={height}
+                        width={width}
+                        nodeClicked={node =>
+                          nodeClicked({
+                            type: !currentNode
+                              ? 'Cluster'
+                              : currentNode.type === 'Cluster'
+                              ? 'Phrase'
+                              : 'Item',
+                            id: node.id,
+                          })
+                        }
+                        bigColor={treemapBigColor}
+                        smallColor={treemapSmallColor}
+                        countFontSize={treemapCountFontSize}
+                        fontFamily={treemapFontFamily}
+                        textColor={treemapTextColor}
+                        borderWidth={treemapBorderWidth}
+                        borderColor={treemapBorderColor}
+                      />
+                    ) : (
+                      <BarChart
+                        dataNodes={treemapNodes}
+                        height={height}
+                        width={width}
+                        nodeClicked={node =>
+                          nodeClicked({
+                            type: !currentNode
+                              ? 'Cluster'
+                              : currentNode.type === 'Cluster'
+                              ? 'Phrase'
+                              : 'Item',
+                            id: node.id,
+                          })
+                        }
+                        fontFamily={treemapFontFamily}
+                        textColor={treemapTextColor}
+                      />
+                    )}
+                  </>
                 )}
               </ContainerDimensions>
             )}
           </div>
           {currentPage < totalPagesAmount - 1 && (
             <div
-              className="h-full flex items-center justify-center"
-              style={{ width: '2%' }}
+              className="h-full flex items-center justify-center hover:cursor-pointer"
+              onClick={nextPageClicked}
+              style={{ width: '3%' }}
             >
               <button
                 type="button"
-                onClick={nextPageClicked}
-                className="text-blue-500 hover:text-blue-700 font-medium rounded-lg text-sm  text-center inline-flex items-center"
+                className="text-slate-500 hover:text-slate-700 font-medium rounded-lg text-sm  text-center inline-flex items-center"
               >
                 <svg
                   aria-hidden="true"
