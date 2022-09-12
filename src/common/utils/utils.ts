@@ -26,3 +26,9 @@ export function chunks<T>(arr: T[], size: number): Array<T[]> {
     arr.slice(i * size, i * size + size)
   );
 }
+
+export function getSecondsDiff(startDate: Date, endDate: Date) {
+  const diff = endDate.getTime() - startDate.getTime();
+
+  return Math.abs(diff / 1000);
+}

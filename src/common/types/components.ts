@@ -57,8 +57,17 @@ export interface OneAiAnalyticsProps {
   itemsDisplay?: FC<ItemsDisplayComponentProps>;
 }
 
-export type OneAIAnalyticsApiWrapperProps = Omit<
+export type OneAIAnalyticsStaticDataWrapperProps = Omit<
   OneAiAnalyticsProps & { exampleNodes: ExampleNode[] },
+  'dataNodes' | 'totalPagesAmount' | 'currentPage'
+>;
+
+export type OneAIAnalyticsApiWrapperProps = Omit<
+  OneAiAnalyticsProps & {
+    domain?: string;
+    apiKey?: string;
+    collection?: string;
+  },
   'dataNodes' | 'totalPagesAmount' | 'currentPage'
 >;
 

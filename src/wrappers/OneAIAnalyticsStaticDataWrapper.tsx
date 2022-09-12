@@ -2,12 +2,12 @@ import React, { FC, useMemo, useState } from 'react';
 import {
   ExampleNode,
   NodeType,
-  OneAIAnalyticsApiWrapperProps,
+  OneAIAnalyticsStaticDataWrapperProps,
   OneAIDataNode,
 } from '../common/types/components';
 import { Cluster, Item, Phrase } from '../common/types/modals';
 import { chunks } from '../common/utils/utils';
-import { OneAiAnalytics } from './OneAiAnalytics';
+import { OneAiAnalytics } from '../components/OneAiAnalytics';
 
 const PAGE_SIZE = 25;
 
@@ -16,7 +16,7 @@ const PAGE_SIZE = 25;
 /**
  * One Ai Analytics all items wrapper Component
  */
-export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
+export const OneAIAnalyticsStaticDataWrapper: FC<OneAIAnalyticsStaticDataWrapperProps> = ({
   exampleNodes,
   ...rest
 }) => {

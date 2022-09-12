@@ -16,9 +16,9 @@ export interface Item {
 
 export interface Phrase {
   phrase_id: number;
+  text: string;
   items_count: number;
   metadata: {} | null;
-  text: string;
 }
 
 export interface Cluster {
