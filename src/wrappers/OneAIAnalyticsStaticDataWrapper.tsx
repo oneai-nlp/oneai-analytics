@@ -14,7 +14,7 @@ const PAGE_SIZE = 25;
 // Please do not use types off of a default export module or else Storybook Docs will suffer.
 // see: https://github.com/storybookjs/storybook/issues/9556
 /**
- * One Ai Analytics all items wrapper Component
+ * One AI Analytics static data wrapper component
  */
 export const OneAIAnalyticsStaticDataWrapper: FC<OneAIAnalyticsStaticDataWrapperProps> = ({
   exampleNodes,

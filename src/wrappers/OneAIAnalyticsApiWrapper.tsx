@@ -15,7 +15,7 @@ const cache: Map<string, { nodes: OneAIDataNode[]; time: Date }> = new Map();
 // Please do not use types off of a default export module or else Storybook Docs will suffer.
 // see: https://github.com/storybookjs/storybook/issues/9556
 /**
- * One Ai Analytics all items wrapper Component
+ * One AI Analytics api wrapper component
  */
 export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   domain = 'https://api.oneai.com',
@@ -107,7 +107,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       console.error(e);
       setLoading(false);
     });
-  }, [domain, collection, apiKey, clickedNodes]);
+  }, [domain, collection, apiKey, clickedNodes, currentPage]);
 
   const nodeClicked = (node: { type: NodeType; id: string }) => {
     if (node.type === 'Cluster') {
