@@ -33,7 +33,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   treemapBorderColor = '#2C161D',
   navbarColor = treemapBigColor,
 }) => {
-  const [display, setDisplay] = useState('BarChart' as Displays);
+  const [display, setDisplay] = useState('Treemap' as Displays);
 
   const navBarText = currentNode
     ? currentNode.type === 'Cluster'
@@ -189,7 +189,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               itemsDisplay({
                 items: dataNodes.map(d => (d.data as Item).original_text) ?? [],
                 bgColor: treemapSmallColor,
-                textColor: treemapBigColor,
+                textColor: 'white',
               })
             ) : (
               <ContainerDimensions>
