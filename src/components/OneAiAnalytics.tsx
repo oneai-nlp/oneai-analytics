@@ -23,16 +23,17 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   nextPageClicked = () => {},
   prevPageClicked = () => {},
   itemsDisplay = ItemsListDisplay,
+  background = '#2C293D',
   treemapBigColor = '#031f38',
-  treemapSmallColor = '#72b1ca',
+  treemapSmallColor = '#2C293D',
   treemapCountFontSize = 14,
   treemapFontFamily = 'sans-serif',
   treemapTextColor = 'white',
-  treemapBorderWidth = 0,
-  treemapBorderColor = treemapTextColor,
+  treemapBorderWidth = 1,
+  treemapBorderColor = '#2C161D',
   navbarColor = treemapBigColor,
 }) => {
-  const [display, setDisplay] = useState('Treemap' as Displays);
+  const [display, setDisplay] = useState('BarChart' as Displays);
 
   const navBarText = currentNode
     ? currentNode.type === 'Cluster'
@@ -73,7 +74,10 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   });
 
   return (
-    <div className="h-full w-full flex flex-col">
+    <div
+      className="h-full w-full flex flex-col"
+      style={{ background: background }}
+    >
       <div
         className="max-h-20 w-full"
         style={{ backgroundColor: navbarColor, height: '15%' }}

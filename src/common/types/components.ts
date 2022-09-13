@@ -46,6 +46,7 @@ export interface OneAiAnalyticsProps {
   goBackClicked?: () => void;
   nextPageClicked?: () => void;
   prevPageClicked?: () => void;
+  background?: string;
   treemapBigColor?: string;
   treemapSmallColor?: string;
   treemapCountFontSize?: number;
