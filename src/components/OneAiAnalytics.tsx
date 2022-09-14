@@ -50,7 +50,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
       ? (currentNode.data as Phrase).items_count
       : 1;
 
-  const treemapNodes: DataNode[] = dataNodes.map(d => {
+  const nodes: DataNode[] = dataNodes.map(d => {
     return {
       id: (d.type === 'Cluster'
         ? (d.data as Cluster).cluster_id
@@ -197,7 +197,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                   <>
                     {display === 'Treemap' ? (
                       <Treemap
-                        dataNodes={treemapNodes}
+                        dataNodes={nodes}
                         height={height}
                         width={width}
                         nodeClicked={node =>
@@ -220,7 +220,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                       />
                     ) : (
                       <BarChart
-                        dataNodes={treemapNodes}
+                        dataNodes={nodes}
                         height={height}
                         width={width}
                         nodeClicked={node =>

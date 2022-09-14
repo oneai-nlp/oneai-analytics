@@ -172,27 +172,29 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           </div>
         </div>
       )}
-      <div
-        className={`h-full w-full ${
-          loading ? 'opacity-20 pointer-events-none' : ''
-        }`}
-      >
-        <OneAiAnalytics
-          dataNodes={
-            currentPages.at(currentPage)?.map(node => {
-              return { type: node.type, data: node.data };
-            }) ?? []
-          }
-          currentNode={clickedNodes.at(-1)}
-          nodeClicked={nodeClicked}
-          goBackClicked={goBack}
-          currentPage={currentPage}
-          totalPagesAmount={currentPages.length}
-          nextPageClicked={() => setCurrentPage(page => page + 1)}
-          prevPageClicked={() => setCurrentPage(page => page - 1)}
-          {...rest}
-        />
-      </div>
+      {currentNodes && (
+        <div
+          className={`h-full w-full ${
+            loading ? 'opacity-20 pointer-events-none' : ''
+          }`}
+        >
+          <OneAiAnalytics
+            dataNodes={
+              currentPages.at(currentPage)?.map(node => {
+                return { type: node.type, data: node.data };
+              }) ?? []
+            }
+            currentNode={clickedNodes.at(-1)}
+            nodeClicked={nodeClicked}
+            goBackClicked={goBack}
+            currentPage={currentPage}
+            totalPagesAmount={currentPages.length}
+            nextPageClicked={() => setCurrentPage(page => page + 1)}
+            prevPageClicked={() => setCurrentPage(page => page - 1)}
+            {...rest}
+          />
+        </div>
+      )}
     </>
   );
 };
@@ -204,7 +206,8 @@ async function fetchClusters(
 ): Promise<Cluster[]> {
   return await fetchApi(
     `${domain}/clustering/v1/collections/${collection}/clusters`,
-    apiKey
+    apiKey,
+    'clusters'
   );
 }
 
@@ -216,7 +219,8 @@ async function fetchPhrases(
 ): Promise<Phrase[]> {
   return await fetchApi(
     `${domain}/clustering/v1/collections/${collection}/clusters/${clusterId}/phrases`,
-    apiKey
+    apiKey,
+    'phrases'
   );
 }
 
@@ -228,25 +232,33 @@ async function fetchItems(
 ): Promise<Item[]> {
   return await fetchApi(
     `${domain}/clustering/v1/collections/${collection}/phrases/${phraseId}/items`,
-    apiKey
+    apiKey,
+    'items'
   );
 }
 
-async function fetchApi<T>(url: string, apiKey: string): Promise<T[]> {
+async function fetchApi<T>(
+  url: string,
+  apiKey: string,
+  accessor: string
+): Promise<T[]> {
   try {
     const res = await fetch(url, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json', 'api-key': apiKey },
     });
 
-    if (res.status !== 200) return [];
+    if (res.status !== 200 || !res.ok) return [];
 
-    return await res.json();
+    const json = await res.json();
+
+    console.log(json);
+
+    return json[accessor];
   } catch (e) {
-    console.error('error occurred', e);
+    console.error('error occurred ->', e);
+    return [];
   }
-
-  return [];
 }
 
 function getNodesFromCache(
