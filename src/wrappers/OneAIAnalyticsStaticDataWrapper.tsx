@@ -31,7 +31,7 @@ export const OneAIAnalyticsStaticDataWrapper: FC<OneAIAnalyticsStaticDataWrapper
 
   const nodeClicked = (node: { type: NodeType; id: string }) => {
     setCurrentNodes(currentClusters => {
-      const clickedNode = currentClusters.at(Number(node.id));
+      const clickedNode = currentPages.at(currentPage)?.at(Number(node.id));
       if (clickedNode) {
         setClickedNodes(currentClickedCluster => [
           ...currentClickedCluster,
