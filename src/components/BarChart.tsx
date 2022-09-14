@@ -11,7 +11,7 @@ export const BarChart: FC<BarChartProps> = ({
   nodeClicked,
   fontFamily = 'sans-serif',
 }) => {
-  const barsHeight = dataNodes.length * 25;
+  const barsHeight = dataNodes.length * 40;
   // Y axis is for groups since the barplot is horizontal
   const groups = dataNodes
     .sort((a, b) => b.amount - a.amount)
@@ -44,10 +44,8 @@ export const BarChart: FC<BarChartProps> = ({
     );
     const height = yScale.bandwidth();
     const opacity = 0.7;
-    const stroke = '#72b1ca';
     const fill = '#72b1ca';
     const fillOpacity = 0.3;
-    const strokeWidth = 1;
     const rx = 1;
     return (
       <g
@@ -61,10 +59,8 @@ export const BarChart: FC<BarChartProps> = ({
           width={width}
           height={height}
           opacity={opacity}
-          stroke={stroke}
           fill={fill}
           fillOpacity={fillOpacity}
-          strokeWidth={strokeWidth}
           rx={rx}
         />
         <foreignObject
@@ -73,14 +69,12 @@ export const BarChart: FC<BarChartProps> = ({
           width={width}
           height={height}
           opacity={opacity}
-          stroke={stroke}
           fill={fill}
           fillOpacity={fillOpacity}
-          strokeWidth={strokeWidth}
           rx={rx}
         >
           <div
-            className="flex h-full items-center"
+            className="flex h-full items-center ml-2"
             style={{ fontFamily: fontFamily, color: 'white' }}
           >
             <span className="truncate">

@@ -56,6 +56,7 @@ export interface OneAiAnalyticsProps {
   treemapBorderColor?: string;
   navbarColor?: string;
   itemsDisplay?: FC<ItemsDisplayComponentProps>;
+  loading?: boolean;
 }
 
 export type OneAIAnalyticsStaticDataWrapperProps = Omit<
