@@ -1,11 +1,24 @@
 {
   "version": "0.1.4",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "dist/oneai-analytics.cjs.production.min.js",
+  "module": "dist/oneai-analytics.esm.js",
   "typings": "dist/index.d.ts",
+  "description": "OneAI analytics package",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/power-of-language/oneai-analytics.git"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "oneAI"
+  ],
   "files": [
+    "src",
     "dist",
-    "src"
+    "LICENSE",
+    "README.md"
   ],
   "engines": {
     "node": ">=14"
@@ -37,7 +50,6 @@
   },
   "name": "oneai-analytics",
   "author": "Ron Helfer",
-  "module": "dist/oneai-analytics.esm.js",
   "size-limit": [
     {
       "path": "dist/oneai-analytics.cjs.production.min.js",
@@ -49,7 +61,7 @@
     }
   ],
   "devDependencies": {
-    "@babel/core": "^7.19.0",
+    "@babel/core": "^7.19.1",
     "@size-limit/preset-small-lib": "^8.1.0",
     "@storybook/addon-essentials": "^6.5.12",
     "@storybook/addon-info": "^5.3.21",
@@ -64,7 +76,7 @@
     "@types/d3": "^7.4.0",
     "@types/react": "^18.0.20",
     "@types/react-dom": "^18.0.6",
-    "autoprefixer": "^10.4.10",
+    "autoprefixer": "^10.4.11",
     "babel-jest": "^29.0.3",
     "babel-loader": "^8.2.5",
     "husky": "^8.0.1",
