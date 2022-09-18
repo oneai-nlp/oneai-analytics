@@ -1,8 +1,9 @@
 import './index.css';
 import './common/utils/polyfill';
+import { OneAIAnalyticsApiWrapper } from './wrappers/OneAIAnalyticsApiWrapper';
+import { OneAIAnalyticsStaticDataWrapper } from './wrappers/OneAIAnalyticsStaticDataWrapper';
+export { OneAIAnalyticsApiWrapper, OneAIAnalyticsStaticDataWrapper };
 export { OneAiAnalytics } from './components/OneAiAnalytics';
-export { OneAIAnalyticsApiWrapper } from './wrappers/OneAIAnalyticsApiWrapper';
-export { OneAIAnalyticsStaticDataWrapper } from './wrappers/OneAIAnalyticsStaticDataWrapper';
 export {
   TreemapProps,
   BarChartProps,
