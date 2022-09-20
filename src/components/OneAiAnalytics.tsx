@@ -215,7 +215,10 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               </div>
             )}
 
-            <div className="overflow-y-auto overflow-x-hidden h-full w-full">
+            <div
+              ref={ref}
+              className="overflow-y-auto overflow-x-hidden h-full w-full"
+            >
               {currentNode && currentNode.type === 'Phrase' ? (
                 itemsDisplay({
                   items:
@@ -224,52 +227,50 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                   textColor: 'white',
                 })
               ) : (
-                <div ref={ref} className="h-full w-full">
-                  <>
-                    {display === 'Treemap' ? (
-                      <Treemap
-                        dataNodes={nodes}
-                        height={height ?? 0}
-                        width={width ?? 0}
-                        nodeClicked={(node) =>
-                          nodeClicked({
-                            type: !currentNode
-                              ? 'Cluster'
-                              : currentNode.type === 'Cluster'
-                              ? 'Phrase'
-                              : 'Item',
-                            id: node.id,
-                          })
-                        }
-                        bigColor={treemapBigColor}
-                        smallColor={treemapSmallColor}
-                        countFontSize={treemapCountFontSize}
-                        fontFamily={treemapFontFamily}
-                        textColor={treemapTextColor}
-                        borderWidth={treemapBorderWidth}
-                        borderColor={treemapBorderColor}
-                      />
-                    ) : (
-                      <BarChart
-                        dataNodes={nodes}
-                        height={height ?? 0}
-                        width={width ?? 0}
-                        nodeClicked={(node) =>
-                          nodeClicked({
-                            type: !currentNode
-                              ? 'Cluster'
-                              : currentNode.type === 'Cluster'
-                              ? 'Phrase'
-                              : 'Item',
-                            id: node.id,
-                          })
-                        }
-                        fontFamily={treemapFontFamily}
-                        textColor={treemapTextColor}
-                      />
-                    )}
-                  </>
-                </div>
+                <>
+                  {display === 'Treemap' ? (
+                    <Treemap
+                      dataNodes={nodes}
+                      height={height ?? 0}
+                      width={width ?? 0}
+                      nodeClicked={(node) =>
+                        nodeClicked({
+                          type: !currentNode
+                            ? 'Cluster'
+                            : currentNode.type === 'Cluster'
+                            ? 'Phrase'
+                            : 'Item',
+                          id: node.id,
+                        })
+                      }
+                      bigColor={treemapBigColor}
+                      smallColor={treemapSmallColor}
+                      countFontSize={treemapCountFontSize}
+                      fontFamily={treemapFontFamily}
+                      textColor={treemapTextColor}
+                      borderWidth={treemapBorderWidth}
+                      borderColor={treemapBorderColor}
+                    />
+                  ) : (
+                    <BarChart
+                      dataNodes={nodes}
+                      height={height ?? 0}
+                      width={width ?? 0}
+                      nodeClicked={(node) =>
+                        nodeClicked({
+                          type: !currentNode
+                            ? 'Cluster'
+                            : currentNode.type === 'Cluster'
+                            ? 'Phrase'
+                            : 'Item',
+                          id: node.id,
+                        })
+                      }
+                      fontFamily={treemapFontFamily}
+                      textColor={treemapTextColor}
+                    />
+                  )}
+                </>
               )}
             </div>
 
