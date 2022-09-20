@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import ContainerDimensions from 'react-container-dimensions';
-import { OneAiAnalyticsProps, DataNode } from '../common/types/components';
+import { DataNode, OneAiAnalyticsProps } from '../common/types/components';
 import { Cluster, Item, Phrase } from '../common/types/modals';
 import { BarChart } from './BarChart';
 import { ItemsListDisplay } from './ItemsListDisplay';

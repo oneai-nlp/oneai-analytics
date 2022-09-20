@@ -15,7 +15,7 @@ export const BarChart: FC<BarChartProps> = ({
   // Y axis is for groups since the barplot is horizontal
   const groups = dataNodes
     .sort((a, b) => b.amount - a.amount)
-    .map(d => d.text ?? '');
+    .map((d) => d.text ?? '');
 
   const yScale = useMemo(() => {
     return scaleBand()
@@ -24,9 +24,10 @@ export const BarChart: FC<BarChartProps> = ({
       .padding(BAR_PADDING);
   }, [height, groups]);
 
-  const max = useMemo(() => extent(dataNodes.map(d => d.amount))[1] ?? 20, [
-    dataNodes,
-  ]);
+  const max = useMemo(
+    () => extent(dataNodes.map((d) => d.amount))[1] ?? 20,
+    [dataNodes]
+  );
 
   // X axis
   const xScale = useMemo(() => {

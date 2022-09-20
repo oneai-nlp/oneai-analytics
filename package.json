@@ -4,6 +4,12 @@
   "main": "dist/index.js",
   "module": "dist/oneai-analytics.esm.js",
   "typings": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/oneai-analytics.esm.js"
+    }
+  },
   "description": "OneAI analytics package",
   "repository": {
     "type": "git",
@@ -24,11 +30,11 @@
     "node": ">=14"
   },
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "test": "tsdx test --passWithNoTests",
-    "lint": "tsdx lint",
-    "prepare": "tsdx build",
+    "start": "dts watch",
+    "build": "dts build",
+    "test": "dts test --passWithNoTests",
+    "lint": "dts lint",
+    "prepare": "dts build",
     "size": "size-limit",
     "analyze": "size-limit --why",
     "sb": "start-storybook -p 6006",
@@ -62,6 +68,7 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.19.1",
+    "@rollup/plugin-node-resolve": "^14.1.0",
     "@size-limit/preset-small-lib": "^8.1.0",
     "@storybook/addon-essentials": "^6.5.12",
     "@storybook/addon-info": "^5.3.21",
@@ -73,13 +80,13 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/chroma-js": "^2.1.4",
-    "@types/d3": "^6.7.0",
+    "@types/d3": "^7.4.0",
     "@types/react": "^18.0.20",
     "@types/react-dom": "^18.0.6",
     "autoprefixer": "^10.4.11",
     "babel-jest": "^29.0.3",
     "babel-loader": "^8.2.5",
-    "d3": "^6.7.0",
+    "dts-cli": "^1.6.0",
     "husky": "^8.0.1",
     "postcss": "^8.4.16",
     "react": "^18.2.0",
@@ -88,13 +95,13 @@
     "rollup-plugin-postcss": "^4.0.2",
     "size-limit": "^8.1.0",
     "tailwindcss": "^3.1.8",
-    "tsdx": "^0.14.1",
     "tslib": "^2.4.0",
     "typescript": "^4.8.3"
   },
   "dependencies": {
     "chroma-js": "^2.4.2",
-    "core-js": "^3.25.1",
+    "core-js": "^3.25.2",
+    "d3": "7.6.1",
     "react-app-polyfill": "^3.0.0",
     "react-container-dimensions": "^1.4.1"
   }

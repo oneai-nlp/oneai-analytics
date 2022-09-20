@@ -11,9 +11,9 @@
     "typescript"
   ],
   "scripts": {
-    "dev": "NODE_ENV=production next",
+    "dev": "next",
     "build": "next build",
-    "start": "NODE_ENV=production next start",
+    "start": "next start",
     "type-check": "tsc",
     "lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\"",
     "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\" --write"
@@ -25,7 +25,9 @@
     ]
   },
   "dependencies": {
+    "d3": "^7.6.1",
     "next": "12.3.0",
+    "oneai-analytics": "0.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },

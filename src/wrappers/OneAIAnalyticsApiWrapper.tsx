@@ -226,8 +226,6 @@ async function fetchApi<T>(
 
     const json = await res.json();
 
-    console.log(json);
-
     return json[accessor];
   } catch (e) {
     console.error('error occurred ->', e);
