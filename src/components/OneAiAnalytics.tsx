@@ -1,11 +1,10 @@
 import React, { FC, useState } from 'react';
-import ContainerDimensions from 'react-container-dimensions';
 import { DataNode, OneAiAnalyticsProps } from '../common/types/components';
 import { Cluster, Item, Phrase } from '../common/types/modals';
 import { BarChart } from './BarChart';
 import { ItemsListDisplay } from './ItemsListDisplay';
 import { Treemap } from './Treemap';
-
+import { useResizeDetector } from 'react-resize-detector';
 export type Displays = 'Treemap' | 'BarChart';
 
 // Please do not use types off of a default export module or else Storybook Docs will suffer.
@@ -35,6 +34,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   loading,
 }) => {
   const [display, setDisplay] = useState('Treemap' as Displays);
+  const { width, height, ref } = useResizeDetector();
 
   const navBarText = currentNode
     ? currentNode.type === 'Cluster'
@@ -51,7 +51,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
       ? (currentNode.data as Phrase).items_count
       : 1;
 
-  const nodes: DataNode[] = dataNodes.map(d => {
+  const nodes: DataNode[] = dataNodes.map((d) => {
     return {
       id: (d.type === 'Cluster'
         ? (d.data as Cluster).cluster_id
@@ -219,59 +219,57 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               {currentNode && currentNode.type === 'Phrase' ? (
                 itemsDisplay({
                   items:
-                    dataNodes.map(d => (d.data as Item).original_text) ?? [],
+                    dataNodes.map((d) => (d.data as Item).original_text) ?? [],
                   bgColor: treemapSmallColor,
                   textColor: 'white',
                 })
               ) : (
-                <ContainerDimensions>
-                  {({ height, width }) => (
-                    <>
-                      {display === 'Treemap' ? (
-                        <Treemap
-                          dataNodes={nodes}
-                          height={height}
-                          width={width}
-                          nodeClicked={node =>
-                            nodeClicked({
-                              type: !currentNode
-                                ? 'Cluster'
-                                : currentNode.type === 'Cluster'
-                                ? 'Phrase'
-                                : 'Item',
-                              id: node.id,
-                            })
-                          }
-                          bigColor={treemapBigColor}
-                          smallColor={treemapSmallColor}
-                          countFontSize={treemapCountFontSize}
-                          fontFamily={treemapFontFamily}
-                          textColor={treemapTextColor}
-                          borderWidth={treemapBorderWidth}
-                          borderColor={treemapBorderColor}
-                        />
-                      ) : (
-                        <BarChart
-                          dataNodes={nodes}
-                          height={height}
-                          width={width}
-                          nodeClicked={node =>
-                            nodeClicked({
-                              type: !currentNode
-                                ? 'Cluster'
-                                : currentNode.type === 'Cluster'
-                                ? 'Phrase'
-                                : 'Item',
-                              id: node.id,
-                            })
-                          }
-                          fontFamily={treemapFontFamily}
-                          textColor={treemapTextColor}
-                        />
-                      )}
-                    </>
-                  )}
-                </ContainerDimensions>
+                <div ref={ref} className="h-full w-full">
+                  <>
+                    {display === 'Treemap' ? (
+                      <Treemap
+                        dataNodes={nodes}
+                        height={height ?? 0}
+                        width={width ?? 0}
+                        nodeClicked={(node) =>
+                          nodeClicked({
+                            type: !currentNode
+                              ? 'Cluster'
+                              : currentNode.type === 'Cluster'
+                              ? 'Phrase'
+                              : 'Item',
+                            id: node.id,
+                          })
+                        }
+                        bigColor={treemapBigColor}
+                        smallColor={treemapSmallColor}
+                        countFontSize={treemapCountFontSize}
+                        fontFamily={treemapFontFamily}
+                        textColor={treemapTextColor}
+                        borderWidth={treemapBorderWidth}
+                        borderColor={treemapBorderColor}
+                      />
+                    ) : (
+                      <BarChart
+                        dataNodes={nodes}
+                        height={height ?? 0}
+                        width={width ?? 0}
+                        nodeClicked={(node) =>
+                          nodeClicked({
+                            type: !currentNode
+                              ? 'Cluster'
+                              : currentNode.type === 'Cluster'
+                              ? 'Phrase'
+                              : 'Item',
+                            id: node.id,
+                          })
+                        }
+                        fontFamily={treemapFontFamily}
+                        textColor={treemapTextColor}
+                      />
+                    )}
+                  </>
+                </div>
               )}
             </div>
 

@@ -1,5 +1,4 @@
-import { ExampleNode } from 'oneai-analytics';
-import { OneAIAnalyticsStaticDataWrapper } from '../../../dist';
+import { ExampleNode, OneAIAnalyticsStaticDataWrapper } from '../../../dist';
 
 export default function Chart() {
   return (

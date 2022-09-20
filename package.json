@@ -1,12 +1,11 @@
 {
   "version": "0.1.7",
   "license": "MIT",
-  "main": "dist/index.js",
-  "module": "dist/oneai-analytics.esm.js",
+  "main": "dist/index",
+  "module": "dist/oneai-analytics.esm",
   "typings": "dist/index.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/index.js",
       "import": "./dist/oneai-analytics.esm.js"
     }
   },
@@ -68,7 +67,6 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.19.1",
-    "@rollup/plugin-node-resolve": "^14.1.0",
     "@size-limit/preset-small-lib": "^8.1.0",
     "@storybook/addon-essentials": "^6.5.12",
     "@storybook/addon-info": "^5.3.21",
@@ -103,6 +101,6 @@
     "core-js": "^3.25.2",
     "d3": "7.6.1",
     "react-app-polyfill": "^3.0.0",
-    "react-container-dimensions": "^1.4.1"
+    "react-resize-detector": "^7.1.2"
   }
 }

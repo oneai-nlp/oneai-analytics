@@ -4,4 +4,6 @@ const nextConfig = {
   swcMinify: true,
 };
 
-module.exports = nextConfig;
+const withTM = require('next-transpile-modules')(['oneai-analytics']);
+
+module.exports = withTM(nextConfig);
