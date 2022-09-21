@@ -40,10 +40,10 @@ export const BarChart: FC<BarChartProps> = ({
   const allShapes = dataNodes.map((d, i) => {
     const x = xScale(0);
     const y = yScale(d.text ?? '') ?? 0;
-    const width = xScale(
+    const barWidth = xScale(
       d.amount === max ? d.amount : Math.min(max - 1, d.amount + max * 0.1)
     );
-    const height = yScale.bandwidth();
+    const barHeight = yScale.bandwidth();
     const opacity = 0.7;
     const fill = '#72b1ca';
     const fillOpacity = 0.3;
@@ -57,8 +57,8 @@ export const BarChart: FC<BarChartProps> = ({
         <rect
           x={x}
           y={y}
-          width={width}
-          height={height}
+          width={barWidth}
+          height={barHeight}
           opacity={opacity}
           fill={fill}
           fillOpacity={fillOpacity}
@@ -68,14 +68,14 @@ export const BarChart: FC<BarChartProps> = ({
           x={x}
           y={y}
           width={width}
-          height={height}
+          height={barHeight}
           opacity={opacity}
           fill={fill}
           fillOpacity={fillOpacity}
           rx={rx}
         >
           <div
-            className="flex h-full items-center ml-2"
+            className="flex h-full items-center ml-2 truncate"
             style={{ fontFamily: fontFamily, color: 'white' }}
           >
             <span className="truncate">

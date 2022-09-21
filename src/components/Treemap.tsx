@@ -70,8 +70,11 @@ export const Treemap: FC<TreemapProps> = ({
     const fontSize = calculateFontSize(height, width);
     const lineHeight = fontSize * 1.1 + 5;
     const paddingY = 10;
-    let lines = Math.floor((height - paddingY + 20) / lineHeight) - 3; // -2 is for the d.data.value and <br />, 20 is for the value absolute top padding
-    lines = Math.max(lines, 1);
+    const lines = Math.max(
+      1,
+      Math.floor((height - paddingY + 20) / lineHeight) - 3
+    ); // -2 is for the d.data.value and <br />, 20 is for the value absolute top padding
+
     return (
       <g
         key={index}
