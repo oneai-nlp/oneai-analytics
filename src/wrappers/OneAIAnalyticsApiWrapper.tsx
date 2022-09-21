@@ -27,9 +27,10 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   const [currentNodes, setCurrentNodes] = useState([] as OneAIDataNode[]);
   const [clickedNodes, setClickedNodes] = useState([] as OneAIDataNode[]);
   const [currentPage, setCurrentPage] = useState(0);
-  const currentPages = useMemo(() => chunks(currentNodes, PAGE_SIZE), [
-    currentNodes,
-  ]);
+  const currentPages = useMemo(
+    () => chunks(currentNodes, PAGE_SIZE),
+    [currentNodes]
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,7 +45,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
         } else {
           const clusters = await fetchClusters(domain, collection, apiKey);
 
-          const newNodes = clusters.map(c => {
+          const newNodes = clusters.map((c) => {
             return { type: 'Cluster' as NodeType, data: c };
           });
 
@@ -56,7 +57,9 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           setNodesInCache('Collection', collection, currentPage, newNodes);
         }
       } else if (currentClicked.type === 'Cluster') {
-        const clusterId = (currentClicked.data as Cluster).cluster_id.toString();
+        const clusterId = (
+          currentClicked.data as Cluster
+        ).cluster_id.toString();
         const cached = getNodesFromCache(
           currentClicked.type,
           clusterId,
@@ -72,7 +75,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             apiKey
           );
 
-          const newNodes = phrases.map(p => {
+          const newNodes = phrases.map((p) => {
             return { type: 'Phrase' as NodeType, data: p };
           });
 
@@ -98,7 +101,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
         } else {
           const items = await fetchItems(domain, collection, phraseId, apiKey);
 
-          const newNodes = items.map(i => {
+          const newNodes = items.map((i) => {
             return { type: 'Item' as NodeType, data: i };
           });
 
@@ -112,7 +115,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       setLoading(false);
     };
 
-    fetchData().catch(e => {
+    fetchData().catch((e) => {
       console.error(e);
       setLoading(false);
     });
@@ -121,20 +124,20 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   const nodeClicked = (node: { type: NodeType; id: string }) => {
     if (node.type === 'Cluster') {
       const clickedNode = currentNodes.find(
-        n => (n.data as Cluster).cluster_id.toString() === node.id
+        (n) => (n.data as Cluster).cluster_id.toString() === node.id
       );
       if (clickedNode) {
-        setClickedNodes(currentClickedCluster => [
+        setClickedNodes((currentClickedCluster) => [
           ...currentClickedCluster,
           clickedNode,
         ]);
       }
     } else if (node.type === 'Phrase') {
       const clickedNode = currentNodes.find(
-        n => (n.data as Phrase).phrase_id.toString() === node.id
+        (n) => (n.data as Phrase).phrase_id.toString() === node.id
       );
       if (clickedNode) {
-        setClickedNodes(currentClickedCluster => [
+        setClickedNodes((currentClickedCluster) => [
           ...currentClickedCluster,
           clickedNode,
         ]);
@@ -143,7 +146,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   };
 
   const goBack = () => {
-    setClickedNodes(clickedClusters => {
+    setClickedNodes((clickedClusters) => {
       clickedClusters.pop();
       return [...clickedClusters];
     });
@@ -154,7 +157,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       {currentNodes && (
         <OneAiAnalytics
           dataNodes={
-            currentPages.at(currentPage)?.map(node => {
+            currentPages.at(currentPage)?.map((node) => {
               return { type: node.type, data: node.data };
             }) ?? []
           }
@@ -163,8 +166,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           goBackClicked={goBack}
           currentPage={currentPage}
           totalPagesAmount={currentPages.length}
-          nextPageClicked={() => setCurrentPage(page => page + 1)}
-          prevPageClicked={() => setCurrentPage(page => page - 1)}
+          nextPageClicked={() => setCurrentPage((page) => page + 1)}
+          prevPageClicked={() => setCurrentPage((page) => page - 1)}
           loading={loading}
           {...rest}
         />
