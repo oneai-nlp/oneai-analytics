@@ -31,7 +31,7 @@
   "scripts": {
     "start": "dts watch",
     "build": "dts build",
-    "test": "dts test --passWithNoTests",
+    "test": "dts test --passWithNoTests --env=jsdom",
     "lint": "dts lint",
     "prepare": "dts build",
     "size": "size-limit",
@@ -81,7 +81,7 @@
     "@types/d3": "^7.4.0",
     "@types/react": "^18.0.20",
     "@types/react-dom": "^18.0.6",
-    "autoprefixer": "^10.4.11",
+    "autoprefixer": "^10.4.12",
     "babel-jest": "^29.0.3",
     "babel-loader": "^8.2.5",
     "dts-cli": "^1.6.0",
@@ -101,6 +101,7 @@
     "core-js": "^3.25.2",
     "d3": "7.6.1",
     "react-app-polyfill": "^3.0.0",
-    "react-resize-detector": "^7.1.2"
+    "react-resize-detector": "^7.1.2",
+    "resize-observer-polyfill": "^1.5.1"
   }
 }
