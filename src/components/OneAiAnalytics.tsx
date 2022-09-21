@@ -32,7 +32,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   treemapBorderColor = '#2C161D',
   loading,
 }) => {
-  const [display, setDisplay] = useState('BarChart' as Displays);
+  const [display, setDisplay] = useState('Treemap' as Displays);
   const { width, height, ref } = useResizeDetector();
 
   const navBarText = currentNode
