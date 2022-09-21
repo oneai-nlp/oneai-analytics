@@ -11,7 +11,7 @@ export function groupBy<T, K extends keyof any>(
   key: (i: T) => K
 ): Map<K, T[]> {
   const map: Map<K, T[]> = new Map();
-  arr.forEach(item => {
+  arr.forEach((item) => {
     const currentKey = key(item);
     const savedCluster = map.get(currentKey) || [];
     savedCluster.push(item);
