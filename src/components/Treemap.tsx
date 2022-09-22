@@ -90,37 +90,45 @@ export const Treemap: FC<TreemapProps> = ({
           fill={colors(index).hex()}
         />
         <foreignObject x={leaf.x0} y={leaf.y0} width={width} height={height}>
-          <span
-            className="relative h-full p-1 items-center flex justify-center text-gray-200"
+          <div
+            className="flex flex-col h-full w-full"
             style={{
-              fontSize: `${fontSize}px`,
               fontFamily: fontFamily,
               color: textColor,
               borderWidth: `${borderWidth}px`,
               borderColor: borderColor,
             }}
           >
-            <span
-              data-element="rect-text"
-              className="overflow-hidden mt-1 text-center"
+            <div
+              className="mx-1 flex"
               style={{
-                lineHeight: `${lineHeight}px`,
-                wordBreak: 'break-word',
-                WebkitLineClamp: lines,
-                WebkitTouchCallout: 'none',
-                display: '-webkit-box',
-                WebkitBoxOrient: 'vertical',
+                fontSize: `${countFontSize}px`,
               }}
             >
-              {leaf.data.text}
-            </span>
+              <span>{leaf.data.amount}</span>
+            </div>
             <span
-              className="absolute top-1 left-1"
-              style={{ fontSize: `${countFontSize}px` }}
+              className="items-center flex justify-center h-full"
+              style={{
+                fontSize: `${fontSize}px`,
+              }}
             >
-              {leaf.data.amount}
+              <span
+                data-element="rect-text"
+                className="overflow-hidden text-center"
+                style={{
+                  lineHeight: `${lineHeight}px`,
+                  wordBreak: 'break-word',
+                  WebkitLineClamp: lines,
+                  WebkitTouchCallout: 'none',
+                  display: '-webkit-box',
+                  WebkitBoxOrient: 'vertical',
+                }}
+              >
+                {leaf.data.text}
+              </span>
             </span>
-          </span>
+          </div>
         </foreignObject>
       </g>
     );

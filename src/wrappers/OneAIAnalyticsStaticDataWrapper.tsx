@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import {
   ExampleNode,
   NodeType,
@@ -27,6 +27,10 @@ export const OneAIAnalyticsStaticDataWrapper: FC<OneAIAnalyticsStaticDataWrapper
       () => chunks(currentNodes, PAGE_SIZE),
       [currentNodes]
     );
+
+    useEffect(() => {
+      setCurrentNodes(exampleNodes);
+    }, [exampleNodes]);
 
     const nodeClicked = (node: { type: NodeType; id: string }) => {
       setCurrentNodes((currentClusters) => {
