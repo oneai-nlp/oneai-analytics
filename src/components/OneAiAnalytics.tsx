@@ -101,14 +101,15 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
 
   return (
     <div
-      className="h-full w-full flex flex-col"
+      className="h-full w-full flex flex-col overflow-hidden"
       style={{ background: background }}
     >
       <div
-        className="max-h-20 w-full mb-1 rounded-md"
+        className="w-full mb-1 rounded-md"
         style={{
           height: '10%',
-          minHeight: '2em',
+          minHeight: '3rem',
+          maxHeight: '4rem',
           background: navbarColor,
         }}
       >
@@ -184,18 +185,19 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
       </div>
 
       <div
-        className="w-full overflow-hidden rounded-md"
-        style={{ height: '85%', minHeight: '7em', background: navbarColor }}
+        className="w-full rounded-md grow flex flex-col overflow-hidden"
+        style={{ background: navbarColor }}
       >
         <div
-          className="max-h-20 w-full"
+          className="w-full"
           style={{
             height: '5%',
-            minHeight: '3em',
+            minHeight: '3rem',
+            maxHeight: '4rem',
           }}
         >
           <div className="flex flex-row items-center p-5 h-full">
-            <div className="flex flex-row w-5/12 justify-start">
+            <div className="flex flex-row w-10/12 justify-start">
               {currentNode && (
                 <button
                   type="button"
@@ -237,7 +239,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 ))}
               </div>
             </div>
-            <div className="flex w-7/12 justify-end">
+            <div className="flex w-2/12 justify-end">
               <p className="text-white">
                 {dataNodes
                   .map((node) =>
@@ -252,15 +254,9 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
             </div>
           </div>
         </div>
-        <div
-          className="w-full"
-          style={{
-            height: '95%',
-            minHeight: '4em',
-          }}
-        >
+        <div className="w-full grow flex flex-col overflow-x-hidden">
           {loading && (
-            <div className="flex h-full justify-center items-center">
+            <div className="h-full w-full justify-center items-center flex">
               <div className="text-center">
                 <div role="status">
                   <svg
@@ -284,8 +280,10 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
             </div>
           )}
           <div
-            className={`flex flex-row w-full h-full ${
-              loading && 'invisible pointer-events-none'
+            className={`flex flex-row flex-grow ${
+              loading
+                ? 'invisible pointer-events-none w-0 h-0'
+                : 'w-full h-full'
             }`}
           >
             {currentPage > 0 && (
@@ -316,10 +314,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               </div>
             )}
 
-            <div
-              ref={ref}
-              className="overflow-y-auto overflow-x-hidden h-full w-full"
-            >
+            <div ref={ref} className="h-full w-full overflow-y-auto ">
               {currentNode && currentNode.type === 'Phrase' ? (
                 itemsDisplay({
                   items:
@@ -327,53 +322,49 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                   bgColor: treemapSmallColor,
                   textColor: 'white',
                 })
+              ) : display === 'Treemap' ? (
+                <Treemap
+                  dataNodes={nodes}
+                  height={height ?? 0}
+                  width={width ?? 0}
+                  nodeClicked={(node) =>
+                    nodeClicked({
+                      type: !currentNode
+                        ? 'Cluster'
+                        : currentNode.type === 'Cluster'
+                        ? 'Phrase'
+                        : 'Item',
+                      id: node.id,
+                    })
+                  }
+                  labels={labels}
+                  counters={counters}
+                  bigColor={treemapBigColor}
+                  smallColor={treemapSmallColor}
+                  countFontSize={treemapCountFontSize}
+                  fontFamily={treemapFontFamily}
+                  textColor={treemapTextColor}
+                  borderWidth={treemapBorderWidth}
+                  borderColor={treemapBorderColor}
+                />
               ) : (
-                <>
-                  {display === 'Treemap' ? (
-                    <Treemap
-                      dataNodes={nodes}
-                      height={height ?? 0}
-                      width={width ?? 0}
-                      nodeClicked={(node) =>
-                        nodeClicked({
-                          type: !currentNode
-                            ? 'Cluster'
-                            : currentNode.type === 'Cluster'
-                            ? 'Phrase'
-                            : 'Item',
-                          id: node.id,
-                        })
-                      }
-                      labels={labels}
-                      counters={counters}
-                      bigColor={treemapBigColor}
-                      smallColor={treemapSmallColor}
-                      countFontSize={treemapCountFontSize}
-                      fontFamily={treemapFontFamily}
-                      textColor={treemapTextColor}
-                      borderWidth={treemapBorderWidth}
-                      borderColor={treemapBorderColor}
-                    />
-                  ) : (
-                    <BarChart
-                      dataNodes={nodes}
-                      height={height ?? 0}
-                      width={width ?? 0}
-                      nodeClicked={(node) =>
-                        nodeClicked({
-                          type: !currentNode
-                            ? 'Cluster'
-                            : currentNode.type === 'Cluster'
-                            ? 'Phrase'
-                            : 'Item',
-                          id: node.id,
-                        })
-                      }
-                      fontFamily={treemapFontFamily}
-                      textColor={treemapTextColor}
-                    />
-                  )}
-                </>
+                <BarChart
+                  dataNodes={nodes}
+                  height={height ?? 0}
+                  width={width ?? 0}
+                  nodeClicked={(node) =>
+                    nodeClicked({
+                      type: !currentNode
+                        ? 'Cluster'
+                        : currentNode.type === 'Cluster'
+                        ? 'Phrase'
+                        : 'Item',
+                      id: node.id,
+                    })
+                  }
+                  fontFamily={treemapFontFamily}
+                  textColor={treemapTextColor}
+                />
               )}
             </div>
 
