@@ -1,9 +1,12 @@
+export interface MetaData {
+  [name: string]: { value: string; count: number }[];
+}
 export interface Item {
   id: number;
   create_date: string;
   original_text: string;
   distance_to_phrase: number;
-  metadata: {} | null;
+  metadata: MetaData;
   phrase: {
     id: number;
     text: string;
@@ -18,7 +21,7 @@ export interface Phrase {
   phrase_id: number;
   text: string;
   items_count: number;
-  metadata: {} | null;
+  metadata: MetaData;
 }
 
 export interface Cluster {
@@ -26,6 +29,6 @@ export interface Cluster {
   collection: string;
   cluster_phrase: string;
   phrases_count: number;
-  metadata: {} | null;
+  metadata: MetaData;
   items_count: number;
 }

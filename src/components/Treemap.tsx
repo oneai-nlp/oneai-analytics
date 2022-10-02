@@ -21,6 +21,8 @@ export const Treemap: FC<TreemapProps> = ({
   textColor = 'white',
   borderWidth = 0,
   borderColor = textColor,
+  labels,
+  counters,
 }) => {
   const mainNode: TreemapNode = useMemo(() => {
     return {
@@ -29,6 +31,7 @@ export const Treemap: FC<TreemapProps> = ({
         return { ...c, children: [] };
       }),
       amount: 0,
+      metadata: {},
     };
   }, [dataNodes]);
 
@@ -100,12 +103,34 @@ export const Treemap: FC<TreemapProps> = ({
             }}
           >
             <div
-              className="mx-1 flex"
+              className="flex"
               style={{
                 fontSize: `${countFontSize}px`,
               }}
             >
-              <span>{leaf.data.amount}</span>
+              <span className="truncate w-full">
+                <span className="ml-1">{leaf.data.amount}</span>
+                {counters.map((counter) => {
+                  const meta = leaf.data.metadata[counter];
+                  if (!meta || meta.length === 0) return <></>;
+                  return (
+                    <span className="ml-1 bg-emerald-400 rounded-xl p-1">
+                      {meta
+                        .map((instance) => instance.count)
+                        .reduce((partialSum, a) => partialSum + a, 0)}
+                    </span>
+                  );
+                })}
+                {labels.map((label) => {
+                  const meta = leaf.data.metadata[label]?.at(0);
+                  if (!meta) return <></>;
+                  return (
+                    <span className="ml-1 bg-slate-400 rounded-xl p-1">
+                      {meta.value ?? ''}
+                    </span>
+                  );
+                })}
+              </span>
             </div>
             <span
               className="items-center flex justify-center h-full"

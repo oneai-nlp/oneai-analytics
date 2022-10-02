@@ -1,11 +1,12 @@
 import { FC } from 'react';
-import { Cluster, Item, Phrase } from './modals';
+import { Cluster, Item, MetaData, Phrase } from './modals';
 import { ItemsDisplayComponentProps } from './configurations';
 
 export interface DataNode {
   id: string;
   amount: number;
   text?: string;
+  metadata: MetaData;
 }
 
 export interface TreemapProps {
@@ -20,6 +21,8 @@ export interface TreemapProps {
   textColor?: string;
   borderWidth?: number;
   borderColor?: string;
+  labels: string[];
+  counters: string[];
 }
 
 export interface BarChartProps {

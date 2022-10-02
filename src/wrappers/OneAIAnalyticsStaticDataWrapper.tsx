@@ -104,13 +104,13 @@ function getNodeData(
       collection: '',
       items_count: node.items_count,
       phrases_count: node.children?.length ?? 0,
-      metadata: null,
+      metadata: {},
     } as Cluster;
   }
   if (node.type === 'Phrase') {
     return {
       phrase_id: index,
-      metadata: null,
+      metadata: {},
       items_count: node.items_count,
       text: node.text,
     } as Phrase;
@@ -119,6 +119,7 @@ function getNodeData(
     return {
       id: index,
       original_text: node.text,
+      metadata: {},
     } as Item;
   }
 
