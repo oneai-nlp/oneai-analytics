@@ -1,4 +1,5 @@
 import React from 'react';
+import { CUSTOM_METADATA_KEY } from '../types/configurations';
 import { MetaData } from '../types/modals';
 
 export default function CountersLabelsDisplay({
@@ -15,7 +16,13 @@ export default function CountersLabelsDisplay({
       {counters.map((counter) => {
         const meta = metadata[counter];
         return (
-          <span className="ml-1 text-emerald-400">
+          <span
+            className={`ml-1 ${
+              counter === CUSTOM_METADATA_KEY
+                ? 'text-white'
+                : 'text-emerald-400'
+            }`}
+          >
             {meta && meta.length > 0
               ? meta
                   .map((instance) => instance.count)
