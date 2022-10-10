@@ -1,6 +1,7 @@
 import { scale, valid } from 'chroma-js';
 import { hierarchy, treemap } from 'd3';
 import React, { FC, useMemo } from 'react';
+import CountersLabelsDisplay from '../common/components/CuntersLabelsDisplay';
 import { DataNode, TreemapProps } from '../common/types/components';
 import { calculateFontSize } from '../common/utils/utils';
 
@@ -97,6 +98,8 @@ export const Treemap: FC<TreemapProps> = ({
             className="flex flex-col h-full w-full"
             style={{
               fontFamily: fontFamily,
+              fontWeight: 400,
+              fontStyle: 'normal',
               color: textColor,
               borderWidth: `${borderWidth}px`,
               borderColor: borderColor,
@@ -108,29 +111,11 @@ export const Treemap: FC<TreemapProps> = ({
                 fontSize: `${countFontSize}px`,
               }}
             >
-              <span className="truncate w-full">
-                <span className="ml-1">{leaf.data.amount}</span>
-                {counters.map((counter) => {
-                  const meta = leaf.data.metadata[counter];
-                  if (!meta || meta.length === 0) return <></>;
-                  return (
-                    <span className="ml-1 bg-emerald-400 rounded-xl p-1">
-                      {meta
-                        .map((instance) => instance.count)
-                        .reduce((partialSum, a) => partialSum + a, 0)}
-                    </span>
-                  );
-                })}
-                {labels.map((label) => {
-                  const meta = leaf.data.metadata[label]?.at(0);
-                  if (!meta) return <></>;
-                  return (
-                    <span className="ml-1 bg-slate-400 rounded-xl p-1">
-                      {meta.value ?? ''}
-                    </span>
-                  );
-                })}
-              </span>
+              <CountersLabelsDisplay
+                counters={counters}
+                labels={labels}
+                metadata={leaf.data.metadata}
+              />
             </div>
             <span
               className="items-center flex justify-center h-full"

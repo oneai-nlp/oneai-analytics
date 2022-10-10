@@ -13,7 +13,7 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story = args => (
+const Template: Story = (args) => (
   <div className="h-screen w-full">
     <OneAIAnalyticsStaticDataWrapper exampleNodes={[]} {...args} />
   </div>
@@ -23,4 +23,7 @@ const Template: Story = args => (
 // https://storybook.js.org/docs/react/workflows/unit-testing
 export const OneAIAnalyticsStaticExample = Template.bind({});
 
-OneAIAnalyticsStaticExample.args = { exampleNodes: clusters };
+OneAIAnalyticsStaticExample.args = {
+  exampleNodes: clusters,
+  collection: 'Wall Street Bets',
+};

@@ -9,8 +9,8 @@ export const ItemsListDisplay: FC<ItemsDisplayComponentProps> = ({
 }) => {
   return (
     <div style={{ backgroundColor: bgColor, color: textColor }}>
-      {items.map((item) => (
-        <div className="p-2" key={item}>
+      {items.map((item, i) => (
+        <div className="p-2" key={i}>
           {item}
         </div>
       ))}

@@ -46,7 +46,7 @@ export interface OneAiAnalyticsProps {
   totalPagesAmount?: number;
   currentPage?: number;
   nodeClicked?: (node: Omit<OneAIDataNode & { id: string }, 'data'>) => void;
-  goBackClicked?: () => void;
+  goBackClicked?: (skip: number) => void;
   nextPageClicked?: () => void;
   prevPageClicked?: () => void;
   background?: string;
@@ -60,10 +60,11 @@ export interface OneAiAnalyticsProps {
   navbarColor?: string;
   itemsDisplay?: FC<ItemsDisplayComponentProps>;
   loading?: boolean;
+  nodesPath?: string[];
 }
 
 export type OneAIAnalyticsStaticDataWrapperProps = Omit<
-  OneAiAnalyticsProps & { exampleNodes: ExampleNode[] },
+  OneAiAnalyticsProps & { exampleNodes: ExampleNode[]; collection?: string },
   'dataNodes' | 'totalPagesAmount' | 'currentPage'
 >;
 

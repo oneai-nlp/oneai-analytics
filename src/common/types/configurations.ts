@@ -3,3 +3,5 @@ export interface ItemsDisplayComponentProps {
   bgColor: string;
   textColor: string;
 }
+
+export const CUSTOM_METADATA_KEY = 'Items count';

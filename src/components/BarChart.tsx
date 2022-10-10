@@ -10,6 +10,7 @@ export const BarChart: FC<BarChartProps> = ({
   width,
   nodeClicked,
   fontFamily = 'sans-serif',
+  textColor,
 }) => {
   const barsHeight = dataNodes.length * 40;
   // Y axis is for groups since the barplot is horizontal
@@ -76,7 +77,12 @@ export const BarChart: FC<BarChartProps> = ({
         >
           <div
             className="flex h-full items-center ml-2 truncate"
-            style={{ fontFamily: fontFamily, color: 'white' }}
+            style={{
+              fontFamily: fontFamily,
+              fontWeight: 400,
+              fontStyle: 'normal',
+              color: textColor,
+            }}
           >
             <span className="truncate">
               {d.amount} - {d.text}

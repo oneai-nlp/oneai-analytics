@@ -5,6 +5,7 @@ import {
   OneAIDataNode,
 } from '../common/types/components';
 import { Cluster, Item, Phrase } from '../common/types/modals';
+import { getNodeText } from '../common/utils/modalsUtils';
 import { chunks, getSecondsDiff } from '../common/utils/utils';
 import { OneAiAnalytics } from '../components/OneAiAnalytics';
 
@@ -145,9 +146,11 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
     }
   };
 
-  const goBack = () => {
+  const goBack = (skip: number = 1) => {
     setClickedNodes((clickedClusters) => {
-      clickedClusters.pop();
+      for (let i = 0; i < skip; i++) {
+        clickedClusters.pop();
+      }
       return [...clickedClusters];
     });
   };
@@ -169,6 +172,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           nextPageClicked={() => setCurrentPage((page) => page + 1)}
           prevPageClicked={() => setCurrentPage((page) => page - 1)}
           loading={loading}
+          nodesPath={[collection, ...clickedNodes.map(getNodeText)]}
           {...rest}
         />
       )}

@@ -2687,16 +2687,17 @@ once@^1.3.0:
   dependencies:
     wrappy "1"
 
-oneai-analytics@0.1.8:
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/oneai-analytics/-/oneai-analytics-0.1.8.tgz#23d300746fb4b6fa25ff469055f8cc45c417564b"
-  integrity sha512-liB90uIYo7dIoYZKOvpRtQpDo0XmmNsBhepWly+U8sFDLMdHyoQWGTiLzgqg46gZmX6M+uJ1uXTse/sJ3K6z/Q==
+oneai-analytics@latest:
+  version "0.1.92"
+  resolved "https://registry.yarnpkg.com/oneai-analytics/-/oneai-analytics-0.1.92.tgz#de0ce0fa24eb808a91e6239c91411f95eeb9f2d2"
+  integrity sha512-Hp6HgBgO6dldUXzZYeRzshRsfmU3ckeLE/FEGiPgTfck2FsQQIWTQ2SuJ20v4IXyOk9oZzOD5FxGBTcW2PP8rw==
   dependencies:
     chroma-js "^2.4.2"
     core-js "^3.25.2"
     d3 "7.6.1"
     react-app-polyfill "^3.0.0"
     react-resize-detector "^7.1.2"
+    resize-observer-polyfill "^1.5.1"
 
 onetime@^5.1.0, onetime@^5.1.2:
   version "5.1.2"
@@ -3012,6 +3013,11 @@ require-from-string@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/require-from-string/-/require-from-string-2.0.2.tgz#89a7fdd938261267318eafe14f9c32e598c36909"
   integrity sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==
+
+resize-observer-polyfill@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
+  integrity sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==
 
 resolve-from@5.0.0, resolve-from@^5.0.0:
   version "5.0.0"

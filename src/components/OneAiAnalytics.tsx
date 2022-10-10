@@ -1,11 +1,18 @@
 import React, { FC, useEffect, useState } from 'react';
+import { useResizeDetector } from 'react-resize-detector';
+import Select from 'react-select';
+import CountersLabelsDisplay from '../common/components/CuntersLabelsDisplay';
 import { DataNode, OneAiAnalyticsProps } from '../common/types/components';
-import { Cluster, Item, Phrase } from '../common/types/modals';
+import { CUSTOM_METADATA_KEY } from '../common/types/configurations';
+import { MetaData } from '../common/types/modals';
+import {
+  getNodeId,
+  getNodeItemsCount,
+  getNodeText,
+} from '../common/utils/modalsUtils';
 import { BarChart } from './BarChart';
 import { ItemsListDisplay } from './ItemsListDisplay';
 import { Treemap } from './Treemap';
-import { useResizeDetector } from 'react-resize-detector';
-import Select from 'react-select';
 
 export type Displays = 'Treemap' | 'BarChart';
 
@@ -28,32 +35,22 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   treemapBigColor = '#322F46',
   treemapSmallColor = '#2C293D',
   treemapCountFontSize = 14,
-  treemapFontFamily = 'sans-serif',
+  treemapFontFamily = 'Poppins',
   treemapTextColor = 'white',
   treemapBorderWidth = 1,
   treemapBorderColor = '#2C161D',
   navbarColor = '#272535',
   loading,
+  nodesPath = [],
 }) => {
   const [display, setDisplay] = useState('Treemap' as Displays);
   const { width, height, ref } = useResizeDetector();
   const [metaDataKeys, setMetaDataKeys] = useState(new Set());
-  const [navBarText, setNavBarText] = useState('');
   const [nodes, setNodes] = useState([] as DataNode[]);
   const [labels, setLabels] = useState([] as string[]);
   const [counters, setCounters] = useState([] as string[]);
 
   useEffect(() => {
-    setNavBarText(
-      currentNode
-        ? currentNode.type === 'Cluster'
-          ? (currentNode.data as Cluster).cluster_phrase
-          : currentNode.type === 'Phrase'
-          ? (currentNode.data as Phrase).text
-          : (currentNode.data as Item).original_text
-        : ''
-    );
-
     setMetaDataKeys(
       (keys) =>
         new Set([
@@ -66,38 +63,31 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   useEffect(() => {
     setNodes(
       dataNodes.map((d) => {
+        const itemsCount = getNodeItemsCount(d);
         return {
-          id: (d.type === 'Cluster'
-            ? (d.data as Cluster).cluster_id
-            : d.type === 'Phrase'
-            ? (d.data as Phrase).phrase_id
-            : (d.data as Item).original_text
-          ).toString(),
-          amount:
-            d.type === 'Cluster'
-              ? (d.data as Cluster).items_count
-              : d.type === 'Phrase'
-              ? (d.data as Phrase).items_count
-              : 1,
-          text:
-            d.type === 'Cluster'
-              ? (d.data as Cluster).cluster_phrase
-              : d.type === 'Phrase'
-              ? (d.data as Phrase).text
-              : (d.data as Item).original_text,
-          metadata: d.data.metadata,
+          id: getNodeId(d),
+          amount: itemsCount,
+          text: getNodeText(d),
+          metadata: {
+            [CUSTOM_METADATA_KEY]: [
+              { value: CUSTOM_METADATA_KEY, count: itemsCount },
+            ],
+            ...d.data.metadata,
+          },
         };
       })
     );
+  }, [dataNodes]);
 
+  useEffect(() => {
     setMetaDataKeys(
       (keys) =>
         new Set([
           ...Array.from(keys),
-          ...dataNodes.map((node) => Object.keys(node.data.metadata)).flat(),
+          ...nodes.map((node) => Object.keys(node.metadata)).flat(),
         ])
     );
-  }, [dataNodes]);
+  }, [nodes]);
 
   return (
     <div
@@ -168,9 +158,11 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
             </div>
             <div className="w-1/3 ml-2">
               <Select
-                options={Array.from(metaDataKeys).map((key) => {
-                  return { label: key, value: key };
-                })}
+                options={Array.from(metaDataKeys)
+                  .filter((key) => key !== CUSTOM_METADATA_KEY)
+                  .map((key) => {
+                    return { label: key, value: key };
+                  })}
                 isMulti
                 isClearable
                 closeMenuOnSelect={false}
@@ -201,7 +193,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               {currentNode && (
                 <button
                   type="button"
-                  onClick={goBackClicked}
+                  onClick={() => goBackClicked(1)}
                   className="text-slate-700 hover:bg-slate-700 hover:text-white font-medium rounded-lg text-sm p-1 text-center inline-flex items-center"
                 >
                   <svg
@@ -225,32 +217,34 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 </button>
               )}
 
-              <div className="ml-4 text-gray-300 font-bold truncate self-center">
-                {navBarText} {navBarText.length > 0 && <>/</>}
-                {counters.map((counter) => (
-                  <span className="bg-emerald-400 rounded-xl p-1 ml-1">
-                    {counter}
-                  </span>
-                ))}
-                {labels.map((label) => (
-                  <span className="bg-slate-400 rounded-xl p-1 ml-1">
-                    {label}
-                  </span>
+              <div className="ml-4 text-gray-300 font-bold truncate self-center flex">
+                {nodesPath.map((node, i) => (
+                  <div key={i} className="flex">
+                    <div className="max-w-[20ch] truncate">
+                      <span
+                        className="cursor-pointer hover:text-gray-50"
+                        onClick={() => goBackClicked(nodesPath.length - 1 - i)}
+                      >
+                        {node}
+                      </span>
+                    </div>
+                    {nodesPath.length - 1 !== i && (
+                      <span className="ml-1 mr-1"> / </span>
+                    )}
+                  </div>
                 ))}
               </div>
             </div>
             <div className="flex w-2/12 justify-end">
-              <p className="text-white">
-                {dataNodes
-                  .map((node) =>
-                    node.type === 'Cluster'
-                      ? (node.data as Cluster).items_count
-                      : node.type === 'Phrase'
-                      ? (node.data as Phrase).items_count
-                      : 1
-                  )
-                  .reduce((partialSum, a) => partialSum + a, 0)}
-              </p>
+              <CountersLabelsDisplay
+                counters={counters}
+                labels={labels}
+                metadata={dataNodes.reduce(
+                  (finalMetadata, currentNode) =>
+                    mergeMetadata(finalMetadata, currentNode.data.metadata),
+                  {}
+                )}
+              />
             </div>
           </div>
         </div>
@@ -314,11 +308,13 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               </div>
             )}
 
-            <div ref={ref} className="h-full w-full overflow-y-auto ">
+            <div
+              ref={ref}
+              className="h-full w-full overflow-y-auto overflow-x-hidden"
+            >
               {currentNode && currentNode.type === 'Phrase' ? (
                 itemsDisplay({
-                  items:
-                    dataNodes.map((d) => (d.data as Item).original_text) ?? [],
+                  items: dataNodes.map((d) => getNodeText(d)) ?? [],
                   bgColor: treemapSmallColor,
                   textColor: 'white',
                 })
@@ -408,4 +404,24 @@ function getVisualizationLogoClasses(active: boolean) {
       ? 'text-white'
       : 'text-slate-500 hover:cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-100 hover:text-white'
   }`;
+}
+
+function mergeMetadata(metadata1: MetaData, metadata2: MetaData): MetaData {
+  const newMetadata: MetaData = {};
+  Array.from(
+    new Set([...Object.keys(metadata1), ...Object.keys(metadata2)])
+  ).forEach((key) => {
+    const mergedValues = [...(metadata1[key] ?? []), ...(metadata2[key] ?? [])];
+    const valuesToCounts: Map<string, number> = new Map();
+    mergedValues.forEach((meta) => {
+      const value = valuesToCounts.get(meta.value) ?? 0;
+      valuesToCounts.set(meta.value, value + meta.count);
+    });
+
+    newMetadata[key] = Array.from(valuesToCounts.keys()).map((key) => {
+      return { value: key, count: valuesToCounts.get(key) ?? 0 };
+    });
+  });
+
+  return newMetadata;
 }

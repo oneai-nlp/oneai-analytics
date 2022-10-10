@@ -17,7 +17,7 @@ const PAGE_SIZE = 25;
  * One AI Analytics static data wrapper component
  */
 export const OneAIAnalyticsStaticDataWrapper: FC<OneAIAnalyticsStaticDataWrapperProps> =
-  ({ exampleNodes, ...rest }) => {
+  ({ exampleNodes, collection = '', ...rest }) => {
     const [currentNodes, setCurrentNodes] = useState(
       exampleNodes as ExampleNode[]
     );
@@ -53,9 +53,11 @@ export const OneAIAnalyticsStaticDataWrapper: FC<OneAIAnalyticsStaticDataWrapper
       });
     };
 
-    const goBack = () => {
+    const goBack = (skip: number = 0) => {
       setClickedNodes((clickedClusters) => {
-        clickedClusters.pop();
+        for (let i = 0; i < skip; i++) {
+          clickedClusters.pop();
+        }
         setCurrentNodes(clickedClusters.at(-1)?.children ?? exampleNodes);
         setCurrentPage(0);
         return [...clickedClusters];
@@ -88,6 +90,7 @@ export const OneAIAnalyticsStaticDataWrapper: FC<OneAIAnalyticsStaticDataWrapper
         totalPagesAmount={currentPages.length}
         nextPageClicked={() => setCurrentPage((page) => page + 1)}
         prevPageClicked={() => setCurrentPage((page) => page - 1)}
+        nodesPath={[collection, ...clickedNodes.map((node) => node.text)]}
         {...rest}
       />
     );
