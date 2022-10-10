@@ -79,7 +79,7 @@ export const BarChart: FC<BarChartProps> = ({
             className="flex h-full items-center ml-2 truncate"
             style={{
               fontFamily: fontFamily,
-              fontWeight: 400,
+              fontWeight: 300,
               fontStyle: 'normal',
               color: textColor,
             }}

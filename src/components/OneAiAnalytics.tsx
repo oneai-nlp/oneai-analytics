@@ -38,8 +38,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   treemapFontFamily = 'Poppins',
   treemapTextColor = 'white',
   treemapBorderWidth = 1,
-  treemapBorderColor = '#2C161D',
   navbarColor = '#272535',
+  treemapBorderColor = navbarColor,
   loading,
   nodesPath = [],
 }) => {
@@ -239,9 +239,9 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               <CountersLabelsDisplay
                 counters={counters}
                 labels={labels}
-                metadata={dataNodes.reduce(
+                metadata={nodes.reduce(
                   (finalMetadata, currentNode) =>
-                    mergeMetadata(finalMetadata, currentNode.data.metadata),
+                    mergeMetadata(finalMetadata, currentNode.metadata),
                   {}
                 )}
               />

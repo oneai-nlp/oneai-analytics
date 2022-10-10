@@ -21,7 +21,7 @@ export const Treemap: FC<TreemapProps> = ({
   fontFamily = 'sans-serif',
   textColor = 'white',
   borderWidth = 0,
-  borderColor = textColor,
+  borderColor = bigColor,
   labels,
   counters,
 }) => {
@@ -95,10 +95,10 @@ export const Treemap: FC<TreemapProps> = ({
         />
         <foreignObject x={leaf.x0} y={leaf.y0} width={width} height={height}>
           <div
-            className="flex flex-col h-full w-full"
+            className="flex flex-col h-full w-full p-1"
             style={{
               fontFamily: fontFamily,
-              fontWeight: 400,
+              fontWeight: 300,
               fontStyle: 'normal',
               color: textColor,
               borderWidth: `${borderWidth}px`,
