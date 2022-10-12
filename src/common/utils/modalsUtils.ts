@@ -1,6 +1,8 @@
 import { OneAIDataNode } from '../types/components';
 import { Cluster, Item, Phrase } from '../types/modals';
 
+export const COLLECTION_TYPE = 'Collection';
+
 export function getNodeText(node: OneAIDataNode): string {
   return node.type === 'Cluster'
     ? (node.data as Cluster).cluster_phrase
@@ -25,4 +27,14 @@ export function getNodeItemsCount(node: OneAIDataNode): number {
     : node.type === 'Phrase'
     ? (node.data as Phrase).items_count
     : 1;
+}
+
+export function getNodeDetails(
+  node: OneAIDataNode | undefined,
+  collection: string
+): { id: string; type: string } {
+  const currentNodeType = node?.type ?? COLLECTION_TYPE;
+  const currentNodeId = node ? getNodeId(node) : collection;
+
+  return { id: currentNodeId, type: currentNodeType };
 }

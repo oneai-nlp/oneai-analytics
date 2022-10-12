@@ -73,6 +73,7 @@ export type OneAIAnalyticsApiWrapperProps = Omit<
     domain?: string;
     apiKey?: string;
     collection?: string;
+    refreshToken?: string;
   },
   'dataNodes' | 'totalPagesAmount' | 'currentPage'
 >;

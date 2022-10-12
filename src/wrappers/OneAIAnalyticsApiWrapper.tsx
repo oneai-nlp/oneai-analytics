@@ -5,7 +5,12 @@ import {
   OneAIDataNode,
 } from '../common/types/components';
 import { Cluster, Item, Phrase } from '../common/types/modals';
-import { getNodeText } from '../common/utils/modalsUtils';
+import {
+  COLLECTION_TYPE,
+  getNodeDetails,
+  getNodeId,
+  getNodeText,
+} from '../common/utils/modalsUtils';
 import { getSecondsDiff } from '../common/utils/utils';
 import { OneAiAnalytics } from '../components/OneAiAnalytics';
 
@@ -16,6 +21,8 @@ const cache: Map<
   { nodes: OneAIDataNode[]; totalPages: number; time: Date }
 > = new Map();
 
+const nodeToPageCache: Map<string, number> = new Map();
+
 // Please do not use types off of a default export module or else Storybook Docs will suffer.
 // see: https://github.com/storybookjs/storybook/issues/9556
 /**
@@ -25,6 +32,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   domain = 'https://api.oneai.com',
   apiKey = '',
   collection = '',
+  refreshToken = '',
   ...rest
 }) => {
   const [loading, setLoading] = useState(true);
@@ -36,6 +44,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
     domain: null as string | null,
     apiKey: null as string | null,
     collection: null as string | null,
+    refreshToken: null as string | null,
     clickedNodes: null as OneAIDataNode[] | null,
     currentPage: null as number | null,
   });
@@ -45,7 +54,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
     if (
       previousValues.current.domain !== domain ||
       previousValues.current.apiKey !== apiKey ||
-      previousValues.current.collection !== collection
+      previousValues.current.collection !== collection ||
+      previousValues.current.refreshToken !== refreshToken
     ) {
       setCurrentNodes([]);
       setClickedNodes([]);
@@ -56,11 +66,12 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
         domain,
         apiKey,
         collection,
+        refreshToken,
         clickedNodes: null,
         currentPage: null,
       };
     }
-  }, [domain, apiKey, collection]);
+  }, [domain, apiKey, collection, refreshToken]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -69,7 +80,11 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       const currentClicked = clickedNodes.at(-1);
 
       if (!currentClicked) {
-        const cached = getNodesFromCache('Collection', collection, currentPage);
+        const cached = getNodesFromCache(
+          COLLECTION_TYPE,
+          collection,
+          currentPage
+        );
         if (cached) {
           setTotalPages(cached.totalPages);
           setCurrentNodes(cached.nodes);
@@ -90,7 +105,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             setTotalPages(clusters.totalPages);
           }
 
-          setNodesInCache(
+          setNodesDataInCache(
             'Collection',
             collection,
             currentPage,
@@ -127,7 +142,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             setCurrentNodes(newNodes);
             setTotalPages(phrases.totalPages);
           }
-          setNodesInCache(
+          setNodesDataInCache(
             currentClicked.type,
             clusterId,
             currentPage,
@@ -163,7 +178,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             setTotalPages(items.totalPages);
           }
 
-          setNodesInCache(
+          setNodesDataInCache(
             currentClicked.type,
             phraseId,
             currentPage,
@@ -195,43 +210,60 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           collection,
           clickedNodes,
           currentPage,
+          refreshToken,
         };
       }
     }
   }, [domain, collection, apiKey, clickedNodes, currentPage]);
 
   const nodeClicked = (node: { type: NodeType; id: string }) => {
-    setCurrentPage(0);
+    const currentNodeDetails = getNodeDetails(clickedNodes.at(-1), collection);
+    setNodePageNumberInCache(
+      currentNodeDetails.type,
+      currentNodeDetails.id,
+      currentPage
+    );
+    let clickedNode: OneAIDataNode | null = null;
     if (node.type === 'Cluster') {
-      const clickedNode = currentNodes.find(
-        (n) => (n.data as Cluster).cluster_id.toString() === node.id
-      );
-      if (clickedNode) {
-        setClickedNodes((currentClickedCluster) => [
-          ...currentClickedCluster,
-          clickedNode,
-        ]);
-      }
+      clickedNode =
+        currentNodes.find(
+          (n) => (n.data as Cluster).cluster_id.toString() === node.id
+        ) ?? null;
     } else if (node.type === 'Phrase') {
-      const clickedNode = currentNodes.find(
-        (n) => (n.data as Phrase).phrase_id.toString() === node.id
+      clickedNode =
+        currentNodes.find(
+          (n) => (n.data as Phrase).phrase_id.toString() === node.id
+        ) ?? null;
+    }
+
+    if (clickedNode) {
+      const nodeCachedPage = getNodePageNumberFromCache(
+        clickedNode.type,
+        getNodeId(clickedNode)
       );
-      if (clickedNode) {
-        setClickedNodes((currentClickedCluster) => [
-          ...currentClickedCluster,
-          clickedNode,
-        ]);
-      }
+      setCurrentPage(nodeCachedPage);
+      setClickedNodes((currentClickedCluster) => [
+        ...currentClickedCluster,
+        clickedNode as OneAIDataNode,
+      ]);
     }
   };
 
   const goBack = (skip: number = 1) => {
     if (skip === 0) return;
-    setCurrentPage(0);
     setClickedNodes((clickedClusters) => {
       for (let i = 0; i < skip; i++) {
         clickedClusters.pop();
       }
+      const currentNodeDetails = getNodeDetails(
+        clickedClusters.at(-1),
+        collection
+      );
+      const nodeCachedPage = getNodePageNumberFromCache(
+        currentNodeDetails.type,
+        currentNodeDetails.id
+      );
+      setCurrentPage(nodeCachedPage);
       return [...clickedClusters];
     });
   };
@@ -335,7 +367,7 @@ function getNodesFromCache(
   return null;
 }
 
-function setNodesInCache(
+function setNodesDataInCache(
   parentType: string,
   parentId: string,
   page: number,
@@ -349,6 +381,23 @@ function setNodesInCache(
   });
 }
 
-function assembleCacheId(type: string, id: string, page: number): string {
+function getNodePageNumberFromCache(nodeType: string, nodeId: string): number {
+  const cached = nodeToPageCache.get(assembleCacheId(nodeType, nodeId));
+  if (cached) {
+    return cached;
+  }
+
+  return 0;
+}
+
+function setNodePageNumberInCache(
+  nodeType: string,
+  nodeId: string,
+  page: number
+) {
+  nodeToPageCache.set(assembleCacheId(nodeType, nodeId), page);
+}
+
+function assembleCacheId(type: string, id: string, page: number = 0): string {
   return `${type}-${id}-${page}`;
 }

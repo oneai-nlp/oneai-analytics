@@ -235,6 +235,9 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     )}
                   </div>
                 ))}
+                {totalPagesAmount > 1 && (
+                  <span className="ml-1 text-green-300">/ {currentPage}</span>
+                )}
               </div>
             </div>
             <div className="flex w-2/12 justify-end">
