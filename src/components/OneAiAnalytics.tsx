@@ -35,7 +35,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   treemapBigColor = '#322F46',
   treemapSmallColor = '#2C293D',
   treemapCountFontSize = 14,
-  treemapFontFamily = 'Poppins',
+  treemapFontFamily = "'Poppins', sans-serif",
   treemapTextColor = 'white',
   treemapBorderWidth = 1,
   navbarColor = '#272535',
@@ -101,6 +101,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
           minHeight: '3rem',
           maxHeight: '4rem',
           background: navbarColor,
+          fontFamily: treemapFontFamily,
         }}
       >
         <div className="flex flex-row items-center p-5 h-full">
@@ -186,6 +187,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
             height: '5%',
             minHeight: '3rem',
             maxHeight: '4rem',
+            fontFamily: treemapFontFamily,
           }}
         >
           <div className="flex flex-row items-center p-5 h-full">
@@ -229,7 +231,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                       </span>
                     </div>
                     {nodesPath.length - 1 !== i && (
-                      <span className="ml-1 mr-1"> / </span>
+                      <span className="ml-1 mr-1">/</span>
                     )}
                   </div>
                 ))}
@@ -250,7 +252,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
         </div>
         <div className="w-full grow flex flex-col overflow-x-hidden">
           {loading && (
-            <div className="h-full w-full justify-center items-center flex">
+            <div className="grow w-full justify-center items-center flex">
               <div className="text-center">
                 <div role="status">
                   <svg

@@ -29,6 +29,8 @@ export const OneAIAnalyticsStaticDataWrapper: FC<OneAIAnalyticsStaticDataWrapper
     );
 
     useEffect(() => {
+      setClickedNodes([]);
+      setCurrentPage(0);
       setCurrentNodes(exampleNodes);
     }, [exampleNodes]);
 
@@ -58,8 +60,8 @@ export const OneAIAnalyticsStaticDataWrapper: FC<OneAIAnalyticsStaticDataWrapper
         for (let i = 0; i < skip; i++) {
           clickedClusters.pop();
         }
-        setCurrentNodes(clickedClusters.at(-1)?.children ?? exampleNodes);
         setCurrentPage(0);
+        setCurrentNodes(clickedClusters.at(-1)?.children ?? exampleNodes);
         return [...clickedClusters];
       });
     };
