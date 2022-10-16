@@ -126,49 +126,14 @@ function Counter({
               leaveTo="opacity-0"
             >
               <Listbox.Options className="fixed mt-1 z-10 max-h-60 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                {Object.keys(countersConfigurations).map((key, i) => {
-                  const [opened, setOpened] = useState(false);
-                  const configData = countersConfigurations[key];
-
-                  return (
-                    <Fragment key={i}>
-                      <div className="w-full flex">
-                        {configData.groups && configData.groups.length > 0 && (
-                          <button
-                            type="button"
-                            className="ml-1"
-                            onClick={() => setOpened((opened) => !opened)}
-                          >
-                            {opened ? (
-                              <ChevronUpIcon className="h-4 w-4 text-gray-600" />
-                            ) : (
-                              <ChevronRightIcon className="h-4 w-4 text-gray-600" />
-                            )}
-                            <span className="sr-only">
-                              Open or Close metadata
-                            </span>
-                          </button>
-                        )}
-
-                        <Option label={key} value={configData} key={key} />
-                      </div>
-                      {opened &&
-                        configData.groups?.map((group) => {
-                          group.label = group.label?.includes(key)
-                            ? group.label
-                            : `${key}.${group.label ?? ''}`;
-                          return (
-                            <Option
-                              label={group.label}
-                              value={group}
-                              pl={3}
-                              key={key + group.label}
-                            />
-                          );
-                        })}
-                    </Fragment>
-                  );
-                })}
+                {Object.keys(countersConfigurations).map((key, i) => (
+                  <CascadedOption
+                    countersConfigurations={countersConfigurations}
+                    optionName={key}
+                    index={i}
+                    key={i}
+                  />
+                ))}
               </Listbox.Options>
             </Transition>
           </div>
@@ -213,6 +178,56 @@ function Counter({
         </button>
       </div>
     </div>
+  );
+}
+
+function CascadedOption({
+  countersConfigurations,
+  optionName,
+  index,
+}: {
+  countersConfigurations: CountersConfiguration;
+  optionName: string;
+  index: number;
+}) {
+  const [opened, setOpened] = useState(false);
+  const configData = countersConfigurations[optionName];
+
+  return (
+    <Fragment key={index}>
+      <div className="w-full flex">
+        {configData.groups && configData.groups.length > 0 && (
+          <button
+            type="button"
+            className="ml-1"
+            onClick={() => setOpened((opened) => !opened)}
+          >
+            {opened ? (
+              <ChevronUpIcon className="h-4 w-4 text-gray-600" />
+            ) : (
+              <ChevronRightIcon className="h-4 w-4 text-gray-600" />
+            )}
+            <span className="sr-only">Open or Close metadata</span>
+          </button>
+        )}
+
+        <Option label={optionName} value={configData} key={optionName} />
+      </div>
+      {opened &&
+        configData.groups?.map((group) => {
+          group.label = group.label?.includes(optionName)
+            ? group.label
+            : `${optionName}.${group.label ?? ''}`;
+          return (
+            <Option
+              label={group.label}
+              value={group}
+              pl={3}
+              key={optionName + group.label}
+            />
+          );
+        })}
+    </Fragment>
   );
 }
 
