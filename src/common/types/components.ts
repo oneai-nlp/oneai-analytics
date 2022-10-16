@@ -1,12 +1,14 @@
 import { FC } from 'react';
 import { Cluster, Item, MetaData, Phrase } from './modals';
 import { ItemsDisplayComponentProps } from './configurations';
+import { CounterType } from './Customize';
 
 export interface DataNode {
   id: string;
   amount: number;
   text?: string;
   metadata: MetaData;
+  type: string;
 }
 
 export interface TreemapProps {
@@ -22,7 +24,7 @@ export interface TreemapProps {
   borderWidth?: number;
   borderColor?: string;
   labels: string[];
-  counters: string[];
+  counters: CounterType[];
 }
 
 export interface BarChartProps {

@@ -1,11 +1,14 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FaceFrownIcon, FaceSmileIcon } from '@heroicons/react/20/solid';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
-import Select from 'react-select';
-import CountersLabelsDisplay from '../common/components/CuntersLabelsDisplay';
+import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
+import CustomizeTab from '../common/components/CustomizeTab';
 import { DataNode, OneAiAnalyticsProps } from '../common/types/components';
 import { CUSTOM_METADATA_KEY } from '../common/types/configurations';
+import { CountersConfiguration, CounterType } from '../common/types/Customize';
 import { MetaData } from '../common/types/modals';
 import {
+  COLLECTION_TYPE,
   getNodeId,
   getNodeItemsCount,
   getNodeText,
@@ -15,6 +18,46 @@ import { ItemsListDisplay } from './ItemsListDisplay';
 import { Treemap } from './Treemap';
 
 export type Displays = 'Treemap' | 'BarChart';
+
+const defaultCountersConfigurations: CountersConfiguration = {
+  positive: {
+    display: {
+      color: 'green',
+      icon: <FaceSmileIcon className="h-4 w-4" />,
+    },
+    members: [
+      { metadataName: 'emotion', values: ['happiness'] },
+      { metadataName: 'sentiment', values: ['POS'] },
+    ],
+  },
+  emotion: {
+    groups: [
+      {
+        label: 'positive',
+        display: {
+          color: 'green',
+          icon: <FaceSmileIcon className="h-4 w-4" />,
+        },
+        members: [{ values: ['happiness'] }],
+      },
+      {
+        label: 'negative',
+        display: {
+          color: 'red',
+          icon: <FaceFrownIcon className="h-4 w-4" />,
+        },
+        members: [{ values: ['anger', 'sadness'] }],
+      },
+      {
+        label: 'happiness',
+        display: {
+          color: 'green',
+          icon: <FaceSmileIcon className="h-4 w-4" />,
+        },
+      },
+    ],
+  },
+};
 
 // Please do not use types off of a default export module or else Storybook Docs will suffer.
 // see: https://github.com/storybookjs/storybook/issues/9556
@@ -45,20 +88,52 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
 }) => {
   const [display, setDisplay] = useState('Treemap' as Displays);
   const { width, height, ref } = useResizeDetector();
-  const [metaDataKeys, setMetaDataKeys] = useState(new Set());
+  const [metaData, setMetaData] = useState({} as MetaData);
   const [nodes, setNodes] = useState([] as DataNode[]);
   const [labels, setLabels] = useState([] as string[]);
-  const [counters, setCounters] = useState([] as string[]);
+  const [counters, setCounters] = useState([] as CounterType[]);
+  const [countersConfigurations, setCountersConfigurations] = useState(
+    {} as CountersConfiguration
+  );
+  const loadedNodes = useRef([] as { type: string; id: string }[]);
 
   useEffect(() => {
-    setMetaDataKeys(
-      (keys) =>
-        new Set([
-          ...Array.from(keys),
-          ...Object.keys(currentNode?.data.metadata ?? {}),
-        ])
-    );
-  }, [currentNode]);
+    setMetaData((currentMetadata) => {
+      const newMetadata = currentNode
+        ? loadedNodes.current.some(
+            (loadedNode) =>
+              loadedNode.type === currentNode.type &&
+              loadedNode.id === getNodeId(currentNode)
+          )
+          ? currentMetadata
+          : mergeMetadata(currentMetadata, currentNode?.data.metadata ?? {})
+        : nodes
+            .filter(
+              (node) =>
+                !loadedNodes.current.some(
+                  (loadedNode) =>
+                    loadedNode.id === node.id && loadedNode.type === node.type
+                )
+            )
+            .reduce(
+              (finalMetadata, currentNode) =>
+                mergeMetadata(finalMetadata, currentNode.metadata),
+              currentMetadata
+            );
+      loadedNodes.current.push({
+        type: currentNode?.type ?? COLLECTION_TYPE,
+        id: currentNode ? getNodeId(currentNode) : COLLECTION_TYPE,
+      });
+
+      if (!currentNode)
+        loadedNodes.current.push(
+          ...nodes.map((node) => {
+            return { type: node.type, id: node.id };
+          })
+        );
+      return newMetadata;
+    });
+  }, [currentNode, nodes]);
 
   useEffect(() => {
     setNodes(
@@ -74,20 +149,58 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
             ],
             ...d.data.metadata,
           },
+          type: d.type,
         };
       })
     );
   }, [dataNodes]);
 
   useEffect(() => {
-    setMetaDataKeys(
-      (keys) =>
-        new Set([
-          ...Array.from(keys),
-          ...nodes.map((node) => Object.keys(node.metadata)).flat(),
-        ])
-    );
-  }, [nodes]);
+    const newCountersConfigurations: CountersConfiguration = {};
+    Object.keys(metaData)
+      .concat(Object.keys(defaultCountersConfigurations))
+      .forEach((key) => {
+        const defaultConfig = defaultCountersConfigurations[key];
+        const valuesConfigured =
+          defaultConfig?.groups?.map((group) => group.label) ?? [];
+        newCountersConfigurations[key] = {
+          label: defaultConfig?.label ?? key,
+          display: defaultConfig?.display,
+          members: defaultConfig?.members ?? [{ metadataName: key }],
+          groups:
+            key === CUSTOM_METADATA_KEY
+              ? undefined
+              : (
+                  defaultConfig?.groups?.map((group) => {
+                    return {
+                      label: group.label,
+                      display: group.display,
+                      members: group.members?.map((member) => {
+                        return {
+                          metadataName: member.metadataName ?? key,
+                          values: member.values,
+                        };
+                      }) ?? [
+                        { metadataName: key, values: [group.label ?? ''] },
+                      ],
+                    };
+                  }) ?? []
+                ).concat(
+                  metaData[key]
+                    ?.filter((meta) => !valuesConfigured.includes(meta.value))
+                    .map((meta) => {
+                      return {
+                        label: meta.value,
+                        members: [{ metadataName: key, values: [meta.value] }],
+                        display: undefined,
+                      };
+                    }) ?? []
+                ),
+        };
+      });
+
+    setCountersConfigurations(newCountersConfigurations);
+  }, [metaData]);
 
   return (
     <div
@@ -105,72 +218,54 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
         }}
       >
         <div className="flex flex-row items-center p-5 h-full">
-          <div className="flex flex-row w-5/12 justify-start">
-            <svg
-              className={getVisualizationLogoClasses(display === 'Treemap')}
-              onClick={() => setDisplay('Treemap')}
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              strokeWidth="2"
-              stroke="currentColor"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              {' '}
-              <path stroke="none" d="M0 0h24v24H0z" />{' '}
-              <rect x="4" y="4" width="16" height="16" rx="2" />{' '}
-              <line x1="4" y1="10" x2="20" y2="10" />{' '}
-              <line x1="10" y1="4" x2="10" y2="20" />
-            </svg>
-
-            <svg
-              className={getVisualizationLogoClasses(display === 'BarChart')}
-              onClick={() => setDisplay('BarChart')}
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
+          <div className="flex flex-row w-5/12 justify-start items-center">
+            <div className="h-full flex">
+              <svg
+                className={getVisualizationLogoClasses(display === 'Treemap')}
+                onClick={() => setDisplay('Treemap')}
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-              />
-            </svg>
-          </div>
-          <div className="flex w-7/12 justify-end">
-            <div className="w-1/3">
-              <Select
-                options={Array.from(metaDataKeys).map((key) => {
-                  return { label: key, value: key };
-                })}
-                isMulti
-                isClearable
-                closeMenuOnSelect={false}
-                placeholder="Counters"
-                hideSelectedOptions={false}
-                controlShouldRenderValue={false}
-                onChange={(val) =>
-                  setCounters(val.map((v) => v.value as string))
-                }
-              />
+              >
+                {' '}
+                <path stroke="none" d="M0 0h24v24H0z" />{' '}
+                <rect x="4" y="4" width="16" height="16" rx="2" />{' '}
+                <line x1="4" y1="10" x2="20" y2="10" />{' '}
+                <line x1="10" y1="4" x2="10" y2="20" />
+              </svg>
+              <svg
+                className={getVisualizationLogoClasses(display === 'BarChart')}
+                onClick={() => setDisplay('BarChart')}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                />
+              </svg>
             </div>
-            <div className="w-1/3 ml-2">
-              <Select
-                options={Array.from(metaDataKeys)
-                  .filter((key) => key !== CUSTOM_METADATA_KEY)
-                  .map((key) => {
-                    return { label: key, value: key };
-                  })}
-                isMulti
-                isClearable
-                closeMenuOnSelect={false}
-                placeholder="Labels"
-                hideSelectedOptions={false}
-                controlShouldRenderValue={false}
-                onChange={(val) => setLabels(val.map((v) => v.value as string))}
+            <div className={`${loading && 'hidden'}`}>
+              <CustomizeTab
+                currentCounters={counters}
+                selectedLabels={labels}
+                countersConfigurations={countersConfigurations}
+                labelsOptions={Object.keys(metaData).filter(
+                  (key) => key !== CUSTOM_METADATA_KEY
+                )}
+                countersTypes={[
+                  { name: 'count', hasGroups: false, type: 'number' },
+                ]}
+                countersChanged={setCounters}
+                labelsChanged={setLabels}
               />
             </div>
           </div>
@@ -235,8 +330,10 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     )}
                   </div>
                 ))}
-                {totalPagesAmount > 1 && (
-                  <span className="ml-1 text-green-300">/ {currentPage}</span>
+                {totalPagesAmount > 1 && currentPage > 0 && (
+                  <span className="ml-1 text-gray-500">
+                    / {currentPage + 1}
+                  </span>
                 )}
               </div>
             </div>
@@ -244,11 +341,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               <CountersLabelsDisplay
                 counters={counters}
                 labels={labels}
-                metadata={nodes.reduce(
-                  (finalMetadata, currentNode) =>
-                    mergeMetadata(finalMetadata, currentNode.metadata),
-                  {}
-                )}
+                metadata={metaData}
               />
             </div>
           </div>

@@ -1,7 +1,7 @@
 import { scale, valid } from 'chroma-js';
 import { hierarchy, treemap } from 'd3';
 import React, { FC, useMemo } from 'react';
-import CountersLabelsDisplay from '../common/components/CuntersLabelsDisplay';
+import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
 import { DataNode, TreemapProps } from '../common/types/components';
 import { calculateFontSize } from '../common/utils/utils';
 
@@ -33,6 +33,7 @@ export const Treemap: FC<TreemapProps> = ({
       }),
       amount: 0,
       metadata: {},
+      type: '',
     };
   }, [dataNodes]);
 

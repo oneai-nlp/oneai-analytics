@@ -5,5 +5,11 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
-  "cSpell.words": ["tailwindcss", "treemap", "Treemap"]
+  "cSpell.words": [
+    "headlessui",
+    "heroicons",
+    "tailwindcss",
+    "treemap",
+    "Treemap"
+  ]
 }

@@ -4,4 +4,4 @@ export interface ItemsDisplayComponentProps {
   textColor: string;
 }
 
-export const CUSTOM_METADATA_KEY = 'Items count';
+export const CUSTOM_METADATA_KEY = 'item count';
