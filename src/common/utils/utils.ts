@@ -32,3 +32,7 @@ export function getSecondsDiff(startDate: Date, endDate: Date) {
 
   return Math.abs(diff / 1000);
 }
+
+export function sum(numbers: number[]): number {
+  return numbers.reduce((partialSum, a) => partialSum + a, 0);
+}

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Cluster, Item, MetaData, Phrase } from './modals';
 import { ItemsDisplayComponentProps } from './configurations';
-import { CounterType } from './Customize';
+import { CounterType } from './CustomizeBarTypes';
 
 export interface DataNode {
   id: string;

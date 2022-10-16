@@ -5,7 +5,7 @@ import {
   CalculationTypes,
   CountersConfiguration,
   CounterType,
-} from '../types/Customize';
+} from '../types/CustomizeBarTypes';
 import Counters from './CustomizeTab/Counters';
 import Labels from './CustomizeTab/Labels';
 

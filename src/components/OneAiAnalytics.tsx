@@ -5,7 +5,10 @@ import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
 import CustomizeTab from '../common/components/CustomizeTab';
 import { DataNode, OneAiAnalyticsProps } from '../common/types/components';
 import { CUSTOM_METADATA_KEY } from '../common/types/configurations';
-import { CountersConfiguration, CounterType } from '../common/types/Customize';
+import {
+  CountersConfiguration,
+  CounterType,
+} from '../common/types/CustomizeBarTypes';
 import { MetaData } from '../common/types/modals';
 import {
   COLLECTION_TYPE,
@@ -20,14 +23,19 @@ import { Treemap } from './Treemap';
 export type Displays = 'Treemap' | 'BarChart';
 
 const defaultCountersConfigurations: CountersConfiguration = {
-  positive: {
-    display: {
-      color: 'green',
-      icon: <FaceSmileIcon className="h-4 w-4" />,
-    },
-    members: [
-      { metadataName: 'emotion', values: ['happiness'] },
-      { metadataName: 'sentiment', values: ['POS'] },
+  signals: {
+    groups: [
+      {
+        label: 'positive',
+        display: {
+          color: 'green',
+          icon: <FaceSmileIcon />,
+        },
+        members: [
+          { metadataName: 'emotion', values: ['happiness'] },
+          { metadataName: 'sentiment', values: ['POS'] },
+        ],
+      },
     ],
   },
   emotion: {
@@ -36,7 +44,7 @@ const defaultCountersConfigurations: CountersConfiguration = {
         label: 'positive',
         display: {
           color: 'green',
-          icon: <FaceSmileIcon className="h-4 w-4" />,
+          icon: <FaceSmileIcon />,
         },
         members: [{ values: ['happiness'] }],
       },
@@ -44,7 +52,7 @@ const defaultCountersConfigurations: CountersConfiguration = {
         label: 'negative',
         display: {
           color: 'red',
-          icon: <FaceFrownIcon className="h-4 w-4" />,
+          icon: <FaceFrownIcon />,
         },
         members: [{ values: ['anger', 'sadness'] }],
       },
@@ -52,7 +60,7 @@ const defaultCountersConfigurations: CountersConfiguration = {
         label: 'happiness',
         display: {
           color: 'green',
-          icon: <FaceSmileIcon className="h-4 w-4" />,
+          icon: <FaceSmileIcon />,
         },
       },
     ],
@@ -263,6 +271,9 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 )}
                 countersTypes={[
                   { name: 'count', hasGroups: false, type: 'number' },
+                  { name: 'top group', hasGroups: true, type: 'number' },
+                  { name: 'top value', hasGroups: false, type: 'number' },
+                  { name: 'top value %', hasGroups: false, type: 'percentage' },
                 ]}
                 countersChanged={setCounters}
                 labelsChanged={setLabels}
@@ -509,16 +520,7 @@ function mergeMetadata(metadata1: MetaData, metadata2: MetaData): MetaData {
   Array.from(
     new Set([...Object.keys(metadata1), ...Object.keys(metadata2)])
   ).forEach((key) => {
-    const mergedValues = [...(metadata1[key] ?? []), ...(metadata2[key] ?? [])];
-    const valuesToCounts: Map<string, number> = new Map();
-    mergedValues.forEach((meta) => {
-      const value = valuesToCounts.get(meta.value) ?? 0;
-      valuesToCounts.set(meta.value, value + meta.count);
-    });
-
-    newMetadata[key] = Array.from(valuesToCounts.keys()).map((key) => {
-      return { value: key, count: valuesToCounts.get(key) ?? 0 };
-    });
+    newMetadata[key] = [...(metadata1[key] ?? []), ...(metadata2[key] ?? [])];
   });
 
   return newMetadata;

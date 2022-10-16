@@ -27,7 +27,7 @@ export interface DisplayConfig {
 }
 
 export interface CalculationTypes {
-  name: string;
+  name: 'count' | 'top value' | 'top value %' | 'top group' | 'top group %';
   type: 'number' | 'percentage';
   hasGroups: boolean;
 }

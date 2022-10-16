@@ -12,7 +12,8 @@ import {
   CounterConfiguration,
   CountersConfiguration,
   CounterType,
-} from '../../types/Customize';
+} from '../../types/CustomizeBarTypes';
+import { getCounterGroups } from '../../utils/CountersUtils';
 
 export default function Counters({
   countersConfigurations,
@@ -161,7 +162,10 @@ function Counter({
               leaveTo="opacity-0"
             >
               <Listbox.Options className="fixed mt-1 z-10 max-h-60 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                {countersTypes.map((counter) => (
+                {getCalculationTypes(
+                  countersTypes,
+                  counterData.counterConfiguration
+                ).map((counter) => (
                   <Option
                     label={counter.name}
                     value={counter}
@@ -214,7 +218,7 @@ function CascadedOption({
         <Option label={optionName} value={configData} key={optionName} />
       </div>
       {opened &&
-        configData.groups?.map((group) => {
+        configData.groups?.map((group, i) => {
           group.label = group.label?.includes(optionName)
             ? group.label
             : `${optionName}.${group.label ?? ''}`;
@@ -223,7 +227,7 @@ function CascadedOption({
               label={group.label}
               value={group}
               pl={3}
-              key={optionName + group.label}
+              key={optionName + group.label + i.toString()}
             />
           );
         })}
@@ -267,5 +271,18 @@ function Option({
         </span>
       )}
     </Listbox.Option>
+  );
+}
+
+function getCalculationTypes(
+  calculationTypes: CalculationType[],
+  selectedCounterConfig: CounterConfiguration | null
+): CalculationType[] {
+  if (!selectedCounterConfig)
+    return calculationTypes.filter((calc) => !calc.hasGroups);
+  const newLocal = getCounterGroups(selectedCounterConfig);
+  const hasGroups = newLocal.length > 0;
+  return calculationTypes.filter(
+    (calc) => calc.hasGroups === hasGroups || !calc.hasGroups
   );
 }

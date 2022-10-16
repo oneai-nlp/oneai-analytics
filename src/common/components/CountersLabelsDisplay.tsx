@@ -1,6 +1,7 @@
 import React from 'react';
-import { CounterType } from '../types/Customize';
+import { CounterType } from '../types/CustomizeBarTypes';
 import { MetaData } from '../types/modals';
+import { calculateCounter } from '../utils/CountersUtils';
 
 export default function CountersLabelsDisplay({
   counters,
@@ -12,44 +13,39 @@ export default function CountersLabelsDisplay({
   metadata: MetaData;
 }) {
   return (
-    <span className="truncate w-full flex">
+    <span className="truncate flex">
       {counters
         .filter((counter) => counter.counterConfiguration !== null)
         .map((counter, i) => {
           const counterConfig = counter.counterConfiguration;
           if (!counterConfig) return <></>;
-          const count = counterConfig.members?.map((member) => {
-            const key = metadata[member.metadataName ?? ''];
-            if (!key) return 0;
-            let itemCounts: number[] = [];
-            if (member.values === undefined) {
-              itemCounts = key.map(({ count }) => count);
-            } else {
-              itemCounts = key
-                .filter((k) => member.values?.includes(k.value))
-                .map(({ count }) => count);
-            }
-
-            return itemCounts.reduce((partialSum, a) => partialSum + a, 0);
-          }) ?? [0];
+          const displayResult = calculateCounter(counter, metadata);
+          if (!displayResult.counter?.counterConfiguration) return <></>;
 
           return (
             <span
               key={i}
-              className={`ml-1 flex items-center ${
-                counterConfig.display
-                  ? counterConfig.display.color === 'green'
+              className={`ml-1 flex items-center text-sm ${
+                displayResult.counter.counterConfiguration.display
+                  ? displayResult.counter.counterConfiguration.display.color ===
+                    'green'
                     ? 'text-emerald-400'
-                    : counterConfig.display.color === 'red'
+                    : displayResult.counter.counterConfiguration.display
+                        .color === 'red'
                     ? 'text-red-400'
                     : 'text-white'
                   : 'text-white'
               }`}
             >
-              {counterConfig.display && counterConfig.display.icon !== null && (
-                <>{counterConfig.display.icon}</>
-              )}
-              {count.reduce((partialSum, a) => partialSum + a, 0)}
+              {displayResult.counter.counterConfiguration.display &&
+                displayResult.counter.counterConfiguration.display.icon !==
+                  null && (
+                  <span style={{ width: '1em', height: '1em' }}>
+                    {displayResult.counter.counterConfiguration.display.icon}
+                  </span>
+                )}
+              {displayResult.result}
+              {displayResult.counter.counterType.type === 'percentage' && '%'}
             </span>
           );
         })}
