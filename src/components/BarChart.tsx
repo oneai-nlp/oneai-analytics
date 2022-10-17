@@ -1,6 +1,6 @@
 import { extent, scaleBand, scaleLinear } from 'd3';
 import React, { FC, useMemo } from 'react';
-import { BarChartProps } from '../common/types/components';
+import { BarChartProps } from '../common/types/componentsInputs';
 
 const BAR_PADDING = 0.1;
 

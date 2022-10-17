@@ -25,6 +25,8 @@ export default function CountersLabelsDisplay({
           return (
             <span
               key={i}
+              data-tip={`${counter.counterConfiguration?.label} - ${counter.counterType.name}`}
+              data-for="global"
               className={`ml-1 flex items-center text-sm ${
                 displayResult.counter.counterConfiguration.display
                   ? displayResult.counter.counterConfiguration.display.color ===

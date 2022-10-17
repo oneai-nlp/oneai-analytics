@@ -3,7 +3,7 @@ import {
   NodeType,
   OneAIAnalyticsApiWrapperProps,
   OneAIDataNode,
-} from '../common/types/components';
+} from '../common/types/componentsInputs';
 import { Cluster, Item, Phrase } from '../common/types/modals';
 import {
   COLLECTION_TYPE,

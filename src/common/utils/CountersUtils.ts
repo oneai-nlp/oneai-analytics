@@ -16,6 +16,7 @@ export function calculateCounter(
     return {
       result: calculateSumItemsInMetadata(
         counter.counterConfiguration.members,
+        counter.counterConfiguration.groups,
         metadata
       ),
       counter: counter,
@@ -24,8 +25,11 @@ export function calculateCounter(
 
   if (counter.counterType.name === 'top value') {
     return {
-      result: getMaxItemValue(counter.counterConfiguration.members, metadata)
-        .result,
+      result: getMaxItemValue(
+        counter.counterConfiguration.members,
+        counter.counterConfiguration.groups,
+        metadata
+      ).count,
       counter: counter,
     };
   }
@@ -33,12 +37,15 @@ export function calculateCounter(
   if (counter.counterType.name === 'top value %') {
     const max = getMaxItemValue(
       counter.counterConfiguration.members,
+      counter.counterConfiguration.groups,
       metadata
-    ).result;
+    ).count;
     const sum = calculateSumItemsInMetadata(
       counter.counterConfiguration.members,
+      counter.counterConfiguration.groups,
       metadata
     );
+
     return {
       result: sum === 0 ? 0 : Math.round((max / sum) * 100),
       counter: counter,
@@ -49,6 +56,7 @@ export function calculateCounter(
   return {
     result: calculateSumItemsInMetadata(
       counter.counterConfiguration.members,
+      counter.counterConfiguration.groups,
       metadata
     ),
     counter: counter,
@@ -76,49 +84,57 @@ export function getCounterGroups(
 
 function calculateSumItemsInMetadata(
   members: GroupMembers[] | undefined,
+  groups: CounterConfiguration[] | undefined,
   metadata: MetaData
 ): number {
-  const count = members?.map((member) => {
-    const key = metadata[member.metadataName ?? ''];
-    if (!key) return 0;
-    let itemCounts: number[] = [];
-    if (member.values === undefined) {
-      itemCounts = key.map(({ count }) => count);
-    } else {
-      itemCounts = key
-        .filter((k) => member.values?.includes(k.value))
-        .map(({ count }) => count);
-    }
-
-    return sum(itemCounts);
-  }) ?? [0];
-
-  return sum(count);
+  const items = getValuesAndCounts(members, groups, metadata);
+  return sum(items.map(({ count }) => count));
 }
 
 function getMaxItemValue(
   members: GroupMembers[] | undefined,
+  groups: CounterConfiguration[] | undefined,
   metadata: MetaData
-): { metadata?: string; value?: string; result: number } {
-  const itemCounts: { metadata?: string; value?: string; result: number }[] =
+): { metadata?: string; value?: string; count: number } {
+  const items = getValuesAndCounts(members, groups, metadata);
+  if (items.length === 0) return { count: 0 };
+
+  return items.reduce((prev, current) =>
+    prev.count > current.count ? prev : current
+  );
+}
+
+function getValuesAndCounts(
+  members: GroupMembers[] | undefined,
+  groups: CounterConfiguration[] | undefined,
+  metadata: MetaData
+): { metadata?: string; value: string; count: number }[] {
+  const membersData = filterRelevantValues(members, metadata);
+
+  if (membersData.length > 0) return membersData;
+
+  return filterRelevantValues(
+    groups?.flatMap((group) => group.members ?? []) ?? [],
+    metadata
+  );
+}
+
+function filterRelevantValues(
+  members: GroupMembers[] | undefined,
+  metadata: MetaData
+): { metadata?: string; value: string; count: number }[] {
+  return (
     members?.flatMap((member) => {
       const values = metadata[member.metadataName ?? ''];
-      if (!values) return [{ metadata: member.metadataName, result: 0 }];
-      if (member.values === undefined) {
-        return values.map(({ count, value }) => {
-          return { metadata: member.metadataName, value: value, result: count };
-        });
-      }
-      return values
-        .filter((k) => member.values?.includes(k.value))
-        .map(({ count, value }) => {
-          return { metadata: member.metadataName, value: value, result: count };
-        });
-    }) ?? [{ result: 0 }];
+      if (!values) return [];
 
-  if (!itemCounts || itemCounts.length === 0) return { result: 0 };
-
-  return itemCounts.reduce((prev, current) =>
-    prev.result > current.result ? prev : current
+      return (
+        member.values === undefined
+          ? values
+          : values.filter((k) => member.values?.includes(k.value))
+      ).map(({ value, count }) => {
+        return { metadata: member.metadataName, value: value, count: count };
+      });
+    }) ?? []
   );
 }

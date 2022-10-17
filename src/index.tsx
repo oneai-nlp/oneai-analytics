@@ -14,6 +14,6 @@ export {
   NodeType,
   OneAIAnalyticsApiWrapperProps,
   OneAIAnalyticsStaticDataWrapperProps,
-} from './common/types/components';
+} from './common/types/componentsInputs';
 export { ItemsDisplayComponentProps } from './common/types/configurations';
 export { Cluster, Phrase, Item } from './common/types/modals';

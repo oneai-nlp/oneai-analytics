@@ -1,4 +1,4 @@
-import { OneAIDataNode } from '../types/components';
+import { OneAIDataNode } from '../types/componentsInputs';
 import { Cluster, Item, Phrase } from '../types/modals';
 
 export const COLLECTION_TYPE = 'Collection';

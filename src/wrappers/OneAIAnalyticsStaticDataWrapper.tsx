@@ -4,7 +4,7 @@ import {
   NodeType,
   OneAIAnalyticsStaticDataWrapperProps,
   OneAIDataNode,
-} from '../common/types/components';
+} from '../common/types/componentsInputs';
 import { Cluster, Item, Phrase } from '../common/types/modals';
 import { chunks } from '../common/utils/utils';
 import { OneAiAnalytics } from '../components/OneAiAnalytics';

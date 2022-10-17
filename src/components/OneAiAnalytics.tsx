@@ -1,9 +1,13 @@
 import { FaceFrownIcon, FaceSmileIcon } from '@heroicons/react/20/solid';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
+import ReactTooltip from 'react-tooltip';
 import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
 import CustomizeTab from '../common/components/CustomizeTab';
-import { DataNode, OneAiAnalyticsProps } from '../common/types/components';
+import {
+  DataNode,
+  OneAiAnalyticsProps,
+} from '../common/types/componentsInputs';
 import { CUSTOM_METADATA_KEY } from '../common/types/configurations';
 import {
   CountersConfiguration,
@@ -210,11 +214,16 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
     setCountersConfigurations(newCountersConfigurations);
   }, [metaData]);
 
+  useEffect(() => {
+    ReactTooltip.rebuild();
+  }, [counters, labels]);
+
   return (
     <div
       className="h-full w-full flex flex-col overflow-hidden"
       style={{ background: background }}
     >
+      <ReactTooltip id="global" />
       <div
         className="w-full mb-1 rounded-md"
         style={{
