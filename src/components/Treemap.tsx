@@ -24,6 +24,7 @@ export const Treemap: FC<TreemapProps> = ({
   borderColor = bigColor,
   labels,
   counters,
+  countersConfiguration,
 }) => {
   const mainNode: TreemapNode = useMemo(() => {
     return {
@@ -116,6 +117,7 @@ export const Treemap: FC<TreemapProps> = ({
                 counters={counters}
                 labels={labels}
                 metadata={leaf.data.metadata}
+                countersConfiguration={countersConfiguration}
               />
             </div>
             <span

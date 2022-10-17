@@ -27,7 +27,12 @@ export interface DisplayConfig {
 }
 
 export interface CalculationTypes {
-  name: 'count' | 'top value' | 'top value %' | 'top group' | 'top group %';
+  name:
+    | 'Total SUM'
+    | 'Top value total sum'
+    | 'top value %'
+    | 'top group total'
+    | 'top group %';
   type: 'number' | 'percentage';
   hasGroups: boolean;
 }

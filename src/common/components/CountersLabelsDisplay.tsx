@@ -1,5 +1,5 @@
 import React from 'react';
-import { CounterType } from '../types/CustomizeBarTypes';
+import { CountersConfiguration, CounterType } from '../types/CustomizeBarTypes';
 import { MetaData } from '../types/modals';
 import { calculateCounter } from '../utils/CountersUtils';
 
@@ -7,10 +7,12 @@ export default function CountersLabelsDisplay({
   counters,
   labels,
   metadata,
+  countersConfiguration,
 }: {
   counters: CounterType[];
   labels: string[];
   metadata: MetaData;
+  countersConfiguration: CountersConfiguration;
 }) {
   return (
     <span className="truncate flex">
@@ -19,35 +21,42 @@ export default function CountersLabelsDisplay({
         .map((counter, i) => {
           const counterConfig = counter.counterConfiguration;
           if (!counterConfig) return <></>;
-          const displayResult = calculateCounter(counter, metadata);
-          if (!displayResult.counter?.counterConfiguration) return <></>;
+          const displayResult = calculateCounter(
+            counter,
+            metadata,
+            countersConfiguration
+          );
+          if (!displayResult.counter) return <></>;
 
           return (
             <span
               key={i}
-              data-tip={`${counter.counterConfiguration?.label} - ${counter.counterType.name}`}
+              data-tip={
+                `${counter.counterConfiguration?.label} - ${counter.counterType.name}` +
+                getMetadataValueTitle(
+                  displayResult.metadata,
+                  displayResult.value
+                )
+              }
               data-for="global"
               className={`ml-1 flex items-center text-sm ${
-                displayResult.counter.counterConfiguration.display
-                  ? displayResult.counter.counterConfiguration.display.color ===
-                    'green'
+                displayResult.counter.display
+                  ? displayResult.counter.display.color === 'green'
                     ? 'text-emerald-400'
-                    : displayResult.counter.counterConfiguration.display
-                        .color === 'red'
+                    : displayResult.counter.display.color === 'red'
                     ? 'text-red-400'
                     : 'text-white'
                   : 'text-white'
               }`}
             >
-              {displayResult.counter.counterConfiguration.display &&
-                displayResult.counter.counterConfiguration.display.icon !==
-                  null && (
+              {displayResult.counter.display &&
+                displayResult.counter.display.icon !== null && (
                   <span style={{ width: '1em', height: '1em' }}>
-                    {displayResult.counter.counterConfiguration.display.icon}
+                    {displayResult.counter.display.icon}
                   </span>
                 )}
               {displayResult.result}
-              {displayResult.counter.counterType.type === 'percentage' && '%'}
+              {counter.counterType.type === 'percentage' && '%'}
             </span>
           );
         })}
@@ -64,4 +73,20 @@ export default function CountersLabelsDisplay({
       })}
     </span>
   );
+}
+
+function getMetadataValueTitle(
+  metadata: string | undefined,
+  value: string | undefined
+) {
+  if (metadata) {
+    if (value) return `(${metadata}.${value})`;
+    return `(${metadata})`;
+  }
+
+  if (value) {
+    return `(${value})`;
+  }
+
+  return '';
 }

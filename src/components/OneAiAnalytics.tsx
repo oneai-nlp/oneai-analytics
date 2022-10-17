@@ -279,9 +279,13 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                   (key) => key !== CUSTOM_METADATA_KEY
                 )}
                 countersTypes={[
-                  { name: 'count', hasGroups: false, type: 'number' },
-                  { name: 'top group', hasGroups: true, type: 'number' },
-                  { name: 'top value', hasGroups: false, type: 'number' },
+                  { name: 'Total SUM', hasGroups: false, type: 'number' },
+                  { name: 'top group total', hasGroups: true, type: 'number' },
+                  {
+                    name: 'Top value total sum',
+                    hasGroups: false,
+                    type: 'number',
+                  },
                   { name: 'top value %', hasGroups: false, type: 'percentage' },
                 ]}
                 countersChanged={setCounters}
@@ -362,6 +366,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 counters={counters}
                 labels={labels}
                 metadata={metaData}
+                countersConfiguration={countersConfigurations}
               />
             </div>
           </div>
@@ -460,6 +465,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                   textColor={treemapTextColor}
                   borderWidth={treemapBorderWidth}
                   borderColor={treemapBorderColor}
+                  countersConfiguration={countersConfigurations}
                 />
               ) : (
                 <BarChart

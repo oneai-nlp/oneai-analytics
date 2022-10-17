@@ -58,7 +58,7 @@ export default function CustomizeTab({
                     <div className="w-full">
                       <Counters
                         countersConfigurations={countersConfigurations}
-                        countersTypes={countersTypes}
+                        countersTypes={countersTypes.sort()}
                         currentCounters={currentCounters}
                         countersChanged={countersChanged}
                       />
@@ -66,7 +66,7 @@ export default function CustomizeTab({
                     <div className="w-full mt-2">
                       <Labels
                         currentLabels={selectedLabels}
-                        labelsOptions={labelsOptions}
+                        labelsOptions={labelsOptions.sort()}
                         labelsChanged={labelsChanged}
                       />
                     </div>

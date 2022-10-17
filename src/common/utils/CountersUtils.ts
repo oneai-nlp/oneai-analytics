@@ -1,5 +1,6 @@
 import {
   CounterConfiguration,
+  CountersConfiguration,
   CounterType,
   GroupMembers,
 } from '../types/CustomizeBarTypes';
@@ -8,29 +9,44 @@ import { sum } from './utils';
 
 export function calculateCounter(
   counter: CounterType,
-  metadata: MetaData
-): { counter: CounterType | null; result: number } {
+  metadata: MetaData,
+  countersConfigurations: CountersConfiguration
+): {
+  counter: CounterConfiguration | null;
+  metadata?: string;
+  value?: string;
+  result: number;
+} {
   if (!counter.counterConfiguration)
     return { counter: counter.counterConfiguration, result: 0 };
-  if (counter.counterType.name === 'count') {
+  if (counter.counterType.name === 'Total SUM') {
     return {
       result: calculateSumItemsInMetadata(
         counter.counterConfiguration.members,
         counter.counterConfiguration.groups,
         metadata
       ),
-      counter: counter,
+      counter: counter.counterConfiguration,
     };
   }
 
-  if (counter.counterType.name === 'top value') {
+  if (counter.counterType.name === 'Top value total sum') {
+    const maxItem = getMaxItemValue(
+      counter.counterConfiguration.members,
+      counter.counterConfiguration.groups,
+      metadata
+    );
+
     return {
-      result: getMaxItemValue(
-        counter.counterConfiguration.members,
-        counter.counterConfiguration.groups,
-        metadata
-      ).count,
-      counter: counter,
+      result: maxItem.count,
+      counter:
+        getItemCounterConfiguration(
+          maxItem.metadata,
+          maxItem.value,
+          countersConfigurations
+        ) ?? counter.counterConfiguration,
+      metadata: maxItem.metadata,
+      value: maxItem.value,
     };
   }
 
@@ -39,7 +55,7 @@ export function calculateCounter(
       counter.counterConfiguration.members,
       counter.counterConfiguration.groups,
       metadata
-    ).count;
+    );
     const sum = calculateSumItemsInMetadata(
       counter.counterConfiguration.members,
       counter.counterConfiguration.groups,
@@ -47,8 +63,15 @@ export function calculateCounter(
     );
 
     return {
-      result: sum === 0 ? 0 : Math.round((max / sum) * 100),
-      counter: counter,
+      result: sum === 0 ? 0 : Math.round((max.count / sum) * 100),
+      counter:
+        getItemCounterConfiguration(
+          max.metadata,
+          max.value,
+          countersConfigurations
+        ) ?? counter.counterConfiguration,
+      metadata: max.metadata,
+      value: max.value,
     };
   }
 
@@ -59,7 +82,7 @@ export function calculateCounter(
       counter.counterConfiguration.groups,
       metadata
     ),
-    counter: counter,
+    counter: counter.counterConfiguration,
   };
 }
 
@@ -137,4 +160,14 @@ function filterRelevantValues(
       });
     }) ?? []
   );
+}
+
+function getItemCounterConfiguration(
+  metadata: string | undefined,
+  value: string | undefined,
+  countersConfigurations: CountersConfiguration
+): CounterConfiguration | null {
+  if (!metadata || !value) return null;
+  const counterConfig = countersConfigurations[metadata];
+  return counterConfig.groups?.find((group) => group.label === value) ?? null;
 }
