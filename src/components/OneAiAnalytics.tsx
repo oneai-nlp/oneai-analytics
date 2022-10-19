@@ -10,6 +10,8 @@ import {
 } from '../common/types/componentsInputs';
 import { CUSTOM_METADATA_KEY } from '../common/types/configurations';
 import {
+  CalculationType,
+  CounterConfiguration,
   CountersConfiguration,
   CounterType,
 } from '../common/types/CustomizeBarTypes';
@@ -25,6 +27,27 @@ import { ItemsListDisplay } from './ItemsListDisplay';
 import { Treemap } from './Treemap';
 
 export type Displays = 'Treemap' | 'BarChart';
+
+const totalSum: CalculationType = {
+  name: 'Total SUM',
+  hasGroups: false,
+  type: 'number',
+};
+const topGroup: CalculationType = {
+  name: 'top group total',
+  hasGroups: true,
+  type: 'number',
+};
+const topValue: CalculationType = {
+  name: 'Top value total sum',
+  hasGroups: false,
+  type: 'number',
+};
+const topValuePercent: CalculationType = {
+  name: 'top value %',
+  hasGroups: false,
+  type: 'percentage',
+};
 
 const defaultCountersConfigurations: CountersConfiguration = {
   signals: {
@@ -68,6 +91,9 @@ const defaultCountersConfigurations: CountersConfiguration = {
         },
       },
     ],
+  },
+  [CUSTOM_METADATA_KEY]: {
+    default: ['Total SUM'],
   },
 };
 
@@ -175,7 +201,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
         const defaultConfig = defaultCountersConfigurations[key];
         const valuesConfigured =
           defaultConfig?.groups?.map((group) => group.label) ?? [];
-        newCountersConfigurations[key] = {
+        const counterConfiguration: CounterConfiguration = {
+          default: defaultConfig?.default ?? [],
           label: defaultConfig?.label ?? key,
           display: defaultConfig?.display,
           members: defaultConfig?.members ?? [{ metadataName: key }],
@@ -185,6 +212,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               : (
                   defaultConfig?.groups?.map((group) => {
                     return {
+                      default: group.default ?? [],
                       label: group.label,
                       display: group.display,
                       members: group.members?.map((member) => {
@@ -202,6 +230,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     ?.filter((meta) => !valuesConfigured.includes(meta.value))
                     .map((meta) => {
                       return {
+                        default: [],
                         label: meta.value,
                         members: [{ metadataName: key, values: [meta.value] }],
                         display: undefined,
@@ -209,6 +238,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     }) ?? []
                 ),
         };
+        newCountersConfigurations[key] = counterConfiguration;
+        // counterConfiguration.default?.forEach((defaultCalculation) => {});
       });
 
     setCountersConfigurations(newCountersConfigurations);
@@ -278,16 +309,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 labelsOptions={Object.keys(metaData).filter(
                   (key) => key !== CUSTOM_METADATA_KEY
                 )}
-                countersTypes={[
-                  { name: 'Total SUM', hasGroups: false, type: 'number' },
-                  { name: 'top group total', hasGroups: true, type: 'number' },
-                  {
-                    name: 'Top value total sum',
-                    hasGroups: false,
-                    type: 'number',
-                  },
-                  { name: 'top value %', hasGroups: false, type: 'percentage' },
-                ]}
+                countersTypes={[totalSum, topGroup, topValue, topValuePercent]}
                 countersChanged={setCounters}
                 labelsChanged={setLabels}
               />

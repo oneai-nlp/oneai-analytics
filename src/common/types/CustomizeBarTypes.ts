@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 
 export interface CounterType {
   counterConfiguration: CounterConfiguration | null;
-  counterType: CalculationTypes;
+  counterType: CalculationType;
 }
 
 export interface CountersConfiguration {
@@ -14,6 +14,7 @@ export interface CounterConfiguration {
   display?: DisplayConfig;
   members?: GroupMembers[];
   groups?: CounterConfiguration[];
+  default?: CalculationName[];
 }
 
 export interface GroupMembers {
@@ -26,13 +27,15 @@ export interface DisplayConfig {
   icon: ReactElement | null;
 }
 
-export interface CalculationTypes {
-  name:
-    | 'Total SUM'
-    | 'Top value total sum'
-    | 'top value %'
-    | 'top group total'
-    | 'top group %';
+export interface CalculationType {
+  name: CalculationName;
   type: 'number' | 'percentage';
   hasGroups: boolean;
 }
+
+export type CalculationName =
+  | 'Total SUM'
+  | 'Top value total sum'
+  | 'top value %'
+  | 'top group total'
+  | 'top group %';

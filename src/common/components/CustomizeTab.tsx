@@ -2,7 +2,7 @@ import { Popover, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import React, { Fragment } from 'react';
 import {
-  CalculationTypes,
+  CalculationType,
   CountersConfiguration,
   CounterType,
 } from '../types/CustomizeBarTypes';
@@ -21,7 +21,7 @@ export default function CustomizeTab({
   currentCounters: CounterType[];
   selectedLabels: string[];
   countersConfigurations: CountersConfiguration;
-  countersTypes: CalculationTypes[];
+  countersTypes: CalculationType[];
   labelsOptions: string[];
   countersChanged: (counters: CounterType[]) => void;
   labelsChanged: (labels: string[]) => void;

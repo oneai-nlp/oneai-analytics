@@ -9,12 +9,13 @@ import {
 import React, { Fragment, useState } from 'react';
 import { CUSTOM_METADATA_KEY } from '../../types/configurations';
 import {
-  CalculationTypes as CalculationType,
+  CalculationType as CalculationType,
   CounterConfiguration,
   CountersConfiguration,
   CounterType,
 } from '../../types/CustomizeBarTypes';
 import { getCounterGroups } from '../../utils/CountersUtils';
+import { uniqBy } from '../../utils/utils';
 
 export default function Counters({
   countersConfigurations,
@@ -128,14 +129,16 @@ function Counter({
               leaveTo="opacity-0"
             >
               <Listbox.Options className="fixed mt-1 z-10 max-h-60 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                {Object.keys(countersConfigurations).map((key, i) => (
-                  <CascadedOption
-                    countersConfigurations={countersConfigurations}
-                    optionName={key}
-                    index={i}
-                    key={i}
-                  />
-                ))}
+                {uniqBy(Object.keys(countersConfigurations), (key) => key).map(
+                  (key, i) => (
+                    <CascadedOption
+                      countersConfigurations={countersConfigurations}
+                      optionName={key}
+                      index={i}
+                      key={i}
+                    />
+                  )
+                )}
               </Listbox.Options>
             </Transition>
           </div>
@@ -219,19 +222,21 @@ function CascadedOption({
         <Option label={optionName} value={configData} key={optionName} />
       </div>
       {opened &&
-        configData.groups?.map((group, i) => {
-          group.label = group.label?.includes(optionName)
-            ? group.label
-            : `${optionName}.${group.label ?? ''}`;
-          return (
-            <Option
-              label={group.label}
-              value={group}
-              pl={3}
-              key={optionName + group.label + i.toString()}
-            />
-          );
-        })}
+        uniqBy(configData.groups ?? [], (group) => group.label).map(
+          (group, i) => {
+            group.label = group.label?.includes(optionName)
+              ? group.label
+              : `${optionName}.${group.label ?? ''}`;
+            return (
+              <Option
+                label={group.label}
+                value={group}
+                pl={3}
+                key={optionName + group.label + i.toString()}
+              />
+            );
+          }
+        )}
     </Fragment>
   );
 }

@@ -1,6 +1,7 @@
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import React, { Fragment, useState } from 'react';
+import { uniqBy } from '../../utils/utils';
 
 export default function Labels({
   currentLabels,
@@ -45,7 +46,7 @@ export default function Labels({
             leaveTo="opacity-0"
           >
             <Listbox.Options className="fixed mt-1 z-10 max-h-60 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              {labelsOptions.map((key) => (
+              {uniqBy(labelsOptions, (key) => key).map((key) => (
                 <Listbox.Option
                   key={key}
                   className={({ active }) =>

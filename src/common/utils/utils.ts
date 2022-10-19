@@ -36,3 +36,11 @@ export function getSecondsDiff(startDate: Date, endDate: Date) {
 export function sum(numbers: number[]): number {
   return numbers.reduce((partialSum, a) => partialSum + a, 0);
 }
+
+export function uniqBy<T, K>(arr: T[], getKey: (item: T) => K) {
+  let seen = new Set<K>();
+  return arr.filter((item) => {
+    let k = getKey(item);
+    return seen.has(k) ? false : seen.add(k);
+  });
+}
