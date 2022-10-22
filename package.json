@@ -105,6 +105,7 @@
     "chroma-js": "^2.4.2",
     "core-js": "^3.25.5",
     "d3": "7.6.1",
+    "date-fns": "^2.29.3",
     "react-app-polyfill": "^3.0.0",
     "react-resize-detector": "^7.1.2",
     "react-tooltip": "^4.4.0",

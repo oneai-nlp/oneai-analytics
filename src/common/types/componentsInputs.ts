@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Cluster, Item, MetaData, Phrase } from './modals';
-import { ItemsDisplayComponentProps } from './configurations';
-import { CountersConfiguration, CounterType } from './CustomizeBarTypes';
+import { ItemsDisplayComponentProps } from './commonTypes';
+import { CountersConfigurations, CounterType } from './customizeBarTypes';
 
 export interface DataNode {
   id: string;
@@ -25,7 +25,7 @@ export interface TreemapProps {
   borderColor?: string;
   labels: string[];
   counters: CounterType[];
-  countersConfiguration: CountersConfiguration;
+  countersConfiguration: CountersConfigurations;
 }
 
 export interface BarChartProps {
@@ -64,6 +64,7 @@ export interface OneAiAnalyticsProps {
   itemsDisplay?: FC<ItemsDisplayComponentProps>;
   loading?: boolean;
   nodesPath?: string[];
+  dateRangeChanged?: (from: Date | null, to: Date | null) => void;
 }
 
 export type OneAIAnalyticsStaticDataWrapperProps = Omit<

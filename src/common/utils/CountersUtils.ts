@@ -1,111 +1,183 @@
 import {
   CounterConfiguration,
-  CountersConfiguration,
-  CounterType,
+  CountersConfigurations,
   GroupMembers,
-} from '../types/CustomizeBarTypes';
+  MetadataKeyValue,
+} from '../types/customizeBarTypes';
 import { MetaData } from '../types/modals';
 import { sum } from './utils';
 
-export function calculateCounter(
-  counter: CounterType,
+export function topGroupPercentCalculation(
+  metadataKeyValue: MetadataKeyValue | null,
   metadata: MetaData,
-  countersConfigurations: CountersConfiguration
-): {
-  counter: CounterConfiguration | null;
-  metadata?: string;
-  value?: string;
-  result: number;
-} {
-  if (!counter.counterConfiguration)
-    return { counter: counter.counterConfiguration, result: 0 };
-  if (counter.counterType.name === 'Total SUM') {
-    return {
-      result: calculateSumItemsInMetadata(
-        counter.counterConfiguration.members,
-        counter.counterConfiguration.groups,
-        metadata
-      ),
-      counter: counter.counterConfiguration,
-    };
-  }
+  countersConfigurations: CountersConfigurations
+) {
+  const counter = getMetadataKeyValueConfiguration(
+    metadataKeyValue,
+    countersConfigurations
+  );
+  const groups = getCounterGroups(counter);
+  if (!counter || groups.length === 0) return { counter: counter, result: 0 };
 
-  if (counter.counterType.name === 'Top value total sum') {
-    const maxItem = getMaxItemValue(
-      counter.counterConfiguration.members,
-      counter.counterConfiguration.groups,
-      metadata
-    );
-
-    return {
-      result: maxItem.count,
-      counter:
-        getItemCounterConfiguration(
-          maxItem.metadata,
-          maxItem.value,
-          countersConfigurations
-        ) ?? counter.counterConfiguration,
-      metadata: maxItem.metadata,
-      value: maxItem.value,
-    };
-  }
-
-  if (counter.counterType.name === 'top value %') {
-    const max = getMaxItemValue(
-      counter.counterConfiguration.members,
-      counter.counterConfiguration.groups,
-      metadata
-    );
-    const sum = calculateSumItemsInMetadata(
-      counter.counterConfiguration.members,
-      counter.counterConfiguration.groups,
-      metadata
-    );
-
-    return {
-      result: sum === 0 ? 0 : Math.round((max.count / sum) * 100),
-      counter:
-        getItemCounterConfiguration(
-          max.metadata,
-          max.value,
-          countersConfigurations
-        ) ?? counter.counterConfiguration,
-      metadata: max.metadata,
-      value: max.value,
-    };
-  }
-
-  // TODO delete
+  const sums = groups.map((group) =>
+    calculateSumItemsInMetadata(group.members, [], metadata)
+  );
+  const max = Math.max(...sums);
+  const maxGroup = groups[sums.indexOf(max)];
+  const groupsSum = sum(sums);
   return {
-    result: calculateSumItemsInMetadata(
-      counter.counterConfiguration.members,
-      counter.counterConfiguration.groups,
-      metadata
-    ),
-    counter: counter.counterConfiguration,
+    result: groupsSum === 0 ? 0 : Math.round((max / groupsSum) * 100),
+    counter: maxGroup ?? counter,
+    metadataKey: maxGroup.label,
+    value: undefined,
   };
 }
 
-export function getCounterGroups(
-  counter: CounterConfiguration
-): CounterConfiguration[] {
-  return (
-    counter.groups?.filter((group) => {
-      let membersCount = 0;
-      group.members?.forEach((member) => {
-        if (member.values === undefined) {
-          membersCount += 2;
-        } else {
-          membersCount += member.values.length;
-        }
-      });
-
-      return membersCount > 1;
-    }) ?? []
+export function topGroupCalculation(
+  metadataKeyValue: MetadataKeyValue | null,
+  metadata: MetaData,
+  countersConfigurations: CountersConfigurations
+) {
+  const counter = getMetadataKeyValueConfiguration(
+    metadataKeyValue,
+    countersConfigurations
   );
+  const groups = getCounterGroups(counter);
+  if (groups.length === 0)
+    return {
+      counter: counter,
+      result: 0,
+    };
+  const sums = groups.map((group) =>
+    calculateSumItemsInMetadata(group.members, [], metadata)
+  );
+  const max = Math.max(...sums);
+  const maxGroup = groups[sums.indexOf(max)];
+  return {
+    result: max,
+    counter: maxGroup ?? counter,
+    metadataKey: maxGroup.label,
+    value: undefined,
+  };
 }
 
-function calculateSumItemsInMetadata(
+export function topValuePercentCalculation(
+  metadataKeyValue: MetadataKeyValue | null,
+  metadata: MetaData,
+  countersConfigurations: CountersConfigurations
+) {
+  const counter = getMetadataKeyValueConfiguration(
+    metadataKeyValue,
+    countersConfigurations
+  );
+  if (!counter) return { counter: counter, result: 0 };
+
+  const max = getMaxItemValue(counter.members, counter.groups, metadata);
+  const sum = calculateSumItemsInMetadata(
+    counter.members,
+    counter.groups,
+    metadata
+  );
+
+  return {
+    result: sum === 0 ? 0 : Math.round((max.count / sum) * 100),
+    counter:
+      getItemCounterConfiguration(
+        max.metadata,
+        max.value,
+        countersConfigurations
+      ) ?? counter,
+    metadataKey: max.metadata,
+    value: max.value,
+  };
+}
+
+export function topValueCalculation(
+  metadataKeyValue: MetadataKeyValue | null,
+  metadata: MetaData,
+  countersConfigurations: CountersConfigurations
+) {
+  const counter = getMetadataKeyValueConfiguration(
+    metadataKeyValue,
+    countersConfigurations
+  );
+  if (!counter) return { counter: counter, result: 0 };
+
+  const maxItem = getMaxItemValue(counter.members, counter.groups, metadata);
+
+  return {
+    result: maxItem.count,
+    counter:
+      getItemCounterConfiguration(
+        maxItem.metadata,
+        maxItem.value,
+        countersConfigurations
+      ) ?? counter,
+    metadataKey: maxItem.metadata,
+    value: maxItem.value,
+  };
+}
+
+export function totalSumCalculation(
+  metadataKeyValue: MetadataKeyValue | null,
+  metadata: MetaData,
+  countersConfigurations: CountersConfigurations
+): {
+  counter: CounterConfiguration | null;
+  metadata?: string | undefined;
+  value?: string | undefined;
+  result: number;
+} {
+  const counter = getMetadataKeyValueConfiguration(
+    metadataKeyValue,
+    countersConfigurations
+  );
+  if (!counter) return { counter: counter, result: 0 };
+  return {
+    result: calculateSumItemsInMetadata(
+      counter.members,
+      counter.groups,
+      metadata
+    ),
+    counter: counter,
+  };
+}
+
+export function getMetadataKeyValueGroups(
+  metadataKeyValue: MetadataKeyValue | null,
+  countersConfigurations: CountersConfigurations
+): CounterConfiguration[] {
+  const counter = getMetadataKeyValueConfiguration(
+    metadataKeyValue,
+    countersConfigurations
+  );
+
+  return getCounterGroups(counter);
+}
+
+function getCounterGroups(
+  counter: CounterConfiguration | null
+): CounterConfiguration[] {
+  if (!counter) return [];
+
+  return counter.groups?.filter((group) => group.isGroup ?? false) ?? [];
+}
+
+export function getMetadataKeyValueConfiguration(
+  metadataKeyValue: MetadataKeyValue | null,
+  countersConfigurations: CountersConfigurations
+): CounterConfiguration | null {
+  if (!metadataKeyValue) return null;
+  const keyConfig = countersConfigurations[metadataKeyValue.key];
+  if (!metadataKeyValue.value) return keyConfig;
+  const memberConfig = keyConfig.groups?.find(
+    (group) => group.label === metadataKeyValue.value
+  );
+  if (!memberConfig) return keyConfig;
+  return memberConfig;
+}
+
+export function calculateSumItemsInMetadata(
   members: GroupMembers[] | undefined,
   groups: CounterConfiguration[] | undefined,
   metadata: MetaData
@@ -114,7 +186,7 @@ function calculateSumItemsInMetadata(
   return sum(items.map(({ count }) => count));
 }
 
-function getMaxItemValue(
+export function getMaxItemValue(
   members: GroupMembers[] | undefined,
   groups: CounterConfiguration[] | undefined,
   metadata: MetaData
@@ -162,10 +234,10 @@ function filterRelevantValues(
   );
 }
 
-function getItemCounterConfiguration(
+export function getItemCounterConfiguration(
   metadata: string | undefined,
   value: string | undefined,
-  countersConfigurations: CountersConfiguration
+  countersConfigurations: CountersConfigurations
 ): CounterConfiguration | null {
   if (!metadata || !value) return null;
   const counterConfig = countersConfigurations[metadata];

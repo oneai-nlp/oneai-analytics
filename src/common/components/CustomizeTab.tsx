@@ -2,29 +2,38 @@ import { Popover, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import React, { Fragment } from 'react';
 import {
-  CalculationType,
-  CountersConfiguration,
+  CalculationConfiguration,
+  CountersConfigurations,
   CounterType,
-} from '../types/CustomizeBarTypes';
+} from '../types/customizeBarTypes';
 import Counters from './CustomizeTab/Counters';
+import Datepicker from './CustomizeTab/Datepicker';
 import Labels from './CustomizeTab/Labels';
 
 export default function CustomizeTab({
   currentCounters,
   selectedLabels,
   countersConfigurations,
-  countersTypes,
+  calculationsConfigurations,
   labelsOptions,
   countersChanged,
   labelsChanged,
+  fromDate,
+  toDate,
+  fromDateChanged,
+  toDateChanged,
 }: {
   currentCounters: CounterType[];
   selectedLabels: string[];
-  countersConfigurations: CountersConfiguration;
-  countersTypes: CalculationType[];
+  countersConfigurations: CountersConfigurations;
+  calculationsConfigurations: CalculationConfiguration[];
   labelsOptions: string[];
+  fromDate: Date | null;
+  toDate: Date | null;
   countersChanged: (counters: CounterType[]) => void;
   labelsChanged: (labels: string[]) => void;
+  fromDateChanged: (date: Date) => void;
+  toDateChanged: (date: Date) => void;
 }) {
   return (
     <div className="max-w-sm">
@@ -58,7 +67,7 @@ export default function CustomizeTab({
                     <div className="w-full">
                       <Counters
                         countersConfigurations={countersConfigurations}
-                        countersTypes={countersTypes.sort()}
+                        calculationsConfigurations={calculationsConfigurations}
                         currentCounters={currentCounters}
                         countersChanged={countersChanged}
                       />
@@ -69,6 +78,24 @@ export default function CustomizeTab({
                         labelsOptions={labelsOptions.sort()}
                         labelsChanged={labelsChanged}
                       />
+                    </div>
+                    <div className="w-full mt-2">
+                      <div className="flex flex-wrap w-full mt-3">
+                        <div className="w-64">
+                          <Datepicker
+                            selectedDate={fromDate}
+                            dateChanged={fromDateChanged}
+                            placeholder="From"
+                          />
+                        </div>
+                        <div className="w-64 ml-3">
+                          <Datepicker
+                            selectedDate={toDate}
+                            dateChanged={toDateChanged}
+                            placeholder="To"
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

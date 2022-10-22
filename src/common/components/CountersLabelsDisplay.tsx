@@ -1,7 +1,10 @@
 import React from 'react';
-import { CountersConfiguration, CounterType } from '../types/CustomizeBarTypes';
+import {
+  CountersConfigurations,
+  CounterType,
+} from '../types/customizeBarTypes';
 import { MetaData } from '../types/modals';
-import { calculateCounter } from '../utils/CountersUtils';
+import { getMetadataKeyValueDisplay } from '../utils/displayUtils';
 
 export default function CountersLabelsDisplay({
   counters,
@@ -12,17 +15,17 @@ export default function CountersLabelsDisplay({
   counters: CounterType[];
   labels: string[];
   metadata: MetaData;
-  countersConfiguration: CountersConfiguration;
+  countersConfiguration: CountersConfigurations;
 }) {
   return (
     <span className="truncate flex">
       {counters
-        .filter((counter) => counter.counterConfiguration !== null)
+        .filter((counter) => counter.metadataKeyValue !== null)
         .map((counter, i) => {
-          const counterConfig = counter.counterConfiguration;
-          if (!counterConfig) return <></>;
-          const displayResult = calculateCounter(
-            counter,
+          const metadataKeyValue = counter.metadataKeyValue;
+          if (!metadataKeyValue) return <></>;
+          const displayResult = counter.calculationConfiguration.calculate(
+            metadataKeyValue,
             metadata,
             countersConfiguration
           );
@@ -32,9 +35,11 @@ export default function CountersLabelsDisplay({
             <span
               key={i}
               data-tip={
-                `${counter.counterConfiguration?.label} - ${counter.counterType.name}` +
+                `${getMetadataKeyValueDisplay(metadataKeyValue)} - ${
+                  counter.calculationConfiguration.name
+                }` +
                 getMetadataValueTitle(
-                  displayResult.metadata,
+                  displayResult.metadataKey,
                   displayResult.value
                 )
               }
@@ -56,7 +61,7 @@ export default function CountersLabelsDisplay({
                   </span>
                 )}
               {displayResult.result}
-              {counter.counterType.type === 'percentage' && '%'}
+              {counter.calculationConfiguration.type === 'percentage' && '%'}
             </span>
           );
         })}

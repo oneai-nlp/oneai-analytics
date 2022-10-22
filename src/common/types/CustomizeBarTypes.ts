@@ -1,11 +1,12 @@
 import { ReactElement } from 'react';
+import { MetaData } from './modals';
 
 export interface CounterType {
-  counterConfiguration: CounterConfiguration | null;
-  counterType: CalculationType;
+  metadataKeyValue: MetadataKeyValue | null;
+  calculationConfiguration: CalculationConfiguration;
 }
 
-export interface CountersConfiguration {
+export interface CountersConfigurations {
   [key: string]: CounterConfiguration;
 }
 
@@ -14,7 +15,7 @@ export interface CounterConfiguration {
   display?: DisplayConfig;
   members?: GroupMembers[];
   groups?: CounterConfiguration[];
-  default?: CalculationName[];
+  isGroup?: boolean;
 }
 
 export interface GroupMembers {
@@ -26,16 +27,28 @@ export interface DisplayConfig {
   color: 'green' | 'red' | 'white';
   icon: ReactElement | null;
 }
-
-export interface CalculationType {
-  name: CalculationName;
+export interface CalculationConfiguration {
+  name: string;
   type: 'number' | 'percentage';
   hasGroups: boolean;
+  calculate: (
+    selectedMetadataKeyValue: MetadataKeyValue | null,
+    metadata: MetaData,
+    allCountersConfigurations: CountersConfigurations
+  ) => {
+    counter: CounterConfiguration | null;
+    metadataKey?: string;
+    value?: string;
+    result: number;
+  };
 }
 
-export type CalculationName =
-  | 'Total SUM'
-  | 'Top value total sum'
-  | 'top value %'
-  | 'top group total'
-  | 'top group %';
+export interface MetadataKeyValue {
+  key: string;
+  value?: string;
+}
+
+export interface CountersLocalStorageObject {
+  metadataKeyValue: MetadataKeyValue | null;
+  calculationName: string;
+}

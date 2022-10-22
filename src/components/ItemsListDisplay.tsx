@@ -1,6 +1,6 @@
 import React from 'react';
 import { FC } from 'react';
-import { ItemsDisplayComponentProps } from '../common/types/configurations';
+import { ItemsDisplayComponentProps } from '../common/types/commonTypes';
 
 export const ItemsListDisplay: FC<ItemsDisplayComponentProps> = ({
   items,

@@ -1,20 +1,29 @@
-import { FaceFrownIcon, FaceSmileIcon } from '@heroicons/react/20/solid';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 import ReactTooltip from 'react-tooltip';
 import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
 import CustomizeTab from '../common/components/CustomizeTab';
 import {
+  topGroupCalculationConfiguration,
+  topGroupPercentCalculationConfiguration,
+  topValueCalculationConfiguration,
+  topValuePercentCalculationConfiguration,
+  totalSumCalculationConfiguration,
+  totalSumCalculationName,
+} from '../common/configurations/calculationsConfigurations';
+import { defaultCountersConfigurations } from '../common/configurations/countersConfigurations';
+import { CUSTOM_METADATA_KEY } from '../common/types/commonTypes';
+import {
   DataNode,
   OneAiAnalyticsProps,
 } from '../common/types/componentsInputs';
-import { CUSTOM_METADATA_KEY } from '../common/types/configurations';
 import {
-  CalculationType,
+  CalculationConfiguration,
   CounterConfiguration,
-  CountersConfiguration,
+  CountersConfigurations,
+  CountersLocalStorageObject,
   CounterType,
-} from '../common/types/CustomizeBarTypes';
+} from '../common/types/customizeBarTypes';
 import { MetaData } from '../common/types/modals';
 import {
   COLLECTION_TYPE,
@@ -28,75 +37,15 @@ import { Treemap } from './Treemap';
 
 export type Displays = 'Treemap' | 'BarChart';
 
-const totalSum: CalculationType = {
-  name: 'Total SUM',
-  hasGroups: false,
-  type: 'number',
-};
-const topGroup: CalculationType = {
-  name: 'top group total',
-  hasGroups: true,
-  type: 'number',
-};
-const topValue: CalculationType = {
-  name: 'Top value total sum',
-  hasGroups: false,
-  type: 'number',
-};
-const topValuePercent: CalculationType = {
-  name: 'top value %',
-  hasGroups: false,
-  type: 'percentage',
-};
-
-const defaultCountersConfigurations: CountersConfiguration = {
-  signals: {
-    groups: [
-      {
-        label: 'positive',
-        display: {
-          color: 'green',
-          icon: <FaceSmileIcon />,
-        },
-        members: [
-          { metadataName: 'emotion', values: ['happiness'] },
-          { metadataName: 'sentiment', values: ['POS'] },
-        ],
-      },
-    ],
-  },
-  emotion: {
-    groups: [
-      {
-        label: 'positive',
-        display: {
-          color: 'green',
-          icon: <FaceSmileIcon />,
-        },
-        members: [{ values: ['happiness'] }],
-      },
-      {
-        label: 'negative',
-        display: {
-          color: 'red',
-          icon: <FaceFrownIcon />,
-        },
-        members: [{ values: ['anger', 'sadness'] }],
-      },
-      {
-        label: 'happiness',
-        display: {
-          color: 'green',
-          icon: <FaceSmileIcon />,
-        },
-      },
-    ],
-  },
-  [CUSTOM_METADATA_KEY]: {
-    default: ['Total SUM'],
-  },
-};
-
+const countersStorageKey = 'oneAi-counters';
+const labelsStorageKey = 'oneAi-labels';
+const defaultCalculations = [
+  totalSumCalculationConfiguration,
+  topValueCalculationConfiguration,
+  topValuePercentCalculationConfiguration,
+  topGroupCalculationConfiguration,
+  topGroupPercentCalculationConfiguration,
+];
 // Please do not use types off of a default export module or else Storybook Docs will suffer.
 // see: https://github.com/storybookjs/storybook/issues/9556
 /**
@@ -123,16 +72,29 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   treemapBorderColor = navbarColor,
   loading,
   nodesPath = [],
+  dateRangeChanged = () => {},
 }) => {
   const [display, setDisplay] = useState('Treemap' as Displays);
   const { width, height, ref } = useResizeDetector();
   const [metaData, setMetaData] = useState({} as MetaData);
   const [nodes, setNodes] = useState([] as DataNode[]);
-  const [labels, setLabels] = useState([] as string[]);
-  const [counters, setCounters] = useState([] as CounterType[]);
-  const [countersConfigurations, setCountersConfigurations] = useState(
-    {} as CountersConfiguration
+  const [labels, setLabels] = useState(
+    JSON.parse(sessionStorage.getItem(labelsStorageKey) ?? '[]') as string[]
   );
+  const [counters, setCounters] = useState(
+    getInitialCounters(defaultCalculations, [
+      {
+        metadataKeyValue: { key: CUSTOM_METADATA_KEY },
+        calculationName: totalSumCalculationName,
+      },
+    ]) as CounterType[]
+  );
+  const [countersConfigurations, setCountersConfigurations] = useState(
+    {} as CountersConfigurations
+  );
+  const [fromDate, setFromDate] = useState(null as Date | null);
+  const [toDate, setToDate] = useState(null as Date | null);
+
   const loadedNodes = useRef([] as { type: string; id: string }[]);
 
   useEffect(() => {
@@ -194,7 +156,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   }, [dataNodes]);
 
   useEffect(() => {
-    const newCountersConfigurations: CountersConfiguration = {};
+    const newCountersConfigurations: CountersConfigurations = {};
     Object.keys(metaData)
       .concat(Object.keys(defaultCountersConfigurations))
       .forEach((key) => {
@@ -202,19 +164,19 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
         const valuesConfigured =
           defaultConfig?.groups?.map((group) => group.label) ?? [];
         const counterConfiguration: CounterConfiguration = {
-          default: defaultConfig?.default ?? [],
           label: defaultConfig?.label ?? key,
           display: defaultConfig?.display,
           members: defaultConfig?.members ?? [{ metadataName: key }],
+          isGroup: defaultConfig?.isGroup ?? false,
           groups:
             key === CUSTOM_METADATA_KEY
               ? undefined
               : (
                   defaultConfig?.groups?.map((group) => {
                     return {
-                      default: group.default ?? [],
                       label: group.label,
                       display: group.display,
+                      isGroup: group.isGroup,
                       members: group.members?.map((member) => {
                         return {
                           metadataName: member.metadataName ?? key,
@@ -230,24 +192,35 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     ?.filter((meta) => !valuesConfigured.includes(meta.value))
                     .map((meta) => {
                       return {
-                        default: [],
                         label: meta.value,
                         members: [{ metadataName: key, values: [meta.value] }],
                         display: undefined,
+                        isGroup: false,
                       };
                     }) ?? []
                 ),
         };
         newCountersConfigurations[key] = counterConfiguration;
-        // counterConfiguration.default?.forEach((defaultCalculation) => {});
       });
 
     setCountersConfigurations(newCountersConfigurations);
   }, [metaData]);
 
   useEffect(() => {
+    const storedCounters = counters.map((counter) => {
+      return {
+        metadataKeyValue: counter.metadataKeyValue,
+        calculationName: counter.calculationConfiguration.name,
+      } as CountersLocalStorageObject;
+    });
+    sessionStorage.setItem(countersStorageKey, JSON.stringify(storedCounters));
+    sessionStorage.setItem(labelsStorageKey, JSON.stringify(labels));
     ReactTooltip.rebuild();
   }, [counters, labels]);
+
+  useEffect(() => {
+    dateRangeChanged(fromDate, toDate);
+  }, [fromDate, toDate]);
 
   return (
     <div
@@ -309,9 +282,13 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 labelsOptions={Object.keys(metaData).filter(
                   (key) => key !== CUSTOM_METADATA_KEY
                 )}
-                countersTypes={[totalSum, topGroup, topValue, topValuePercent]}
+                calculationsConfigurations={defaultCalculations}
                 countersChanged={setCounters}
                 labelsChanged={setLabels}
+                fromDate={fromDate}
+                fromDateChanged={setFromDate}
+                toDate={toDate}
+                toDateChanged={setToDate}
               />
             </div>
           </div>
@@ -384,12 +361,14 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               </div>
             </div>
             <div className="flex w-2/12 justify-end">
-              <CountersLabelsDisplay
-                counters={counters}
-                labels={labels}
-                metadata={metaData}
-                countersConfiguration={countersConfigurations}
-              />
+              {!loading && (
+                <CountersLabelsDisplay
+                  counters={counters}
+                  labels={labels}
+                  metadata={metaData}
+                  countersConfiguration={countersConfigurations}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -429,7 +408,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               <div
                 className="h-full flex items-center justify-center hover:cursor-pointer"
                 onClick={prevPageClicked}
-                style={{ width: '3%' }}
+                style={{ width: '3%', backgroundColor: treemapBigColor }}
               >
                 <button
                   type="button"
@@ -514,7 +493,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               <div
                 className="h-full flex items-center justify-center hover:cursor-pointer"
                 onClick={nextPageClicked}
-                style={{ width: '3%' }}
+                style={{ width: '3%', backgroundColor: treemapSmallColor }}
               >
                 <button
                   type="button"
@@ -561,4 +540,25 @@ function mergeMetadata(metadata1: MetaData, metadata2: MetaData): MetaData {
   });
 
   return newMetadata;
+}
+
+function getInitialCounters(
+  calculationConfiguration: CalculationConfiguration[],
+  defaultCounters: CountersLocalStorageObject[]
+): CounterType[] {
+  const storedCounters: CountersLocalStorageObject[] = JSON.parse(
+    sessionStorage.getItem(countersStorageKey) ?? '[]'
+  );
+  const counters = storedCounters.length > 0 ? storedCounters : defaultCounters;
+
+  return counters
+    .map((counter) => {
+      return {
+        calculationConfiguration: calculationConfiguration.find(
+          (calc) => calc.name === counter.calculationName
+        ),
+        metadataKeyValue: counter.metadataKeyValue,
+      } as CounterType;
+    })
+    .filter((calc) => calc.calculationConfiguration !== undefined);
 }

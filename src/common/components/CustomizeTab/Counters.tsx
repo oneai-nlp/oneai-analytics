@@ -7,31 +7,41 @@ import {
   XMarkIcon,
 } from '@heroicons/react/20/solid';
 import React, { Fragment, useState } from 'react';
-import { CUSTOM_METADATA_KEY } from '../../types/configurations';
+import { totalSumCalculationName } from '../../configurations/calculationsConfigurations';
+import { CUSTOM_METADATA_KEY } from '../../types/commonTypes';
 import {
-  CalculationType as CalculationType,
-  CounterConfiguration,
-  CountersConfiguration,
+  CalculationConfiguration,
+  CountersConfigurations,
   CounterType,
-} from '../../types/CustomizeBarTypes';
-import { getCounterGroups } from '../../utils/CountersUtils';
+  MetadataKeyValue,
+} from '../../types/customizeBarTypes';
+import { getMetadataKeyValueGroups } from '../../utils/countersUtils';
+import { getMetadataKeyValueDisplay } from '../../utils/displayUtils';
 import { uniqBy } from '../../utils/utils';
 
 export default function Counters({
   countersConfigurations,
-  countersTypes,
+  calculationsConfigurations,
   currentCounters,
   countersChanged,
 }: {
-  countersConfigurations: CountersConfiguration;
-  countersTypes: CalculationType[];
+  countersConfigurations: CountersConfigurations;
+  calculationsConfigurations: CalculationConfiguration[];
   currentCounters: CounterType[];
   countersChanged: (counters: CounterType[]) => void;
 }) {
-  const addCounter = () => {
+  const addCounter = (newMetadataKeyValue: MetadataKeyValue) => {
+    const allowedCalculations = getCalculationTypes(
+      calculationsConfigurations,
+      newMetadataKeyValue,
+      countersConfigurations
+    );
     countersChanged([
       ...currentCounters,
-      { counterConfiguration: null, counterType: countersTypes[0] },
+      {
+        metadataKeyValue: newMetadataKeyValue,
+        calculationConfiguration: allowedCalculations[0],
+      },
     ]);
   };
 
@@ -48,25 +58,53 @@ export default function Counters({
   return (
     <div className="w-full">
       <p className="text-xl text-gray-600">Counters</p>
-      <div className="flex w-full flex-wrap">
+      <div className="flex w-full flex-wrap items-center">
         {currentCounters.map((addedCounter, i) => (
           <div className="ml-1 mb-1" key={i}>
             <Counter
               counterData={addedCounter}
               countersConfigurations={countersConfigurations}
-              countersTypes={countersTypes}
+              calculationsConfigurations={calculationsConfigurations}
               counterDeleted={() => deleteCounter(i)}
               counterChanged={(counter) => updateCounter(i, counter)}
             />
           </div>
         ))}
-        <button
-          type="button"
-          onClick={addCounter}
-          className="ml-1 text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm px-2 py-2.5 text-center"
-        >
-          Add Counter
-        </button>
+        <Listbox onChange={addCounter}>
+          <div className="relative ml-1 mb-1">
+            <Listbox.Button className="relative cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+              <span className="block truncate lowercase first-letter:uppercase">
+                Add counter
+              </span>
+              <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                <ChevronUpDownIcon
+                  className="h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
+              </span>
+            </Listbox.Button>
+            <Transition
+              as={Fragment}
+              leave="transition ease-in duration-100"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Listbox.Options className="fixed mt-1 z-10 max-h-60 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                {uniqBy(Object.keys(countersConfigurations), (key) => key).map(
+                  (key, i) => (
+                    <CascadedOption
+                      countersConfigurations={countersConfigurations}
+                      optionName={key}
+                      index={i}
+                      selected={false}
+                      key={i}
+                    />
+                  )
+                )}
+              </Listbox.Options>
+            </Transition>
+          </div>
+        </Listbox>
       </div>
     </div>
   );
@@ -75,29 +113,38 @@ export default function Counters({
 function Counter({
   counterData,
   countersConfigurations,
-  countersTypes,
+  calculationsConfigurations,
   counterDeleted,
   counterChanged,
 }: {
   counterData: CounterType;
-  countersConfigurations: CountersConfiguration;
-  countersTypes: CalculationType[];
+  countersConfigurations: CountersConfigurations;
+  calculationsConfigurations: CalculationConfiguration[];
   counterDeleted: () => void;
   counterChanged: (counter: CounterType) => void;
 }) {
-  const counterConfigurationChangeHandler = (
-    newCounterConfiguration: CounterConfiguration
+  const selectedMetadataKeyValueChangeHandler = (
+    newMetadataKeyValue: MetadataKeyValue
   ) => {
+    const allowedCalculations = getCalculationTypes(
+      calculationsConfigurations,
+      newMetadataKeyValue,
+      countersConfigurations
+    );
     counterChanged({
-      counterConfiguration: newCounterConfiguration,
-      counterType: counterData.counterType,
+      metadataKeyValue: newMetadataKeyValue,
+      calculationConfiguration: allowedCalculations.some(
+        (calc) => calc.name === counterData.calculationConfiguration.name
+      )
+        ? counterData.calculationConfiguration
+        : allowedCalculations[0],
     });
   };
 
-  const counterChangeHandler = (newCounter: CalculationType) => {
+  const counterChangeHandler = (newCounter: CalculationConfiguration) => {
     counterChanged({
-      counterConfiguration: counterData.counterConfiguration,
-      counterType: newCounter,
+      metadataKeyValue: counterData.metadataKeyValue,
+      calculationConfiguration: newCounter,
     });
   };
 
@@ -105,14 +152,15 @@ function Counter({
     <div className="w-full">
       <div className="flex bg-gray-200 rounded-full p-2 w-fit">
         <Listbox
-          value={counterData.counterConfiguration}
-          onChange={counterConfigurationChangeHandler}
+          value={counterData.metadataKeyValue}
+          onChange={selectedMetadataKeyValueChangeHandler}
+          by={(a, b) => a?.key === b?.key && a?.value === b?.value}
         >
           <div className="relative">
             <Listbox.Button className="relative cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
               <span className="block truncate lowercase first-letter:uppercase">
-                {counterData.counterConfiguration
-                  ? counterData.counterConfiguration.label
+                {counterData.metadataKeyValue
+                  ? getMetadataKeyValueDisplay(counterData.metadataKeyValue)
                   : 'Select'}
               </span>
               <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -135,6 +183,10 @@ function Counter({
                       countersConfigurations={countersConfigurations}
                       optionName={key}
                       index={i}
+                      selected={
+                        (counterData.metadataKeyValue?.key ?? '') === key &&
+                        counterData.metadataKeyValue?.value !== undefined
+                      }
                       key={i}
                     />
                   )
@@ -144,13 +196,14 @@ function Counter({
           </div>
         </Listbox>
         <Listbox
-          value={counterData.counterType}
+          value={counterData.calculationConfiguration}
           onChange={counterChangeHandler}
+          by="name"
         >
           <div className="relative ml-1">
             <Listbox.Button className="relative cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
               <span className="block truncate lowercase first-letter:uppercase">
-                {counterData.counterType.name}
+                {counterData.calculationConfiguration.name}
               </span>
               <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                 <ChevronUpDownIcon
@@ -167,15 +220,22 @@ function Counter({
             >
               <Listbox.Options className="fixed mt-1 z-10 max-h-60 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                 {getCalculationTypes(
-                  countersTypes,
-                  counterData.counterConfiguration
-                ).map((counter) => (
-                  <Option
-                    label={counter.name}
-                    value={counter}
-                    key={counter.name}
-                  />
-                ))}
+                  calculationsConfigurations,
+                  counterData.metadataKeyValue,
+                  countersConfigurations
+                )
+                  .sort(function (a, b) {
+                    const textA = a.name.toUpperCase();
+                    const textB = b.name.toUpperCase();
+                    return textA < textB ? -1 : textA > textB ? 1 : 0;
+                  })
+                  .map((counter) => (
+                    <Option
+                      label={counter.name}
+                      value={counter}
+                      key={counter.name}
+                    />
+                  ))}
               </Listbox.Options>
             </Transition>
           </div>
@@ -193,12 +253,14 @@ function CascadedOption({
   countersConfigurations,
   optionName,
   index,
+  selected,
 }: {
-  countersConfigurations: CountersConfiguration;
+  countersConfigurations: CountersConfigurations;
   optionName: string;
   index: number;
+  selected: boolean;
 }) {
-  const [opened, setOpened] = useState(false);
+  const [opened, setOpened] = useState(selected);
   const configData = countersConfigurations[optionName];
 
   return (
@@ -219,18 +281,21 @@ function CascadedOption({
           </button>
         )}
 
-        <Option label={optionName} value={configData} key={optionName} />
+        <Option
+          label={optionName}
+          value={{ key: optionName } as MetadataKeyValue}
+          key={optionName}
+        />
       </div>
       {opened &&
         uniqBy(configData.groups ?? [], (group) => group.label).map(
           (group, i) => {
-            group.label = group.label?.includes(optionName)
-              ? group.label
-              : `${optionName}.${group.label ?? ''}`;
             return (
               <Option
-                label={group.label}
-                value={group}
+                label={group.label ?? ''}
+                value={
+                  { key: optionName, value: group.label } as MetadataKeyValue
+                }
                 pl={3}
                 key={optionName + group.label + i.toString()}
               />
@@ -247,7 +312,7 @@ function Option({
   pl = 1,
 }: {
   label: string;
-  value: CounterConfiguration | CalculationType;
+  value: MetadataKeyValue | CalculationConfiguration;
   pl?: number;
 }) {
   return (
@@ -272,7 +337,7 @@ function Option({
               selected ? 'font-medium' : 'font-normal'
             }`}
           >
-            {label.split('.').at(-1)}
+            {label}
           </span>
         </span>
       )}
@@ -281,15 +346,20 @@ function Option({
 }
 
 function getCalculationTypes(
-  calculationTypes: CalculationType[],
-  selectedCounterConfig: CounterConfiguration | null
-): CalculationType[] {
-  if (!selectedCounterConfig)
+  calculationTypes: CalculationConfiguration[],
+  selectedMetadataKeyValue: MetadataKeyValue | null,
+  countersConfiguration: CountersConfigurations
+): CalculationConfiguration[] {
+  if (!selectedMetadataKeyValue)
     return calculationTypes.filter((calc) => !calc.hasGroups);
-  if (selectedCounterConfig.label === CUSTOM_METADATA_KEY)
-    return calculationTypes.filter((calc) => calc.name === 'Total SUM');
-  const newLocal = getCounterGroups(selectedCounterConfig);
-  const hasGroups = newLocal.length > 0;
+  if (selectedMetadataKeyValue.key === CUSTOM_METADATA_KEY)
+    return calculationTypes.filter(
+      (calc) => calc.name === totalSumCalculationName
+    );
+  const hasGroups =
+    getMetadataKeyValueGroups(selectedMetadataKeyValue, countersConfiguration)
+      .length > 0;
+
   return calculationTypes.filter(
     (calc) => calc.hasGroups === hasGroups || !calc.hasGroups
   );

@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import {
   NodeType,
@@ -40,11 +41,18 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   const [clickedNodes, setClickedNodes] = useState([] as OneAIDataNode[]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [dateRange, setDateRange] = useState([
+    null,
+    null,
+  ] as Array<Date | null>);
+  const [localRefreshToken, setLocalRefreshToken] = useState(refreshToken);
+
   const previousValues = useRef({
     domain: null as string | null,
     apiKey: null as string | null,
     collection: null as string | null,
     refreshToken: null as string | null,
+    localRefreshToken: null as string | null,
     clickedNodes: null as OneAIDataNode[] | null,
     currentPage: null as number | null,
   });
@@ -55,7 +63,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       previousValues.current.domain !== domain ||
       previousValues.current.apiKey !== apiKey ||
       previousValues.current.collection !== collection ||
-      previousValues.current.refreshToken !== refreshToken
+      previousValues.current.refreshToken !== refreshToken ||
+      previousValues.current.localRefreshToken !== localRefreshToken
     ) {
       setCurrentNodes([]);
       setClickedNodes([]);
@@ -67,11 +76,12 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
         apiKey,
         collection,
         refreshToken,
+        localRefreshToken,
         clickedNodes: null,
         currentPage: null,
       };
     }
-  }, [domain, apiKey, collection, refreshToken]);
+  }, [domain, apiKey, collection, refreshToken, localRefreshToken]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -93,7 +103,9 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             domain,
             collection,
             apiKey,
-            currentPage
+            currentPage,
+            dateRange[0],
+            dateRange[1]
           );
 
           const newNodes = clusters.data.map((c) => {
@@ -131,7 +143,9 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             collection,
             clusterId,
             apiKey,
-            currentPage
+            currentPage,
+            dateRange[0],
+            dateRange[1]
           );
 
           const newNodes = phrases.data.map((p) => {
@@ -166,7 +180,9 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             collection,
             phraseId,
             apiKey,
-            currentPage
+            currentPage,
+            dateRange[0],
+            dateRange[1]
           );
 
           const newNodes = items.data.map((i) => {
@@ -211,6 +227,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           clickedNodes,
           currentPage,
           refreshToken,
+          localRefreshToken,
         };
       }
     }
@@ -281,6 +298,12 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
         prevPageClicked={() => setCurrentPage((page) => page - 1)}
         loading={loading}
         nodesPath={[collection, ...clickedNodes.map(getNodeText)]}
+        dateRangeChanged={(from, to) => {
+          setLocalRefreshToken((current) => {
+            setDateRange([from, to]);
+            return current + '1';
+          });
+        }}
         {...rest}
       />
     )
@@ -291,13 +314,17 @@ async function fetchClusters(
   domain: string,
   collection: string,
   apiKey: string,
-  page: number
+  page: number,
+  from: Date | null,
+  to: Date | null
 ): Promise<{ totalPages: number; data: Cluster[] }> {
   return await fetchApi(
     `${domain}/clustering/v1/collections/${collection}/clusters`,
     apiKey,
     'clusters',
-    page
+    page,
+    from,
+    to
   );
 }
 
@@ -306,13 +333,17 @@ async function fetchPhrases(
   collection: string,
   clusterId: string,
   apiKey: string,
-  page: number
+  page: number,
+  from: Date | null,
+  to: Date | null
 ): Promise<{ totalPages: number; data: Phrase[] }> {
   return await fetchApi(
     `${domain}/clustering/v1/collections/${collection}/clusters/${clusterId}/phrases`,
     apiKey,
     'phrases',
-    page
+    page,
+    from,
+    to
   );
 }
 
@@ -321,13 +352,17 @@ async function fetchItems(
   collection: string,
   phraseId: string,
   apiKey: string,
-  page: number
+  page: number,
+  from: Date | null,
+  to: Date | null
 ): Promise<{ totalPages: number; data: Item[] }> {
   return await fetchApi(
     `${domain}/clustering/v1/collections/${collection}/phrases/${phraseId}/items`,
     apiKey,
     'items',
-    page
+    page,
+    from,
+    to
   );
 }
 
@@ -335,13 +370,20 @@ async function fetchApi<T>(
   url: string,
   apiKey: string,
   accessor: string,
-  page: number
+  page: number,
+  from: Date | null,
+  to: Date | null
 ): Promise<{ totalPages: number; data: T[] }> {
   try {
-    const res = await fetch(`${url}?page=${page}&limit=${PAGE_SIZE}`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json', 'api-key': apiKey },
-    });
+    const res = await fetch(
+      `${url}?page=${page}&limit=${PAGE_SIZE}` +
+        (from ? `&from-date=${format(from, 'yyyy-MM-dd')}` : '') +
+        (to ? `&to-date=${format(to, 'yyyy-MM-dd')}` : ''),
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json', 'api-key': apiKey },
+      }
+    );
 
     if (res.status !== 200 || !res.ok) return { totalPages: 0, data: [] };
 
