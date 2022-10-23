@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { Cluster, Item, MetaData, Phrase } from './modals';
-import { ItemsDisplayComponentProps } from './commonTypes';
 import {
   CountersConfigurations,
   CounterType,
@@ -97,4 +96,14 @@ export interface ExampleNode {
   items_count: number;
   items?: string[];
   children?: ExampleNode[];
+}
+
+export interface ItemsDisplayComponentProps {
+  items: Item[];
+  bgColor: string;
+  textColor: string;
+  labels: string[];
+  counters: CounterType[];
+  countersConfiguration: CountersConfigurations;
+  labelClicked: (key: string, value: string) => void;
 }

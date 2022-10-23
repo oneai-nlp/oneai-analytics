@@ -20,7 +20,7 @@ export default function CountersLabelsDisplay({
   labelClicked: (key: string, value: string) => void;
 }) {
   return (
-    <span className="truncate flex">
+    <span className="truncate flex w-full">
       {counters
         .filter((counter) => counter.metadataKeyValue !== null)
         .map((counter, i) => {

@@ -3,16 +3,14 @@ import { useResizeDetector } from 'react-resize-detector';
 import ReactTooltip from 'react-tooltip';
 import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
 import CustomizeTab from '../common/components/CustomizeTab';
+import { totalSumCalculationName } from '../common/configurations/calculationsConfigurations';
 import {
-  topGroupCalculationConfiguration,
-  topGroupPercentCalculationConfiguration,
-  topValueCalculationConfiguration,
-  topValuePercentCalculationConfiguration,
-  totalSumCalculationConfiguration,
-  totalSumCalculationName,
-} from '../common/configurations/calculationsConfigurations';
+  labelsStorageKey,
+  defaultCalculations,
+  countersStorageKey,
+  CUSTOM_METADATA_KEY,
+} from '../common/configurations/commonConfigurations';
 import { defaultCountersConfigurations } from '../common/configurations/countersConfigurations';
-import { CUSTOM_METADATA_KEY } from '../common/types/commonTypes';
 import {
   DataNode,
   OneAiAnalyticsProps,
@@ -24,7 +22,7 @@ import {
   CountersLocalStorageObject,
   CounterType,
 } from '../common/types/customizeBarTypes';
-import { MetaData } from '../common/types/modals';
+import { Item, MetaData } from '../common/types/modals';
 import {
   COLLECTION_TYPE,
   getNodeId,
@@ -36,16 +34,6 @@ import { ItemsListDisplay } from './ItemsListDisplay';
 import { Treemap } from './Treemap';
 
 export type Displays = 'Treemap' | 'BarChart';
-
-const countersStorageKey = 'oneAi-counters';
-const labelsStorageKey = 'oneAi-labels';
-const defaultCalculations = [
-  totalSumCalculationConfiguration,
-  topValueCalculationConfiguration,
-  topValuePercentCalculationConfiguration,
-  topGroupCalculationConfiguration,
-  topGroupPercentCalculationConfiguration,
-];
 
 // Please do not use types off of a default export module or else Storybook Docs will suffer.
 // see: https://github.com/storybookjs/storybook/issues/9556
@@ -467,9 +455,13 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
             >
               {currentNode && currentNode.type === 'Phrase' ? (
                 itemsDisplay({
-                  items: dataNodes.map((d) => getNodeText(d)) ?? [],
+                  items: dataNodes.map((dataNode) => dataNode.data as Item),
                   bgColor: treemapSmallColor,
                   textColor: 'white',
+                  counters: counters,
+                  labels: labels,
+                  labelClicked: labelClicked,
+                  countersConfiguration: countersConfigurations,
                 })
               ) : display === 'Treemap' ? (
                 <Treemap

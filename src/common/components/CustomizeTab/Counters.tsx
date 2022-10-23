@@ -8,7 +8,7 @@ import {
 } from '@heroicons/react/20/solid';
 import React, { Fragment, useState } from 'react';
 import { totalSumCalculationName } from '../../configurations/calculationsConfigurations';
-import { CUSTOM_METADATA_KEY } from '../../types/commonTypes';
+import { CUSTOM_METADATA_KEY } from '../../configurations/commonConfigurations';
 import {
   CalculationConfiguration,
   CountersConfigurations,
