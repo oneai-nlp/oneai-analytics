@@ -1,6 +1,7 @@
 const postcss = require('rollup-plugin-postcss');
 const autoprefixer = require('autoprefixer');
 const tailwindcss = require('tailwindcss');
+const tailwindcssConfig = require('./tailwind.config');
 
 module.exports = {
   rollup(config, options) {
@@ -10,16 +11,7 @@ module.exports = {
         inject: {
           insertAt: 'top',
         },
-        plugins: [
-          tailwindcss({
-            content: ['./src/**/*.{js,jsx,ts,tsx}'],
-            theme: {
-              extend: {},
-            },
-            plugins: [],
-          }),
-          autoprefixer(),
-        ],
+        plugins: [tailwindcss(tailwindcssConfig), autoprefixer()],
         inject: true,
         // only write out CSS for the first bundle (avoids pointless extra files):
         extract: !!options.writeMeta,

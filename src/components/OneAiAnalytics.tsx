@@ -46,6 +46,7 @@ const defaultCalculations = [
   topGroupCalculationConfiguration,
   topGroupPercentCalculationConfiguration,
 ];
+
 // Please do not use types off of a default export module or else Storybook Docs will suffer.
 // see: https://github.com/storybookjs/storybook/issues/9556
 /**
@@ -73,6 +74,9 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   loading,
   nodesPath = [],
   dateRangeChanged = () => {},
+  labelsFilters,
+  labelClicked = () => {},
+  labelFilterDeleted = () => {},
 }) => {
   const [display, setDisplay] = useState('Treemap' as Displays);
   const { width, height, ref } = useResizeDetector();
@@ -215,12 +219,15 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
     });
     sessionStorage.setItem(countersStorageKey, JSON.stringify(storedCounters));
     sessionStorage.setItem(labelsStorageKey, JSON.stringify(labels));
-    ReactTooltip.rebuild();
   }, [counters, labels]);
 
   useEffect(() => {
     dateRangeChanged(fromDate, toDate);
   }, [fromDate, toDate]);
+
+  useEffect(() => {
+    ReactTooltip.rebuild();
+  });
 
   return (
     <div
@@ -314,7 +321,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 <button
                   type="button"
                   onClick={() => goBackClicked(1)}
-                  className="text-slate-700 hover:bg-slate-700 hover:text-white font-medium rounded-lg text-sm p-1 text-center inline-flex items-center"
+                  className="text-slate-700 hover:bg-slate-700 bg-transparent hover:text-white font-medium rounded-lg text-sm p-1 text-center inline-flex items-center"
                 >
                   <svg
                     className="h-4 w-4 text-white"
@@ -353,6 +360,23 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     )}
                   </div>
                 ))}
+                {(labelsFilters?.length ?? 0) > 0 &&
+                  labelsFilters
+                    ?.filter((label) => label.value)
+                    .map((label, i) => (
+                      <span
+                        key={i}
+                        data-for="global"
+                        data-tip="click to delete"
+                        className="ml-1 text-gray-500 cursor-pointer max-w-[15ch] truncate"
+                        onClick={() => {
+                          labelFilterDeleted(i);
+                          ReactTooltip.hide();
+                        }}
+                      >
+                        / {label.value}
+                      </span>
+                    ))}
                 {totalPagesAmount > 1 && currentPage > 0 && (
                   <span className="ml-1 text-gray-500">
                     / {currentPage + 1}
@@ -365,8 +389,13 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 <CountersLabelsDisplay
                   counters={counters}
                   labels={labels}
-                  metadata={metaData}
+                  metadata={nodes.reduce(
+                    (finalMetadata, currentNode) =>
+                      mergeMetadata(finalMetadata, currentNode.metadata),
+                    {}
+                  )}
                   countersConfiguration={countersConfigurations}
+                  labelClicked={labelClicked}
                 />
               )}
             </div>
@@ -412,7 +441,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               >
                 <button
                   type="button"
-                  className="text-slate-500 hover:text-slate-700 font-medium rounded-lg text-sm  text-center inline-flex items-center"
+                  className="text-slate-500 hover:text-slate-700 font-medium rounded-lg text-sm bg-transparent text-center inline-flex items-center"
                 >
                   <svg
                     aria-hidden="true"
@@ -467,6 +496,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                   borderWidth={treemapBorderWidth}
                   borderColor={treemapBorderColor}
                   countersConfiguration={countersConfigurations}
+                  labelClicked={labelClicked}
                 />
               ) : (
                 <BarChart
@@ -497,7 +527,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               >
                 <button
                   type="button"
-                  className="text-slate-500 hover:text-slate-700 font-medium rounded-lg text-sm  text-center inline-flex items-center"
+                  className="text-slate-500 hover:text-slate-700 font-medium rounded-lg text-sm bg-transparent text-center inline-flex items-center"
                 >
                   <svg
                     aria-hidden="true"

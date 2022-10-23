@@ -25,6 +25,7 @@ export const Treemap: FC<TreemapProps> = ({
   labels,
   counters,
   countersConfiguration,
+  labelClicked,
 }) => {
   const mainNode: TreemapNode = useMemo(() => {
     return {
@@ -82,11 +83,7 @@ export const Treemap: FC<TreemapProps> = ({
     ); // -2 is for the d.data.value and <br />, 20 is for the value absolute top padding
 
     return (
-      <g
-        key={index}
-        className="hover:cursor-pointer"
-        onClick={() => nodeClicked(leaf.data)}
-      >
+      <g key={index}>
         <rect
           x={leaf.x0}
           y={leaf.y0}
@@ -118,10 +115,12 @@ export const Treemap: FC<TreemapProps> = ({
                 labels={labels}
                 metadata={leaf.data.metadata}
                 countersConfiguration={countersConfiguration}
+                labelClicked={labelClicked}
               />
             </div>
             <span
-              className="items-center flex justify-center h-full"
+              className="items-center flex justify-center h-full hover:cursor-pointer"
+              onClick={() => nodeClicked(leaf.data)}
               style={{
                 fontSize: `${fontSize}px`,
               }}

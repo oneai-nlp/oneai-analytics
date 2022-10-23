@@ -1,5 +1,5 @@
 {
-  "version": "0.1.93",
+  "version": "0.1.94",
   "license": "MIT",
   "main": "dist/index",
   "module": "dist/oneai-analytics.esm",

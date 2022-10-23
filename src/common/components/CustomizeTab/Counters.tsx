@@ -240,7 +240,11 @@ function Counter({
             </Transition>
           </div>
         </Listbox>
-        <button type="button" className="ml-1" onClick={counterDeleted}>
+        <button
+          type="button"
+          className="ml-1 bg-transparent"
+          onClick={counterDeleted}
+        >
           <XMarkIcon className="h-4 w-4 text-gray-600 hover:scale-125 transition duration-100 ease-linear" />
           <span className="sr-only">Delete counter</span>
         </button>
@@ -269,7 +273,7 @@ function CascadedOption({
         {configData.groups && configData.groups.length > 0 && (
           <button
             type="button"
-            className="ml-1"
+            className="ml-1 bg-transparent"
             onClick={() => setOpened((opened) => !opened)}
           >
             {opened ? (

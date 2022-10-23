@@ -5,6 +5,7 @@ import {
   OneAIAnalyticsApiWrapperProps,
   OneAIDataNode,
 } from '../common/types/componentsInputs';
+import { MetadataKeyValue } from '../common/types/customizeBarTypes';
 import { Cluster, Item, Phrase } from '../common/types/modals';
 import {
   COLLECTION_TYPE,
@@ -45,6 +46,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
     null,
     null,
   ] as Array<Date | null>);
+  const [labelsFilters, setLabelsFilters] = useState([] as MetadataKeyValue[]);
+
   const [localRefreshToken, setLocalRefreshToken] = useState(refreshToken);
 
   const previousValues = useRef({
@@ -105,7 +108,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             apiKey,
             currentPage,
             dateRange[0],
-            dateRange[1]
+            dateRange[1],
+            labelsFilters
           );
 
           const newNodes = clusters.data.map((c) => {
@@ -145,7 +149,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             apiKey,
             currentPage,
             dateRange[0],
-            dateRange[1]
+            dateRange[1],
+            labelsFilters
           );
 
           const newNodes = phrases.data.map((p) => {
@@ -182,7 +187,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             apiKey,
             currentPage,
             dateRange[0],
-            dateRange[1]
+            dateRange[1],
+            labelsFilters
           );
 
           const newNodes = items.data.map((i) => {
@@ -298,12 +304,33 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
         prevPageClicked={() => setCurrentPage((page) => page - 1)}
         loading={loading}
         nodesPath={[collection, ...clickedNodes.map(getNodeText)]}
-        dateRangeChanged={(from, to) => {
+        dateRangeChanged={(from, to) =>
           setLocalRefreshToken((current) => {
             setDateRange([from, to]);
             return current + '1';
-          });
+          })
+        }
+        labelsFilters={labelsFilters}
+        labelClicked={(key, value) => {
+          if (
+            !labelsFilters.some(
+              (keyValue) => keyValue.key === key && keyValue.value === value
+            )
+          )
+            setLocalRefreshToken((current) => {
+              setLabelsFilters([{ key, value }]);
+              return current + '1';
+            });
         }}
+        labelFilterDeleted={(i) =>
+          setLocalRefreshToken((current) => {
+            setLabelsFilters((filters) => {
+              filters.splice(i, 1);
+              return [...filters];
+            });
+            return current + '1';
+          })
+        }
         {...rest}
       />
     )
@@ -316,7 +343,8 @@ async function fetchClusters(
   apiKey: string,
   page: number,
   from: Date | null,
-  to: Date | null
+  to: Date | null,
+  labelsFilters: MetadataKeyValue[]
 ): Promise<{ totalPages: number; data: Cluster[] }> {
   return await fetchApi(
     `${domain}/clustering/v1/collections/${collection}/clusters`,
@@ -324,7 +352,8 @@ async function fetchClusters(
     'clusters',
     page,
     from,
-    to
+    to,
+    labelsFilters
   );
 }
 
@@ -335,7 +364,8 @@ async function fetchPhrases(
   apiKey: string,
   page: number,
   from: Date | null,
-  to: Date | null
+  to: Date | null,
+  labelsFilters: MetadataKeyValue[]
 ): Promise<{ totalPages: number; data: Phrase[] }> {
   return await fetchApi(
     `${domain}/clustering/v1/collections/${collection}/clusters/${clusterId}/phrases`,
@@ -343,7 +373,8 @@ async function fetchPhrases(
     'phrases',
     page,
     from,
-    to
+    to,
+    labelsFilters
   );
 }
 
@@ -354,7 +385,8 @@ async function fetchItems(
   apiKey: string,
   page: number,
   from: Date | null,
-  to: Date | null
+  to: Date | null,
+  labelsFilters: MetadataKeyValue[]
 ): Promise<{ totalPages: number; data: Item[] }> {
   return await fetchApi(
     `${domain}/clustering/v1/collections/${collection}/phrases/${phraseId}/items`,
@@ -362,7 +394,8 @@ async function fetchItems(
     'items',
     page,
     from,
-    to
+    to,
+    labelsFilters
   );
 }
 
@@ -372,13 +405,25 @@ async function fetchApi<T>(
   accessor: string,
   page: number,
   from: Date | null,
-  to: Date | null
+  to: Date | null,
+  labelsFilters: MetadataKeyValue[]
 ): Promise<{ totalPages: number; data: T[] }> {
+  const labelsFiltersString = labelsFilters
+    .map((metadataKeyValue) =>
+      metadataKeyValue.key && metadataKeyValue.value
+        ? `${metadataKeyValue.key} eq '${metadataKeyValue.value}'`
+        : ''
+    )
+    .filter((str) => str !== '');
+
   try {
     const res = await fetch(
       `${url}?page=${page}&limit=${PAGE_SIZE}` +
         (from ? `&from-date=${format(from, 'yyyy-MM-dd')}` : '') +
-        (to ? `&to-date=${format(to, 'yyyy-MM-dd')}` : ''),
+        (to ? `&to-date=${format(to, 'yyyy-MM-dd')}` : '') +
+        (labelsFiltersString.length > 0
+          ? `&item-metadata=${labelsFiltersString.join()}`
+          : ''),
       {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', 'api-key': apiKey },

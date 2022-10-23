@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {
   CountersConfigurations,
   CounterType,
@@ -11,11 +11,13 @@ export default function CountersLabelsDisplay({
   labels,
   metadata,
   countersConfiguration,
+  labelClicked,
 }: {
   counters: CounterType[];
   labels: string[];
   metadata: MetaData;
   countersConfiguration: CountersConfigurations;
+  labelClicked: (key: string, value: string) => void;
 }) {
   return (
     <span className="truncate flex">
@@ -23,13 +25,13 @@ export default function CountersLabelsDisplay({
         .filter((counter) => counter.metadataKeyValue !== null)
         .map((counter, i) => {
           const metadataKeyValue = counter.metadataKeyValue;
-          if (!metadataKeyValue) return <></>;
+          if (!metadataKeyValue) return <Fragment key={i}></Fragment>;
           const displayResult = counter.calculationConfiguration.calculate(
             metadataKeyValue,
             metadata,
             countersConfiguration
           );
-          if (!displayResult.counter) return <></>;
+          if (!displayResult.counter) return <Fragment key={i}></Fragment>;
 
           return (
             <span
@@ -69,9 +71,13 @@ export default function CountersLabelsDisplay({
         const meta = metadata[label]?.reduce((prev, current) =>
           prev.count > current.count ? prev : current
         );
-        if (!meta) return <></>;
+        if (!meta) return <Fragment key={i}></Fragment>;
         return (
-          <span key={i} className="ml-1 bg-slate-400 rounded-xl p-1">
+          <span
+            key={i}
+            className="ml-1 text-gray-500 p-1 cursor-pointer hover:text-gray-300"
+            onClick={() => labelClicked(label, meta.value)}
+          >
             {meta.value ?? ''}
           </span>
         );

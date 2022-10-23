@@ -1,13 +1,5 @@
 import { ExampleNode, OneAIAnalyticsStaticDataWrapper } from 'oneai-analytics';
 
-export default function Chart() {
-  return (
-    <OneAIAnalyticsStaticDataWrapper
-      exampleNodes={getData() as ExampleNode[]}
-    />
-  );
-}
-
 function getData() {
   return [
     {
@@ -8449,4 +8441,12 @@ function getData() {
       ],
     },
   ];
+}
+
+export default function Chart() {
+  return (
+    <OneAIAnalyticsStaticDataWrapper
+      exampleNodes={getData() as ExampleNode[]}
+    />
+  );
 }
