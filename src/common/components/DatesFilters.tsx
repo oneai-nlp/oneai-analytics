@@ -25,7 +25,7 @@ export default function DatesFilters({
           <Popover.Button
             className={`
                 ${open ? '' : 'text-opacity-90'}
-                group inline-flex items-center bg-transparent rounded-md px-3 py-2 text-base font-medium text-white hover:text-opacity-100 focus:outline-none `}
+                group inline-flex items-center rounded-md px-3 py-2 text-base font-medium text-white hover:text-opacity-100 focus:outline-none `}
           >
             <CalendarDaysIcon className="h-7 w-7" />
             <ChevronDownIcon
@@ -43,11 +43,11 @@ export default function DatesFilters({
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
           >
-            <Popover.Panel className="absolute z-10 mt-3 transform max-w-fit">
+            <Popover.Panel className="absolute z-10 mt-3 transform max-w-xs">
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                 <div className="relative bg-white p-5">
                   <div className="w-full">
-                    <div className="flex flex-wrap md:flex-nowrap w-full mt-3">
+                    <div className="flex flex-wrap w-full mt-3">
                       <div className="flex items-center">
                         <Datepicker
                           selectedDate={fromDate}
@@ -57,7 +57,6 @@ export default function DatesFilters({
                         <div className="ml-1">
                           <button
                             type="button"
-                            className="bg-transparent"
                             onClick={() => fromDateChanged(null)}
                           >
                             <XMarkIcon className="h-4 w-4 text-gray-600 hover:scale-125 transition duration-100 ease-linear" />
@@ -74,7 +73,6 @@ export default function DatesFilters({
                         <div className="ml-1">
                           <button
                             type="button"
-                            className="bg-transparent"
                             onClick={() => toDateChanged(null)}
                           >
                             <XMarkIcon className="h-4 w-4 text-gray-600 hover:scale-125 transition duration-100 ease-linear" />

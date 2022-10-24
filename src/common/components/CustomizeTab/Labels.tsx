@@ -27,7 +27,7 @@ export default function Labels({
       <Listbox value={selectedLabels} onChange={handleChange} multiple>
         <div className="relative">
           <Listbox.Button className="relative cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-            <span className="block truncate lowercase first-letter:uppercase">
+            <span className="block truncate lowercase first-letter:uppercase text-gray-800">
               {selectedLabels.length === 0
                 ? 'Select'
                 : `${selectedLabels.length} labels selected`}

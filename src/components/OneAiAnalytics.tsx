@@ -251,7 +251,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
 
   return (
     <div
-      className="h-full w-full flex flex-col overflow-hidden"
+      className="oneai-analytics-namespace h-full w-full flex flex-col overflow-hidden"
       style={{ background: background }}
     >
       <ReactTooltip id="global" />
@@ -345,7 +345,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 <button
                   type="button"
                   onClick={() => goBackClicked(1)}
-                  className="text-slate-700 hover:bg-slate-700 bg-transparent hover:text-white font-medium rounded-lg text-sm p-1 text-center inline-flex items-center"
+                  className="text-slate-700 hover:bg-slate-700 hover:text-white font-medium rounded-lg text-sm p-1 text-center inline-flex items-center"
                 >
                   <svg
                     className="h-4 w-4 text-white"
@@ -465,7 +465,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               >
                 <button
                   type="button"
-                  className="text-slate-500 hover:text-slate-700 font-medium rounded-lg text-sm bg-transparent text-center inline-flex items-center"
+                  className="text-slate-500 hover:text-slate-700 font-medium rounded-lg text-sm text-center inline-flex items-center"
                 >
                   <svg
                     aria-hidden="true"
@@ -555,7 +555,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               >
                 <button
                   type="button"
-                  className="text-slate-500 hover:text-slate-700 font-medium rounded-lg text-sm bg-transparent text-center inline-flex items-center"
+                  className="text-slate-500 hover:text-slate-700 font-medium rounded-lg text-sm text-center inline-flex items-center"
                 >
                   <svg
                     aria-hidden="true"

@@ -167,7 +167,7 @@ export default function Datepicker({
               <div>
                 <button
                   type="button"
-                  className="transition bg-transparent ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                  className="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
                   onClick={decrement}
                 >
                   <svg
@@ -206,7 +206,7 @@ export default function Datepicker({
               <div>
                 <button
                   type="button"
-                  className="transition bg-transparent ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                  className="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
                   onClick={increment}
                 >
                   <svg

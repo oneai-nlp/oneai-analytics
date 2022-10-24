@@ -34,7 +34,7 @@ export default function CustomizeTab({
             <Popover.Button
               className={`
                 ${open ? '' : 'text-opacity-90'}
-                group inline-flex items-center bg-transparent rounded-md px-3 py-2 text-base font-medium text-white hover:text-opacity-100 focus:outline-none `}
+                group inline-flex items-center rounded-md px-3 py-2 text-base font-medium text-white hover:text-opacity-100 focus:outline-none `}
             >
               <span>Customize</span>
               <ChevronDownIcon
