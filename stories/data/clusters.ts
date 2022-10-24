@@ -1,4 +1,4 @@
-import { ExampleNode } from '../../src/common/types/components';
+import { ExampleNode } from '../../src/common/types/componentsInputs';
 
 export const clusters: ExampleNode[] = [
   {
@@ -170,10 +170,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Just bought the dip! Hold the line you ****. This is not financial advice, I just like the stock.',
-        text:
-          'Just bought the dip! Hold the line you ****. This is not financial advice, I just like the stock.',
+        id: 'Just bought the dip! Hold the line you ****. This is not financial advice, I just like the stock.',
+        text: 'Just bought the dip! Hold the line you ****. This is not financial advice, I just like the stock.',
         items_count: 5,
         items: [
           'Just bought the dip! Hold the line you ****. This is not financial advice, I just like the stock.',
@@ -199,10 +197,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'BUY THE DIP! Thanks to this even poor guys like me can join in! 💎🤲🚀',
-        text:
-          'BUY THE DIP! Thanks to this even poor guys like me can join in! 💎🤲🚀',
+        id: 'BUY THE DIP! Thanks to this even poor guys like me can join in! 💎🤲🚀',
+        text: 'BUY THE DIP! Thanks to this even poor guys like me can join in! 💎🤲🚀',
         items_count: 3,
         items: [
           'BUY THE DIP! Thanks to this even poor guys like me can join in! 💎🤲🚀',
@@ -260,10 +256,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "BUY THE DIP! I DO NOT BELIEVE FOR ONE SECOND THAT THESE GREEDY ****S HAVE COVERED OVER 60% OF THEIR SHORT INTEREST ON THESE LOW VOLUME DOWN DAYS BUT EVEN IF THEY DID YOU BETTER BELIEVE THAT WHAT WE'RE SEEING THIS MORNING IS THEM DOUBLING DOWN AND NAKED SHORT SELLING ONCE AGAIN!",
-        text:
-          "BUY THE DIP! I DO NOT BELIEVE FOR ONE SECOND THAT THESE GREEDY ****S HAVE COVERED OVER 60% OF THEIR SHORT INTEREST ON THESE LOW VOLUME DOWN DAYS BUT EVEN IF THEY DID YOU BETTER BELIEVE THAT WHAT WE'RE SEEING THIS MORNING IS THEM DOUBLING DOWN AND NAKED SHORT SELLING ONCE AGAIN!",
+        id: "BUY THE DIP! I DO NOT BELIEVE FOR ONE SECOND THAT THESE GREEDY ****S HAVE COVERED OVER 60% OF THEIR SHORT INTEREST ON THESE LOW VOLUME DOWN DAYS BUT EVEN IF THEY DID YOU BETTER BELIEVE THAT WHAT WE'RE SEEING THIS MORNING IS THEM DOUBLING DOWN AND NAKED SHORT SELLING ONCE AGAIN!",
+        text: "BUY THE DIP! I DO NOT BELIEVE FOR ONE SECOND THAT THESE GREEDY ****S HAVE COVERED OVER 60% OF THEIR SHORT INTEREST ON THESE LOW VOLUME DOWN DAYS BUT EVEN IF THEY DID YOU BETTER BELIEVE THAT WHAT WE'RE SEEING THIS MORNING IS THEM DOUBLING DOWN AND NAKED SHORT SELLING ONCE AGAIN!",
         items_count: 2,
         items: [
           "BUY THE DIP! I DO NOT BELIEVE FOR ONE SECOND THAT THESE GREEDY ****S HAVE COVERED OVER 60% OF THEIR SHORT INTEREST ON THESE LOW VOLUME DOWN DAYS BUT EVEN IF THEY DID YOU BETTER BELIEVE THAT WHAT WE'RE SEEING THIS MORNING IS THEM DOUBLING DOWN AND NAKED SHORT SELLING ONCE AGAIN!",
@@ -293,10 +287,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Buy the dip!!! I'm a pussy and a coward because I don't take risks and am scared of losing money so I have lost out on over $100,000 but **** IT YOLO, if I bought shares @370 so can y'all, and HOLD",
-        text:
-          "Buy the dip!!! I'm a pussy and a coward because I don't take risks and am scared of losing money so I have lost out on over $100,000 but **** IT YOLO, if I bought shares @370 so can y'all, and HOLD",
+        id: "Buy the dip!!! I'm a pussy and a coward because I don't take risks and am scared of losing money so I have lost out on over $100,000 but **** IT YOLO, if I bought shares @370 so can y'all, and HOLD",
+        text: "Buy the dip!!! I'm a pussy and a coward because I don't take risks and am scared of losing money so I have lost out on over $100,000 but **** IT YOLO, if I bought shares @370 so can y'all, and HOLD",
         items_count: 2,
         items: [
           "Buy the dip!!! I'm a pussy and a coward because I don't take risks and am scared of losing money so I have lost out on over $100,000 but **** IT YOLO, if I bought shares @370 so can y'all, and HOLD",
@@ -364,10 +356,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Buying the dip, every dip until they start accepting my sell price.',
-        text:
-          'Buying the dip, every dip until they start accepting my sell price.',
+        id: 'Buying the dip, every dip until they start accepting my sell price.',
+        text: 'Buying the dip, every dip until they start accepting my sell price.',
         items_count: 1,
         items: [
           'Buying the dip, every dip until they start accepting my sell price.',
@@ -396,10 +386,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'BUY THE **** DIP. Don’t have much money to spare, but I know a good deal when I see one. Don’t take financial advice from me.',
-        text:
-          'BUY THE **** DIP. Don’t have much money to spare, but I know a good deal when I see one. Don’t take financial advice from me.',
+        id: 'BUY THE **** DIP. Don’t have much money to spare, but I know a good deal when I see one. Don’t take financial advice from me.',
+        text: 'BUY THE **** DIP. Don’t have much money to spare, but I know a good deal when I see one. Don’t take financial advice from me.',
         items_count: 1,
         items: [
           'BUY THE **** DIP. Don’t have much money to spare, but I know a good deal when I see one. Don’t take financial advice from me.',
@@ -407,10 +395,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'YOU ARE HERE: This is the chart of the Volkswagen squeeze a few years ago. Look familiar? Buy the dip.',
-        text:
-          'YOU ARE HERE: This is the chart of the Volkswagen squeeze a few years ago. Look familiar? Buy the dip.',
+        id: 'YOU ARE HERE: This is the chart of the Volkswagen squeeze a few years ago. Look familiar? Buy the dip.',
+        text: 'YOU ARE HERE: This is the chart of the Volkswagen squeeze a few years ago. Look familiar? Buy the dip.',
         items_count: 1,
         items: [
           'YOU ARE HERE: This is the chart of the Volkswagen squeeze a few years ago. Look familiar? Buy the dip.',
@@ -460,10 +446,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          '🚀🚀🚀 MARK CUBAN HAS SPOKEN. BUY THE DIP AND HOLD. 🚀🚀🚀 ONLY 💎✋',
-        text:
-          '🚀🚀🚀 MARK CUBAN HAS SPOKEN. BUY THE DIP AND HOLD. 🚀🚀🚀 ONLY 💎✋',
+        id: '🚀🚀🚀 MARK CUBAN HAS SPOKEN. BUY THE DIP AND HOLD. 🚀🚀🚀 ONLY 💎✋',
+        text: '🚀🚀🚀 MARK CUBAN HAS SPOKEN. BUY THE DIP AND HOLD. 🚀🚀🚀 ONLY 💎✋',
         items_count: 1,
         items: [
           '🚀🚀🚀 MARK CUBAN HAS SPOKEN. BUY THE DIP AND HOLD. 🚀🚀🚀 ONLY 💎✋',
@@ -513,10 +497,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Buy that **** dip, no weak hands as we March closer to the zero hour!!!',
-        text:
-          'Buy that **** dip, no weak hands as we March closer to the zero hour!!!',
+        id: 'Buy that **** dip, no weak hands as we March closer to the zero hour!!!',
+        text: 'Buy that **** dip, no weak hands as we March closer to the zero hour!!!',
         items_count: 1,
         items: [
           'Buy that **** dip, no weak hands as we March closer to the zero hour!!!',
@@ -524,10 +506,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I thoght about the current situation... And I came to the conclusion to BUY THE **** DIP ****!',
-        text:
-          'I thoght about the current situation... And I came to the conclusion to BUY THE **** DIP ****!',
+        id: 'I thoght about the current situation... And I came to the conclusion to BUY THE **** DIP ****!',
+        text: 'I thoght about the current situation... And I came to the conclusion to BUY THE **** DIP ****!',
         items_count: 1,
         items: [
           'I thoght about the current situation... And I came to the conclusion to BUY THE **** DIP ****!',
@@ -542,10 +522,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'This is the dip before launch off! Fellow retorts buy the **** dip.',
-        text:
-          'This is the dip before launch off! Fellow retorts buy the **** dip.',
+        id: 'This is the dip before launch off! Fellow retorts buy the **** dip.',
+        text: 'This is the dip before launch off! Fellow retorts buy the **** dip.',
         items_count: 1,
         items: [
           'This is the dip before launch off! Fellow retorts buy the **** dip.',
@@ -588,10 +566,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "I'm retarded and broke, but **** it, let's ride this 🍌🍌🚀🚀bought the dip, 1@232.50",
-        text:
-          "I'm retarded and broke, but **** it, let's ride this 🍌🍌🚀🚀bought the dip, 1@232.50",
+        id: "I'm retarded and broke, but **** it, let's ride this 🍌🍌🚀🚀bought the dip, 1@232.50",
+        text: "I'm retarded and broke, but **** it, let's ride this 🍌🍌🚀🚀bought the dip, 1@232.50",
         items_count: 1,
         items: [
           "I'm retarded and broke, but **** it, let's ride this 🍌🍌🚀🚀bought the dip, 1@232.50",
@@ -620,10 +596,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Whats with all the doom and gloom? People were saying this was gonna happen. Buy the dip, tards',
-        text:
-          'Whats with all the doom and gloom? People were saying this was gonna happen. Buy the dip, tards',
+        id: 'Whats with all the doom and gloom? People were saying this was gonna happen. Buy the dip, tards',
+        text: 'Whats with all the doom and gloom? People were saying this was gonna happen. Buy the dip, tards',
         items_count: 1,
         items: [
           'Whats with all the doom and gloom? People were saying this was gonna happen. Buy the dip, tards',
@@ -699,10 +673,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut has been blocked by broker-dealer so now cannot buy GME AMC on that platform. 💎🙌',
-        text:
-          'Revolut has been blocked by broker-dealer so now cannot buy GME AMC on that platform. 💎🙌',
+        id: 'Revolut has been blocked by broker-dealer so now cannot buy GME AMC on that platform. 💎🙌',
+        text: 'Revolut has been blocked by broker-dealer so now cannot buy GME AMC on that platform. 💎🙌',
         items_count: 32,
         items: [
           'Revolut has been blocked by broker-dealer so now cannot buy GME AMC on that platform. 💎🙌',
@@ -817,10 +789,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'DriveWealth broker now is blocking to buy GME and AMC. This the broker used by Revolut.',
-        text:
-          'DriveWealth broker now is blocking to buy GME and AMC. This the broker used by Revolut.',
+        id: 'DriveWealth broker now is blocking to buy GME and AMC. This the broker used by Revolut.',
+        text: 'DriveWealth broker now is blocking to buy GME and AMC. This the broker used by Revolut.',
         items_count: 10,
         items: [
           'DriveWealth broker now is blocking to buy GME and AMC. This the broker used by Revolut.',
@@ -929,8 +899,7 @@ export const clusters: ExampleNode[] = [
       {
         type: 'Phrase',
         id: 'Important for Europeans! Revolut started allowing $GME buys again',
-        text:
-          'Important for Europeans! Revolut started allowing $GME buys again',
+        text: 'Important for Europeans! Revolut started allowing $GME buys again',
         items_count: 3,
         items: [
           'Important for Europeans! Revolut started allowing $GME buys again',
@@ -1005,8 +974,7 @@ export const clusters: ExampleNode[] = [
       {
         type: 'Phrase',
         id: 'Heads up, Revolut will only allow sell orders on GME and AMC now.',
-        text:
-          'Heads up, Revolut will only allow sell orders on GME and AMC now.',
+        text: 'Heads up, Revolut will only allow sell orders on GME and AMC now.',
         items_count: 2,
         items: [
           'Heads up, Revolut will only allow sell orders on GME and AMC now.',
@@ -1033,10 +1001,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut (banking app Europe) no longer allowing buys of GME or AMC',
-        text:
-          'Revolut (banking app Europe) no longer allowing buys of GME or AMC',
+        id: 'Revolut (banking app Europe) no longer allowing buys of GME or AMC',
+        text: 'Revolut (banking app Europe) no longer allowing buys of GME or AMC',
         items_count: 1,
         items: [
           'Revolut (banking app Europe) no longer allowing buys of GME or AMC',
@@ -1044,10 +1010,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Revolut just restricted buying GME and AMC. Don't have money to spare anyways, ITS ALL IN THE STOCK I LIKE",
-        text:
-          "Revolut just restricted buying GME and AMC. Don't have money to spare anyways, ITS ALL IN THE STOCK I LIKE",
+        id: "Revolut just restricted buying GME and AMC. Don't have money to spare anyways, ITS ALL IN THE STOCK I LIKE",
+        text: "Revolut just restricted buying GME and AMC. Don't have money to spare anyways, ITS ALL IN THE STOCK I LIKE",
         items_count: 1,
         items: [
           "Revolut just restricted buying GME and AMC. Don't have money to spare anyways, ITS ALL IN THE STOCK I LIKE",
@@ -1055,10 +1019,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut no longer offering AMC or GME... still holding but holy **** this has got to be illegal',
-        text:
-          'Revolut no longer offering AMC or GME... still holding but holy **** this has got to be illegal',
+        id: 'Revolut no longer offering AMC or GME... still holding but holy **** this has got to be illegal',
+        text: 'Revolut no longer offering AMC or GME... still holding but holy **** this has got to be illegal',
         items_count: 1,
         items: [
           'Revolut no longer offering AMC or GME... still holding but holy **** this has got to be illegal',
@@ -1066,10 +1028,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut now blocked buying GME and AMC shares, europe apes keep the 💎🙌',
-        text:
-          'Revolut now blocked buying GME and AMC shares, europe apes keep the 💎🙌',
+        id: 'Revolut now blocked buying GME and AMC shares, europe apes keep the 💎🙌',
+        text: 'Revolut now blocked buying GME and AMC shares, europe apes keep the 💎🙌',
         items_count: 1,
         items: [
           'Revolut now blocked buying GME and AMC shares, europe apes keep the 💎🙌',
@@ -1077,10 +1037,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut now blocks GME/AMC purchases, how is this not market manipulation?',
-        text:
-          'Revolut now blocks GME/AMC purchases, how is this not market manipulation?',
+        id: 'Revolut now blocks GME/AMC purchases, how is this not market manipulation?',
+        text: 'Revolut now blocks GME/AMC purchases, how is this not market manipulation?',
         items_count: 1,
         items: [
           'Revolut now blocks GME/AMC purchases, how is this not market manipulation?',
@@ -1095,10 +1053,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut have now banned GME and AMC buying, Wall Street super hacks have been enabled.',
-        text:
-          'Revolut have now banned GME and AMC buying, Wall Street super hacks have been enabled.',
+        id: 'Revolut have now banned GME and AMC buying, Wall Street super hacks have been enabled.',
+        text: 'Revolut have now banned GME and AMC buying, Wall Street super hacks have been enabled.',
         items_count: 1,
         items: [
           'Revolut have now banned GME and AMC buying, Wall Street super hacks have been enabled.',
@@ -1115,10 +1071,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut and Freetrades (freetards) no longer allowing AMC or GME buys',
-        text:
-          'Revolut and Freetrades (freetards) no longer allowing AMC or GME buys',
+        id: 'Revolut and Freetrades (freetards) no longer allowing AMC or GME buys',
+        text: 'Revolut and Freetrades (freetards) no longer allowing AMC or GME buys',
         items_count: 1,
         items: [
           'Revolut and Freetrades (freetards) no longer allowing AMC or GME buys',
@@ -1126,10 +1080,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut dicks also blocking GME and AMC buy orders! Time to leave Revolut.',
-        text:
-          'Revolut dicks also blocking GME and AMC buy orders! Time to leave Revolut.',
+        id: 'Revolut dicks also blocking GME and AMC buy orders! Time to leave Revolut.',
+        text: 'Revolut dicks also blocking GME and AMC buy orders! Time to leave Revolut.',
         items_count: 1,
         items: [
           'Revolut dicks also blocking GME and AMC buy orders! Time to leave Revolut.',
@@ -1144,10 +1096,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Revolut has stopped GME and AMC buys. Why won't they let us buy at a discount!?!?",
-        text:
-          "Revolut has stopped GME and AMC buys. Why won't they let us buy at a discount!?!?",
+        id: "Revolut has stopped GME and AMC buys. Why won't they let us buy at a discount!?!?",
+        text: "Revolut has stopped GME and AMC buys. Why won't they let us buy at a discount!?!?",
         items_count: 1,
         items: [
           "Revolut has stopped GME and AMC buys. Why won't they let us buy at a discount!?!?",
@@ -1155,10 +1105,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Another restricted seller- Revolut now only allowing sales of GME and AMC. Still holding with you boys 💎👐🚀',
-        text:
-          'Another restricted seller- Revolut now only allowing sales of GME and AMC. Still holding with you boys 💎👐🚀',
+        id: 'Another restricted seller- Revolut now only allowing sales of GME and AMC. Still holding with you boys 💎👐🚀',
+        text: 'Another restricted seller- Revolut now only allowing sales of GME and AMC. Still holding with you boys 💎👐🚀',
         items_count: 1,
         items: [
           'Another restricted seller- Revolut now only allowing sales of GME and AMC. Still holding with you boys 💎👐🚀',
@@ -1516,8 +1464,7 @@ export const clusters: ExampleNode[] = [
       {
         type: 'Phrase',
         id: "I may be a dumb retard but I'm holding so you guys need to aswell",
-        text:
-          "I may be a dumb retard but I'm holding so you guys need to aswell",
+        text: "I may be a dumb retard but I'm holding so you guys need to aswell",
         items_count: 1,
         items: [
           "I may be a dumb retard but I'm holding so you guys need to aswell",
@@ -1717,10 +1664,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'LOSS PORN: GOING TO MAKE MY HUSBAND GIVE ME MORE $$ IN THE AM 🚀🚀💎💎👐💎💎🚀💎💎👐💎🚀🚀',
-        text:
-          'LOSS PORN: GOING TO MAKE MY HUSBAND GIVE ME MORE $$ IN THE AM 🚀🚀💎💎👐💎💎🚀💎💎👐💎🚀🚀',
+        id: 'LOSS PORN: GOING TO MAKE MY HUSBAND GIVE ME MORE $$ IN THE AM 🚀🚀💎💎👐💎💎🚀💎💎👐💎🚀🚀',
+        text: 'LOSS PORN: GOING TO MAKE MY HUSBAND GIVE ME MORE $$ IN THE AM 🚀🚀💎💎👐💎💎🚀💎💎👐💎🚀🚀',
         items_count: 1,
         items: [
           'LOSS PORN: GOING TO MAKE MY HUSBAND GIVE ME MORE $$ IN THE AM 🚀🚀💎💎👐💎💎🚀💎💎👐💎🚀🚀',
@@ -1756,10 +1701,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I know the loss **** isn’t the best. But it’s all I can give as a college student 💎 🙌🏻',
-        text:
-          'I know the loss **** isn’t the best. But it’s all I can give as a college student 💎 🙌🏻',
+        id: 'I know the loss **** isn’t the best. But it’s all I can give as a college student 💎 🙌🏻',
+        text: 'I know the loss **** isn’t the best. But it’s all I can give as a college student 💎 🙌🏻',
         items_count: 1,
         items: [
           'I know the loss **** isn’t the best. But it’s all I can give as a college student 💎 🙌🏻',
@@ -1795,10 +1738,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Not the major loss **** you usually see on here but it’s all or nothing for me at this point 💎🙌🚀🚀🚀',
-        text:
-          'Not the major loss **** you usually see on here but it’s all or nothing for me at this point 💎🙌🚀🚀🚀',
+        id: 'Not the major loss **** you usually see on here but it’s all or nothing for me at this point 💎🙌🚀🚀🚀',
+        text: 'Not the major loss **** you usually see on here but it’s all or nothing for me at this point 💎🙌🚀🚀🚀',
         items_count: 1,
         items: [
           'Not the major loss **** you usually see on here but it’s all or nothing for me at this point 💎🙌🚀🚀🚀',
@@ -1820,10 +1761,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Loss ****. (Unrealized) if I can hold you can hold too. NO 🌈🐻🧻🖐only 💎👐',
-        text:
-          'Loss ****. (Unrealized) if I can hold you can hold too. NO 🌈🐻🧻🖐only 💎👐',
+        id: 'Loss ****. (Unrealized) if I can hold you can hold too. NO 🌈🐻🧻🖐only 💎👐',
+        text: 'Loss ****. (Unrealized) if I can hold you can hold too. NO 🌈🐻🧻🖐only 💎👐',
         items_count: 1,
         items: [
           'Loss ****. (Unrealized) if I can hold you can hold too. NO 🌈🐻🧻🖐only 💎👐',
@@ -1927,8 +1866,7 @@ export const clusters: ExampleNode[] = [
       {
         type: 'Phrase',
         id: 'Hold AMC stop selling!! Keep buying it’s the only way we will win',
-        text:
-          'Hold AMC stop selling!! Keep buying it’s the only way we will win',
+        text: 'Hold AMC stop selling!! Keep buying it’s the only way we will win',
         items_count: 3,
         items: [
           'Hold AMC stop selling!! Keep buying it’s the only way we will win',
@@ -1960,10 +1898,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "I'm not a big time trader but I got excited over AMC and bought 90 shares at 16.50. HOLD THE LINE",
-        text:
-          "I'm not a big time trader but I got excited over AMC and bought 90 shares at 16.50. HOLD THE LINE",
+        id: "I'm not a big time trader but I got excited over AMC and bought 90 shares at 16.50. HOLD THE LINE",
+        text: "I'm not a big time trader but I got excited over AMC and bought 90 shares at 16.50. HOLD THE LINE",
         items_count: 2,
         items: [
           "I'm not a big time trader but I got excited over AMC and bought 90 shares at 16.50. HOLD THE LINE",
@@ -1987,10 +1923,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'AMC? I like this stock 💎💎💎👐👐👐🚀🚀🚀🚀🌕 then 🚀🚀🚀🚀🚀🚀🚀🚀☀️',
-        text:
-          'AMC? I like this stock 💎💎💎👐👐👐🚀🚀🚀🚀🌕 then 🚀🚀🚀🚀🚀🚀🚀🚀☀️',
+        id: 'AMC? I like this stock 💎💎💎👐👐👐🚀🚀🚀🚀🌕 then 🚀🚀🚀🚀🚀🚀🚀🚀☀️',
+        text: 'AMC? I like this stock 💎💎💎👐👐👐🚀🚀🚀🚀🌕 then 🚀🚀🚀🚀🚀🚀🚀🚀☀️',
         items_count: 2,
         items: [
           'AMC? I like this stock 💎💎💎👐👐👐🚀🚀🚀🚀🌕 then 🚀🚀🚀🚀🚀🚀🚀🚀☀️',
@@ -2282,10 +2216,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "I don't know what the heck is going on but I'm still diamond hands",
-        text:
-          "I don't know what the heck is going on but I'm still diamond hands",
+        id: "I don't know what the heck is going on but I'm still diamond hands",
+        text: "I don't know what the heck is going on but I'm still diamond hands",
         items_count: 1,
         items: [
           "I don't know what the heck is going on but I'm still diamond hands",
@@ -2586,10 +2518,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'It’s not much but it’s honest work and I’m holding the line, not a loss unless I sell',
-        text:
-          'It’s not much but it’s honest work and I’m holding the line, not a loss unless I sell',
+        id: 'It’s not much but it’s honest work and I’m holding the line, not a loss unless I sell',
+        text: 'It’s not much but it’s honest work and I’m holding the line, not a loss unless I sell',
         items_count: 1,
         items: [
           'It’s not much but it’s honest work and I’m holding the line, not a loss unless I sell',
@@ -2604,10 +2534,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "It ain't much, but it's honest work... also my life savings 🚀🚀🚀🚀",
-        text:
-          "It ain't much, but it's honest work... also my life savings 🚀🚀🚀🚀",
+        id: "It ain't much, but it's honest work... also my life savings 🚀🚀🚀🚀",
+        text: "It ain't much, but it's honest work... also my life savings 🚀🚀🚀🚀",
         items_count: 1,
         items: [
           "It ain't much, but it's honest work... also my life savings 🚀🚀🚀🚀",
@@ -2615,10 +2543,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'It ain’t much, but it’s honest work. I ain’t ****in leaving either 💎💎🙌🙌🚀🚀🚀',
-        text:
-          'It ain’t much, but it’s honest work. I ain’t ****in leaving either 💎💎🙌🙌🚀🚀🚀',
+        id: 'It ain’t much, but it’s honest work. I ain’t ****in leaving either 💎💎🙌🙌🚀🚀🚀',
+        text: 'It ain’t much, but it’s honest work. I ain’t ****in leaving either 💎💎🙌🙌🚀🚀🚀',
         items_count: 1,
         items: [
           'It ain’t much, but it’s honest work. I ain’t ****in leaving either 💎💎🙌🙌🚀🚀🚀',
@@ -2633,10 +2559,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Its not much but its honest work. Waiting for my paycheck so I can do more!',
-        text:
-          'Its not much but its honest work. Waiting for my paycheck so I can do more!',
+        id: 'Its not much but its honest work. Waiting for my paycheck so I can do more!',
+        text: 'Its not much but its honest work. Waiting for my paycheck so I can do more!',
         items_count: 1,
         items: [
           'Its not much but its honest work. Waiting for my paycheck so I can do more!',
@@ -2914,18 +2838,14 @@ export const clusters: ExampleNode[] = [
   },
   {
     type: 'Cluster',
-    id:
-      'I’m not a big investor, but I continue to hold AMC. I went from a 170$ Market Value down to 76$. I bought it at 4.9$, and bought 1 more at 8.07$. I will hold and hold, and I will not leave this battle, WITHOUT A FIGHT. WSB… DO. YOUR. THING. YOU. LOVE. 🤚💎✋',
-    text:
-      'I’m not a big investor, but I continue to hold AMC. I went from a 170$ Market Value down to 76$. I bought it at 4.9$, and bought 1 more at 8.07$. I will hold and hold, and I will not leave this battle, WITHOUT A FIGHT. WSB… DO. YOUR. THING. YOU. LOVE. 🤚💎✋',
+    id: 'I’m not a big investor, but I continue to hold AMC. I went from a 170$ Market Value down to 76$. I bought it at 4.9$, and bought 1 more at 8.07$. I will hold and hold, and I will not leave this battle, WITHOUT A FIGHT. WSB… DO. YOUR. THING. YOU. LOVE. 🤚💎✋',
+    text: 'I’m not a big investor, but I continue to hold AMC. I went from a 170$ Market Value down to 76$. I bought it at 4.9$, and bought 1 more at 8.07$. I will hold and hold, and I will not leave this battle, WITHOUT A FIGHT. WSB… DO. YOUR. THING. YOU. LOVE. 🤚💎✋',
     items_count: 56,
     children: [
       {
         type: 'Phrase',
-        id:
-          'Just loaded up another 100 shares of AMC 🚀🚀🚀 I ain’t selling ****. WHO Else is with me? AMC to the moon 🚀🚀🚀',
-        text:
-          'Just loaded up another 100 shares of AMC 🚀🚀🚀 I ain’t selling ****. WHO Else is with me? AMC to the moon 🚀🚀🚀',
+        id: 'Just loaded up another 100 shares of AMC 🚀🚀🚀 I ain’t selling ****. WHO Else is with me? AMC to the moon 🚀🚀🚀',
+        text: 'Just loaded up another 100 shares of AMC 🚀🚀🚀 I ain’t selling ****. WHO Else is with me? AMC to the moon 🚀🚀🚀',
         items_count: 4,
         items: [
           'Just loaded up another 100 shares of AMC 🚀🚀🚀 I ain’t selling ****. WHO Else is with me? AMC to the moon 🚀🚀🚀',
@@ -2952,10 +2872,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'If you can buy $AMC then buy. Buy as many as u possibly can. We hold and buy and we’ll win this fight against the hedge funds.',
-        text:
-          'If you can buy $AMC then buy. Buy as many as u possibly can. We hold and buy and we’ll win this fight against the hedge funds.',
+        id: 'If you can buy $AMC then buy. Buy as many as u possibly can. We hold and buy and we’ll win this fight against the hedge funds.',
+        text: 'If you can buy $AMC then buy. Buy as many as u possibly can. We hold and buy and we’ll win this fight against the hedge funds.',
         items_count: 3,
         items: [
           'If you can buy $AMC then buy. Buy as many as u possibly can. We hold and buy and we’ll win this fight against the hedge funds.',
@@ -2966,10 +2884,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Are you invested into $amc?? (be honest, share position if you'd like!)",
-        text:
-          "Are you invested into $amc?? (be honest, share position if you'd like!)",
+        id: "Are you invested into $amc?? (be honest, share position if you'd like!)",
+        text: "Are you invested into $amc?? (be honest, share position if you'd like!)",
         items_count: 2,
         items: [
           "Are you invested into $amc?? (be honest, share position if you'd like!)",
@@ -2978,10 +2894,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Buy $AMC! NOW IS THE TIME! Get it to $11.84 and investors will come in. It’ll SKY ROCKET! 🚀 We were close!',
-        text:
-          'Buy $AMC! NOW IS THE TIME! Get it to $11.84 and investors will come in. It’ll SKY ROCKET! 🚀 We were close!',
+        id: 'Buy $AMC! NOW IS THE TIME! Get it to $11.84 and investors will come in. It’ll SKY ROCKET! 🚀 We were close!',
+        text: 'Buy $AMC! NOW IS THE TIME! Get it to $11.84 and investors will come in. It’ll SKY ROCKET! 🚀 We were close!',
         items_count: 2,
         items: [
           'Buy $AMC! NOW IS THE TIME! Get it to $11.84 and investors will come in. It’ll SKY ROCKET! 🚀 We were close!',
@@ -2991,10 +2905,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Hey guys, I have decided to join you guys after having been on the fence for a while. I know my portfolio ain’t much but finally decided to buy some shares of amc.',
-        text:
-          'Hey guys, I have decided to join you guys after having been on the fence for a while. I know my portfolio ain’t much but finally decided to buy some shares of amc.',
+        id: 'Hey guys, I have decided to join you guys after having been on the fence for a while. I know my portfolio ain’t much but finally decided to buy some shares of amc.',
+        text: 'Hey guys, I have decided to join you guys after having been on the fence for a while. I know my portfolio ain’t much but finally decided to buy some shares of amc.',
         items_count: 2,
         items: [
           'Hey guys, I have decided to join you guys after having been on the fence for a while. I know my portfolio ain’t much but finally decided to buy some shares of amc.',
@@ -3003,10 +2915,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Now i have lost 50% of my AMC holding. I am still positive, AMC to The moon! 🚀🚀🌑',
-        text:
-          'Now i have lost 50% of my AMC holding. I am still positive, AMC to The moon! 🚀🚀🌑',
+        id: 'Now i have lost 50% of my AMC holding. I am still positive, AMC to The moon! 🚀🚀🌑',
+        text: 'Now i have lost 50% of my AMC holding. I am still positive, AMC to The moon! 🚀🚀🌑',
         items_count: 2,
         items: [
           'Now i have lost 50% of my AMC holding. I am still positive, AMC to The moon! 🚀🚀🌑',
@@ -3015,10 +2925,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I saw AMC share price this morning and nearly cried... Then I bought more',
-        text:
-          'I saw AMC share price this morning and nearly cried... Then I bought more',
+        id: 'I saw AMC share price this morning and nearly cried... Then I bought more',
+        text: 'I saw AMC share price this morning and nearly cried... Then I bought more',
         items_count: 2,
         items: [
           'I saw AMC share price this morning and nearly cried... Then I bought more',
@@ -3049,10 +2957,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I’m not a big investor, but I continue to hold AMC. I went from a 170$ Market Value down to 76$. I bought it at 4.9$, and bought 1 more at 8.07$. I will hold and hold, and I will not leave this battle, WITHOUT A FIGHT. WSB… DO. YOUR. THING. YOU. LOVE. 🤚💎✋',
-        text:
-          'I’m not a big investor, but I continue to hold AMC. I went from a 170$ Market Value down to 76$. I bought it at 4.9$, and bought 1 more at 8.07$. I will hold and hold, and I will not leave this battle, WITHOUT A FIGHT. WSB… DO. YOUR. THING. YOU. LOVE. 🤚💎✋',
+        id: 'I’m not a big investor, but I continue to hold AMC. I went from a 170$ Market Value down to 76$. I bought it at 4.9$, and bought 1 more at 8.07$. I will hold and hold, and I will not leave this battle, WITHOUT A FIGHT. WSB… DO. YOUR. THING. YOU. LOVE. 🤚💎✋',
+        text: 'I’m not a big investor, but I continue to hold AMC. I went from a 170$ Market Value down to 76$. I bought it at 4.9$, and bought 1 more at 8.07$. I will hold and hold, and I will not leave this battle, WITHOUT A FIGHT. WSB… DO. YOUR. THING. YOU. LOVE. 🤚💎✋',
         items_count: 1,
         items: [
           'I’m not a big investor, but I continue to hold AMC. I went from a 170$ Market Value down to 76$. I bought it at 4.9$, and bought 1 more at 8.07$. I will hold and hold, and I will not leave this battle, WITHOUT A FIGHT. WSB… DO. YOUR. THING. YOU. LOVE. 🤚💎✋',
@@ -3060,10 +2966,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'As I’m typing this, GME is at 63.74 and AMC is at 7.64. If you are a real one, hold. I’ve lost so much money now that selling won’t do me any good. HOLD',
-        text:
-          'As I’m typing this, GME is at 63.74 and AMC is at 7.64. If you are a real one, hold. I’ve lost so much money now that selling won’t do me any good. HOLD',
+        id: 'As I’m typing this, GME is at 63.74 and AMC is at 7.64. If you are a real one, hold. I’ve lost so much money now that selling won’t do me any good. HOLD',
+        text: 'As I’m typing this, GME is at 63.74 and AMC is at 7.64. If you are a real one, hold. I’ve lost so much money now that selling won’t do me any good. HOLD',
         items_count: 1,
         items: [
           'As I’m typing this, GME is at 63.74 and AMC is at 7.64. If you are a real one, hold. I’ve lost so much money now that selling won’t do me any good. HOLD',
@@ -3071,10 +2975,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'YOLO’d 10k into AMC @ $14.90. Lost almost half my investment. Have no choice but to BUY MORE AND HOLD',
-        text:
-          'YOLO’d 10k into AMC @ $14.90. Lost almost half my investment. Have no choice but to BUY MORE AND HOLD',
+        id: 'YOLO’d 10k into AMC @ $14.90. Lost almost half my investment. Have no choice but to BUY MORE AND HOLD',
+        text: 'YOLO’d 10k into AMC @ $14.90. Lost almost half my investment. Have no choice but to BUY MORE AND HOLD',
         items_count: 1,
         items: [
           'YOLO’d 10k into AMC @ $14.90. Lost almost half my investment. Have no choice but to BUY MORE AND HOLD',
@@ -3082,10 +2984,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'PEPPPZZZ. Even blackrock is bullish on AMC. WSB is gettinf hijacked; dont believe the assholes. 🚀🚀🚀🚀 GME AND AMC🚀🚀',
-        text:
-          'PEPPPZZZ. Even blackrock is bullish on AMC. WSB is gettinf hijacked; dont believe the assholes. 🚀🚀🚀🚀 GME AND AMC🚀🚀',
+        id: 'PEPPPZZZ. Even blackrock is bullish on AMC. WSB is gettinf hijacked; dont believe the assholes. 🚀🚀🚀🚀 GME AND AMC🚀🚀',
+        text: 'PEPPPZZZ. Even blackrock is bullish on AMC. WSB is gettinf hijacked; dont believe the assholes. 🚀🚀🚀🚀 GME AND AMC🚀🚀',
         items_count: 1,
         items: [
           'PEPPPZZZ. Even blackrock is bullish on AMC. WSB is gettinf hijacked; dont believe the assholes. 🚀🚀🚀🚀 GME AND AMC🚀🚀',
@@ -3093,10 +2993,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'AMC IS THE BUY! THE WORLD WILL OPEN UP AGAIN, THE THEATERS WILL OPEN UP AGAIN, MY WIFE AND HER BOYFRIEND CAN START GOING ON DATES THERE AGAIN, THE STOCK WILL HOLD, WE WILL HOLD THE LINE. I LIKE THIS STOCK!!!!',
-        text:
-          'AMC IS THE BUY! THE WORLD WILL OPEN UP AGAIN, THE THEATERS WILL OPEN UP AGAIN, MY WIFE AND HER BOYFRIEND CAN START GOING ON DATES THERE AGAIN, THE STOCK WILL HOLD, WE WILL HOLD THE LINE. I LIKE THIS STOCK!!!!',
+        id: 'AMC IS THE BUY! THE WORLD WILL OPEN UP AGAIN, THE THEATERS WILL OPEN UP AGAIN, MY WIFE AND HER BOYFRIEND CAN START GOING ON DATES THERE AGAIN, THE STOCK WILL HOLD, WE WILL HOLD THE LINE. I LIKE THIS STOCK!!!!',
+        text: 'AMC IS THE BUY! THE WORLD WILL OPEN UP AGAIN, THE THEATERS WILL OPEN UP AGAIN, MY WIFE AND HER BOYFRIEND CAN START GOING ON DATES THERE AGAIN, THE STOCK WILL HOLD, WE WILL HOLD THE LINE. I LIKE THIS STOCK!!!!',
         items_count: 1,
         items: [
           'AMC IS THE BUY! THE WORLD WILL OPEN UP AGAIN, THE THEATERS WILL OPEN UP AGAIN, MY WIFE AND HER BOYFRIEND CAN START GOING ON DATES THERE AGAIN, THE STOCK WILL HOLD, WE WILL HOLD THE LINE. I LIKE THIS STOCK!!!!',
@@ -3104,10 +3002,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I got 36 stocks in AMC and 1 in NOK WE GOT THIS GUYS JUST HOLD !!!💎🙌',
-        text:
-          'I got 36 stocks in AMC and 1 in NOK WE GOT THIS GUYS JUST HOLD !!!💎🙌',
+        id: 'I got 36 stocks in AMC and 1 in NOK WE GOT THIS GUYS JUST HOLD !!!💎🙌',
+        text: 'I got 36 stocks in AMC and 1 in NOK WE GOT THIS GUYS JUST HOLD !!!💎🙌',
         items_count: 1,
         items: [
           'I got 36 stocks in AMC and 1 in NOK WE GOT THIS GUYS JUST HOLD !!!💎🙌',
@@ -3115,10 +3011,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I could not allow us to end in the red again today so I sold my two shares of AMC because it’s all I could do to help',
-        text:
-          'I could not allow us to end in the red again today so I sold my two shares of AMC because it’s all I could do to help',
+        id: 'I could not allow us to end in the red again today so I sold my two shares of AMC because it’s all I could do to help',
+        text: 'I could not allow us to end in the red again today so I sold my two shares of AMC because it’s all I could do to help',
         items_count: 1,
         items: [
           'I could not allow us to end in the red again today so I sold my two shares of AMC because it’s all I could do to help',
@@ -3126,10 +3020,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I like the stock. Small price for dividends paid in billionaire tears and cheap tickets the moon, baby! (Also trying to do my small part for AMC too)',
-        text:
-          'I like the stock. Small price for dividends paid in billionaire tears and cheap tickets the moon, baby! (Also trying to do my small part for AMC too)',
+        id: 'I like the stock. Small price for dividends paid in billionaire tears and cheap tickets the moon, baby! (Also trying to do my small part for AMC too)',
+        text: 'I like the stock. Small price for dividends paid in billionaire tears and cheap tickets the moon, baby! (Also trying to do my small part for AMC too)',
         items_count: 1,
         items: [
           'I like the stock. Small price for dividends paid in billionaire tears and cheap tickets the moon, baby! (Also trying to do my small part for AMC too)',
@@ -3144,10 +3036,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Rally for AMC People. Premarket is up. Buy and Hold. Mark Cuban already laid out the success trajectory for AMC. This is for the People. Patience and Persistence will win this.. divide into every which stock and watch this movement dissolve. #AMC 💰🎬🚀',
-        text:
-          'Rally for AMC People. Premarket is up. Buy and Hold. Mark Cuban already laid out the success trajectory for AMC. This is for the People. Patience and Persistence will win this.. divide into every which stock and watch this movement dissolve. #AMC 💰🎬🚀',
+        id: 'Rally for AMC People. Premarket is up. Buy and Hold. Mark Cuban already laid out the success trajectory for AMC. This is for the People. Patience and Persistence will win this.. divide into every which stock and watch this movement dissolve. #AMC 💰🎬🚀',
+        text: 'Rally for AMC People. Premarket is up. Buy and Hold. Mark Cuban already laid out the success trajectory for AMC. This is for the People. Patience and Persistence will win this.. divide into every which stock and watch this movement dissolve. #AMC 💰🎬🚀',
         items_count: 1,
         items: [
           'Rally for AMC People. Premarket is up. Buy and Hold. Mark Cuban already laid out the success trajectory for AMC. This is for the People. Patience and Persistence will win this.. divide into every which stock and watch this movement dissolve. #AMC 💰🎬🚀',
@@ -3169,10 +3059,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Put about $170 in the account and AMC was my first stonk. So far have lost almost half of it. But im tryna be a **** 💎👐🦍 so I put another $60 in today with the dip and im ****inn holding my tiny 19 shares. AMC TO THE MOON 🚀🚀🚀🚀',
-        text:
-          'Put about $170 in the account and AMC was my first stonk. So far have lost almost half of it. But im tryna be a **** 💎👐🦍 so I put another $60 in today with the dip and im ****inn holding my tiny 19 shares. AMC TO THE MOON 🚀🚀🚀🚀',
+        id: 'Put about $170 in the account and AMC was my first stonk. So far have lost almost half of it. But im tryna be a **** 💎👐🦍 so I put another $60 in today with the dip and im ****inn holding my tiny 19 shares. AMC TO THE MOON 🚀🚀🚀🚀',
+        text: 'Put about $170 in the account and AMC was my first stonk. So far have lost almost half of it. But im tryna be a **** 💎👐🦍 so I put another $60 in today with the dip and im ****inn holding my tiny 19 shares. AMC TO THE MOON 🚀🚀🚀🚀',
         items_count: 1,
         items: [
           'Put about $170 in the account and AMC was my first stonk. So far have lost almost half of it. But im tryna be a **** 💎👐🦍 so I put another $60 in today with the dip and im ****inn holding my tiny 19 shares. AMC TO THE MOON 🚀🚀🚀🚀',
@@ -3180,10 +3068,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'IMPORTANT NOTICE FOR ANYONE THAT IS HOLDING AMC SHARES. Do not sell I repeat Do NOT SELL. READ THIS AND UNDERSTAND WHATS HAPPENING RIGHT NOW 🚀🚀',
-        text:
-          'IMPORTANT NOTICE FOR ANYONE THAT IS HOLDING AMC SHARES. Do not sell I repeat Do NOT SELL. READ THIS AND UNDERSTAND WHATS HAPPENING RIGHT NOW 🚀🚀',
+        id: 'IMPORTANT NOTICE FOR ANYONE THAT IS HOLDING AMC SHARES. Do not sell I repeat Do NOT SELL. READ THIS AND UNDERSTAND WHATS HAPPENING RIGHT NOW 🚀🚀',
+        text: 'IMPORTANT NOTICE FOR ANYONE THAT IS HOLDING AMC SHARES. Do not sell I repeat Do NOT SELL. READ THIS AND UNDERSTAND WHATS HAPPENING RIGHT NOW 🚀🚀',
         items_count: 1,
         items: [
           'IMPORTANT NOTICE FOR ANYONE THAT IS HOLDING AMC SHARES. Do not sell I repeat Do NOT SELL. READ THIS AND UNDERSTAND WHATS HAPPENING RIGHT NOW 🚀🚀',
@@ -3198,10 +3084,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Down half my investment, minimum wage job, no savings, IM STILL HOLDING AMC 💎🤲💎🤲',
-        text:
-          'Down half my investment, minimum wage job, no savings, IM STILL HOLDING AMC 💎🤲💎🤲',
+        id: 'Down half my investment, minimum wage job, no savings, IM STILL HOLDING AMC 💎🤲💎🤲',
+        text: 'Down half my investment, minimum wage job, no savings, IM STILL HOLDING AMC 💎🤲💎🤲',
         items_count: 1,
         items: [
           'Down half my investment, minimum wage job, no savings, IM STILL HOLDING AMC 💎🤲💎🤲',
@@ -3209,10 +3093,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Seeing all of you lose so much but still holding IS INSPIRING!! MAKE ME A YEARS+ IN RENT! HOLD $AMC $NOK',
-        text:
-          'Seeing all of you lose so much but still holding IS INSPIRING!! MAKE ME A YEARS+ IN RENT! HOLD $AMC $NOK',
+        id: 'Seeing all of you lose so much but still holding IS INSPIRING!! MAKE ME A YEARS+ IN RENT! HOLD $AMC $NOK',
+        text: 'Seeing all of you lose so much but still holding IS INSPIRING!! MAKE ME A YEARS+ IN RENT! HOLD $AMC $NOK',
         items_count: 1,
         items: [
           'Seeing all of you lose so much but still holding IS INSPIRING!! MAKE ME A YEARS+ IN RENT! HOLD $AMC $NOK',
@@ -3220,10 +3102,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          '21 shares in (AMC) and holding trying to do my part 🌑✨ is there still hope if I bought gme?',
-        text:
-          '21 shares in (AMC) and holding trying to do my part 🌑✨ is there still hope if I bought gme?',
+        id: '21 shares in (AMC) and holding trying to do my part 🌑✨ is there still hope if I bought gme?',
+        text: '21 shares in (AMC) and holding trying to do my part 🌑✨ is there still hope if I bought gme?',
         items_count: 1,
         items: [
           '21 shares in (AMC) and holding trying to do my part 🌑✨ is there still hope if I bought gme?',
@@ -3238,10 +3118,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Tell me you are not all absolute pussies as I watch AMC plummet. No heart. No hope. Should have watched a Rocky Movie before investing your monies. 🙈🙈🙈 who is still in there?',
-        text:
-          'Tell me you are not all absolute pussies as I watch AMC plummet. No heart. No hope. Should have watched a Rocky Movie before investing your monies. 🙈🙈🙈 who is still in there?',
+        id: 'Tell me you are not all absolute pussies as I watch AMC plummet. No heart. No hope. Should have watched a Rocky Movie before investing your monies. 🙈🙈🙈 who is still in there?',
+        text: 'Tell me you are not all absolute pussies as I watch AMC plummet. No heart. No hope. Should have watched a Rocky Movie before investing your monies. 🙈🙈🙈 who is still in there?',
         items_count: 1,
         items: [
           'Tell me you are not all absolute pussies as I watch AMC plummet. No heart. No hope. Should have watched a Rocky Movie before investing your monies. 🙈🙈🙈 who is still in there?',
@@ -3249,10 +3127,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Woke up to this. Said **** it and bought another share. We still sending AMC to the moon, right?',
-        text:
-          'Woke up to this. Said **** it and bought another share. We still sending AMC to the moon, right?',
+        id: 'Woke up to this. Said **** it and bought another share. We still sending AMC to the moon, right?',
+        text: 'Woke up to this. Said **** it and bought another share. We still sending AMC to the moon, right?',
         items_count: 1,
         items: [
           'Woke up to this. Said **** it and bought another share. We still sending AMC to the moon, right?',
@@ -3260,10 +3136,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Just bought more AMC shares via Fidelity. FYI the mobile Fidelity app was super slow, made purchase via website with no issue. Buy the Dip fellow ****!',
-        text:
-          'Just bought more AMC shares via Fidelity. FYI the mobile Fidelity app was super slow, made purchase via website with no issue. Buy the Dip fellow ****!',
+        id: 'Just bought more AMC shares via Fidelity. FYI the mobile Fidelity app was super slow, made purchase via website with no issue. Buy the Dip fellow ****!',
+        text: 'Just bought more AMC shares via Fidelity. FYI the mobile Fidelity app was super slow, made purchase via website with no issue. Buy the Dip fellow ****!',
         items_count: 1,
         items: [
           'Just bought more AMC shares via Fidelity. FYI the mobile Fidelity app was super slow, made purchase via website with no issue. Buy the Dip fellow ****!',
@@ -3271,10 +3145,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Saw AMC stock dropped so naturally went to buy more, makes sense. HOLDING EVEN HARDER NOW',
-        text:
-          'Saw AMC stock dropped so naturally went to buy more, makes sense. HOLDING EVEN HARDER NOW',
+        id: 'Saw AMC stock dropped so naturally went to buy more, makes sense. HOLDING EVEN HARDER NOW',
+        text: 'Saw AMC stock dropped so naturally went to buy more, makes sense. HOLDING EVEN HARDER NOW',
         items_count: 1,
         items: [
           'Saw AMC stock dropped so naturally went to buy more, makes sense. HOLDING EVEN HARDER NOW',
@@ -3282,10 +3154,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "I'm buying $2,500 worth of $AMC and $GME shares near market open! The scummers did a number on the prices, but that is not a reflection of our progress. Just look at yesterday's volume. There are buyers and a lot of them. THEY WANT YOU TO SELL. WE WILL SEE PROGRESS SOON. BUY OR HOLD!",
-        text:
-          "I'm buying $2,500 worth of $AMC and $GME shares near market open! The scummers did a number on the prices, but that is not a reflection of our progress. Just look at yesterday's volume. There are buyers and a lot of them. THEY WANT YOU TO SELL. WE WILL SEE PROGRESS SOON. BUY OR HOLD!",
+        id: "I'm buying $2,500 worth of $AMC and $GME shares near market open! The scummers did a number on the prices, but that is not a reflection of our progress. Just look at yesterday's volume. There are buyers and a lot of them. THEY WANT YOU TO SELL. WE WILL SEE PROGRESS SOON. BUY OR HOLD!",
+        text: "I'm buying $2,500 worth of $AMC and $GME shares near market open! The scummers did a number on the prices, but that is not a reflection of our progress. Just look at yesterday's volume. There are buyers and a lot of them. THEY WANT YOU TO SELL. WE WILL SEE PROGRESS SOON. BUY OR HOLD!",
         items_count: 1,
         items: [
           "I'm buying $2,500 worth of $AMC and $GME shares near market open! The scummers did a number on the prices, but that is not a reflection of our progress. Just look at yesterday's volume. There are buyers and a lot of them. THEY WANT YOU TO SELL. WE WILL SEE PROGRESS SOON. BUY OR HOLD!",
@@ -3293,10 +3163,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'BUY AND HOLD COMRADES! DOING MY SMALL BIT.. THE REST IS TIED INTO AMC',
-        text:
-          'BUY AND HOLD COMRADES! DOING MY SMALL BIT.. THE REST IS TIED INTO AMC',
+        id: 'BUY AND HOLD COMRADES! DOING MY SMALL BIT.. THE REST IS TIED INTO AMC',
+        text: 'BUY AND HOLD COMRADES! DOING MY SMALL BIT.. THE REST IS TIED INTO AMC',
         items_count: 1,
         items: [
           'BUY AND HOLD COMRADES! DOING MY SMALL BIT.. THE REST IS TIED INTO AMC',
@@ -3304,10 +3172,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "I'm New, Were In This Together. Bought A Little Bit Today 523 Shares $AMC. AH Price Is Manipulated Don't Worry, They Are Trying So Hard.",
-        text:
-          "I'm New, Were In This Together. Bought A Little Bit Today 523 Shares $AMC. AH Price Is Manipulated Don't Worry, They Are Trying So Hard.",
+        id: "I'm New, Were In This Together. Bought A Little Bit Today 523 Shares $AMC. AH Price Is Manipulated Don't Worry, They Are Trying So Hard.",
+        text: "I'm New, Were In This Together. Bought A Little Bit Today 523 Shares $AMC. AH Price Is Manipulated Don't Worry, They Are Trying So Hard.",
         items_count: 1,
         items: [
           "I'm New, Were In This Together. Bought A Little Bit Today 523 Shares $AMC. AH Price Is Manipulated Don't Worry, They Are Trying So Hard.",
@@ -3315,10 +3181,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Bought my first stock ever and I have already made $0.35. Let's see where this AMC goes.",
-        text:
-          "Bought my first stock ever and I have already made $0.35. Let's see where this AMC goes.",
+        id: "Bought my first stock ever and I have already made $0.35. Let's see where this AMC goes.",
+        text: "Bought my first stock ever and I have already made $0.35. Let's see where this AMC goes.",
         items_count: 1,
         items: [
           "Bought my first stock ever and I have already made $0.35. Let's see where this AMC goes.",
@@ -3326,10 +3190,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Bought over 1k shares of $AMC this morning. Strengthen your resolve. Hold the **** line.',
-        text:
-          'Bought over 1k shares of $AMC this morning. Strengthen your resolve. Hold the **** line.',
+        id: 'Bought over 1k shares of $AMC this morning. Strengthen your resolve. Hold the **** line.',
+        text: 'Bought over 1k shares of $AMC this morning. Strengthen your resolve. Hold the **** line.',
         items_count: 1,
         items: [
           'Bought over 1k shares of $AMC this morning. Strengthen your resolve. Hold the **** line.',
@@ -3337,10 +3199,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Averaging down in my amc position 💎🙌 now holding 35 amc shares, make the hedgies pay',
-        text:
-          'Averaging down in my amc position 💎🙌 now holding 35 amc shares, make the hedgies pay',
+        id: 'Averaging down in my amc position 💎🙌 now holding 35 amc shares, make the hedgies pay',
+        text: 'Averaging down in my amc position 💎🙌 now holding 35 amc shares, make the hedgies pay',
         items_count: 1,
         items: [
           'Averaging down in my amc position 💎🙌 now holding 35 amc shares, make the hedgies pay',
@@ -3348,10 +3208,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Doing my part, put in what i could on friday, bought 3 shares of amc @ 13.46. Amc to the 🌚🚀🚀🚀🚀 Tl;DR: 🐒🚀🌚 ✋🏻💎🤚🏻',
-        text:
-          'Doing my part, put in what i could on friday, bought 3 shares of amc @ 13.46. Amc to the 🌚🚀🚀🚀🚀 Tl;DR: 🐒🚀🌚 ✋🏻💎🤚🏻',
+        id: 'Doing my part, put in what i could on friday, bought 3 shares of amc @ 13.46. Amc to the 🌚🚀🚀🚀🚀 Tl;DR: 🐒🚀🌚 ✋🏻💎🤚🏻',
+        text: 'Doing my part, put in what i could on friday, bought 3 shares of amc @ 13.46. Amc to the 🌚🚀🚀🚀🚀 Tl;DR: 🐒🚀🌚 ✋🏻💎🤚🏻',
         items_count: 1,
         items: [
           'Doing my part, put in what i could on friday, bought 3 shares of amc @ 13.46. Amc to the 🌚🚀🚀🚀🚀 Tl;DR: 🐒🚀🌚 ✋🏻💎🤚🏻',
@@ -3359,10 +3217,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Alright **** this is it. Been a lurker on WSB for 3 years and dont even know what an option is. All my life savings into AMC *HOLD THE **** LINE 💎👐* this is not financial advice. I like the stock',
-        text:
-          'Alright **** this is it. Been a lurker on WSB for 3 years and dont even know what an option is. All my life savings into AMC *HOLD THE **** LINE 💎👐* this is not financial advice. I like the stock',
+        id: 'Alright **** this is it. Been a lurker on WSB for 3 years and dont even know what an option is. All my life savings into AMC *HOLD THE **** LINE 💎👐* this is not financial advice. I like the stock',
+        text: 'Alright **** this is it. Been a lurker on WSB for 3 years and dont even know what an option is. All my life savings into AMC *HOLD THE **** LINE 💎👐* this is not financial advice. I like the stock',
         items_count: 1,
         items: [
           'Alright **** this is it. Been a lurker on WSB for 3 years and dont even know what an option is. All my life savings into AMC *HOLD THE **** LINE 💎👐* this is not financial advice. I like the stock',
@@ -3524,10 +3380,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'To the MooN 🌙 🌙🌙🌙🌙💎🙌🚀💎🙌🚀💎🙌🚀💎🙌🚀💎🙌🚀💎🙌🚀hold and buy my glorious 🦍🦍🦍🦍🦍!!!!!!!',
-        text:
-          'To the MooN 🌙 🌙🌙🌙🌙💎🙌🚀💎🙌🚀💎🙌🚀💎🙌🚀💎🙌🚀💎🙌🚀hold and buy my glorious 🦍🦍🦍🦍🦍!!!!!!!',
+        id: 'To the MooN 🌙 🌙🌙🌙🌙💎🙌🚀💎🙌🚀💎🙌🚀💎🙌🚀💎🙌🚀💎🙌🚀hold and buy my glorious 🦍🦍🦍🦍🦍!!!!!!!',
+        text: 'To the MooN 🌙 🌙🌙🌙🌙💎🙌🚀💎🙌🚀💎🙌🚀💎🙌🚀💎🙌🚀💎🙌🚀hold and buy my glorious 🦍🦍🦍🦍🦍!!!!!!!',
         items_count: 1,
         items: [
           'To the MooN 🌙 🌙🌙🌙🌙💎🙌🚀💎🙌🚀💎🙌🚀💎🙌🚀💎🙌🚀💎🙌🚀hold and buy my glorious 🦍🦍🦍🦍🦍!!!!!!!',
@@ -3674,10 +3528,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'IM NOT **** GIVING IN ON AMC RIDING IT TO THE **** MOON 🚀🍿🚀🍿🚀🙌💎',
-        text:
-          'IM NOT **** GIVING IN ON AMC RIDING IT TO THE **** MOON 🚀🍿🚀🍿🚀🙌💎',
+        id: 'IM NOT **** GIVING IN ON AMC RIDING IT TO THE **** MOON 🚀🍿🚀🍿🚀🙌💎',
+        text: 'IM NOT **** GIVING IN ON AMC RIDING IT TO THE **** MOON 🚀🍿🚀🍿🚀🙌💎',
         items_count: 1,
         items: [
           'IM NOT **** GIVING IN ON AMC RIDING IT TO THE **** MOON 🚀🍿🚀🍿🚀🙌💎',
@@ -3699,10 +3551,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'AMC GANG, SHOW ME THAT YOU‘RE STILL HERE 💎🤲 ALL THE WAY (SLINGSHOT)- UP!',
-        text:
-          'AMC GANG, SHOW ME THAT YOU‘RE STILL HERE 💎🤲 ALL THE WAY (SLINGSHOT)- UP!',
+        id: 'AMC GANG, SHOW ME THAT YOU‘RE STILL HERE 💎🤲 ALL THE WAY (SLINGSHOT)- UP!',
+        text: 'AMC GANG, SHOW ME THAT YOU‘RE STILL HERE 💎🤲 ALL THE WAY (SLINGSHOT)- UP!',
         items_count: 1,
         items: [
           'AMC GANG, SHOW ME THAT YOU‘RE STILL HERE 💎🤲 ALL THE WAY (SLINGSHOT)- UP!',
@@ -3970,8 +3820,7 @@ export const clusters: ExampleNode[] = [
       {
         type: 'Phrase',
         id: 'Reasons why GME is unique, and reasons why no there’s no next GME',
-        text:
-          'Reasons why GME is unique, and reasons why no there’s no next GME',
+        text: 'Reasons why GME is unique, and reasons why no there’s no next GME',
         items_count: 1,
         items: [
           'Reasons why GME is unique, and reasons why no there’s no next GME',
@@ -3994,10 +3843,8 @@ export const clusters: ExampleNode[] = [
     children: [
       {
         type: 'Phrase',
-        id:
-          'Remember when we wished we could buy $GME for under $100? Buy the dip!',
-        text:
-          'Remember when we wished we could buy $GME for under $100? Buy the dip!',
+        id: 'Remember when we wished we could buy $GME for under $100? Buy the dip!',
+        text: 'Remember when we wished we could buy $GME for under $100? Buy the dip!',
         items_count: 7,
         items: [
           'Remember when we wished we could buy $GME for under $100? Buy the dip!',
@@ -4054,10 +3901,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Nice dip. I just bought another 700+ shares of GME with $100k worth of margin. Thank you, hedgie ladder traders.',
-        text:
-          'Nice dip. I just bought another 700+ shares of GME with $100k worth of margin. Thank you, hedgie ladder traders.',
+        id: 'Nice dip. I just bought another 700+ shares of GME with $100k worth of margin. Thank you, hedgie ladder traders.',
+        text: 'Nice dip. I just bought another 700+ shares of GME with $100k worth of margin. Thank you, hedgie ladder traders.',
         items_count: 2,
         items: [
           'Nice dip. I just bought another 700+ shares of GME with $100k worth of margin. Thank you, hedgie ladder traders.',
@@ -4077,10 +3922,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Ready to put my remaining money in GME buying the dip when it happens today!',
-        text:
-          'Ready to put my remaining money in GME buying the dip when it happens today!',
+        id: 'Ready to put my remaining money in GME buying the dip when it happens today!',
+        text: 'Ready to put my remaining money in GME buying the dip when it happens today!',
         items_count: 2,
         items: [
           'Ready to put my remaining money in GME buying the dip when it happens today!',
@@ -4096,10 +3939,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'All inned on $GME at $327 and I’m down 72% (10K USD) so I opened a margins account and bought the dip 💎 🙌',
-        text:
-          'All inned on $GME at $327 and I’m down 72% (10K USD) so I opened a margins account and bought the dip 💎 🙌',
+        id: 'All inned on $GME at $327 and I’m down 72% (10K USD) so I opened a margins account and bought the dip 💎 🙌',
+        text: 'All inned on $GME at $327 and I’m down 72% (10K USD) so I opened a margins account and bought the dip 💎 🙌',
         items_count: 1,
         items: [
           'All inned on $GME at $327 and I’m down 72% (10K USD) so I opened a margins account and bought the dip 💎 🙌',
@@ -4107,10 +3948,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'GME YOLO Update - 2/3/21. Bought the dip yesterday. Still holding.',
-        text:
-          'GME YOLO Update - 2/3/21. Bought the dip yesterday. Still holding.',
+        id: 'GME YOLO Update - 2/3/21. Bought the dip yesterday. Still holding.',
+        text: 'GME YOLO Update - 2/3/21. Bought the dip yesterday. Still holding.',
         items_count: 1,
         items: [
           'GME YOLO Update - 2/3/21. Bought the dip yesterday. Still holding.',
@@ -4118,10 +3957,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Bought at the tip then at the dip. RH let’s you hold 100 shares of $GME now. Cut my cost basis in half let’s gooooo to the 🌑🌑🌑🚀🚀🚀🚀💎👋🏻💎👋🏻💎👋🏻',
-        text:
-          'Bought at the tip then at the dip. RH let’s you hold 100 shares of $GME now. Cut my cost basis in half let’s gooooo to the 🌑🌑🌑🚀🚀🚀🚀💎👋🏻💎👋🏻💎👋🏻',
+        id: 'Bought at the tip then at the dip. RH let’s you hold 100 shares of $GME now. Cut my cost basis in half let’s gooooo to the 🌑🌑🌑🚀🚀🚀🚀💎👋🏻💎👋🏻💎👋🏻',
+        text: 'Bought at the tip then at the dip. RH let’s you hold 100 shares of $GME now. Cut my cost basis in half let’s gooooo to the 🌑🌑🌑🚀🚀🚀🚀💎👋🏻💎👋🏻💎👋🏻',
         items_count: 1,
         items: [
           'Bought at the tip then at the dip. RH let’s you hold 100 shares of $GME now. Cut my cost basis in half let’s gooooo to the 🌑🌑🌑🚀🚀🚀🚀💎👋🏻💎👋🏻💎👋🏻',
@@ -4129,10 +3966,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Holding $GME and got the dip today by placing a limit order for $89 just in case!!',
-        text:
-          'Holding $GME and got the dip today by placing a limit order for $89 just in case!!',
+        id: 'Holding $GME and got the dip today by placing a limit order for $89 just in case!!',
+        text: 'Holding $GME and got the dip today by placing a limit order for $89 just in case!!',
         items_count: 1,
         items: [
           'Holding $GME and got the dip today by placing a limit order for $89 just in case!!',
@@ -4140,10 +3975,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Hesitated for a few days, started salivating at the dips, bought 5 more shares of GME and 30 AMC.',
-        text:
-          'Hesitated for a few days, started salivating at the dips, bought 5 more shares of GME and 30 AMC.',
+        id: 'Hesitated for a few days, started salivating at the dips, bought 5 more shares of GME and 30 AMC.',
+        text: 'Hesitated for a few days, started salivating at the dips, bought 5 more shares of GME and 30 AMC.',
         items_count: 1,
         items: [
           'Hesitated for a few days, started salivating at the dips, bought 5 more shares of GME and 30 AMC.',
@@ -4151,10 +3984,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I’ve been fighting the amc front but I just bought the dip on gme.',
-        text:
-          'I’ve been fighting the amc front but I just bought the dip on gme.',
+        id: 'I’ve been fighting the amc front but I just bought the dip on gme.',
+        text: 'I’ve been fighting the amc front but I just bought the dip on gme.',
         items_count: 1,
         items: [
           'I’ve been fighting the amc front but I just bought the dip on gme.',
@@ -4169,10 +4000,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'HOOOOOLLLLLDDDDDD 🤲🏽💎🤲🏽 just got my $GME stock on the dip, thanks hedgies. I like this stonk!',
-        text:
-          'HOOOOOLLLLLDDDDDD 🤲🏽💎🤲🏽 just got my $GME stock on the dip, thanks hedgies. I like this stonk!',
+        id: 'HOOOOOLLLLLDDDDDD 🤲🏽💎🤲🏽 just got my $GME stock on the dip, thanks hedgies. I like this stonk!',
+        text: 'HOOOOOLLLLLDDDDDD 🤲🏽💎🤲🏽 just got my $GME stock on the dip, thanks hedgies. I like this stonk!',
         items_count: 1,
         items: [
           'HOOOOOLLLLLDDDDDD 🤲🏽💎🤲🏽 just got my $GME stock on the dip, thanks hedgies. I like this stonk!',
@@ -4194,10 +4023,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Mom yells at me I'm an idiot for keeping GME, but she bought the dip as soon as I did. Twice as much, in fact",
-        text:
-          "Mom yells at me I'm an idiot for keeping GME, but she bought the dip as soon as I did. Twice as much, in fact",
+        id: "Mom yells at me I'm an idiot for keeping GME, but she bought the dip as soon as I did. Twice as much, in fact",
+        text: "Mom yells at me I'm an idiot for keeping GME, but she bought the dip as soon as I did. Twice as much, in fact",
         items_count: 1,
         items: [
           "Mom yells at me I'm an idiot for keeping GME, but she bought the dip as soon as I did. Twice as much, in fact",
@@ -4205,10 +4032,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Really can’t afford GME but guess who just bought GME at the dip anyway? HOLDING! 🚀',
-        text:
-          'Really can’t afford GME but guess who just bought GME at the dip anyway? HOLDING! 🚀',
+        id: 'Really can’t afford GME but guess who just bought GME at the dip anyway? HOLDING! 🚀',
+        text: 'Really can’t afford GME but guess who just bought GME at the dip anyway? HOLDING! 🚀',
         items_count: 1,
         items: [
           'Really can’t afford GME but guess who just bought GME at the dip anyway? HOLDING! 🚀',
@@ -4216,10 +4041,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Long time lurker first time poster. Today I bought the dip and gained 26 GME and 2 AMC after previously buying 2 GME on Robbinhood',
-        text:
-          'Long time lurker first time poster. Today I bought the dip and gained 26 GME and 2 AMC after previously buying 2 GME on Robbinhood',
+        id: 'Long time lurker first time poster. Today I bought the dip and gained 26 GME and 2 AMC after previously buying 2 GME on Robbinhood',
+        text: 'Long time lurker first time poster. Today I bought the dip and gained 26 GME and 2 AMC after previously buying 2 GME on Robbinhood',
         items_count: 1,
         items: [
           'Long time lurker first time poster. Today I bought the dip and gained 26 GME and 2 AMC after previously buying 2 GME on Robbinhood',
@@ -4227,10 +4050,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Doing my part. Picked up some more GME at dip. Let’s take this to the moon.',
-        text:
-          'Doing my part. Picked up some more GME at dip. Let’s take this to the moon.',
+        id: 'Doing my part. Picked up some more GME at dip. Let’s take this to the moon.',
+        text: 'Doing my part. Picked up some more GME at dip. Let’s take this to the moon.',
         items_count: 1,
         items: [
           'Doing my part. Picked up some more GME at dip. Let’s take this to the moon.',
@@ -4238,10 +4059,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I bought the GME dip. SLV rugpull money is going to fund a second short attack on GME.',
-        text:
-          'I bought the GME dip. SLV rugpull money is going to fund a second short attack on GME.',
+        id: 'I bought the GME dip. SLV rugpull money is going to fund a second short attack on GME.',
+        text: 'I bought the GME dip. SLV rugpull money is going to fund a second short attack on GME.',
         items_count: 1,
         items: [
           'I bought the GME dip. SLV rugpull money is going to fund a second short attack on GME.',
@@ -4256,10 +4075,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Anyone who was late to the GME game,?This is your chance to get some! BUY THE DIP!',
-        text:
-          'Anyone who was late to the GME game,?This is your chance to get some! BUY THE DIP!',
+        id: 'Anyone who was late to the GME game,?This is your chance to get some! BUY THE DIP!',
+        text: 'Anyone who was late to the GME game,?This is your chance to get some! BUY THE DIP!',
         items_count: 1,
         items: [
           'Anyone who was late to the GME game,?This is your chance to get some! BUY THE DIP!',
@@ -4267,10 +4084,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'LIQUIDATED MY ENTIRE PORTFOLIO AMD PUT IT IN GME IN THE DIP 🚀🚀🚀🚀 Let’s **** ride',
-        text:
-          'LIQUIDATED MY ENTIRE PORTFOLIO AMD PUT IT IN GME IN THE DIP 🚀🚀🚀🚀 Let’s **** ride',
+        id: 'LIQUIDATED MY ENTIRE PORTFOLIO AMD PUT IT IN GME IN THE DIP 🚀🚀🚀🚀 Let’s **** ride',
+        text: 'LIQUIDATED MY ENTIRE PORTFOLIO AMD PUT IT IN GME IN THE DIP 🚀🚀🚀🚀 Let’s **** ride',
         items_count: 1,
         items: [
           'LIQUIDATED MY ENTIRE PORTFOLIO AMD PUT IT IN GME IN THE DIP 🚀🚀🚀🚀 Let’s **** ride',
@@ -4278,10 +4093,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Today is the day i YOLO all in to GME looking for some dips at open',
-        text:
-          'Today is the day i YOLO all in to GME looking for some dips at open',
+        id: 'Today is the day i YOLO all in to GME looking for some dips at open',
+        text: 'Today is the day i YOLO all in to GME looking for some dips at open',
         items_count: 1,
         items: [
           'Today is the day i YOLO all in to GME looking for some dips at open',
@@ -4298,10 +4111,8 @@ export const clusters: ExampleNode[] = [
   },
   {
     type: 'Cluster',
-    id:
-      'Bought 5 Shares GME this morning. EoD already down 38%. Not selling. 💎🙌',
-    text:
-      'Bought 5 Shares GME this morning. EoD already down 38%. Not selling. 💎🙌',
+    id: 'Bought 5 Shares GME this morning. EoD already down 38%. Not selling. 💎🙌',
+    text: 'Bought 5 Shares GME this morning. EoD already down 38%. Not selling. 💎🙌',
     items_count: 44,
     children: [
       {
@@ -4335,10 +4146,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Finally caved to FOMO and bought a few shares of $GME this morning @ 83.33. It's down 20% already.",
-        text:
-          "Finally caved to FOMO and bought a few shares of $GME this morning @ 83.33. It's down 20% already.",
+        id: "Finally caved to FOMO and bought a few shares of $GME this morning @ 83.33. It's down 20% already.",
+        text: "Finally caved to FOMO and bought a few shares of $GME this morning @ 83.33. It's down 20% already.",
         items_count: 3,
         items: [
           "Finally caved to FOMO and bought a few shares of $GME this morning @ 83.33. It's down 20% already.",
@@ -4349,10 +4158,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Down $759k this week on GME, no point in selling anything at this point, hold strong boys💎✋',
-        text:
-          'Down $759k this week on GME, no point in selling anything at this point, hold strong boys💎✋',
+        id: 'Down $759k this week on GME, no point in selling anything at this point, hold strong boys💎✋',
+        text: 'Down $759k this week on GME, no point in selling anything at this point, hold strong boys💎✋',
         items_count: 3,
         items: [
           'Down $759k this week on GME, no point in selling anything at this point, hold strong boys💎✋',
@@ -4364,10 +4171,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Bought my first 2 GME stocks yesterday .... Already loosing, but 💎****🙌 are holding 😁',
-        text:
-          'Bought my first 2 GME stocks yesterday .... Already loosing, but 💎****🙌 are holding 😁',
+        id: 'Bought my first 2 GME stocks yesterday .... Already loosing, but 💎****🙌 are holding 😁',
+        text: 'Bought my first 2 GME stocks yesterday .... Already loosing, but 💎****🙌 are holding 😁',
         items_count: 3,
         items: [
           'Bought my first 2 GME stocks yesterday .... Already loosing, but 💎****🙌 are holding 😁',
@@ -4379,10 +4184,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Picked up 700 shares of GME in after hours. I’m with you guys till the end. 🚀🚀🚀🌕🌕🌕💎🤚🤚💎',
-        text:
-          'Picked up 700 shares of GME in after hours. I’m with you guys till the end. 🚀🚀🚀🌕🌕🌕💎🤚🤚💎',
+        id: 'Picked up 700 shares of GME in after hours. I’m with you guys till the end. 🚀🚀🚀🌕🌕🌕💎🤚🤚💎',
+        text: 'Picked up 700 shares of GME in after hours. I’m with you guys till the end. 🚀🚀🚀🌕🌕🌕💎🤚🤚💎',
         items_count: 2,
         items: [
           'Picked up 700 shares of GME in after hours. I’m with you guys till the end. 🚀🚀🚀🌕🌕🌕💎🤚🤚💎',
@@ -4392,10 +4195,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Bought 5 Shares GME this morning. EoD already down 38%. Not selling. 💎🙌',
-        text:
-          'Bought 5 Shares GME this morning. EoD already down 38%. Not selling. 💎🙌',
+        id: 'Bought 5 Shares GME this morning. EoD already down 38%. Not selling. 💎🙌',
+        text: 'Bought 5 Shares GME this morning. EoD already down 38%. Not selling. 💎🙌',
         items_count: 1,
         items: [
           'Bought 5 Shares GME this morning. EoD already down 38%. Not selling. 💎🙌',
@@ -4403,10 +4204,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Bought 20 shares $GME today at $55 -- the HFs have not exited yet!!',
-        text:
-          'Bought 20 shares $GME today at $55 -- the HFs have not exited yet!!',
+        id: 'Bought 20 shares $GME today at $55 -- the HFs have not exited yet!!',
+        text: 'Bought 20 shares $GME today at $55 -- the HFs have not exited yet!!',
         items_count: 1,
         items: [
           'Bought 20 shares $GME today at $55 -- the HFs have not exited yet!!',
@@ -4421,10 +4220,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "I was up about 20% all time.... But now I'm down 69.420%.... And I Couldn't Be Happier!!! BUY BUY BUY GME, THEY HAVENT COVERED THEIR SHORTS. WE NEED A PUSH TO SCARE THEM OFF TO MAKE THEIR LADDER ATTACKS FALL ON THEM",
-        text:
-          "I was up about 20% all time.... But now I'm down 69.420%.... And I Couldn't Be Happier!!! BUY BUY BUY GME, THEY HAVENT COVERED THEIR SHORTS. WE NEED A PUSH TO SCARE THEM OFF TO MAKE THEIR LADDER ATTACKS FALL ON THEM",
+        id: "I was up about 20% all time.... But now I'm down 69.420%.... And I Couldn't Be Happier!!! BUY BUY BUY GME, THEY HAVENT COVERED THEIR SHORTS. WE NEED A PUSH TO SCARE THEM OFF TO MAKE THEIR LADDER ATTACKS FALL ON THEM",
+        text: "I was up about 20% all time.... But now I'm down 69.420%.... And I Couldn't Be Happier!!! BUY BUY BUY GME, THEY HAVENT COVERED THEIR SHORTS. WE NEED A PUSH TO SCARE THEM OFF TO MAKE THEIR LADDER ATTACKS FALL ON THEM",
         items_count: 1,
         items: [
           "I was up about 20% all time.... But now I'm down 69.420%.... And I Couldn't Be Happier!!! BUY BUY BUY GME, THEY HAVENT COVERED THEIR SHORTS. WE NEED A PUSH TO SCARE THEM OFF TO MAKE THEIR LADDER ATTACKS FALL ON THEM",
@@ -4432,10 +4229,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Bought first GME stocks at $330, been able to average down a bit. Not much but will 💎👐🏼💎 until 🚀🚀🌑',
-        text:
-          'Bought first GME stocks at $330, been able to average down a bit. Not much but will 💎👐🏼💎 until 🚀🚀🌑',
+        id: 'Bought first GME stocks at $330, been able to average down a bit. Not much but will 💎👐🏼💎 until 🚀🚀🌑',
+        text: 'Bought first GME stocks at $330, been able to average down a bit. Not much but will 💎👐🏼💎 until 🚀🚀🌑',
         items_count: 1,
         items: [
           'Bought first GME stocks at $330, been able to average down a bit. Not much but will 💎👐🏼💎 until 🚀🚀🌑',
@@ -4443,10 +4238,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I had to sell today boys... OUT OF ALL MY OTHER STOCKS TO BUY MORE GME. Average Cost going down 💎 🙌🏻 going up hold fellas 😈',
-        text:
-          'I had to sell today boys... OUT OF ALL MY OTHER STOCKS TO BUY MORE GME. Average Cost going down 💎 🙌🏻 going up hold fellas 😈',
+        id: 'I had to sell today boys... OUT OF ALL MY OTHER STOCKS TO BUY MORE GME. Average Cost going down 💎 🙌🏻 going up hold fellas 😈',
+        text: 'I had to sell today boys... OUT OF ALL MY OTHER STOCKS TO BUY MORE GME. Average Cost going down 💎 🙌🏻 going up hold fellas 😈',
         items_count: 1,
         items: [
           'I had to sell today boys... OUT OF ALL MY OTHER STOCKS TO BUY MORE GME. Average Cost going down 💎 🙌🏻 going up hold fellas 😈',
@@ -4454,10 +4247,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'GME Update: I doubled down on my shares today. I have a feeling the real show is about to begin. (Am doing my best to spread WallStreetBets message with all this media coverage) (Ik Ik I’m still working on transferring from SelloutHood)',
-        text:
-          'GME Update: I doubled down on my shares today. I have a feeling the real show is about to begin. (Am doing my best to spread WallStreetBets message with all this media coverage) (Ik Ik I’m still working on transferring from SelloutHood)',
+        id: 'GME Update: I doubled down on my shares today. I have a feeling the real show is about to begin. (Am doing my best to spread WallStreetBets message with all this media coverage) (Ik Ik I’m still working on transferring from SelloutHood)',
+        text: 'GME Update: I doubled down on my shares today. I have a feeling the real show is about to begin. (Am doing my best to spread WallStreetBets message with all this media coverage) (Ik Ik I’m still working on transferring from SelloutHood)',
         items_count: 1,
         items: [
           'GME Update: I doubled down on my shares today. I have a feeling the real show is about to begin. (Am doing my best to spread WallStreetBets message with all this media coverage) (Ik Ik I’m still working on transferring from SelloutHood)',
@@ -4465,10 +4256,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Don’t be like me. The idiot who thought he was happy with his gains when $gme was at $20/ share. I bought more at the top to hold with you guys again. Not selling this time. 🚀🚀',
-        text:
-          'Don’t be like me. The idiot who thought he was happy with his gains when $gme was at $20/ share. I bought more at the top to hold with you guys again. Not selling this time. 🚀🚀',
+        id: 'Don’t be like me. The idiot who thought he was happy with his gains when $gme was at $20/ share. I bought more at the top to hold with you guys again. Not selling this time. 🚀🚀',
+        text: 'Don’t be like me. The idiot who thought he was happy with his gains when $gme was at $20/ share. I bought more at the top to hold with you guys again. Not selling this time. 🚀🚀',
         items_count: 1,
         items: [
           'Don’t be like me. The idiot who thought he was happy with his gains when $gme was at $20/ share. I bought more at the top to hold with you guys again. Not selling this time. 🚀🚀',
@@ -4476,10 +4265,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'My first loss for you guys. But it’s okay bois. Bought 2.5 more shares of GME to fuel the 🚀🚀🚀',
-        text:
-          'My first loss for you guys. But it’s okay bois. Bought 2.5 more shares of GME to fuel the 🚀🚀🚀',
+        id: 'My first loss for you guys. But it’s okay bois. Bought 2.5 more shares of GME to fuel the 🚀🚀🚀',
+        text: 'My first loss for you guys. But it’s okay bois. Bought 2.5 more shares of GME to fuel the 🚀🚀🚀',
         items_count: 1,
         items: [
           'My first loss for you guys. But it’s okay bois. Bought 2.5 more shares of GME to fuel the 🚀🚀🚀',
@@ -4487,10 +4274,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'GME 💎🖐🏻 WE HOLD!!! Down $13.5k I don’t know what an exit strategy is! I like the stock!',
-        text:
-          'GME 💎🖐🏻 WE HOLD!!! Down $13.5k I don’t know what an exit strategy is! I like the stock!',
+        id: 'GME 💎🖐🏻 WE HOLD!!! Down $13.5k I don’t know what an exit strategy is! I like the stock!',
+        text: 'GME 💎🖐🏻 WE HOLD!!! Down $13.5k I don’t know what an exit strategy is! I like the stock!',
         items_count: 1,
         items: [
           'GME 💎🖐🏻 WE HOLD!!! Down $13.5k I don’t know what an exit strategy is! I like the stock!',
@@ -4521,10 +4306,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Just bought 1 share of GMT, I now have 2!! Not selling!! Buy the dip!!',
-        text:
-          'Just bought 1 share of GMT, I now have 2!! Not selling!! Buy the dip!!',
+        id: 'Just bought 1 share of GMT, I now have 2!! Not selling!! Buy the dip!!',
+        text: 'Just bought 1 share of GMT, I now have 2!! Not selling!! Buy the dip!!',
         items_count: 1,
         items: [
           'Just bought 1 share of GMT, I now have 2!! Not selling!! Buy the dip!!',
@@ -4532,10 +4315,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Lost half my gains today. Not **** selling 💎🙌 Only my 2nd day in the red since buying GME, after years in the red. Scared money don't make no money, still up 3k all time.",
-        text:
-          "Lost half my gains today. Not **** selling 💎🙌 Only my 2nd day in the red since buying GME, after years in the red. Scared money don't make no money, still up 3k all time.",
+        id: "Lost half my gains today. Not **** selling 💎🙌 Only my 2nd day in the red since buying GME, after years in the red. Scared money don't make no money, still up 3k all time.",
+        text: "Lost half my gains today. Not **** selling 💎🙌 Only my 2nd day in the red since buying GME, after years in the red. Scared money don't make no money, still up 3k all time.",
         items_count: 1,
         items: [
           "Lost half my gains today. Not **** selling 💎🙌 Only my 2nd day in the red since buying GME, after years in the red. Scared money don't make no money, still up 3k all time.",
@@ -4543,10 +4324,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          '🚀🌕💎🙌 Was on the fence and finally decided to finally jump in after hours. +52 GME Shares. LFGOOO, HOLD THE LINE 🦍! 🚀 🌕💎🙌',
-        text:
-          '🚀🌕💎🙌 Was on the fence and finally decided to finally jump in after hours. +52 GME Shares. LFGOOO, HOLD THE LINE 🦍! 🚀 🌕💎🙌',
+        id: '🚀🌕💎🙌 Was on the fence and finally decided to finally jump in after hours. +52 GME Shares. LFGOOO, HOLD THE LINE 🦍! 🚀 🌕💎🙌',
+        text: '🚀🌕💎🙌 Was on the fence and finally decided to finally jump in after hours. +52 GME Shares. LFGOOO, HOLD THE LINE 🦍! 🚀 🌕💎🙌',
         items_count: 1,
         items: [
           '🚀🌕💎🙌 Was on the fence and finally decided to finally jump in after hours. +52 GME Shares. LFGOOO, HOLD THE LINE 🦍! 🚀 🌕💎🙌',
@@ -4561,10 +4340,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'GME - TIRED OF FEELING LEFT OUT! BOUGHT THE DIP $100K LIFE SAVINGS ALL IN NOT SELLING UNTIL $5K AT LEAST I LIKE THIS STOCK!!!!💎🖐🚀🚀🚀🚀🚀🚀🚀🚀👩‍🚀',
-        text:
-          'GME - TIRED OF FEELING LEFT OUT! BOUGHT THE DIP $100K LIFE SAVINGS ALL IN NOT SELLING UNTIL $5K AT LEAST I LIKE THIS STOCK!!!!💎🖐🚀🚀🚀🚀🚀🚀🚀🚀👩‍🚀',
+        id: 'GME - TIRED OF FEELING LEFT OUT! BOUGHT THE DIP $100K LIFE SAVINGS ALL IN NOT SELLING UNTIL $5K AT LEAST I LIKE THIS STOCK!!!!💎🖐🚀🚀🚀🚀🚀🚀🚀🚀👩‍🚀',
+        text: 'GME - TIRED OF FEELING LEFT OUT! BOUGHT THE DIP $100K LIFE SAVINGS ALL IN NOT SELLING UNTIL $5K AT LEAST I LIKE THIS STOCK!!!!💎🖐🚀🚀🚀🚀🚀🚀🚀🚀👩‍🚀',
         items_count: 1,
         items: [
           'GME - TIRED OF FEELING LEFT OUT! BOUGHT THE DIP $100K LIFE SAVINGS ALL IN NOT SELLING UNTIL $5K AT LEAST I LIKE THIS STOCK!!!!💎🖐🚀🚀🚀🚀🚀🚀🚀🚀👩‍🚀',
@@ -4820,10 +4597,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Got 19 more 🚀🚀🚀🚀🚀🚀💎💎💎💎💎🙌🙌🙌🙌🙌 apes stronger together',
-        text:
-          'Got 19 more 🚀🚀🚀🚀🚀🚀💎💎💎💎💎🙌🙌🙌🙌🙌 apes stronger together',
+        id: 'Got 19 more 🚀🚀🚀🚀🚀🚀💎💎💎💎💎🙌🙌🙌🙌🙌 apes stronger together',
+        text: 'Got 19 more 🚀🚀🚀🚀🚀🚀💎💎💎💎💎🙌🙌🙌🙌🙌 apes stronger together',
         items_count: 1,
         items: [
           'Got 19 more 🚀🚀🚀🚀🚀🚀💎💎💎💎💎🙌🙌🙌🙌🙌 apes stronger together',
@@ -4838,10 +4613,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          '‘Apes together strong’ only works if we’re TOGETHER, idiots. AMC and NOK, etc. have weakened the cause',
-        text:
-          '‘Apes together strong’ only works if we’re TOGETHER, idiots. AMC and NOK, etc. have weakened the cause',
+        id: '‘Apes together strong’ only works if we’re TOGETHER, idiots. AMC and NOK, etc. have weakened the cause',
+        text: '‘Apes together strong’ only works if we’re TOGETHER, idiots. AMC and NOK, etc. have weakened the cause',
         items_count: 1,
         items: [
           '‘Apes together strong’ only works if we’re TOGETHER, idiots. AMC and NOK, etc. have weakened the cause',
@@ -4877,10 +4650,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Apes together strong. Harambe showed us how to hold and never let go.',
-        text:
-          'Apes together strong. Harambe showed us how to hold and never let go.',
+        id: 'Apes together strong. Harambe showed us how to hold and never let go.',
+        text: 'Apes together strong. Harambe showed us how to hold and never let go.',
         items_count: 1,
         items: [
           'Apes together strong. Harambe showed us how to hold and never let go.',
@@ -4909,10 +4680,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Melvin Co underestimate how collectively stubborn and smooth brained we are. Apes, together strong, we will HOLD, they will PAY 💎 👐',
-        text:
-          'Melvin Co underestimate how collectively stubborn and smooth brained we are. Apes, together strong, we will HOLD, they will PAY 💎 👐',
+        id: 'Melvin Co underestimate how collectively stubborn and smooth brained we are. Apes, together strong, we will HOLD, they will PAY 💎 👐',
+        text: 'Melvin Co underestimate how collectively stubborn and smooth brained we are. Apes, together strong, we will HOLD, they will PAY 💎 👐',
         items_count: 1,
         items: [
           'Melvin Co underestimate how collectively stubborn and smooth brained we are. Apes, together strong, we will HOLD, they will PAY 💎 👐',
@@ -5053,10 +4822,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'First Timer Here. Makes logical sense to Hold!! We can do this boys!!!',
-        text:
-          'First Timer Here. Makes logical sense to Hold!! We can do this boys!!!',
+        id: 'First Timer Here. Makes logical sense to Hold!! We can do this boys!!!',
+        text: 'First Timer Here. Makes logical sense to Hold!! We can do this boys!!!',
         items_count: 1,
         items: [
           'First Timer Here. Makes logical sense to Hold!! We can do this boys!!!',
@@ -5071,10 +4838,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Still Holding and will keep holding until the line because I have 💎🙌 and I’m a 🦍 if I can hold!! You definitely can hold too!!!!! Gme to infinity and beyond!! 🚀🚀🚀',
-        text:
-          'Still Holding and will keep holding until the line because I have 💎🙌 and I’m a 🦍 if I can hold!! You definitely can hold too!!!!! Gme to infinity and beyond!! 🚀🚀🚀',
+        id: 'Still Holding and will keep holding until the line because I have 💎🙌 and I’m a 🦍 if I can hold!! You definitely can hold too!!!!! Gme to infinity and beyond!! 🚀🚀🚀',
+        text: 'Still Holding and will keep holding until the line because I have 💎🙌 and I’m a 🦍 if I can hold!! You definitely can hold too!!!!! Gme to infinity and beyond!! 🚀🚀🚀',
         items_count: 1,
         items: [
           'Still Holding and will keep holding until the line because I have 💎🙌 and I’m a 🦍 if I can hold!! You definitely can hold too!!!!! Gme to infinity and beyond!! 🚀🚀🚀',
@@ -5121,10 +4886,8 @@ export const clusters: ExampleNode[] = [
   },
   {
     type: 'Cluster',
-    id:
-      'DONT SELL YOU MORONS. THIS IS ABOUT SOMETHING BIGGER THAN You think. BELIEVE ME, IT WILL BE ALL WORTH IT. EITHER BUY AMC OR GME, OR JUST WAIT. Just believe me, hold.',
-    text:
-      'DONT SELL YOU MORONS. THIS IS ABOUT SOMETHING BIGGER THAN You think. BELIEVE ME, IT WILL BE ALL WORTH IT. EITHER BUY AMC OR GME, OR JUST WAIT. Just believe me, hold.',
+    id: 'DONT SELL YOU MORONS. THIS IS ABOUT SOMETHING BIGGER THAN You think. BELIEVE ME, IT WILL BE ALL WORTH IT. EITHER BUY AMC OR GME, OR JUST WAIT. Just believe me, hold.',
+    text: 'DONT SELL YOU MORONS. THIS IS ABOUT SOMETHING BIGGER THAN You think. BELIEVE ME, IT WILL BE ALL WORTH IT. EITHER BUY AMC OR GME, OR JUST WAIT. Just believe me, hold.',
     items_count: 41,
     children: [
       {
@@ -5173,10 +4936,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "I'm confused by what's going on here... I no like confuse. Buy AMC. Buy GME. Hold. Simple. Hold. No financial advise. Hold.",
-        text:
-          "I'm confused by what's going on here... I no like confuse. Buy AMC. Buy GME. Hold. Simple. Hold. No financial advise. Hold.",
+        id: "I'm confused by what's going on here... I no like confuse. Buy AMC. Buy GME. Hold. Simple. Hold. No financial advise. Hold.",
+        text: "I'm confused by what's going on here... I no like confuse. Buy AMC. Buy GME. Hold. Simple. Hold. No financial advise. Hold.",
         items_count: 4,
         items: [
           "I'm confused by what's going on here... I no like confuse. Buy AMC. Buy GME. Hold. Simple. Hold. No financial advise. Hold.",
@@ -5217,10 +4978,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'DONT SELL YOU MORONS. THIS IS ABOUT SOMETHING BIGGER THAN You think. BELIEVE ME, IT WILL BE ALL WORTH IT. EITHER BUY AMC OR GME, OR JUST WAIT. Just believe me, hold.',
-        text:
-          'DONT SELL YOU MORONS. THIS IS ABOUT SOMETHING BIGGER THAN You think. BELIEVE ME, IT WILL BE ALL WORTH IT. EITHER BUY AMC OR GME, OR JUST WAIT. Just believe me, hold.',
+        id: 'DONT SELL YOU MORONS. THIS IS ABOUT SOMETHING BIGGER THAN You think. BELIEVE ME, IT WILL BE ALL WORTH IT. EITHER BUY AMC OR GME, OR JUST WAIT. Just believe me, hold.',
+        text: 'DONT SELL YOU MORONS. THIS IS ABOUT SOMETHING BIGGER THAN You think. BELIEVE ME, IT WILL BE ALL WORTH IT. EITHER BUY AMC OR GME, OR JUST WAIT. Just believe me, hold.',
         items_count: 1,
         items: [
           'DONT SELL YOU MORONS. THIS IS ABOUT SOMETHING BIGGER THAN You think. BELIEVE ME, IT WILL BE ALL WORTH IT. EITHER BUY AMC OR GME, OR JUST WAIT. Just believe me, hold.',
@@ -5228,10 +4987,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Why I Think AMC is currently the best bet going!!! Especially if your looking to hop on the reddit investing bandwagon now!!!',
-        text:
-          'Why I Think AMC is currently the best bet going!!! Especially if your looking to hop on the reddit investing bandwagon now!!!',
+        id: 'Why I Think AMC is currently the best bet going!!! Especially if your looking to hop on the reddit investing bandwagon now!!!',
+        text: 'Why I Think AMC is currently the best bet going!!! Especially if your looking to hop on the reddit investing bandwagon now!!!',
         items_count: 1,
         items: [
           'Why I Think AMC is currently the best bet going!!! Especially if your looking to hop on the reddit investing bandwagon now!!!',
@@ -5239,10 +4996,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Someone recently posted an $820k buy order for AMC!!! THIS IS THE KIND OF SUPPORT WE NEED - AMC AND GME TO THE MOON 🚀 🚀🚀🚀🚀💎🙌🏻💎🙌🏻💎🙌🏻',
-        text:
-          'Someone recently posted an $820k buy order for AMC!!! THIS IS THE KIND OF SUPPORT WE NEED - AMC AND GME TO THE MOON 🚀 🚀🚀🚀🚀💎🙌🏻💎🙌🏻💎🙌🏻',
+        id: 'Someone recently posted an $820k buy order for AMC!!! THIS IS THE KIND OF SUPPORT WE NEED - AMC AND GME TO THE MOON 🚀 🚀🚀🚀🚀💎🙌🏻💎🙌🏻💎🙌🏻',
+        text: 'Someone recently posted an $820k buy order for AMC!!! THIS IS THE KIND OF SUPPORT WE NEED - AMC AND GME TO THE MOON 🚀 🚀🚀🚀🚀💎🙌🏻💎🙌🏻💎🙌🏻',
         items_count: 1,
         items: [
           'Someone recently posted an $820k buy order for AMC!!! THIS IS THE KIND OF SUPPORT WE NEED - AMC AND GME TO THE MOON 🚀 🚀🚀🚀🚀💎🙌🏻💎🙌🏻💎🙌🏻',
@@ -5250,10 +5005,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Bought more AMC and GME while it's on sale. I like the stock!!! This is not investment advice. 💎 🧤 🚀 🚀 🚀🚀",
-        text:
-          "Bought more AMC and GME while it's on sale. I like the stock!!! This is not investment advice. 💎 🧤 🚀 🚀 🚀🚀",
+        id: "Bought more AMC and GME while it's on sale. I like the stock!!! This is not investment advice. 💎 🧤 🚀 🚀 🚀🚀",
+        text: "Bought more AMC and GME while it's on sale. I like the stock!!! This is not investment advice. 💎 🧤 🚀 🚀 🚀🚀",
         items_count: 1,
         items: [
           "Bought more AMC and GME while it's on sale. I like the stock!!! This is not investment advice. 💎 🧤 🚀 🚀 🚀🚀",
@@ -5261,10 +5014,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'You would have to be a genuine idiot to not take advantage of these prices! AMC Has been bailed out by our retard power and now it’s in the crosshairs of Amazon and Disney. If they purchase AMC that equals gains and a huge gaping wound for the Wall Street hedge funds 🦍🙌💎',
-        text:
-          'You would have to be a genuine idiot to not take advantage of these prices! AMC Has been bailed out by our retard power and now it’s in the crosshairs of Amazon and Disney. If they purchase AMC that equals gains and a huge gaping wound for the Wall Street hedge funds 🦍🙌💎',
+        id: 'You would have to be a genuine idiot to not take advantage of these prices! AMC Has been bailed out by our retard power and now it’s in the crosshairs of Amazon and Disney. If they purchase AMC that equals gains and a huge gaping wound for the Wall Street hedge funds 🦍🙌💎',
+        text: 'You would have to be a genuine idiot to not take advantage of these prices! AMC Has been bailed out by our retard power and now it’s in the crosshairs of Amazon and Disney. If they purchase AMC that equals gains and a huge gaping wound for the Wall Street hedge funds 🦍🙌💎',
         items_count: 1,
         items: [
           'You would have to be a genuine idiot to not take advantage of these prices! AMC Has been bailed out by our retard power and now it’s in the crosshairs of Amazon and Disney. If they purchase AMC that equals gains and a huge gaping wound for the Wall Street hedge funds 🦍🙌💎',
@@ -5286,10 +5037,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'EVERYONE TO AMC , WE THE HEDGE FUNDS ON THE ROPES AND SOME IDIOTS ARE SELLING , WE CAN DO THIS',
-        text:
-          'EVERYONE TO AMC , WE THE HEDGE FUNDS ON THE ROPES AND SOME IDIOTS ARE SELLING , WE CAN DO THIS',
+        id: 'EVERYONE TO AMC , WE THE HEDGE FUNDS ON THE ROPES AND SOME IDIOTS ARE SELLING , WE CAN DO THIS',
+        text: 'EVERYONE TO AMC , WE THE HEDGE FUNDS ON THE ROPES AND SOME IDIOTS ARE SELLING , WE CAN DO THIS',
         items_count: 1,
         items: [
           'EVERYONE TO AMC , WE THE HEDGE FUNDS ON THE ROPES AND SOME IDIOTS ARE SELLING , WE CAN DO THIS',
@@ -5311,10 +5060,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Let’s go you ****. I’m too broke to buy into GME but I YOLO’d the rest of my money into AMC. HOLD BOYS HOLD 🤲🏽💎🤲🏽💎🚀🚀🚀🌙🌙',
-        text:
-          'Let’s go you ****. I’m too broke to buy into GME but I YOLO’d the rest of my money into AMC. HOLD BOYS HOLD 🤲🏽💎🤲🏽💎🚀🚀🚀🌙🌙',
+        id: 'Let’s go you ****. I’m too broke to buy into GME but I YOLO’d the rest of my money into AMC. HOLD BOYS HOLD 🤲🏽💎🤲🏽💎🚀🚀🚀🌙🌙',
+        text: 'Let’s go you ****. I’m too broke to buy into GME but I YOLO’d the rest of my money into AMC. HOLD BOYS HOLD 🤲🏽💎🤲🏽💎🚀🚀🚀🌙🌙',
         items_count: 1,
         items: [
           'Let’s go you ****. I’m too broke to buy into GME but I YOLO’d the rest of my money into AMC. HOLD BOYS HOLD 🤲🏽💎🤲🏽💎🚀🚀🚀🌙🌙',
@@ -5322,10 +5069,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          '****. HOLD. THIS. LINE -- BUT -- If you need some other tickers to diversify here ya go watchlist; but **** go GME and AMC till we die.',
-        text:
-          '****. HOLD. THIS. LINE -- BUT -- If you need some other tickers to diversify here ya go watchlist; but **** go GME and AMC till we die.',
+        id: '****. HOLD. THIS. LINE -- BUT -- If you need some other tickers to diversify here ya go watchlist; but **** go GME and AMC till we die.',
+        text: '****. HOLD. THIS. LINE -- BUT -- If you need some other tickers to diversify here ya go watchlist; but **** go GME and AMC till we die.',
         items_count: 1,
         items: [
           '****. HOLD. THIS. LINE -- BUT -- If you need some other tickers to diversify here ya go watchlist; but **** go GME and AMC till we die.',
@@ -5419,10 +5164,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'CashApp resumes ability to purchase $AMC and $NOK again. Lets get to buying and HOLD!',
-        text:
-          'CashApp resumes ability to purchase $AMC and $NOK again. Lets get to buying and HOLD!',
+        id: 'CashApp resumes ability to purchase $AMC and $NOK again. Lets get to buying and HOLD!',
+        text: 'CashApp resumes ability to purchase $AMC and $NOK again. Lets get to buying and HOLD!',
         items_count: 2,
         items: [
           'CashApp resumes ability to purchase $AMC and $NOK again. Lets get to buying and HOLD!',
@@ -5456,10 +5199,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          '$AMC Brothers do not panic! Many Cashapp orders have been pending since morning',
-        text:
-          '$AMC Brothers do not panic! Many Cashapp orders have been pending since morning',
+        id: '$AMC Brothers do not panic! Many Cashapp orders have been pending since morning',
+        text: '$AMC Brothers do not panic! Many Cashapp orders have been pending since morning',
         items_count: 1,
         items: [
           '$AMC Brothers do not panic! Many Cashapp orders have been pending since morning',
@@ -5578,8 +5319,7 @@ export const clusters: ExampleNode[] = [
   {
     type: 'Cluster',
     id: 'WHY GME IS DROPPING: because there are no buyers at these levels....',
-    text:
-      'WHY GME IS DROPPING: because there are no buyers at these levels....',
+    text: 'WHY GME IS DROPPING: because there are no buyers at these levels....',
     items_count: 34,
     children: [
       {
@@ -5618,8 +5358,7 @@ export const clusters: ExampleNode[] = [
       {
         type: 'Phrase',
         id: 'GME option just skyrocketed and went back down. Whats going on??',
-        text:
-          'GME option just skyrocketed and went back down. Whats going on??',
+        text: 'GME option just skyrocketed and went back down. Whats going on??',
         items_count: 2,
         items: [
           'GME option just skyrocketed and went back down. Whats going on??',
@@ -5628,10 +5367,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'What is going on? The price action so far in GME is pretty horrible. Any ideas?',
-        text:
-          'What is going on? The price action so far in GME is pretty horrible. Any ideas?',
+        id: 'What is going on? The price action so far in GME is pretty horrible. Any ideas?',
+        text: 'What is going on? The price action so far in GME is pretty horrible. Any ideas?',
         items_count: 2,
         items: [
           'What is going on? The price action so far in GME is pretty horrible. Any ideas?',
@@ -5641,10 +5378,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'WHY GME IS DROPPING: because there are no buyers at these levels....',
-        text:
-          'WHY GME IS DROPPING: because there are no buyers at these levels....',
+        id: 'WHY GME IS DROPPING: because there are no buyers at these levels....',
+        text: 'WHY GME IS DROPPING: because there are no buyers at these levels....',
         items_count: 1,
         items: [
           'WHY GME IS DROPPING: because there are no buyers at these levels....',
@@ -5652,10 +5387,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'This GME thing has been a scam since day 1. Some people bought in early and convinced everyone else to drive the price up. There’s one born every minute... or 6 million in this case.',
-        text:
-          'This GME thing has been a scam since day 1. Some people bought in early and convinced everyone else to drive the price up. There’s one born every minute... or 6 million in this case.',
+        id: 'This GME thing has been a scam since day 1. Some people bought in early and convinced everyone else to drive the price up. There’s one born every minute... or 6 million in this case.',
+        text: 'This GME thing has been a scam since day 1. Some people bought in early and convinced everyone else to drive the price up. There’s one born every minute... or 6 million in this case.',
         items_count: 1,
         items: [
           'This GME thing has been a scam since day 1. Some people bought in early and convinced everyone else to drive the price up. There’s one born every minute... or 6 million in this case.',
@@ -5663,10 +5396,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Give me ACTUAL reasons why GME isnt dead/going to just keep on dropping.',
-        text:
-          'Give me ACTUAL reasons why GME isnt dead/going to just keep on dropping.',
+        id: 'Give me ACTUAL reasons why GME isnt dead/going to just keep on dropping.',
+        text: 'Give me ACTUAL reasons why GME isnt dead/going to just keep on dropping.',
         items_count: 1,
         items: [
           'Give me ACTUAL reasons why GME isnt dead/going to just keep on dropping.',
@@ -5674,10 +5405,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'With the volume of GME above 45 million daily, how is the price driving down?',
-        text:
-          'With the volume of GME above 45 million daily, how is the price driving down?',
+        id: 'With the volume of GME above 45 million daily, how is the price driving down?',
+        text: 'With the volume of GME above 45 million daily, how is the price driving down?',
         items_count: 1,
         items: [
           'With the volume of GME above 45 million daily, how is the price driving down?',
@@ -5692,10 +5421,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Can someone explain what the evidence is that people are selling their GME en masse?',
-        text:
-          'Can someone explain what the evidence is that people are selling their GME en masse?',
+        id: 'Can someone explain what the evidence is that people are selling their GME en masse?',
+        text: 'Can someone explain what the evidence is that people are selling their GME en masse?',
         items_count: 1,
         items: [
           'Can someone explain what the evidence is that people are selling their GME en masse?',
@@ -5724,10 +5451,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'How does it make sense that $GME crashed so heavy when there are way more buyers than sellers?',
-        text:
-          'How does it make sense that $GME crashed so heavy when there are way more buyers than sellers?',
+        id: 'How does it make sense that $GME crashed so heavy when there are way more buyers than sellers?',
+        text: 'How does it make sense that $GME crashed so heavy when there are way more buyers than sellers?',
         items_count: 1,
         items: [
           'How does it make sense that $GME crashed so heavy when there are way more buyers than sellers?',
@@ -5742,10 +5467,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Looking at 3 key Volume and Price Indicators for GME, we can plainly see that people are HOLDing, dont give into FUD, this recent downward trend is heavily divergent from all three, meaning its an unsustainable downtrend.',
-        text:
-          'Looking at 3 key Volume and Price Indicators for GME, we can plainly see that people are HOLDing, dont give into FUD, this recent downward trend is heavily divergent from all three, meaning its an unsustainable downtrend.',
+        id: 'Looking at 3 key Volume and Price Indicators for GME, we can plainly see that people are HOLDing, dont give into FUD, this recent downward trend is heavily divergent from all three, meaning its an unsustainable downtrend.',
+        text: 'Looking at 3 key Volume and Price Indicators for GME, we can plainly see that people are HOLDing, dont give into FUD, this recent downward trend is heavily divergent from all three, meaning its an unsustainable downtrend.',
         items_count: 1,
         items: [
           'Looking at 3 key Volume and Price Indicators for GME, we can plainly see that people are HOLDing, dont give into FUD, this recent downward trend is heavily divergent from all three, meaning its an unsustainable downtrend.',
@@ -5774,10 +5497,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'The price drop is artificial. Anyone who sells now is an idiot. 💎🙌 double down. Remember, GME went to $130 on Thursday and then went back to $370. All of these are artificial, the upward pressure on GME is very high 🚀🚀🚀🚀🚀',
-        text:
-          'The price drop is artificial. Anyone who sells now is an idiot. 💎🙌 double down. Remember, GME went to $130 on Thursday and then went back to $370. All of these are artificial, the upward pressure on GME is very high 🚀🚀🚀🚀🚀',
+        id: 'The price drop is artificial. Anyone who sells now is an idiot. 💎🙌 double down. Remember, GME went to $130 on Thursday and then went back to $370. All of these are artificial, the upward pressure on GME is very high 🚀🚀🚀🚀🚀',
+        text: 'The price drop is artificial. Anyone who sells now is an idiot. 💎🙌 double down. Remember, GME went to $130 on Thursday and then went back to $370. All of these are artificial, the upward pressure on GME is very high 🚀🚀🚀🚀🚀',
         items_count: 1,
         items: [
           'The price drop is artificial. Anyone who sells now is an idiot. 💎🙌 double down. Remember, GME went to $130 on Thursday and then went back to $370. All of these are artificial, the upward pressure on GME is very high 🚀🚀🚀🚀🚀',
@@ -5785,10 +5506,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "If you're panicking about the price drop for GME - the market is being manipulated and as long as we hold the price will rise as the shorts will need to be covered.",
-        text:
-          "If you're panicking about the price drop for GME - the market is being manipulated and as long as we hold the price will rise as the shorts will need to be covered.",
+        id: "If you're panicking about the price drop for GME - the market is being manipulated and as long as we hold the price will rise as the shorts will need to be covered.",
+        text: "If you're panicking about the price drop for GME - the market is being manipulated and as long as we hold the price will rise as the shorts will need to be covered.",
         items_count: 1,
         items: [
           "If you're panicking about the price drop for GME - the market is being manipulated and as long as we hold the price will rise as the shorts will need to be covered.",
@@ -5796,10 +5515,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Why the $GME price is not the best indicator of what is really going on with the stock.',
-        text:
-          'Why the $GME price is not the best indicator of what is really going on with the stock.',
+        id: 'Why the $GME price is not the best indicator of what is really going on with the stock.',
+        text: 'Why the $GME price is not the best indicator of what is really going on with the stock.',
         items_count: 1,
         items: [
           'Why the $GME price is not the best indicator of what is really going on with the stock.',
@@ -5807,10 +5524,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "For all you newcomers shitting yourselves over the price of GME plummeting, here's a graph showing price and volume over the last week",
-        text:
-          "For all you newcomers shitting yourselves over the price of GME plummeting, here's a graph showing price and volume over the last week",
+        id: "For all you newcomers shitting yourselves over the price of GME plummeting, here's a graph showing price and volume over the last week",
+        text: "For all you newcomers shitting yourselves over the price of GME plummeting, here's a graph showing price and volume over the last week",
         items_count: 1,
         items: [
           "For all you newcomers shitting yourselves over the price of GME plummeting, here's a graph showing price and volume over the last week",
@@ -5825,10 +5540,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Market analysis of why $GME literally can’t go tits up, and why no one will get left behind because the price won’t fall',
-        text:
-          'Market analysis of why $GME literally can’t go tits up, and why no one will get left behind because the price won’t fall',
+        id: 'Market analysis of why $GME literally can’t go tits up, and why no one will get left behind because the price won’t fall',
+        text: 'Market analysis of why $GME literally can’t go tits up, and why no one will get left behind because the price won’t fall',
         items_count: 1,
         items: [
           'Market analysis of why $GME literally can’t go tits up, and why no one will get left behind because the price won’t fall',
@@ -5889,10 +5602,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'So we all in the same page right . Holding 👍🏻🚀🚀. Not a loss unless you sell .',
-        text:
-          'So we all in the same page right . Holding 👍🏻🚀🚀. Not a loss unless you sell .',
+        id: 'So we all in the same page right . Holding 👍🏻🚀🚀. Not a loss unless you sell .',
+        text: 'So we all in the same page right . Holding 👍🏻🚀🚀. Not a loss unless you sell .',
         items_count: 2,
         items: [
           'So we all in the same page right . Holding 👍🏻🚀🚀. Not a loss unless you sell .',
@@ -5931,10 +5642,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "It ain't a loss till I sell, but I know ya tards love seeing red too! Only had 6k in my savings and I went all in at 32@225 to join the 🚀. Hedgefunds and Melvin Capital won't be able to break these 💎👐. P.S. I really like the stock!",
-        text:
-          "It ain't a loss till I sell, but I know ya tards love seeing red too! Only had 6k in my savings and I went all in at 32@225 to join the 🚀. Hedgefunds and Melvin Capital won't be able to break these 💎👐. P.S. I really like the stock!",
+        id: "It ain't a loss till I sell, but I know ya tards love seeing red too! Only had 6k in my savings and I went all in at 32@225 to join the 🚀. Hedgefunds and Melvin Capital won't be able to break these 💎👐. P.S. I really like the stock!",
+        text: "It ain't a loss till I sell, but I know ya tards love seeing red too! Only had 6k in my savings and I went all in at 32@225 to join the 🚀. Hedgefunds and Melvin Capital won't be able to break these 💎👐. P.S. I really like the stock!",
         items_count: 1,
         items: [
           "It ain't a loss till I sell, but I know ya tards love seeing red too! Only had 6k in my savings and I went all in at 32@225 to join the 🚀. Hedgefunds and Melvin Capital won't be able to break these 💎👐. P.S. I really like the stock!",
@@ -5942,10 +5651,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Not as big of a loss as other, still a lot of money to me! Staying strong and holding!',
-        text:
-          'Not as big of a loss as other, still a lot of money to me! Staying strong and holding!',
+        id: 'Not as big of a loss as other, still a lot of money to me! Staying strong and holding!',
+        text: 'Not as big of a loss as other, still a lot of money to me! Staying strong and holding!',
         items_count: 1,
         items: [
           'Not as big of a loss as other, still a lot of money to me! Staying strong and holding!',
@@ -5953,10 +5660,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Holding my AMC! It’s not a loss until you sell! 💎👐🚀 Gonna buy more tomorrow!',
-        text:
-          'Holding my AMC! It’s not a loss until you sell! 💎👐🚀 Gonna buy more tomorrow!',
+        id: 'Holding my AMC! It’s not a loss until you sell! 💎👐🚀 Gonna buy more tomorrow!',
+        text: 'Holding my AMC! It’s not a loss until you sell! 💎👐🚀 Gonna buy more tomorrow!',
         items_count: 1,
         items: [
           'Holding my AMC! It’s not a loss until you sell! 💎👐🚀 Gonna buy more tomorrow!',
@@ -5964,10 +5669,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'No where near the hundreds of thousands some of you have lost but remember it’s only a loss if you sell! :) HOLD 💎🤲🏻',
-        text:
-          'No where near the hundreds of thousands some of you have lost but remember it’s only a loss if you sell! :) HOLD 💎🤲🏻',
+        id: 'No where near the hundreds of thousands some of you have lost but remember it’s only a loss if you sell! :) HOLD 💎🤲🏻',
+        text: 'No where near the hundreds of thousands some of you have lost but remember it’s only a loss if you sell! :) HOLD 💎🤲🏻',
         items_count: 1,
         items: [
           'No where near the hundreds of thousands some of you have lost but remember it’s only a loss if you sell! :) HOLD 💎🤲🏻',
@@ -5983,8 +5686,7 @@ export const clusters: ExampleNode[] = [
       {
         type: 'Phrase',
         id: "Ain't a loss till you sell. Ran out of capital for the dip at $80",
-        text:
-          "Ain't a loss till you sell. Ran out of capital for the dip at $80",
+        text: "Ain't a loss till you sell. Ran out of capital for the dip at $80",
         items_count: 1,
         items: [
           "Ain't a loss till you sell. Ran out of capital for the dip at $80",
@@ -5992,10 +5694,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Just loss 75% of my portfolio, but you know what, I’m not selling! GME 💎🙌🚀',
-        text:
-          'Just loss 75% of my portfolio, but you know what, I’m not selling! GME 💎🙌🚀',
+        id: 'Just loss 75% of my portfolio, but you know what, I’m not selling! GME 💎🙌🚀',
+        text: 'Just loss 75% of my portfolio, but you know what, I’m not selling! GME 💎🙌🚀',
         items_count: 1,
         items: [
           'Just loss 75% of my portfolio, but you know what, I’m not selling! GME 💎🙌🚀',
@@ -6081,10 +5781,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Meanwhile in Europe: Revolut joined the gang: no buy orders for GME and AMC',
-        text:
-          'Meanwhile in Europe: Revolut joined the gang: no buy orders for GME and AMC',
+        id: 'Meanwhile in Europe: Revolut joined the gang: no buy orders for GME and AMC',
+        text: 'Meanwhile in Europe: Revolut joined the gang: no buy orders for GME and AMC',
         items_count: 3,
         items: [
           'Meanwhile in Europe: Revolut joined the gang: no buy orders for GME and AMC',
@@ -6116,10 +5814,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut just stopped as well accepting buy orders. I know it is out of their control but man... **** them brokers.',
-        text:
-          'Revolut just stopped as well accepting buy orders. I know it is out of their control but man... **** them brokers.',
+        id: 'Revolut just stopped as well accepting buy orders. I know it is out of their control but man... **** them brokers.',
+        text: 'Revolut just stopped as well accepting buy orders. I know it is out of their control but man... **** them brokers.',
         items_count: 1,
         items: [
           'Revolut just stopped as well accepting buy orders. I know it is out of their control but man... **** them brokers.',
@@ -6148,10 +5844,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'REVOLUT NOT ALLOWING TO BUY!!! Guys this is going out of hand. From Europe and we can’t go in again on GME !',
-        text:
-          'REVOLUT NOT ALLOWING TO BUY!!! Guys this is going out of hand. From Europe and we can’t go in again on GME !',
+        id: 'REVOLUT NOT ALLOWING TO BUY!!! Guys this is going out of hand. From Europe and we can’t go in again on GME !',
+        text: 'REVOLUT NOT ALLOWING TO BUY!!! Guys this is going out of hand. From Europe and we can’t go in again on GME !',
         items_count: 1,
         items: [
           'REVOLUT NOT ALLOWING TO BUY!!! Guys this is going out of hand. From Europe and we can’t go in again on GME !',
@@ -6209,10 +5903,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "[GME] I can't be the only one with some loss **** on GME. 40k in the hole!",
-        text:
-          "[GME] I can't be the only one with some loss **** on GME. 40k in the hole!",
+        id: "[GME] I can't be the only one with some loss **** on GME. 40k in the hole!",
+        text: "[GME] I can't be the only one with some loss **** on GME. 40k in the hole!",
         items_count: 2,
         items: [
           "[GME] I can't be the only one with some loss **** on GME. 40k in the hole!",
@@ -6227,10 +5919,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'So let me get this straight, for the last two weeks it was GME 24/7 🚀🎉 now we can’t address the lack of loss ****? GTFO here.',
-        text:
-          'So let me get this straight, for the last two weeks it was GME 24/7 🚀🎉 now we can’t address the lack of loss ****? GTFO here.',
+        id: 'So let me get this straight, for the last two weeks it was GME 24/7 🚀🎉 now we can’t address the lack of loss ****? GTFO here.',
+        text: 'So let me get this straight, for the last two weeks it was GME 24/7 🚀🎉 now we can’t address the lack of loss ****? GTFO here.',
         items_count: 1,
         items: [
           'So let me get this straight, for the last two weeks it was GME 24/7 🚀🎉 now we can’t address the lack of loss ****? GTFO here.',
@@ -6245,10 +5935,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'There isn’t enough loss **** right now. I might not have a lot of hands in GME, but the ones I have are 💎💎💎 Hold Fast!',
-        text:
-          'There isn’t enough loss **** right now. I might not have a lot of hands in GME, but the ones I have are 💎💎💎 Hold Fast!',
+        id: 'There isn’t enough loss **** right now. I might not have a lot of hands in GME, but the ones I have are 💎💎💎 Hold Fast!',
+        text: 'There isn’t enough loss **** right now. I might not have a lot of hands in GME, but the ones I have are 💎💎💎 Hold Fast!',
         items_count: 1,
         items: [
           'There isn’t enough loss **** right now. I might not have a lot of hands in GME, but the ones I have are 💎💎💎 Hold Fast!',
@@ -6293,10 +5981,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Some loss **** for you scumbags that jack off to it, holding GME to the 🌙🚀🚀🚀',
-        text:
-          'Some loss **** for you scumbags that jack off to it, holding GME to the 🌙🚀🚀🚀',
+        id: 'Some loss **** for you scumbags that jack off to it, holding GME to the 🌙🚀🚀🚀',
+        text: 'Some loss **** for you scumbags that jack off to it, holding GME to the 🌙🚀🚀🚀',
         items_count: 1,
         items: [
           'Some loss **** for you scumbags that jack off to it, holding GME to the 🌙🚀🚀🚀',
@@ -6318,10 +6004,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Loss **** for all the new people here. YOLOed my entire account at open and lost most of it in 4 min. Also, GME 🚀🚀🚀🚀🚀',
-        text:
-          'Loss **** for all the new people here. YOLOed my entire account at open and lost most of it in 4 min. Also, GME 🚀🚀🚀🚀🚀',
+        id: 'Loss **** for all the new people here. YOLOed my entire account at open and lost most of it in 4 min. Also, GME 🚀🚀🚀🚀🚀',
+        text: 'Loss **** for all the new people here. YOLOed my entire account at open and lost most of it in 4 min. Also, GME 🚀🚀🚀🚀🚀',
         items_count: 1,
         items: [
           'Loss **** for all the new people here. YOLOed my entire account at open and lost most of it in 4 min. Also, GME 🚀🚀🚀🚀🚀',
@@ -6331,10 +6015,8 @@ export const clusters: ExampleNode[] = [
   },
   {
     type: 'Cluster',
-    id:
-      'I’m looking to buy $GME while the price is down and am asking my fellow **** for some guidance',
-    text:
-      'I’m looking to buy $GME while the price is down and am asking my fellow **** for some guidance',
+    id: 'I’m looking to buy $GME while the price is down and am asking my fellow **** for some guidance',
+    text: 'I’m looking to buy $GME while the price is down and am asking my fellow **** for some guidance',
     items_count: 31,
     children: [
       {
@@ -6355,10 +6037,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "I've just bought two shares of $GME. It's all I can afford at the moment. I'm with you guys.",
-        text:
-          "I've just bought two shares of $GME. It's all I can afford at the moment. I'm with you guys.",
+        id: "I've just bought two shares of $GME. It's all I can afford at the moment. I'm with you guys.",
+        text: "I've just bought two shares of $GME. It's all I can afford at the moment. I'm with you guys.",
         items_count: 5,
         items: [
           "I've just bought two shares of $GME. It's all I can afford at the moment. I'm with you guys.",
@@ -6373,10 +6053,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Alright guys. The TIME is here. GME is on SALE! BUY NOW. Dont be afraid that it’s dipping. 500$ NEXT',
-        text:
-          'Alright guys. The TIME is here. GME is on SALE! BUY NOW. Dont be afraid that it’s dipping. 500$ NEXT',
+        id: 'Alright guys. The TIME is here. GME is on SALE! BUY NOW. Dont be afraid that it’s dipping. 500$ NEXT',
+        text: 'Alright guys. The TIME is here. GME is on SALE! BUY NOW. Dont be afraid that it’s dipping. 500$ NEXT',
         items_count: 4,
         items: [
           'Alright guys. The TIME is here. GME is on SALE! BUY NOW. Dont be afraid that it’s dipping. 500$ NEXT',
@@ -6401,10 +6079,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I am new at this, do you think is a good idea invest on GME today?',
-        text:
-          'I am new at this, do you think is a good idea invest on GME today?',
+        id: 'I am new at this, do you think is a good idea invest on GME today?',
+        text: 'I am new at this, do you think is a good idea invest on GME today?',
         items_count: 2,
         items: [
           'I am new at this, do you think is a good idea invest on GME today?',
@@ -6413,10 +6089,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I’m looking to buy $GME while the price is down and am asking my fellow **** for some guidance',
-        text:
-          'I’m looking to buy $GME while the price is down and am asking my fellow **** for some guidance',
+        id: 'I’m looking to buy $GME while the price is down and am asking my fellow **** for some guidance',
+        text: 'I’m looking to buy $GME while the price is down and am asking my fellow **** for some guidance',
         items_count: 1,
         items: [
           'I’m looking to buy $GME while the price is down and am asking my fellow **** for some guidance',
@@ -6424,10 +6098,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "IDK WHATS going on here but HOLD $GME or LITERALLY ANYTHING ELSE and DON'T BUY OIL",
-        text:
-          "IDK WHATS going on here but HOLD $GME or LITERALLY ANYTHING ELSE and DON'T BUY OIL",
+        id: "IDK WHATS going on here but HOLD $GME or LITERALLY ANYTHING ELSE and DON'T BUY OIL",
+        text: "IDK WHATS going on here but HOLD $GME or LITERALLY ANYTHING ELSE and DON'T BUY OIL",
         items_count: 1,
         items: [
           "IDK WHATS going on here but HOLD $GME or LITERALLY ANYTHING ELSE and DON'T BUY OIL",
@@ -6442,10 +6114,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'REALLY COOL NEW STOCK, a movie is coming out about it, I heard it’s on the rise, and I’m here for a ride. Called GME, has some good potential. I’m going to drop 1k in and ride the wave baby! 💎✋🏼 ~not financial advice',
-        text:
-          'REALLY COOL NEW STOCK, a movie is coming out about it, I heard it’s on the rise, and I’m here for a ride. Called GME, has some good potential. I’m going to drop 1k in and ride the wave baby! 💎✋🏼 ~not financial advice',
+        id: 'REALLY COOL NEW STOCK, a movie is coming out about it, I heard it’s on the rise, and I’m here for a ride. Called GME, has some good potential. I’m going to drop 1k in and ride the wave baby! 💎✋🏼 ~not financial advice',
+        text: 'REALLY COOL NEW STOCK, a movie is coming out about it, I heard it’s on the rise, and I’m here for a ride. Called GME, has some good potential. I’m going to drop 1k in and ride the wave baby! 💎✋🏼 ~not financial advice',
         items_count: 1,
         items: [
           'REALLY COOL NEW STOCK, a movie is coming out about it, I heard it’s on the rise, and I’m here for a ride. Called GME, has some good potential. I’m going to drop 1k in and ride the wave baby! 💎✋🏼 ~not financial advice',
@@ -6460,10 +6130,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Buy GME!!! An expert just told me they are awaiting Big trades!! It Will go up to 300 usd before 11',
-        text:
-          'Buy GME!!! An expert just told me they are awaiting Big trades!! It Will go up to 300 usd before 11',
+        id: 'Buy GME!!! An expert just told me they are awaiting Big trades!! It Will go up to 300 usd before 11',
+        text: 'Buy GME!!! An expert just told me they are awaiting Big trades!! It Will go up to 300 usd before 11',
         items_count: 1,
         items: [
           'Buy GME!!! An expert just told me they are awaiting Big trades!! It Will go up to 300 usd before 11',
@@ -6471,10 +6139,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Thank You, to all **** that sold and drop the price to 8th level of hell, Just bought 32 shares of $GME. Don't come crying here next week.",
-        text:
-          "Thank You, to all **** that sold and drop the price to 8th level of hell, Just bought 32 shares of $GME. Don't come crying here next week.",
+        id: "Thank You, to all **** that sold and drop the price to 8th level of hell, Just bought 32 shares of $GME. Don't come crying here next week.",
+        text: "Thank You, to all **** that sold and drop the price to 8th level of hell, Just bought 32 shares of $GME. Don't come crying here next week.",
         items_count: 1,
         items: [
           "Thank You, to all **** that sold and drop the price to 8th level of hell, Just bought 32 shares of $GME. Don't come crying here next week.",
@@ -6489,10 +6155,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Retard checking in... got more GME on this dip. Portfolio diversity: 100% in GME.',
-        text:
-          'Retard checking in... got more GME on this dip. Portfolio diversity: 100% in GME.',
+        id: 'Retard checking in... got more GME on this dip. Portfolio diversity: 100% in GME.',
+        text: 'Retard checking in... got more GME on this dip. Portfolio diversity: 100% in GME.',
         items_count: 1,
         items: [
           'Retard checking in... got more GME on this dip. Portfolio diversity: 100% in GME.',
@@ -6507,10 +6171,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'GME PAYS DIVIDENDS ! HOLD GME NO MATTER WHAT ! IF YOU PANIC SELL THEN YOU LOOSE ! IF YOU HOLD GET PAID DIVIDENs EVEN IF GME GOES DOWN! WHICH IT WONT IF WE HOLD! WIN WIN AS LONG AS YOU DONT SELL!',
-        text:
-          'GME PAYS DIVIDENDS ! HOLD GME NO MATTER WHAT ! IF YOU PANIC SELL THEN YOU LOOSE ! IF YOU HOLD GET PAID DIVIDENs EVEN IF GME GOES DOWN! WHICH IT WONT IF WE HOLD! WIN WIN AS LONG AS YOU DONT SELL!',
+        id: 'GME PAYS DIVIDENDS ! HOLD GME NO MATTER WHAT ! IF YOU PANIC SELL THEN YOU LOOSE ! IF YOU HOLD GET PAID DIVIDENs EVEN IF GME GOES DOWN! WHICH IT WONT IF WE HOLD! WIN WIN AS LONG AS YOU DONT SELL!',
+        text: 'GME PAYS DIVIDENDS ! HOLD GME NO MATTER WHAT ! IF YOU PANIC SELL THEN YOU LOOSE ! IF YOU HOLD GET PAID DIVIDENs EVEN IF GME GOES DOWN! WHICH IT WONT IF WE HOLD! WIN WIN AS LONG AS YOU DONT SELL!',
         items_count: 1,
         items: [
           'GME PAYS DIVIDENDS ! HOLD GME NO MATTER WHAT ! IF YOU PANIC SELL THEN YOU LOOSE ! IF YOU HOLD GET PAID DIVIDENs EVEN IF GME GOES DOWN! WHICH IT WONT IF WE HOLD! WIN WIN AS LONG AS YOU DONT SELL!',
@@ -6518,10 +6180,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I will be buying $GME shares tomorrow with the intent to hold them forever, and I hope you do to.',
-        text:
-          'I will be buying $GME shares tomorrow with the intent to hold them forever, and I hope you do to.',
+        id: 'I will be buying $GME shares tomorrow with the intent to hold them forever, and I hope you do to.',
+        text: 'I will be buying $GME shares tomorrow with the intent to hold them forever, and I hope you do to.',
         items_count: 1,
         items: [
           'I will be buying $GME shares tomorrow with the intent to hold them forever, and I hope you do to.',
@@ -6596,10 +6256,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut GME becomes sell-only as of 2 Feb, all buy orders cancelled',
-        text:
-          'Revolut GME becomes sell-only as of 2 Feb, all buy orders cancelled',
+        id: 'Revolut GME becomes sell-only as of 2 Feb, all buy orders cancelled',
+        text: 'Revolut GME becomes sell-only as of 2 Feb, all buy orders cancelled',
         items_count: 1,
         items: [
           'Revolut GME becomes sell-only as of 2 Feb, all buy orders cancelled',
@@ -6614,10 +6272,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "🇪🇺🇮🇪🇪🇺🇮🇪 Revolut update. AMC and GME have just moved to sell only and I've had a lot of orders cancelled.",
-        text:
-          "🇪🇺🇮🇪🇪🇺🇮🇪 Revolut update. AMC and GME have just moved to sell only and I've had a lot of orders cancelled.",
+        id: "🇪🇺🇮🇪🇪🇺🇮🇪 Revolut update. AMC and GME have just moved to sell only and I've had a lot of orders cancelled.",
+        text: "🇪🇺🇮🇪🇪🇺🇮🇪 Revolut update. AMC and GME have just moved to sell only and I've had a lot of orders cancelled.",
         items_count: 1,
         items: [
           "🇪🇺🇮🇪🇪🇺🇮🇪 Revolut update. AMC and GME have just moved to sell only and I've had a lot of orders cancelled.",
@@ -6625,10 +6281,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'MY EUROPEAN DEGENERATES! REVOLUT $GME $AMC ONLY SELL ORDERS AVAILABLE',
-        text:
-          'MY EUROPEAN DEGENERATES! REVOLUT $GME $AMC ONLY SELL ORDERS AVAILABLE',
+        id: 'MY EUROPEAN DEGENERATES! REVOLUT $GME $AMC ONLY SELL ORDERS AVAILABLE',
+        text: 'MY EUROPEAN DEGENERATES! REVOLUT $GME $AMC ONLY SELL ORDERS AVAILABLE',
         items_count: 1,
         items: [
           'MY EUROPEAN DEGENERATES! REVOLUT $GME $AMC ONLY SELL ORDERS AVAILABLE',
@@ -6694,10 +6348,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Increased BUY LIMITS on Robinhood! You can now buy 100 shares and 100 contracts. DO NOT SELL!',
-        text:
-          'Increased BUY LIMITS on Robinhood! You can now buy 100 shares and 100 contracts. DO NOT SELL!',
+        id: 'Increased BUY LIMITS on Robinhood! You can now buy 100 shares and 100 contracts. DO NOT SELL!',
+        text: 'Increased BUY LIMITS on Robinhood! You can now buy 100 shares and 100 contracts. DO NOT SELL!',
         items_count: 3,
         items: [
           'Increased BUY LIMITS on Robinhood! You can now buy 100 shares and 100 contracts. DO NOT SELL!',
@@ -6718,10 +6370,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Robinhood is cancelling limit orders!! I had three shares ready to be sold at 5000, they were cancelled and now won’t let me put a new limit on, I’ve tried up to 3500',
-        text:
-          'Robinhood is cancelling limit orders!! I had three shares ready to be sold at 5000, they were cancelled and now won’t let me put a new limit on, I’ve tried up to 3500',
+        id: 'Robinhood is cancelling limit orders!! I had three shares ready to be sold at 5000, they were cancelled and now won’t let me put a new limit on, I’ve tried up to 3500',
+        text: 'Robinhood is cancelling limit orders!! I had three shares ready to be sold at 5000, they were cancelled and now won’t let me put a new limit on, I’ve tried up to 3500',
         items_count: 2,
         items: [
           'Robinhood is cancelling limit orders!! I had three shares ready to be sold at 5000, they were cancelled and now won’t let me put a new limit on, I’ve tried up to 3500',
@@ -6738,10 +6388,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Robinhood is manipulating the market by slowly increasing the buying limit',
-        text:
-          'Robinhood is manipulating the market by slowly increasing the buying limit',
+        id: 'Robinhood is manipulating the market by slowly increasing the buying limit',
+        text: 'Robinhood is manipulating the market by slowly increasing the buying limit',
         items_count: 1,
         items: [
           'Robinhood is manipulating the market by slowly increasing the buying limit',
@@ -6757,8 +6405,7 @@ export const clusters: ExampleNode[] = [
       {
         type: 'Phrase',
         id: 'Robinhood is still limiting buys - the squeeze is still happening',
-        text:
-          'Robinhood is still limiting buys - the squeeze is still happening',
+        text: 'Robinhood is still limiting buys - the squeeze is still happening',
         items_count: 1,
         items: [
           'Robinhood is still limiting buys - the squeeze is still happening',
@@ -6766,10 +6413,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Robinhood has no shame! Now you can't cap your sale limit to where you want. I wonder why",
-        text:
-          "Robinhood has no shame! Now you can't cap your sale limit to where you want. I wonder why",
+        id: "Robinhood has no shame! Now you can't cap your sale limit to where you want. I wonder why",
+        text: "Robinhood has no shame! Now you can't cap your sale limit to where you want. I wonder why",
         items_count: 1,
         items: [
           "Robinhood has no shame! Now you can't cap your sale limit to where you want. I wonder why",
@@ -6777,10 +6422,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'what the actual **** robinhood?? how does this make any sense, i’ve had this limit sell in place for 5 days and now they delete it...',
-        text:
-          'what the actual **** robinhood?? how does this make any sense, i’ve had this limit sell in place for 5 days and now they delete it...',
+        id: 'what the actual **** robinhood?? how does this make any sense, i’ve had this limit sell in place for 5 days and now they delete it...',
+        text: 'what the actual **** robinhood?? how does this make any sense, i’ve had this limit sell in place for 5 days and now they delete it...',
         items_count: 1,
         items: [
           'what the actual **** robinhood?? how does this make any sense, i’ve had this limit sell in place for 5 days and now they delete it...',
@@ -6816,10 +6459,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'New Robinhood cap limits on stock. Yesterday 1 GME allowed, today 20!',
-        text:
-          'New Robinhood cap limits on stock. Yesterday 1 GME allowed, today 20!',
+        id: 'New Robinhood cap limits on stock. Yesterday 1 GME allowed, today 20!',
+        text: 'New Robinhood cap limits on stock. Yesterday 1 GME allowed, today 20!',
         items_count: 5,
         items: [
           'New Robinhood cap limits on stock. Yesterday 1 GME allowed, today 20!',
@@ -6847,8 +6488,7 @@ export const clusters: ExampleNode[] = [
       {
         type: 'Phrase',
         id: 'Just bought 20 GME at Robinhood. Appears they lifted some limits?',
-        text:
-          'Just bought 20 GME at Robinhood. Appears they lifted some limits?',
+        text: 'Just bought 20 GME at Robinhood. Appears they lifted some limits?',
         items_count: 4,
         items: [
           'Just bought 20 GME at Robinhood. Appears they lifted some limits?',
@@ -6884,10 +6524,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Robinhood limit for GME is up to 20! For those of you still brave enough to stay with them',
-        text:
-          'Robinhood limit for GME is up to 20! For those of you still brave enough to stay with them',
+        id: 'Robinhood limit for GME is up to 20! For those of you still brave enough to stay with them',
+        text: 'Robinhood limit for GME is up to 20! For those of you still brave enough to stay with them',
         items_count: 1,
         items: [
           'Robinhood limit for GME is up to 20! For those of you still brave enough to stay with them',
@@ -6896,8 +6534,7 @@ export const clusters: ExampleNode[] = [
       {
         type: 'Phrase',
         id: 'Robinhood is letting me but GME and amc above the 5 stock limit?',
-        text:
-          'Robinhood is letting me but GME and amc above the 5 stock limit?',
+        text: 'Robinhood is letting me but GME and amc above the 5 stock limit?',
         items_count: 1,
         items: [
           'Robinhood is letting me but GME and amc above the 5 stock limit?',
@@ -6928,10 +6565,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Can’t but $GME on Robinhood, but I sure can on my new Webull account. In for 2 more while the rest is locked up in RH.',
-        text:
-          'Can’t but $GME on Robinhood, but I sure can on my new Webull account. In for 2 more while the rest is locked up in RH.',
+        id: 'Can’t but $GME on Robinhood, but I sure can on my new Webull account. In for 2 more while the rest is locked up in RH.',
+        text: 'Can’t but $GME on Robinhood, but I sure can on my new Webull account. In for 2 more while the rest is locked up in RH.',
         items_count: 1,
         items: [
           'Can’t but $GME on Robinhood, but I sure can on my new Webull account. In for 2 more while the rest is locked up in RH.',
@@ -6985,10 +6620,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut have switched GME and AMC to sell only - No announcement on Twitter',
-        text:
-          'Revolut have switched GME and AMC to sell only - No announcement on Twitter',
+        id: 'Revolut have switched GME and AMC to sell only - No announcement on Twitter',
+        text: 'Revolut have switched GME and AMC to sell only - No announcement on Twitter',
         items_count: 3,
         items: [
           'Revolut have switched GME and AMC to sell only - No announcement on Twitter',
@@ -7067,10 +6700,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut is now just allowing sell to GME and AMC! To the moon ****! $BB $AMC',
-        text:
-          'Revolut is now just allowing sell to GME and AMC! To the moon ****! $BB $AMC',
+        id: 'Revolut is now just allowing sell to GME and AMC! To the moon ****! $BB $AMC',
+        text: 'Revolut is now just allowing sell to GME and AMC! To the moon ****! $BB $AMC',
         items_count: 1,
         items: [
           'Revolut is now just allowing sell to GME and AMC! To the moon ****! $BB $AMC',
@@ -7264,10 +6895,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'This is why I went into GME @59 today. If you felt you missed your opportunity between $42 and $65',
-        text:
-          'This is why I went into GME @59 today. If you felt you missed your opportunity between $42 and $65',
+        id: 'This is why I went into GME @59 today. If you felt you missed your opportunity between $42 and $65',
+        text: 'This is why I went into GME @59 today. If you felt you missed your opportunity between $42 and $65',
         items_count: 1,
         items: [
           'This is why I went into GME @59 today. If you felt you missed your opportunity between $42 and $65',
@@ -7282,10 +6911,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Put an order for a GME 420c weekly at 0.69 this morning. Got filled at 3:52pm. LFG 🚀🚀',
-        text:
-          'Put an order for a GME 420c weekly at 0.69 this morning. Got filled at 3:52pm. LFG 🚀🚀',
+        id: 'Put an order for a GME 420c weekly at 0.69 this morning. Got filled at 3:52pm. LFG 🚀🚀',
+        text: 'Put an order for a GME 420c weekly at 0.69 this morning. Got filled at 3:52pm. LFG 🚀🚀',
         items_count: 1,
         items: [
           'Put an order for a GME 420c weekly at 0.69 this morning. Got filled at 3:52pm. LFG 🚀🚀',
@@ -7293,10 +6920,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I bought 31 shares of GME at $94. $3k is ready to see what happens.',
-        text:
-          'I bought 31 shares of GME at $94. $3k is ready to see what happens.',
+        id: 'I bought 31 shares of GME at $94. $3k is ready to see what happens.',
+        text: 'I bought 31 shares of GME at $94. $3k is ready to see what happens.',
         items_count: 1,
         items: [
           'I bought 31 shares of GME at $94. $3k is ready to see what happens.',
@@ -7311,10 +6936,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'First big purchase of GME. Bought $23k today. Wife also bought 11k',
-        text:
-          'First big purchase of GME. Bought $23k today. Wife also bought 11k',
+        id: 'First big purchase of GME. Bought $23k today. Wife also bought 11k',
+        text: 'First big purchase of GME. Bought $23k today. Wife also bought 11k',
         items_count: 1,
         items: [
           'First big purchase of GME. Bought $23k today. Wife also bought 11k',
@@ -7336,10 +6959,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I adjusted my AMC order to 32 shares, and set a buy order for 2 GME today',
-        text:
-          'I adjusted my AMC order to 32 shares, and set a buy order for 2 GME today',
+        id: 'I adjusted my AMC order to 32 shares, and set a buy order for 2 GME today',
+        text: 'I adjusted my AMC order to 32 shares, and set a buy order for 2 GME today',
         items_count: 1,
         items: [
           'I adjusted my AMC order to 32 shares, and set a buy order for 2 GME today',
@@ -7520,10 +7141,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Robinhood got some balls promoting on here after what’s happened lately 😂',
-        text:
-          'Robinhood got some balls promoting on here after what’s happened lately 😂',
+        id: 'Robinhood got some balls promoting on here after what’s happened lately 😂',
+        text: 'Robinhood got some balls promoting on here after what’s happened lately 😂',
         items_count: 1,
         items: [
           'Robinhood got some balls promoting on here after what’s happened lately 😂',
@@ -7531,10 +7150,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut (UK) is doing the same as Robinhood , just received this email',
-        text:
-          'Revolut (UK) is doing the same as Robinhood , just received this email',
+        id: 'Revolut (UK) is doing the same as Robinhood , just received this email',
+        text: 'Revolut (UK) is doing the same as Robinhood , just received this email',
         items_count: 1,
         items: [
           'Revolut (UK) is doing the same as Robinhood , just received this email',
@@ -7556,10 +7173,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Literal Propoganda on Robinhood's GME news feed. They're trying to get you to invest elsewhere. I cant believe just a week ago I helped my mom set up a Robinhood account. Hold strong boys. 💎💎🤚🤚",
-        text:
-          "Literal Propoganda on Robinhood's GME news feed. They're trying to get you to invest elsewhere. I cant believe just a week ago I helped my mom set up a Robinhood account. Hold strong boys. 💎💎🤚🤚",
+        id: "Literal Propoganda on Robinhood's GME news feed. They're trying to get you to invest elsewhere. I cant believe just a week ago I helped my mom set up a Robinhood account. Hold strong boys. 💎💎🤚🤚",
+        text: "Literal Propoganda on Robinhood's GME news feed. They're trying to get you to invest elsewhere. I cant believe just a week ago I helped my mom set up a Robinhood account. Hold strong boys. 💎💎🤚🤚",
         items_count: 1,
         items: [
           "Literal Propoganda on Robinhood's GME news feed. They're trying to get you to invest elsewhere. I cant believe just a week ago I helped my mom set up a Robinhood account. Hold strong boys. 💎💎🤚🤚",
@@ -7588,10 +7203,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I WOULD LIKE TO INFORM. ROBINHOOD FILED FOR AN IPO OPENING THIS YEAR.',
-        text:
-          'I WOULD LIKE TO INFORM. ROBINHOOD FILED FOR AN IPO OPENING THIS YEAR.',
+        id: 'I WOULD LIKE TO INFORM. ROBINHOOD FILED FOR AN IPO OPENING THIS YEAR.',
+        text: 'I WOULD LIKE TO INFORM. ROBINHOOD FILED FOR AN IPO OPENING THIS YEAR.',
         items_count: 1,
         items: [
           'I WOULD LIKE TO INFORM. ROBINHOOD FILED FOR AN IPO OPENING THIS YEAR.',
@@ -7606,10 +7219,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Robinhood Insider Information. #NeverForget. We can't let them make us look like fools.",
-        text:
-          "Robinhood Insider Information. #NeverForget. We can't let them make us look like fools.",
+        id: "Robinhood Insider Information. #NeverForget. We can't let them make us look like fools.",
+        text: "Robinhood Insider Information. #NeverForget. We can't let them make us look like fools.",
         items_count: 1,
         items: [
           "Robinhood Insider Information. #NeverForget. We can't let them make us look like fools.",
@@ -7694,10 +7305,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'For the people giving me crap about telling them to stop buying GME. Here are my 20 @ $225. I PLAYED MYSELF! BYE BYE MONEY.',
-        text:
-          'For the people giving me crap about telling them to stop buying GME. Here are my 20 @ $225. I PLAYED MYSELF! BYE BYE MONEY.',
+        id: 'For the people giving me crap about telling them to stop buying GME. Here are my 20 @ $225. I PLAYED MYSELF! BYE BYE MONEY.',
+        text: 'For the people giving me crap about telling them to stop buying GME. Here are my 20 @ $225. I PLAYED MYSELF! BYE BYE MONEY.',
         items_count: 1,
         items: [
           'For the people giving me crap about telling them to stop buying GME. Here are my 20 @ $225. I PLAYED MYSELF! BYE BYE MONEY.',
@@ -7719,10 +7328,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'To everybody who has already purchased $GME, and cannot afford any more',
-        text:
-          'To everybody who has already purchased $GME, and cannot afford any more',
+        id: 'To everybody who has already purchased $GME, and cannot afford any more',
+        text: 'To everybody who has already purchased $GME, and cannot afford any more',
         items_count: 1,
         items: [
           'To everybody who has already purchased $GME, and cannot afford any more',
@@ -7737,10 +7344,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "I just bought some GME for the first time and I'll never sell to these ****s. Or anyone. GD 💎👐 you 🧠🦍",
-        text:
-          "I just bought some GME for the first time and I'll never sell to these ****s. Or anyone. GD 💎👐 you 🧠🦍",
+        id: "I just bought some GME for the first time and I'll never sell to these ****s. Or anyone. GD 💎👐 you 🧠🦍",
+        text: "I just bought some GME for the first time and I'll never sell to these ****s. Or anyone. GD 💎👐 you 🧠🦍",
         items_count: 1,
         items: [
           "I just bought some GME for the first time and I'll never sell to these ****s. Or anyone. GD 💎👐 you 🧠🦍",
@@ -7898,10 +7503,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I’m never selling, not because I have 💎🙌🏼 but I don’t know how. Let’s go boys',
-        text:
-          'I’m never selling, not because I have 💎🙌🏼 but I don’t know how. Let’s go boys',
+        id: 'I’m never selling, not because I have 💎🙌🏼 but I don’t know how. Let’s go boys',
+        text: 'I’m never selling, not because I have 💎🙌🏼 but I don’t know how. Let’s go boys',
         items_count: 1,
         items: [
           'I’m never selling, not because I have 💎🙌🏼 but I don’t know how. Let’s go boys',
@@ -7975,10 +7578,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Went full retard and bought more! I just love this stock and at bargain prices! 💎🚀👐🦍',
-        text:
-          'Went full retard and bought more! I just love this stock and at bargain prices! 💎🚀👐🦍',
+        id: 'Went full retard and bought more! I just love this stock and at bargain prices! 💎🚀👐🦍',
+        text: 'Went full retard and bought more! I just love this stock and at bargain prices! 💎🚀👐🦍',
         items_count: 1,
         items: [
           'Went full retard and bought more! I just love this stock and at bargain prices! 💎🚀👐🦍',
@@ -7986,10 +7587,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Bought dips yesterday, saw it go up 20%, but I held. A few hours later was down 3% so naturally I bought more and when the market closed I was in the green. Will buy more tomorrow. 🙌💎↗️🚀',
-        text:
-          'Bought dips yesterday, saw it go up 20%, but I held. A few hours later was down 3% so naturally I bought more and when the market closed I was in the green. Will buy more tomorrow. 🙌💎↗️🚀',
+        id: 'Bought dips yesterday, saw it go up 20%, but I held. A few hours later was down 3% so naturally I bought more and when the market closed I was in the green. Will buy more tomorrow. 🙌💎↗️🚀',
+        text: 'Bought dips yesterday, saw it go up 20%, but I held. A few hours later was down 3% so naturally I bought more and when the market closed I was in the green. Will buy more tomorrow. 🙌💎↗️🚀',
         items_count: 1,
         items: [
           'Bought dips yesterday, saw it go up 20%, but I held. A few hours later was down 3% so naturally I bought more and when the market closed I was in the green. Will buy more tomorrow. 🙌💎↗️🚀',
@@ -7997,10 +7596,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I panicked when I saw it dip under $100... so I bought more. 60 shares strong! Not much, but doing my part! Used my entire IRA and Stimmy 💎💎🙌🏼🚀🚀🚀',
-        text:
-          'I panicked when I saw it dip under $100... so I bought more. 60 shares strong! Not much, but doing my part! Used my entire IRA and Stimmy 💎💎🙌🏼🚀🚀🚀',
+        id: 'I panicked when I saw it dip under $100... so I bought more. 60 shares strong! Not much, but doing my part! Used my entire IRA and Stimmy 💎💎🙌🏼🚀🚀🚀',
+        text: 'I panicked when I saw it dip under $100... so I bought more. 60 shares strong! Not much, but doing my part! Used my entire IRA and Stimmy 💎💎🙌🏼🚀🚀🚀',
         items_count: 1,
         items: [
           'I panicked when I saw it dip under $100... so I bought more. 60 shares strong! Not much, but doing my part! Used my entire IRA and Stimmy 💎💎🙌🏼🚀🚀🚀',
@@ -8008,10 +7605,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "I came in late to the game, but I bought as much as they'd let me 💎🙌💎 JUST KEEP HOLDING",
-        text:
-          "I came in late to the game, but I bought as much as they'd let me 💎🙌💎 JUST KEEP HOLDING",
+        id: "I came in late to the game, but I bought as much as they'd let me 💎🙌💎 JUST KEEP HOLDING",
+        text: "I came in late to the game, but I bought as much as they'd let me 💎🙌💎 JUST KEEP HOLDING",
         items_count: 1,
         items: [
           "I came in late to the game, but I bought as much as they'd let me 💎🙌💎 JUST KEEP HOLDING",
@@ -8026,10 +7621,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "I may have bought in late. I may be at a loss. But I'm still gonna hold!!",
-        text:
-          "I may have bought in late. I may be at a loss. But I'm still gonna hold!!",
+        id: "I may have bought in late. I may be at a loss. But I'm still gonna hold!!",
+        text: "I may have bought in late. I may be at a loss. But I'm still gonna hold!!",
         items_count: 1,
         items: [
           "I may have bought in late. I may be at a loss. But I'm still gonna hold!!",
@@ -8037,10 +7630,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I don’t care that I haven’t profited, I will HOLD (and buy more come monday)!!!',
-        text:
-          'I don’t care that I haven’t profited, I will HOLD (and buy more come monday)!!!',
+        id: 'I don’t care that I haven’t profited, I will HOLD (and buy more come monday)!!!',
+        text: 'I don’t care that I haven’t profited, I will HOLD (and buy more come monday)!!!',
         items_count: 1,
         items: [
           'I don’t care that I haven’t profited, I will HOLD (and buy more come monday)!!!',
@@ -8361,10 +7952,8 @@ export const clusters: ExampleNode[] = [
   },
   {
     type: 'Cluster',
-    id:
-      'At time point you can buy GME stock with revolut. 🚀🚀🚀🚀🚀💎💎💎💎💎🤲🤲',
-    text:
-      'At time point you can buy GME stock with revolut. 🚀🚀🚀🚀🚀💎💎💎💎💎🤲🤲',
+    id: 'At time point you can buy GME stock with revolut. 🚀🚀🚀🚀🚀💎💎💎💎💎🤲🤲',
+    text: 'At time point you can buy GME stock with revolut. 🚀🚀🚀🚀🚀💎💎💎💎💎🤲🤲',
     items_count: 25,
     children: [
       {
@@ -8393,10 +7982,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'At time point you can buy GME stock with revolut. 🚀🚀🚀🚀🚀💎💎💎💎💎🤲🤲',
-        text:
-          'At time point you can buy GME stock with revolut. 🚀🚀🚀🚀🚀💎💎💎💎💎🤲🤲',
+        id: 'At time point you can buy GME stock with revolut. 🚀🚀🚀🚀🚀💎💎💎💎💎🤲🤲',
+        text: 'At time point you can buy GME stock with revolut. 🚀🚀🚀🚀🚀💎💎💎💎💎🤲🤲',
         items_count: 2,
         items: [
           'At time point you can buy GME stock with revolut. 🚀🚀🚀🚀🚀💎💎💎💎💎🤲🤲',
@@ -8417,10 +8004,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut follows Robinhood and only allows to sell GME and AMC stock',
-        text:
-          'Revolut follows Robinhood and only allows to sell GME and AMC stock',
+        id: 'Revolut follows Robinhood and only allows to sell GME and AMC stock',
+        text: 'Revolut follows Robinhood and only allows to sell GME and AMC stock',
         items_count: 2,
         items: [
           'Revolut follows Robinhood and only allows to sell GME and AMC stock',
@@ -8460,10 +8045,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Revolut no longer has buy option on $GME. Any other alternatives for us from EU? I don't want to miss this dip.",
-        text:
-          "Revolut no longer has buy option on $GME. Any other alternatives for us from EU? I don't want to miss this dip.",
+        id: "Revolut no longer has buy option on $GME. Any other alternatives for us from EU? I don't want to miss this dip.",
+        text: "Revolut no longer has buy option on $GME. Any other alternatives for us from EU? I don't want to miss this dip.",
         items_count: 1,
         items: [
           "Revolut no longer has buy option on $GME. Any other alternatives for us from EU? I don't want to miss this dip.",
@@ -8478,10 +8061,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'We cant buy anymore stock from GME or AMC on Revolut, WE CAN only sell. French retard here with only 4,5 shares and diamond hands 👐💎',
-        text:
-          'We cant buy anymore stock from GME or AMC on Revolut, WE CAN only sell. French retard here with only 4,5 shares and diamond hands 👐💎',
+        id: 'We cant buy anymore stock from GME or AMC on Revolut, WE CAN only sell. French retard here with only 4,5 shares and diamond hands 👐💎',
+        text: 'We cant buy anymore stock from GME or AMC on Revolut, WE CAN only sell. French retard here with only 4,5 shares and diamond hands 👐💎',
         items_count: 1,
         items: [
           'We cant buy anymore stock from GME or AMC on Revolut, WE CAN only sell. French retard here with only 4,5 shares and diamond hands 👐💎',
@@ -8489,10 +8070,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut won’t let you buy GME and AMC anymore, which makes buying these stocks way harder especially in Eastern Europe',
-        text:
-          'Revolut won’t let you buy GME and AMC anymore, which makes buying these stocks way harder especially in Eastern Europe',
+        id: 'Revolut won’t let you buy GME and AMC anymore, which makes buying these stocks way harder especially in Eastern Europe',
+        text: 'Revolut won’t let you buy GME and AMC anymore, which makes buying these stocks way harder especially in Eastern Europe',
         items_count: 1,
         items: [
           'Revolut won’t let you buy GME and AMC anymore, which makes buying these stocks way harder especially in Eastern Europe',
@@ -8501,8 +8080,7 @@ export const clusters: ExampleNode[] = [
       {
         type: 'Phrase',
         id: 'Revolut just halted GME buys. Move to another platforms to 🚀 🚀',
-        text:
-          'Revolut just halted GME buys. Move to another platforms to 🚀 🚀',
+        text: 'Revolut just halted GME buys. Move to another platforms to 🚀 🚀',
         items_count: 1,
         items: [
           'Revolut just halted GME buys. Move to another platforms to 🚀 🚀',
@@ -8521,18 +8099,14 @@ export const clusters: ExampleNode[] = [
   },
   {
     type: 'Cluster',
-    id:
-      'Robinshit now allowing purchase of up to 100 shares and 100 contracts of GME',
-    text:
-      'Robinshit now allowing purchase of up to 100 shares and 100 contracts of GME',
+    id: 'Robinshit now allowing purchase of up to 100 shares and 100 contracts of GME',
+    text: 'Robinshit now allowing purchase of up to 100 shares and 100 contracts of GME',
     items_count: 25,
     children: [
       {
         type: 'Phrase',
-        id:
-          'Robinhood Just Increased GME buy limit to 100 shares. Time to buy the sale 🚀🚀🚀🚀💎💎💎',
-        text:
-          'Robinhood Just Increased GME buy limit to 100 shares. Time to buy the sale 🚀🚀🚀🚀💎💎💎',
+        id: 'Robinhood Just Increased GME buy limit to 100 shares. Time to buy the sale 🚀🚀🚀🚀💎💎💎',
+        text: 'Robinhood Just Increased GME buy limit to 100 shares. Time to buy the sale 🚀🚀🚀🚀💎💎💎',
         items_count: 13,
         items: [
           'Robinhood Just Increased GME buy limit to 100 shares. Time to buy the sale 🚀🚀🚀🚀💎💎💎',
@@ -8558,10 +8132,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Robinshit now allowing purchase of up to 100 shares and 100 contracts of GME',
-        text:
-          'Robinshit now allowing purchase of up to 100 shares and 100 contracts of GME',
+        id: 'Robinshit now allowing purchase of up to 100 shares and 100 contracts of GME',
+        text: 'Robinshit now allowing purchase of up to 100 shares and 100 contracts of GME',
         items_count: 2,
         items: [
           'Robinshit now allowing purchase of up to 100 shares and 100 contracts of GME',
@@ -8571,10 +8143,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Update: Robinhood Is Now Allowing Up To 100 Gamestock Shares or Options',
-        text:
-          'Update: Robinhood Is Now Allowing Up To 100 Gamestock Shares or Options',
+        id: 'Update: Robinhood Is Now Allowing Up To 100 Gamestock Shares or Options',
+        text: 'Update: Robinhood Is Now Allowing Up To 100 Gamestock Shares or Options',
         items_count: 2,
         items: [
           'Update: Robinhood Is Now Allowing Up To 100 Gamestock Shares or Options',
@@ -8584,10 +8154,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          '***YOU CAN BUY UP TO 100 SHARES OF GME ON ROBINHOOD NOW*** THIS IS ARE MOMENT',
-        text:
-          '***YOU CAN BUY UP TO 100 SHARES OF GME ON ROBINHOOD NOW*** THIS IS ARE MOMENT',
+        id: '***YOU CAN BUY UP TO 100 SHARES OF GME ON ROBINHOOD NOW*** THIS IS ARE MOMENT',
+        text: '***YOU CAN BUY UP TO 100 SHARES OF GME ON ROBINHOOD NOW*** THIS IS ARE MOMENT',
         items_count: 2,
         items: [
           '***YOU CAN BUY UP TO 100 SHARES OF GME ON ROBINHOOD NOW*** THIS IS ARE MOMENT',
@@ -8597,10 +8165,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Hi All, It seems we can buy shares of GME on robinhood now can someone confirm this? Or am I just hallucinating from all the paint I've been licking. 💎💎💎✋✋✋🚀🚀🚀",
-        text:
-          "Hi All, It seems we can buy shares of GME on robinhood now can someone confirm this? Or am I just hallucinating from all the paint I've been licking. 💎💎💎✋✋✋🚀🚀🚀",
+        id: "Hi All, It seems we can buy shares of GME on robinhood now can someone confirm this? Or am I just hallucinating from all the paint I've been licking. 💎💎💎✋✋✋🚀🚀🚀",
+        text: "Hi All, It seems we can buy shares of GME on robinhood now can someone confirm this? Or am I just hallucinating from all the paint I've been licking. 💎💎💎✋✋✋🚀🚀🚀",
         items_count: 2,
         items: [
           "Hi All, It seems we can buy shares of GME on robinhood now can someone confirm this? Or am I just hallucinating from all the paint I've been licking. 💎💎💎✋✋✋🚀🚀🚀",
@@ -8620,10 +8186,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Now able to buy up to 20 shares and 20 options contracts for GME in RH!',
-        text:
-          'Now able to buy up to 20 shares and 20 options contracts for GME in RH!',
+        id: 'Now able to buy up to 20 shares and 20 options contracts for GME in RH!',
+        text: 'Now able to buy up to 20 shares and 20 options contracts for GME in RH!',
         items_count: 1,
         items: [
           'Now able to buy up to 20 shares and 20 options contracts for GME in RH!',
@@ -8631,10 +8195,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'RobinHood allowing GME and AMC orders? Is this just because premarket? Before I was only allowed 1 share GME!',
-        text:
-          'RobinHood allowing GME and AMC orders? Is this just because premarket? Before I was only allowed 1 share GME!',
+        id: 'RobinHood allowing GME and AMC orders? Is this just because premarket? Before I was only allowed 1 share GME!',
+        text: 'RobinHood allowing GME and AMC orders? Is this just because premarket? Before I was only allowed 1 share GME!',
         items_count: 1,
         items: [
           'RobinHood allowing GME and AMC orders? Is this just because premarket? Before I was only allowed 1 share GME!',
@@ -8712,10 +8274,8 @@ export const clusters: ExampleNode[] = [
   },
   {
     type: 'Cluster',
-    id:
-      'Serious question - is anyone still holding GME in a profit situation other than DFV?',
-    text:
-      'Serious question - is anyone still holding GME in a profit situation other than DFV?',
+    id: 'Serious question - is anyone still holding GME in a profit situation other than DFV?',
+    text: 'Serious question - is anyone still holding GME in a profit situation other than DFV?',
     items_count: 24,
     children: [
       {
@@ -8748,10 +8308,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Serious question - is anyone still holding GME in a profit situation other than DFV?',
-        text:
-          'Serious question - is anyone still holding GME in a profit situation other than DFV?',
+        id: 'Serious question - is anyone still holding GME in a profit situation other than DFV?',
+        text: 'Serious question - is anyone still holding GME in a profit situation other than DFV?',
         items_count: 2,
         items: [
           'Serious question - is anyone still holding GME in a profit situation other than DFV?',
@@ -8778,10 +8336,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Seeing all the posts of people buying back on GME in a loss, I just wonder if you guys took the time to see that there is other stocks that are actually going up and will not give you a loss? You could make some money back this way, GME is not the only stock. I doubt it will have another 10000% peak',
-        text:
-          'Seeing all the posts of people buying back on GME in a loss, I just wonder if you guys took the time to see that there is other stocks that are actually going up and will not give you a loss? You could make some money back this way, GME is not the only stock. I doubt it will have another 10000% peak',
+        id: 'Seeing all the posts of people buying back on GME in a loss, I just wonder if you guys took the time to see that there is other stocks that are actually going up and will not give you a loss? You could make some money back this way, GME is not the only stock. I doubt it will have another 10000% peak',
+        text: 'Seeing all the posts of people buying back on GME in a loss, I just wonder if you guys took the time to see that there is other stocks that are actually going up and will not give you a loss? You could make some money back this way, GME is not the only stock. I doubt it will have another 10000% peak',
         items_count: 1,
         items: [
           'Seeing all the posts of people buying back on GME in a loss, I just wonder if you guys took the time to see that there is other stocks that are actually going up and will not give you a loss? You could make some money back this way, GME is not the only stock. I doubt it will have another 10000% peak',
@@ -8796,10 +8352,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Ok, status report. When did you buy/sell GME? Or are you still holding?',
-        text:
-          'Ok, status report. When did you buy/sell GME? Or are you still holding?',
+        id: 'Ok, status report. When did you buy/sell GME? Or are you still holding?',
+        text: 'Ok, status report. When did you buy/sell GME? Or are you still holding?',
         items_count: 1,
         items: [
           'Ok, status report. When did you buy/sell GME? Or are you still holding?',
@@ -8821,10 +8375,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Are you still continuing to buy $GME and the other restricted stocks ?',
-        text:
-          'Are you still continuing to buy $GME and the other restricted stocks ?',
+        id: 'Are you still continuing to buy $GME and the other restricted stocks ?',
+        text: 'Are you still continuing to buy $GME and the other restricted stocks ?',
         items_count: 1,
         items: [
           'Are you still continuing to buy $GME and the other restricted stocks ?',
@@ -8832,10 +8384,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Don't know if this will inspire others, but I've been holding GME since 2014, through the very highs of 2021 and the extreme lows of 2020.",
-        text:
-          "Don't know if this will inspire others, but I've been holding GME since 2014, through the very highs of 2021 and the extreme lows of 2020.",
+        id: "Don't know if this will inspire others, but I've been holding GME since 2014, through the very highs of 2021 and the extreme lows of 2020.",
+        text: "Don't know if this will inspire others, but I've been holding GME since 2014, through the very highs of 2021 and the extreme lows of 2020.",
         items_count: 1,
         items: [
           "Don't know if this will inspire others, but I've been holding GME since 2014, through the very highs of 2021 and the extreme lows of 2020.",
@@ -8843,10 +8393,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Fidelity and Schwab are still selling and buying GME and are both $0 commisions',
-        text:
-          'Fidelity and Schwab are still selling and buying GME and are both $0 commisions',
+        id: 'Fidelity and Schwab are still selling and buying GME and are both $0 commisions',
+        text: 'Fidelity and Schwab are still selling and buying GME and are both $0 commisions',
         items_count: 1,
         items: [
           'Fidelity and Schwab are still selling and buying GME and are both $0 commisions',
@@ -8894,10 +8442,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'It may not be much, but I’m holding the line with you! I like the stock!',
-        text:
-          'It may not be much, but I’m holding the line with you! I like the stock!',
+        id: 'It may not be much, but I’m holding the line with you! I like the stock!',
+        text: 'It may not be much, but I’m holding the line with you! I like the stock!',
         items_count: 1,
         items: [
           'It may not be much, but I’m holding the line with you! I like the stock!',
@@ -9121,10 +8667,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I don’t know what I got myself into, BUT I’M NOT **** LEAVING! 💎👐 🚀🚀🚀🚀🚀🚀🚀',
-        text:
-          'I don’t know what I got myself into, BUT I’M NOT **** LEAVING! 💎👐 🚀🚀🚀🚀🚀🚀🚀',
+        id: 'I don’t know what I got myself into, BUT I’M NOT **** LEAVING! 💎👐 🚀🚀🚀🚀🚀🚀🚀',
+        text: 'I don’t know what I got myself into, BUT I’M NOT **** LEAVING! 💎👐 🚀🚀🚀🚀🚀🚀🚀',
         items_count: 1,
         items: [
           'I don’t know what I got myself into, BUT I’M NOT **** LEAVING! 💎👐 🚀🚀🚀🚀🚀🚀🚀',
@@ -9177,10 +8721,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Is there anywhere I can buy GME in UK - Freetrade, Revolut, T212 and more currently sell only',
-        text:
-          'Is there anywhere I can buy GME in UK - Freetrade, Revolut, T212 and more currently sell only',
+        id: 'Is there anywhere I can buy GME in UK - Freetrade, Revolut, T212 and more currently sell only',
+        text: 'Is there anywhere I can buy GME in UK - Freetrade, Revolut, T212 and more currently sell only',
         items_count: 2,
         items: [
           'Is there anywhere I can buy GME in UK - Freetrade, Revolut, T212 and more currently sell only',
@@ -9189,10 +8731,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Anyone from UK know where I can buy more GME? Was using revolut RIP',
-        text:
-          'Anyone from UK know where I can buy more GME? Was using revolut RIP',
+        id: 'Anyone from UK know where I can buy more GME? Was using revolut RIP',
+        text: 'Anyone from UK know where I can buy more GME? Was using revolut RIP',
         items_count: 1,
         items: [
           'Anyone from UK know where I can buy more GME? Was using revolut RIP',
@@ -9228,10 +8768,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'How do I buy GME? What app do you guys use to do all the stuff you do?',
-        text:
-          'How do I buy GME? What app do you guys use to do all the stuff you do?',
+        id: 'How do I buy GME? What app do you guys use to do all the stuff you do?',
+        text: 'How do I buy GME? What app do you guys use to do all the stuff you do?',
         items_count: 1,
         items: [
           'How do I buy GME? What app do you guys use to do all the stuff you do?',
@@ -9239,10 +8777,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Canadian here looking to buy GME as a protest/retaliation as to what happened yesterday. What's the easiest way for me to buy GME in Canada?",
-        text:
-          "Canadian here looking to buy GME as a protest/retaliation as to what happened yesterday. What's the easiest way for me to buy GME in Canada?",
+        id: "Canadian here looking to buy GME as a protest/retaliation as to what happened yesterday. What's the easiest way for me to buy GME in Canada?",
+        text: "Canadian here looking to buy GME as a protest/retaliation as to what happened yesterday. What's the easiest way for me to buy GME in Canada?",
         items_count: 1,
         items: [
           "Canadian here looking to buy GME as a protest/retaliation as to what happened yesterday. What's the easiest way for me to buy GME in Canada?",
@@ -9342,10 +8878,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Issuing $GME price target $69,420 and upgrade to ‘BUY’. HOLD TO THE MOON. ✊🏿✊🏿🚀🚀🚀💎💎💎🦍🦍🦍',
-        text:
-          'Issuing $GME price target $69,420 and upgrade to ‘BUY’. HOLD TO THE MOON. ✊🏿✊🏿🚀🚀🚀💎💎💎🦍🦍🦍',
+        id: 'Issuing $GME price target $69,420 and upgrade to ‘BUY’. HOLD TO THE MOON. ✊🏿✊🏿🚀🚀🚀💎💎💎🦍🦍🦍',
+        text: 'Issuing $GME price target $69,420 and upgrade to ‘BUY’. HOLD TO THE MOON. ✊🏿✊🏿🚀🚀🚀💎💎💎🦍🦍🦍',
         items_count: 1,
         items: [
           'Issuing $GME price target $69,420 and upgrade to ‘BUY’. HOLD TO THE MOON. ✊🏿✊🏿🚀🚀🚀💎💎💎🦍🦍🦍',
@@ -9430,10 +8964,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "How GME IS going to the moon(Yes, it's still possible) (Crucial pls read)",
-        text:
-          "How GME IS going to the moon(Yes, it's still possible) (Crucial pls read)",
+        id: "How GME IS going to the moon(Yes, it's still possible) (Crucial pls read)",
+        text: "How GME IS going to the moon(Yes, it's still possible) (Crucial pls read)",
         items_count: 1,
         items: [
           "How GME IS going to the moon(Yes, it's still possible) (Crucial pls read)",
@@ -9449,8 +8981,7 @@ export const clusters: ExampleNode[] = [
       {
         type: 'Phrase',
         id: 'GME TO THE MOON BOYS, NEXT TIME I SEE YOU ALL ITLL BE ON THE MOON',
-        text:
-          'GME TO THE MOON BOYS, NEXT TIME I SEE YOU ALL ITLL BE ON THE MOON',
+        text: 'GME TO THE MOON BOYS, NEXT TIME I SEE YOU ALL ITLL BE ON THE MOON',
         items_count: 1,
         items: [
           'GME TO THE MOON BOYS, NEXT TIME I SEE YOU ALL ITLL BE ON THE MOON',
@@ -9563,18 +9094,14 @@ export const clusters: ExampleNode[] = [
   },
   {
     type: 'Cluster',
-    id:
-      "Robinhood upped AMC limit to 2500 shares! Now's the to buy and push the stock back up to $14!",
-    text:
-      "Robinhood upped AMC limit to 2500 shares! Now's the to buy and push the stock back up to $14!",
+    id: "Robinhood upped AMC limit to 2500 shares! Now's the to buy and push the stock back up to $14!",
+    text: "Robinhood upped AMC limit to 2500 shares! Now's the to buy and push the stock back up to $14!",
     items_count: 23,
     children: [
       {
         type: 'Phrase',
-        id:
-          'Robinhood now allowing purchases of up to 500 shares of GME 5500 of AMC!',
-        text:
-          'Robinhood now allowing purchases of up to 500 shares of GME 5500 of AMC!',
+        id: 'Robinhood now allowing purchases of up to 500 shares of GME 5500 of AMC!',
+        text: 'Robinhood now allowing purchases of up to 500 shares of GME 5500 of AMC!',
         items_count: 5,
         items: [
           'Robinhood now allowing purchases of up to 500 shares of GME 5500 of AMC!',
@@ -9588,10 +9115,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Robinhood is allowing you to purchase shares again!!!!! The show goes on!!!! 💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎',
-        text:
-          'Robinhood is allowing you to purchase shares again!!!!! The show goes on!!!! 💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎',
+        id: 'Robinhood is allowing you to purchase shares again!!!!! The show goes on!!!! 💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎',
+        text: 'Robinhood is allowing you to purchase shares again!!!!! The show goes on!!!! 💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎',
         items_count: 5,
         items: [
           'Robinhood is allowing you to purchase shares again!!!!! The show goes on!!!! 💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎🖐️💎',
@@ -9605,10 +9130,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Robinhood upped AMC limit to 2500 shares! Now's the to buy and push the stock back up to $14!",
-        text:
-          "Robinhood upped AMC limit to 2500 shares! Now's the to buy and push the stock back up to $14!",
+        id: "Robinhood upped AMC limit to 2500 shares! Now's the to buy and push the stock back up to $14!",
+        text: "Robinhood upped AMC limit to 2500 shares! Now's the to buy and push the stock back up to $14!",
         items_count: 3,
         items: [
           "Robinhood upped AMC limit to 2500 shares! Now's the to buy and push the stock back up to $14!",
@@ -9620,10 +9143,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'ATTN: Those stuck on Robinhood, It seems they have increased the maximum stock limit at least for AMC. If youve been stuck with 10 shares or less, BUY!',
-        text:
-          'ATTN: Those stuck on Robinhood, It seems they have increased the maximum stock limit at least for AMC. If youve been stuck with 10 shares or less, BUY!',
+        id: 'ATTN: Those stuck on Robinhood, It seems they have increased the maximum stock limit at least for AMC. If youve been stuck with 10 shares or less, BUY!',
+        text: 'ATTN: Those stuck on Robinhood, It seems they have increased the maximum stock limit at least for AMC. If youve been stuck with 10 shares or less, BUY!',
         items_count: 2,
         items: [
           'ATTN: Those stuck on Robinhood, It seems they have increased the maximum stock limit at least for AMC. If youve been stuck with 10 shares or less, BUY!',
@@ -9643,10 +9164,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I used all $200 I had in @robinhood to invest in GME and AMC this morning. You CAN still get in, don’t think it’s too late 🚀👏🏽💎💜',
-        text:
-          'I used all $200 I had in @robinhood to invest in GME and AMC this morning. You CAN still get in, don’t think it’s too late 🚀👏🏽💎💜',
+        id: 'I used all $200 I had in @robinhood to invest in GME and AMC this morning. You CAN still get in, don’t think it’s too late 🚀👏🏽💎💜',
+        text: 'I used all $200 I had in @robinhood to invest in GME and AMC this morning. You CAN still get in, don’t think it’s too late 🚀👏🏽💎💜',
         items_count: 1,
         items: [
           'I used all $200 I had in @robinhood to invest in GME and AMC this morning. You CAN still get in, don’t think it’s too late 🚀👏🏽💎💜',
@@ -9655,8 +9174,7 @@ export const clusters: ExampleNode[] = [
       {
         type: 'Phrase',
         id: 'Robinhood raises AMC limit to 1,250 shares and contracts tomorrow',
-        text:
-          'Robinhood raises AMC limit to 1,250 shares and contracts tomorrow',
+        text: 'Robinhood raises AMC limit to 1,250 shares and contracts tomorrow',
         items_count: 1,
         items: [
           'Robinhood raises AMC limit to 1,250 shares and contracts tomorrow',
@@ -9664,10 +9182,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Robinhood raised their maximum shares to 100, so I got 10 more at a sweet price!',
-        text:
-          'Robinhood raised their maximum shares to 100, so I got 10 more at a sweet price!',
+        id: 'Robinhood raised their maximum shares to 100, so I got 10 more at a sweet price!',
+        text: 'Robinhood raised their maximum shares to 100, so I got 10 more at a sweet price!',
         items_count: 1,
         items: [
           'Robinhood raised their maximum shares to 100, so I got 10 more at a sweet price!',
@@ -9675,10 +9191,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'New Robinhood limits! GO BUY AND HOLD!! No $BB restrictions it looks like!!',
-        text:
-          'New Robinhood limits! GO BUY AND HOLD!! No $BB restrictions it looks like!!',
+        id: 'New Robinhood limits! GO BUY AND HOLD!! No $BB restrictions it looks like!!',
+        text: 'New Robinhood limits! GO BUY AND HOLD!! No $BB restrictions it looks like!!',
         items_count: 1,
         items: [
           'New Robinhood limits! GO BUY AND HOLD!! No $BB restrictions it looks like!!',
@@ -9686,10 +9200,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "With today's cash infusion, Robinhood RAISED how many shares you can buy. HOP BACK IN and HOLD! 🙌💎 also **** the automod",
-        text:
-          "With today's cash infusion, Robinhood RAISED how many shares you can buy. HOP BACK IN and HOLD! 🙌💎 also **** the automod",
+        id: "With today's cash infusion, Robinhood RAISED how many shares you can buy. HOP BACK IN and HOLD! 🙌💎 also **** the automod",
+        text: "With today's cash infusion, Robinhood RAISED how many shares you can buy. HOP BACK IN and HOLD! 🙌💎 also **** the automod",
         items_count: 1,
         items: [
           "With today's cash infusion, Robinhood RAISED how many shares you can buy. HOP BACK IN and HOLD! 🙌💎 also **** the automod",
@@ -9724,10 +9236,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Bought more GME yesterday.. and just did some more today. I am HOLDING. 💎💎',
-        text:
-          'Bought more GME yesterday.. and just did some more today. I am HOLDING. 💎💎',
+        id: 'Bought more GME yesterday.. and just did some more today. I am HOLDING. 💎💎',
+        text: 'Bought more GME yesterday.. and just did some more today. I am HOLDING. 💎💎',
         items_count: 3,
         items: [
           'Bought more GME yesterday.. and just did some more today. I am HOLDING. 💎💎',
@@ -9782,10 +9292,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Managed to buy some more earlier when it was dipping. GME to the moon 🚀🚀🚀',
-        text:
-          'Managed to buy some more earlier when it was dipping. GME to the moon 🚀🚀🚀',
+        id: 'Managed to buy some more earlier when it was dipping. GME to the moon 🚀🚀🚀',
+        text: 'Managed to buy some more earlier when it was dipping. GME to the moon 🚀🚀🚀',
         items_count: 1,
         items: [
           'Managed to buy some more earlier when it was dipping. GME to the moon 🚀🚀🚀',
@@ -9793,10 +9301,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Just bought my max limit of 100 Gme starting now buy buy buy 🚀🚀🚀💎🙌',
-        text:
-          'Just bought my max limit of 100 Gme starting now buy buy buy 🚀🚀🚀💎🙌',
+        id: 'Just bought my max limit of 100 Gme starting now buy buy buy 🚀🚀🚀💎🙌',
+        text: 'Just bought my max limit of 100 Gme starting now buy buy buy 🚀🚀🚀💎🙌',
         items_count: 1,
         items: [
           'Just bought my max limit of 100 Gme starting now buy buy buy 🚀🚀🚀💎🙌',
@@ -9811,10 +9317,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Still holding for my brothers and sisters. I’m not selling, add 100 more AMC. I will add 50 more GME this Friday. Diamond Hands 🙌💎',
-        text:
-          'Still holding for my brothers and sisters. I’m not selling, add 100 more AMC. I will add 50 more GME this Friday. Diamond Hands 🙌💎',
+        id: 'Still holding for my brothers and sisters. I’m not selling, add 100 more AMC. I will add 50 more GME this Friday. Diamond Hands 🙌💎',
+        text: 'Still holding for my brothers and sisters. I’m not selling, add 100 more AMC. I will add 50 more GME this Friday. Diamond Hands 🙌💎',
         items_count: 1,
         items: [
           'Still holding for my brothers and sisters. I’m not selling, add 100 more AMC. I will add 50 more GME this Friday. Diamond Hands 🙌💎',
@@ -9829,10 +9333,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'So I heard there was a sale on. Bought 10 more GME at £87. Holding 18 ✋💎💎✋ 🚀🚀🚀🚀🌙',
-        text:
-          'So I heard there was a sale on. Bought 10 more GME at £87. Holding 18 ✋💎💎✋ 🚀🚀🚀🚀🌙',
+        id: 'So I heard there was a sale on. Bought 10 more GME at £87. Holding 18 ✋💎💎✋ 🚀🚀🚀🚀🌙',
+        text: 'So I heard there was a sale on. Bought 10 more GME at £87. Holding 18 ✋💎💎✋ 🚀🚀🚀🚀🌙',
         items_count: 1,
         items: [
           'So I heard there was a sale on. Bought 10 more GME at £87. Holding 18 ✋💎💎✋ 🚀🚀🚀🚀🌙',
@@ -9841,8 +9343,7 @@ export const clusters: ExampleNode[] = [
       {
         type: 'Phrase',
         id: '$GME bought 40 more let’s go! average: $236.99 140 💎 🦍 🦧 🍌 🖐',
-        text:
-          '$GME bought 40 more let’s go! average: $236.99 140 💎 🦍 🦧 🍌 🖐',
+        text: '$GME bought 40 more let’s go! average: $236.99 140 💎 🦍 🦧 🍌 🖐',
         items_count: 1,
         items: [
           '$GME bought 40 more let’s go! average: $236.99 140 💎 🦍 🦧 🍌 🖐',
@@ -9850,10 +9351,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          '🚀🚀🌝🌝🌝🚀🚀🚀🌝💎💎💎🙌🏼🙌🏼🙌🏼🌙🌙🌙🌙💎🌙🌝🚀🌙🌙🌙🌙 I’m buying more Monday..... GME to 42,000 per share. Might go below 100ps first thou so don’t be surprised.',
-        text:
-          '🚀🚀🌝🌝🌝🚀🚀🚀🌝💎💎💎🙌🏼🙌🏼🙌🏼🌙🌙🌙🌙💎🌙🌝🚀🌙🌙🌙🌙 I’m buying more Monday..... GME to 42,000 per share. Might go below 100ps first thou so don’t be surprised.',
+        id: '🚀🚀🌝🌝🌝🚀🚀🚀🌝💎💎💎🙌🏼🙌🏼🙌🏼🌙🌙🌙🌙💎🌙🌝🚀🌙🌙🌙🌙 I’m buying more Monday..... GME to 42,000 per share. Might go below 100ps first thou so don’t be surprised.',
+        text: '🚀🚀🌝🌝🌝🚀🚀🚀🌝💎💎💎🙌🏼🙌🏼🙌🏼🌙🌙🌙🌙💎🌙🌝🚀🌙🌙🌙🌙 I’m buying more Monday..... GME to 42,000 per share. Might go below 100ps first thou so don’t be surprised.',
         items_count: 1,
         items: [
           '🚀🚀🌝🌝🌝🚀🚀🚀🌝💎💎💎🙌🏼🙌🏼🙌🏼🌙🌙🌙🌙💎🌙🌝🚀🌙🌙🌙🌙 I’m buying more Monday..... GME to 42,000 per share. Might go below 100ps first thou so don’t be surprised.',
@@ -9884,10 +9383,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          '15 U.S.C.A. § 78i - the Illegality of Short Ladder Attacks (Legal insight)',
-        text:
-          '15 U.S.C.A. § 78i - the Illegality of Short Ladder Attacks (Legal insight)',
+        id: '15 U.S.C.A. § 78i - the Illegality of Short Ladder Attacks (Legal insight)',
+        text: '15 U.S.C.A. § 78i - the Illegality of Short Ladder Attacks (Legal insight)',
         items_count: 3,
         items: [
           '15 U.S.C.A. § 78i - the Illegality of Short Ladder Attacks (Legal insight)',
@@ -9940,10 +9437,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Okay this could be a classic stupid n00b question but stay with me here... how many short ladder attacks can they feasibly do? Should we be prepared to see this for days to come?',
-        text:
-          'Okay this could be a classic stupid n00b question but stay with me here... how many short ladder attacks can they feasibly do? Should we be prepared to see this for days to come?',
+        id: 'Okay this could be a classic stupid n00b question but stay with me here... how many short ladder attacks can they feasibly do? Should we be prepared to see this for days to come?',
+        text: 'Okay this could be a classic stupid n00b question but stay with me here... how many short ladder attacks can they feasibly do? Should we be prepared to see this for days to come?',
         items_count: 1,
         items: [
           'Okay this could be a classic stupid n00b question but stay with me here... how many short ladder attacks can they feasibly do? Should we be prepared to see this for days to come?',
@@ -9958,10 +9453,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'What’s Happened the Past Few Days?: The Anatomy of a Short Ladder Attack',
-        text:
-          'What’s Happened the Past Few Days?: The Anatomy of a Short Ladder Attack',
+        id: 'What’s Happened the Past Few Days?: The Anatomy of a Short Ladder Attack',
+        text: 'What’s Happened the Past Few Days?: The Anatomy of a Short Ladder Attack',
         items_count: 1,
         items: [
           'What’s Happened the Past Few Days?: The Anatomy of a Short Ladder Attack',
@@ -9987,17 +9480,14 @@ export const clusters: ExampleNode[] = [
   },
   {
     type: 'Cluster',
-    id:
-      "Losing money on $GME was the best thing that's happened to me in a long time.",
-    text:
-      "Losing money on $GME was the best thing that's happened to me in a long time.",
+    id: "Losing money on $GME was the best thing that's happened to me in a long time.",
+    text: "Losing money on $GME was the best thing that's happened to me in a long time.",
     items_count: 22,
     children: [
       {
         type: 'Phrase',
         id: "Bought in at $367 + lost nearly 4k on GME, but I'm still holding!",
-        text:
-          "Bought in at $367 + lost nearly 4k on GME, but I'm still holding!",
+        text: "Bought in at $367 + lost nearly 4k on GME, but I'm still holding!",
         items_count: 4,
         items: [
           "Bought in at $367 + lost nearly 4k on GME, but I'm still holding!",
@@ -10009,10 +9499,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I dumped my entire life’s savings into $GME. All 100 dollars of it.',
-        text:
-          'I dumped my entire life’s savings into $GME. All 100 dollars of it.',
+        id: 'I dumped my entire life’s savings into $GME. All 100 dollars of it.',
+        text: 'I dumped my entire life’s savings into $GME. All 100 dollars of it.',
         items_count: 4,
         items: [
           'I dumped my entire life’s savings into $GME. All 100 dollars of it.',
@@ -10034,10 +9522,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'RIP $GME. Cashed out at $83/share. Im back to my initial investment. Better late than never.',
-        text:
-          'RIP $GME. Cashed out at $83/share. Im back to my initial investment. Better late than never.',
+        id: 'RIP $GME. Cashed out at $83/share. Im back to my initial investment. Better late than never.',
+        text: 'RIP $GME. Cashed out at $83/share. Im back to my initial investment. Better late than never.',
         items_count: 2,
         items: [
           'RIP $GME. Cashed out at $83/share. Im back to my initial investment. Better late than never.',
@@ -10047,10 +9533,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Losing money on $GME was the best thing that's happened to me in a long time.",
-        text:
-          "Losing money on $GME was the best thing that's happened to me in a long time.",
+        id: "Losing money on $GME was the best thing that's happened to me in a long time.",
+        text: "Losing money on $GME was the best thing that's happened to me in a long time.",
         items_count: 1,
         items: [
           "Losing money on $GME was the best thing that's happened to me in a long time.",
@@ -10059,8 +9543,7 @@ export const clusters: ExampleNode[] = [
       {
         type: 'Phrase',
         id: "I've never purchased a single stock in my life, I now have 1 $GME",
-        text:
-          "I've never purchased a single stock in my life, I now have 1 $GME",
+        text: "I've never purchased a single stock in my life, I now have 1 $GME",
         items_count: 1,
         items: [
           "I've never purchased a single stock in my life, I now have 1 $GME",
@@ -10068,10 +9551,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Having lost the money I was happy to put into $GME, and being greedy by not selling when I was +$800, I thank you all because I invested in other long term stocks that were declining because of AMC and GME. Now I made back my money.',
-        text:
-          'Having lost the money I was happy to put into $GME, and being greedy by not selling when I was +$800, I thank you all because I invested in other long term stocks that were declining because of AMC and GME. Now I made back my money.',
+        id: 'Having lost the money I was happy to put into $GME, and being greedy by not selling when I was +$800, I thank you all because I invested in other long term stocks that were declining because of AMC and GME. Now I made back my money.',
+        text: 'Having lost the money I was happy to put into $GME, and being greedy by not selling when I was +$800, I thank you all because I invested in other long term stocks that were declining because of AMC and GME. Now I made back my money.',
         items_count: 1,
         items: [
           'Having lost the money I was happy to put into $GME, and being greedy by not selling when I was +$800, I thank you all because I invested in other long term stocks that were declining because of AMC and GME. Now I made back my money.',
@@ -10079,10 +9560,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Just put my last $300 into $GME, trying to save up to go to school and start my dreams but if I lose, I know it’s for a good cause',
-        text:
-          'Just put my last $300 into $GME, trying to save up to go to school and start my dreams but if I lose, I know it’s for a good cause',
+        id: 'Just put my last $300 into $GME, trying to save up to go to school and start my dreams but if I lose, I know it’s for a good cause',
+        text: 'Just put my last $300 into $GME, trying to save up to go to school and start my dreams but if I lose, I know it’s for a good cause',
         items_count: 1,
         items: [
           'Just put my last $300 into $GME, trying to save up to go to school and start my dreams but if I lose, I know it’s for a good cause',
@@ -10097,10 +9576,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          '$GME: 5 figure loss in 3 days...but at least it was unrealized gains and not principal :(',
-        text:
-          '$GME: 5 figure loss in 3 days...but at least it was unrealized gains and not principal :(',
+        id: '$GME: 5 figure loss in 3 days...but at least it was unrealized gains and not principal :(',
+        text: '$GME: 5 figure loss in 3 days...but at least it was unrealized gains and not principal :(',
         items_count: 1,
         items: [
           '$GME: 5 figure loss in 3 days...but at least it was unrealized gains and not principal :(',
@@ -10108,10 +9585,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Huge loss in $GME and $AMC, still holding it...not sure if we recover',
-        text:
-          'Huge loss in $GME and $AMC, still holding it...not sure if we recover',
+        id: 'Huge loss in $GME and $AMC, still holding it...not sure if we recover',
+        text: 'Huge loss in $GME and $AMC, still holding it...not sure if we recover',
         items_count: 1,
         items: [
           'Huge loss in $GME and $AMC, still holding it...not sure if we recover',
@@ -10119,10 +9594,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "I know it's not much, but I put my entire 401k into GME today. I've officially got diamond hands, boys. Stonks go up. To the moon.🚀🚀🚀 **monkey no give financial advice***",
-        text:
-          "I know it's not much, but I put my entire 401k into GME today. I've officially got diamond hands, boys. Stonks go up. To the moon.🚀🚀🚀 **monkey no give financial advice***",
+        id: "I know it's not much, but I put my entire 401k into GME today. I've officially got diamond hands, boys. Stonks go up. To the moon.🚀🚀🚀 **monkey no give financial advice***",
+        text: "I know it's not much, but I put my entire 401k into GME today. I've officially got diamond hands, boys. Stonks go up. To the moon.🚀🚀🚀 **monkey no give financial advice***",
         items_count: 1,
         items: [
           "I know it's not much, but I put my entire 401k into GME today. I've officially got diamond hands, boys. Stonks go up. To the moon.🚀🚀🚀 **monkey no give financial advice***",
@@ -10130,10 +9603,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'My portfolio yesterday because of GME... felt like a Genkidama. (no_financial_advice)',
-        text:
-          'My portfolio yesterday because of GME... felt like a Genkidama. (no_financial_advice)',
+        id: 'My portfolio yesterday because of GME... felt like a Genkidama. (no_financial_advice)',
+        text: 'My portfolio yesterday because of GME... felt like a Genkidama. (no_financial_advice)',
         items_count: 1,
         items: [
           'My portfolio yesterday because of GME... felt like a Genkidama. (no_financial_advice)',
@@ -10150,10 +9621,8 @@ export const clusters: ExampleNode[] = [
   },
   {
     type: 'Cluster',
-    id:
-      'DO NOT START BUYING FROM ROBINHOOD - USE ANOTHER EXCHANGE THAT DIDNT DISABLE BUYING. WHEN THIS IS OVER THEN TRANSFER YOUR GME STOCKS',
-    text:
-      'DO NOT START BUYING FROM ROBINHOOD - USE ANOTHER EXCHANGE THAT DIDNT DISABLE BUYING. WHEN THIS IS OVER THEN TRANSFER YOUR GME STOCKS',
+    id: 'DO NOT START BUYING FROM ROBINHOOD - USE ANOTHER EXCHANGE THAT DIDNT DISABLE BUYING. WHEN THIS IS OVER THEN TRANSFER YOUR GME STOCKS',
+    text: 'DO NOT START BUYING FROM ROBINHOOD - USE ANOTHER EXCHANGE THAT DIDNT DISABLE BUYING. WHEN THIS IS OVER THEN TRANSFER YOUR GME STOCKS',
     items_count: 22,
     children: [
       {
@@ -10169,10 +9638,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'DO NOT START BUYING FROM ROBINHOOD - USE ANOTHER EXCHANGE THAT DIDNT DISABLE BUYING. WHEN THIS IS OVER THEN TRANSFER YOUR GME STOCKS',
-        text:
-          'DO NOT START BUYING FROM ROBINHOOD - USE ANOTHER EXCHANGE THAT DIDNT DISABLE BUYING. WHEN THIS IS OVER THEN TRANSFER YOUR GME STOCKS',
+        id: 'DO NOT START BUYING FROM ROBINHOOD - USE ANOTHER EXCHANGE THAT DIDNT DISABLE BUYING. WHEN THIS IS OVER THEN TRANSFER YOUR GME STOCKS',
+        text: 'DO NOT START BUYING FROM ROBINHOOD - USE ANOTHER EXCHANGE THAT DIDNT DISABLE BUYING. WHEN THIS IS OVER THEN TRANSFER YOUR GME STOCKS',
         items_count: 2,
         items: [
           'DO NOT START BUYING FROM ROBINHOOD - USE ANOTHER EXCHANGE THAT DIDNT DISABLE BUYING. WHEN THIS IS OVER THEN TRANSFER YOUR GME STOCKS',
@@ -10188,10 +9655,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'i had a account deficiency so robinhood force closed all my shares including AMC i’ve had for months and GME 200 less than i bought it for. What can I do?',
-        text:
-          'i had a account deficiency so robinhood force closed all my shares including AMC i’ve had for months and GME 200 less than i bought it for. What can I do?',
+        id: 'i had a account deficiency so robinhood force closed all my shares including AMC i’ve had for months and GME 200 less than i bought it for. What can I do?',
+        text: 'i had a account deficiency so robinhood force closed all my shares including AMC i’ve had for months and GME 200 less than i bought it for. What can I do?',
         items_count: 1,
         items: [
           'i had a account deficiency so robinhood force closed all my shares including AMC i’ve had for months and GME 200 less than i bought it for. What can I do?',
@@ -10199,10 +9664,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "I don't care if Robinhood will let you buy shares again, you should change broker immediately.",
-        text:
-          "I don't care if Robinhood will let you buy shares again, you should change broker immediately.",
+        id: "I don't care if Robinhood will let you buy shares again, you should change broker immediately.",
+        text: "I don't care if Robinhood will let you buy shares again, you should change broker immediately.",
         items_count: 1,
         items: [
           "I don't care if Robinhood will let you buy shares again, you should change broker immediately.",
@@ -10210,10 +9673,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Ok you beautiful Diamond hand autistic savants just in case your still stuck on Robinhood and want to buy more then 100 GME shares hears the work around.',
-        text:
-          'Ok you beautiful Diamond hand autistic savants just in case your still stuck on Robinhood and want to buy more then 100 GME shares hears the work around.',
+        id: 'Ok you beautiful Diamond hand autistic savants just in case your still stuck on Robinhood and want to buy more then 100 GME shares hears the work around.',
+        text: 'Ok you beautiful Diamond hand autistic savants just in case your still stuck on Robinhood and want to buy more then 100 GME shares hears the work around.',
         items_count: 1,
         items: [
           'Ok you beautiful Diamond hand autistic savants just in case your still stuck on Robinhood and want to buy more then 100 GME shares hears the work around.',
@@ -10221,10 +9682,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Robinhood deactivated my account. No notice, no email, nothing. I havent even been active for over a week. Just holding GME 💎🙌. I can't buy or sell.",
-        text:
-          "Robinhood deactivated my account. No notice, no email, nothing. I havent even been active for over a week. Just holding GME 💎🙌. I can't buy or sell.",
+        id: "Robinhood deactivated my account. No notice, no email, nothing. I havent even been active for over a week. Just holding GME 💎🙌. I can't buy or sell.",
+        text: "Robinhood deactivated my account. No notice, no email, nothing. I havent even been active for over a week. Just holding GME 💎🙌. I can't buy or sell.",
         items_count: 1,
         items: [
           "Robinhood deactivated my account. No notice, no email, nothing. I havent even been active for over a week. Just holding GME 💎🙌. I can't buy or sell.",
@@ -10232,10 +9691,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Robinhood is blocking me from buying GME with the incorrect excuse that I’m not bidding enough for a share. Currently trading at $114 and I bid $120. **** RH',
-        text:
-          'Robinhood is blocking me from buying GME with the incorrect excuse that I’m not bidding enough for a share. Currently trading at $114 and I bid $120. **** RH',
+        id: 'Robinhood is blocking me from buying GME with the incorrect excuse that I’m not bidding enough for a share. Currently trading at $114 and I bid $120. **** RH',
+        text: 'Robinhood is blocking me from buying GME with the incorrect excuse that I’m not bidding enough for a share. Currently trading at $114 and I bid $120. **** RH',
         items_count: 1,
         items: [
           'Robinhood is blocking me from buying GME with the incorrect excuse that I’m not bidding enough for a share. Currently trading at $114 and I bid $120. **** RH',
@@ -10250,10 +9707,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'My GME stocks are stuck in Robinhood (78 at $49) and they keep canceling my limit order, should I be worried? Any suggestions? (Besides get the hell out of Robinhood, will do so as soon as I can)',
-        text:
-          'My GME stocks are stuck in Robinhood (78 at $49) and they keep canceling my limit order, should I be worried? Any suggestions? (Besides get the hell out of Robinhood, will do so as soon as I can)',
+        id: 'My GME stocks are stuck in Robinhood (78 at $49) and they keep canceling my limit order, should I be worried? Any suggestions? (Besides get the hell out of Robinhood, will do so as soon as I can)',
+        text: 'My GME stocks are stuck in Robinhood (78 at $49) and they keep canceling my limit order, should I be worried? Any suggestions? (Besides get the hell out of Robinhood, will do so as soon as I can)',
         items_count: 1,
         items: [
           'My GME stocks are stuck in Robinhood (78 at $49) and they keep canceling my limit order, should I be worried? Any suggestions? (Besides get the hell out of Robinhood, will do so as soon as I can)',
@@ -10275,10 +9730,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'They say Robinhood stopped its users from buying GME because of requirement with Clearinghouse',
-        text:
-          'They say Robinhood stopped its users from buying GME because of requirement with Clearinghouse',
+        id: 'They say Robinhood stopped its users from buying GME because of requirement with Clearinghouse',
+        text: 'They say Robinhood stopped its users from buying GME because of requirement with Clearinghouse',
         items_count: 1,
         items: [
           'They say Robinhood stopped its users from buying GME because of requirement with Clearinghouse',
@@ -10286,10 +9739,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Yo listen up autists, if unsettled fail to deliver trades on GME last 30 days or longer, it becomes known as an aged fail and your broker is on the hook to buy out your share. That's why Robinhood is restricting trading, not collusion by hedge funds",
-        text:
-          "Yo listen up autists, if unsettled fail to deliver trades on GME last 30 days or longer, it becomes known as an aged fail and your broker is on the hook to buy out your share. That's why Robinhood is restricting trading, not collusion by hedge funds",
+        id: "Yo listen up autists, if unsettled fail to deliver trades on GME last 30 days or longer, it becomes known as an aged fail and your broker is on the hook to buy out your share. That's why Robinhood is restricting trading, not collusion by hedge funds",
+        text: "Yo listen up autists, if unsettled fail to deliver trades on GME last 30 days or longer, it becomes known as an aged fail and your broker is on the hook to buy out your share. That's why Robinhood is restricting trading, not collusion by hedge funds",
         items_count: 1,
         items: [
           "Yo listen up autists, if unsettled fail to deliver trades on GME last 30 days or longer, it becomes known as an aged fail and your broker is on the hook to buy out your share. That's why Robinhood is restricting trading, not collusion by hedge funds",
@@ -10297,10 +9748,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Robinhood still plans restrictions on $GME for Monday. You should already be signed up with a new brokerage.',
-        text:
-          'Robinhood still plans restrictions on $GME for Monday. You should already be signed up with a new brokerage.',
+        id: 'Robinhood still plans restrictions on $GME for Monday. You should already be signed up with a new brokerage.',
+        text: 'Robinhood still plans restrictions on $GME for Monday. You should already be signed up with a new brokerage.',
         items_count: 1,
         items: [
           'Robinhood still plans restrictions on $GME for Monday. You should already be signed up with a new brokerage.',
@@ -10308,10 +9757,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'ROBINHOOOD - Unless you already have AMC and GME On Robinhood STOP purchasing other investment instruments through this platform. SWITCH to Webull, fidelity or anything else so that ROBINHOOD won’t get transaction fees. We have TO STOP sustaining and provide money to Robinhood.',
-        text:
-          'ROBINHOOOD - Unless you already have AMC and GME On Robinhood STOP purchasing other investment instruments through this platform. SWITCH to Webull, fidelity or anything else so that ROBINHOOD won’t get transaction fees. We have TO STOP sustaining and provide money to Robinhood.',
+        id: 'ROBINHOOOD - Unless you already have AMC and GME On Robinhood STOP purchasing other investment instruments through this platform. SWITCH to Webull, fidelity or anything else so that ROBINHOOD won’t get transaction fees. We have TO STOP sustaining and provide money to Robinhood.',
+        text: 'ROBINHOOOD - Unless you already have AMC and GME On Robinhood STOP purchasing other investment instruments through this platform. SWITCH to Webull, fidelity or anything else so that ROBINHOOD won’t get transaction fees. We have TO STOP sustaining and provide money to Robinhood.',
         items_count: 1,
         items: [
           'ROBINHOOOD - Unless you already have AMC and GME On Robinhood STOP purchasing other investment instruments through this platform. SWITCH to Webull, fidelity or anything else so that ROBINHOOD won’t get transaction fees. We have TO STOP sustaining and provide money to Robinhood.',
@@ -10319,10 +9766,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'PSA PLEASE. If you are planning on leaving Robinhood, leave after the GME Squeeze is through. If Robinhood capsized in the next week so many of us would be screwed.',
-        text:
-          'PSA PLEASE. If you are planning on leaving Robinhood, leave after the GME Squeeze is through. If Robinhood capsized in the next week so many of us would be screwed.',
+        id: 'PSA PLEASE. If you are planning on leaving Robinhood, leave after the GME Squeeze is through. If Robinhood capsized in the next week so many of us would be screwed.',
+        text: 'PSA PLEASE. If you are planning on leaving Robinhood, leave after the GME Squeeze is through. If Robinhood capsized in the next week so many of us would be screwed.',
         items_count: 1,
         items: [
           'PSA PLEASE. If you are planning on leaving Robinhood, leave after the GME Squeeze is through. If Robinhood capsized in the next week so many of us would be screwed.',
@@ -10330,10 +9775,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Robinhood will cease to exist without $GME holders. Hold your existing positions but take all of your other capital to another trading platform. When you close your positions withdraw and move your funds elsewhere. When you’ve closed all your Robinhood positions close your account!',
-        text:
-          'Robinhood will cease to exist without $GME holders. Hold your existing positions but take all of your other capital to another trading platform. When you close your positions withdraw and move your funds elsewhere. When you’ve closed all your Robinhood positions close your account!',
+        id: 'Robinhood will cease to exist without $GME holders. Hold your existing positions but take all of your other capital to another trading platform. When you close your positions withdraw and move your funds elsewhere. When you’ve closed all your Robinhood positions close your account!',
+        text: 'Robinhood will cease to exist without $GME holders. Hold your existing positions but take all of your other capital to another trading platform. When you close your positions withdraw and move your funds elsewhere. When you’ve closed all your Robinhood positions close your account!',
         items_count: 1,
         items: [
           'Robinhood will cease to exist without $GME holders. Hold your existing positions but take all of your other capital to another trading platform. When you close your positions withdraw and move your funds elsewhere. When you’ve closed all your Robinhood positions close your account!',
@@ -10341,10 +9784,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Robinhood is Auto Selling GME Shares for its Customers w/o Warning',
-        text:
-          'Robinhood is Auto Selling GME Shares for its Customers w/o Warning',
+        id: 'Robinhood is Auto Selling GME Shares for its Customers w/o Warning',
+        text: 'Robinhood is Auto Selling GME Shares for its Customers w/o Warning',
         items_count: 1,
         items: [
           'Robinhood is Auto Selling GME Shares for its Customers w/o Warning',
@@ -10381,10 +9822,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "GME and AMC set to sell only on Revolut in UK (caused by DriveWealth in the US). Guess I'll just hold what I have then because I like the stock 💎👊🚀",
-        text:
-          "GME and AMC set to sell only on Revolut in UK (caused by DriveWealth in the US). Guess I'll just hold what I have then because I like the stock 💎👊🚀",
+        id: "GME and AMC set to sell only on Revolut in UK (caused by DriveWealth in the US). Guess I'll just hold what I have then because I like the stock 💎👊🚀",
+        text: "GME and AMC set to sell only on Revolut in UK (caused by DriveWealth in the US). Guess I'll just hold what I have then because I like the stock 💎👊🚀",
         items_count: 2,
         items: [
           "GME and AMC set to sell only on Revolut in UK (caused by DriveWealth in the US). Guess I'll just hold what I have then because I like the stock 💎👊🚀",
@@ -10408,10 +9847,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Serious question. Should we expect a steady decline in GME stock price until 2/9/2021 when short % is revealed? Obviously, on this date GME either sinks further down probably hitting 20-30s (if we haven’t hit that by then already) or shoot up 100+.',
-        text:
-          'Serious question. Should we expect a steady decline in GME stock price until 2/9/2021 when short % is revealed? Obviously, on this date GME either sinks further down probably hitting 20-30s (if we haven’t hit that by then already) or shoot up 100+.',
+        id: 'Serious question. Should we expect a steady decline in GME stock price until 2/9/2021 when short % is revealed? Obviously, on this date GME either sinks further down probably hitting 20-30s (if we haven’t hit that by then already) or shoot up 100+.',
+        text: 'Serious question. Should we expect a steady decline in GME stock price until 2/9/2021 when short % is revealed? Obviously, on this date GME either sinks further down probably hitting 20-30s (if we haven’t hit that by then already) or shoot up 100+.',
         items_count: 1,
         items: [
           'Serious question. Should we expect a steady decline in GME stock price until 2/9/2021 when short % is revealed? Obviously, on this date GME either sinks further down probably hitting 20-30s (if we haven’t hit that by then already) or shoot up 100+.',
@@ -10419,10 +9856,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'FELLOW APES: The new is blasting stories like "GME drops below $80 as investors bail" in an attempt to discourage you. But we are ****. WE DONT WATCH THE NEWS. And anyone bailing out because of it doesn\'t matter. We caused the spike by ourselves! And we can do it again! GME IS ON SALE TODAY!',
-        text:
-          'FELLOW APES: The new is blasting stories like "GME drops below $80 as investors bail" in an attempt to discourage you. But we are ****. WE DONT WATCH THE NEWS. And anyone bailing out because of it doesn\'t matter. We caused the spike by ourselves! And we can do it again! GME IS ON SALE TODAY!',
+        id: 'FELLOW APES: The new is blasting stories like "GME drops below $80 as investors bail" in an attempt to discourage you. But we are ****. WE DONT WATCH THE NEWS. And anyone bailing out because of it doesn\'t matter. We caused the spike by ourselves! And we can do it again! GME IS ON SALE TODAY!',
+        text: 'FELLOW APES: The new is blasting stories like "GME drops below $80 as investors bail" in an attempt to discourage you. But we are ****. WE DONT WATCH THE NEWS. And anyone bailing out because of it doesn\'t matter. We caused the spike by ourselves! And we can do it again! GME IS ON SALE TODAY!',
         items_count: 1,
         items: [
           'FELLOW APES: The new is blasting stories like "GME drops below $80 as investors bail" in an attempt to discourage you. But we are ****. WE DONT WATCH THE NEWS. And anyone bailing out because of it doesn\'t matter. We caused the spike by ourselves! And we can do it again! GME IS ON SALE TODAY!',
@@ -10430,10 +9865,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Fourth time today Revolut reminded me that GME price is going down! It never happened to me before. Somebody truly started bleeding!! Buy hold, history is being written! Dawaj Maniek to już sie KAMERUJE! !',
-        text:
-          'Fourth time today Revolut reminded me that GME price is going down! It never happened to me before. Somebody truly started bleeding!! Buy hold, history is being written! Dawaj Maniek to już sie KAMERUJE! !',
+        id: 'Fourth time today Revolut reminded me that GME price is going down! It never happened to me before. Somebody truly started bleeding!! Buy hold, history is being written! Dawaj Maniek to już sie KAMERUJE! !',
+        text: 'Fourth time today Revolut reminded me that GME price is going down! It never happened to me before. Somebody truly started bleeding!! Buy hold, history is being written! Dawaj Maniek to już sie KAMERUJE! !',
         items_count: 1,
         items: [
           'Fourth time today Revolut reminded me that GME price is going down! It never happened to me before. Somebody truly started bleeding!! Buy hold, history is being written! Dawaj Maniek to już sie KAMERUJE! !',
@@ -10455,10 +9888,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'It’s sad to see the joy publications are taking in seeing GME go down. I thought they were concerned about us all week with their “warnings” and now that they see a low price they rub it in our faces. Well guess what ****s, there’s already **** alllll over my face to bring it on. Hold the line',
-        text:
-          'It’s sad to see the joy publications are taking in seeing GME go down. I thought they were concerned about us all week with their “warnings” and now that they see a low price they rub it in our faces. Well guess what ****s, there’s already **** alllll over my face to bring it on. Hold the line',
+        id: 'It’s sad to see the joy publications are taking in seeing GME go down. I thought they were concerned about us all week with their “warnings” and now that they see a low price they rub it in our faces. Well guess what ****s, there’s already **** alllll over my face to bring it on. Hold the line',
+        text: 'It’s sad to see the joy publications are taking in seeing GME go down. I thought they were concerned about us all week with their “warnings” and now that they see a low price they rub it in our faces. Well guess what ****s, there’s already **** alllll over my face to bring it on. Hold the line',
         items_count: 1,
         items: [
           'It’s sad to see the joy publications are taking in seeing GME go down. I thought they were concerned about us all week with their “warnings” and now that they see a low price they rub it in our faces. Well guess what ****s, there’s already **** alllll over my face to bring it on. Hold the line',
@@ -10466,10 +9897,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Down 50% means you can buy twice as much GME today as you could yesterday for the same price!!! GME ON SALE!!!',
-        text:
-          'Down 50% means you can buy twice as much GME today as you could yesterday for the same price!!! GME ON SALE!!!',
+        id: 'Down 50% means you can buy twice as much GME today as you could yesterday for the same price!!! GME ON SALE!!!',
+        text: 'Down 50% means you can buy twice as much GME today as you could yesterday for the same price!!! GME ON SALE!!!',
         items_count: 1,
         items: [
           'Down 50% means you can buy twice as much GME today as you could yesterday for the same price!!! GME ON SALE!!!',
@@ -10477,10 +9906,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "As you guys can see here, GME is currently in a diamond pattern. It broke below the triangle it formed today, and the other one formed within the past 3 trading days. this honestly looks very bearish. Those shares that were supposed to be bought today from getting exercised didn't do ****.",
-        text:
-          "As you guys can see here, GME is currently in a diamond pattern. It broke below the triangle it formed today, and the other one formed within the past 3 trading days. this honestly looks very bearish. Those shares that were supposed to be bought today from getting exercised didn't do ****.",
+        id: "As you guys can see here, GME is currently in a diamond pattern. It broke below the triangle it formed today, and the other one formed within the past 3 trading days. this honestly looks very bearish. Those shares that were supposed to be bought today from getting exercised didn't do ****.",
+        text: "As you guys can see here, GME is currently in a diamond pattern. It broke below the triangle it formed today, and the other one formed within the past 3 trading days. this honestly looks very bearish. Those shares that were supposed to be bought today from getting exercised didn't do ****.",
         items_count: 1,
         items: [
           "As you guys can see here, GME is currently in a diamond pattern. It broke below the triangle it formed today, and the other one formed within the past 3 trading days. this honestly looks very bearish. Those shares that were supposed to be bought today from getting exercised didn't do ****.",
@@ -10799,10 +10226,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Of course I try to put more in AMC and cashapp says no. Then AMC immediately starts to shoot up again',
-        text:
-          'Of course I try to put more in AMC and cashapp says no. Then AMC immediately starts to shoot up again',
+        id: 'Of course I try to put more in AMC and cashapp says no. Then AMC immediately starts to shoot up again',
+        text: 'Of course I try to put more in AMC and cashapp says no. Then AMC immediately starts to shoot up again',
         items_count: 1,
         items: [
           'Of course I try to put more in AMC and cashapp says no. Then AMC immediately starts to shoot up again',
@@ -10840,17 +10265,14 @@ export const clusters: ExampleNode[] = [
   },
   {
     type: 'Cluster',
-    id:
-      'NYSE Arca Notices - GME added to short sale restriction list starting tomorrow 02/03/2021',
-    text:
-      'NYSE Arca Notices - GME added to short sale restriction list starting tomorrow 02/03/2021',
+    id: 'NYSE Arca Notices - GME added to short sale restriction list starting tomorrow 02/03/2021',
+    text: 'NYSE Arca Notices - GME added to short sale restriction list starting tomorrow 02/03/2021',
     items_count: 20,
     children: [
       {
         type: 'Phrase',
         id: "Great news everyone! GME is on NYSE's Short Sale Restriction List",
-        text:
-          "Great news everyone! GME is on NYSE's Short Sale Restriction List",
+        text: "Great news everyone! GME is on NYSE's Short Sale Restriction List",
         items_count: 9,
         items: [
           "Great news everyone! GME is on NYSE's Short Sale Restriction List",
@@ -10872,10 +10294,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'GME just got put on the NSYE Short Sale Restrictions List with an anticipated deactivation date of 2/3/2021',
-        text:
-          'GME just got put on the NSYE Short Sale Restrictions List with an anticipated deactivation date of 2/3/2021',
+        id: 'GME just got put on the NSYE Short Sale Restrictions List with an anticipated deactivation date of 2/3/2021',
+        text: 'GME just got put on the NSYE Short Sale Restrictions List with an anticipated deactivation date of 2/3/2021',
         items_count: 7,
         items: [
           'GME just got put on the NSYE Short Sale Restrictions List with an anticipated deactivation date of 2/3/2021',
@@ -10892,10 +10312,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'NYSE Arca Notices - GME added to short sale restriction list starting tomorrow 02/03/2021',
-        text:
-          'NYSE Arca Notices - GME added to short sale restriction list starting tomorrow 02/03/2021',
+        id: 'NYSE Arca Notices - GME added to short sale restriction list starting tomorrow 02/03/2021',
+        text: 'NYSE Arca Notices - GME added to short sale restriction list starting tomorrow 02/03/2021',
         items_count: 1,
         items: [
           'NYSE Arca Notices - GME added to short sale restriction list starting tomorrow 02/03/2021',
@@ -10910,10 +10328,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'GME got put on NYSE Short Sale Restriction List with anticipated deactivate date of 2/3/2021?',
-        text:
-          'GME got put on NYSE Short Sale Restriction List with anticipated deactivate date of 2/3/2021?',
+        id: 'GME got put on NYSE Short Sale Restriction List with anticipated deactivate date of 2/3/2021?',
+        text: 'GME got put on NYSE Short Sale Restriction List with anticipated deactivate date of 2/3/2021?',
         items_count: 1,
         items: [
           'GME got put on NYSE Short Sale Restriction List with anticipated deactivate date of 2/3/2021?',
@@ -10921,10 +10337,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'GME on NYSE Short Restriction List. This means that you can only sell during upticks, so no more short ladder.',
-        text:
-          'GME on NYSE Short Restriction List. This means that you can only sell during upticks, so no more short ladder.',
+        id: 'GME on NYSE Short Restriction List. This means that you can only sell during upticks, so no more short ladder.',
+        text: 'GME on NYSE Short Restriction List. This means that you can only sell during upticks, so no more short ladder.',
         items_count: 1,
         items: [
           'GME on NYSE Short Restriction List. This means that you can only sell during upticks, so no more short ladder.',
@@ -10994,8 +10408,7 @@ export const clusters: ExampleNode[] = [
       {
         type: 'Phrase',
         id: 'Bought me some amc back @ $15 my 💎🤲 will ride it to the ground',
-        text:
-          'Bought me some amc back @ $15 my 💎🤲 will ride it to the ground',
+        text: 'Bought me some amc back @ $15 my 💎🤲 will ride it to the ground',
         items_count: 1,
         items: [
           'Bought me some amc back @ $15 my 💎🤲 will ride it to the ground',
@@ -11071,10 +10484,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Checking in from Canadian Here: Still Holding 💎🙌 I like this stock!🚀🚀 🚀💎',
-        text:
-          'Checking in from Canadian Here: Still Holding 💎🙌 I like this stock!🚀🚀 🚀💎',
+        id: 'Checking in from Canadian Here: Still Holding 💎🙌 I like this stock!🚀🚀 🚀💎',
+        text: 'Checking in from Canadian Here: Still Holding 💎🙌 I like this stock!🚀🚀 🚀💎',
         items_count: 2,
         items: [
           'Checking in from Canadian Here: Still Holding 💎🙌 I like this stock!🚀🚀 🚀💎',
@@ -11084,10 +10495,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Joining into the 💎💎💎 hands gang today with 12 shares. Yolo'd all the money I had into this and will hold it to the moon! 🚀🚀🚀 I really like the stock.",
-        text:
-          "Joining into the 💎💎💎 hands gang today with 12 shares. Yolo'd all the money I had into this and will hold it to the moon! 🚀🚀🚀 I really like the stock.",
+        id: "Joining into the 💎💎💎 hands gang today with 12 shares. Yolo'd all the money I had into this and will hold it to the moon! 🚀🚀🚀 I really like the stock.",
+        text: "Joining into the 💎💎💎 hands gang today with 12 shares. Yolo'd all the money I had into this and will hold it to the moon! 🚀🚀🚀 I really like the stock.",
         items_count: 2,
         items: [
           "Joining into the 💎💎💎 hands gang today with 12 shares. Yolo'd all the money I had into this and will hold it to the moon! 🚀🚀🚀 I really like the stock.",
@@ -11097,10 +10506,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "I haven't sold, I just bought more. I think I have a stock fever. You should hold too. 💎🙌🏼🚀🚀",
-        text:
-          "I haven't sold, I just bought more. I think I have a stock fever. You should hold too. 💎🙌🏼🚀🚀",
+        id: "I haven't sold, I just bought more. I think I have a stock fever. You should hold too. 💎🙌🏼🚀🚀",
+        text: "I haven't sold, I just bought more. I think I have a stock fever. You should hold too. 💎🙌🏼🚀🚀",
         items_count: 1,
         items: [
           "I haven't sold, I just bought more. I think I have a stock fever. You should hold too. 💎🙌🏼🚀🚀",
@@ -11108,10 +10515,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Never in my life did I think I would own stock of any kind but here I am with 2! Apes built a rocket 🚀 and I bought at the dip. Ill never sell! I like the stock! 💎 🙌🏻',
-        text:
-          'Never in my life did I think I would own stock of any kind but here I am with 2! Apes built a rocket 🚀 and I bought at the dip. Ill never sell! I like the stock! 💎 🙌🏻',
+        id: 'Never in my life did I think I would own stock of any kind but here I am with 2! Apes built a rocket 🚀 and I bought at the dip. Ill never sell! I like the stock! 💎 🙌🏻',
+        text: 'Never in my life did I think I would own stock of any kind but here I am with 2! Apes built a rocket 🚀 and I bought at the dip. Ill never sell! I like the stock! 💎 🙌🏻',
         items_count: 1,
         items: [
           'Never in my life did I think I would own stock of any kind but here I am with 2! Apes built a rocket 🚀 and I bought at the dip. Ill never sell! I like the stock! 💎 🙌🏻',
@@ -11128,10 +10533,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Feeling like I finally fit in. Not even THINKING OF SELLING. I JUST LIKE THE STOCK 🦍🦍🦍',
-        text:
-          'Feeling like I finally fit in. Not even THINKING OF SELLING. I JUST LIKE THE STOCK 🦍🦍🦍',
+        id: 'Feeling like I finally fit in. Not even THINKING OF SELLING. I JUST LIKE THE STOCK 🦍🦍🦍',
+        text: 'Feeling like I finally fit in. Not even THINKING OF SELLING. I JUST LIKE THE STOCK 🦍🦍🦍',
         items_count: 1,
         items: [
           'Feeling like I finally fit in. Not even THINKING OF SELLING. I JUST LIKE THE STOCK 🦍🦍🦍',
@@ -11139,10 +10542,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Looks like I bought more a little early today. I just like the stock though. 4 Shares ✋💎💎💎🤚',
-        text:
-          'Looks like I bought more a little early today. I just like the stock though. 4 Shares ✋💎💎💎🤚',
+        id: 'Looks like I bought more a little early today. I just like the stock though. 4 Shares ✋💎💎💎🤚',
+        text: 'Looks like I bought more a little early today. I just like the stock though. 4 Shares ✋💎💎💎🤚',
         items_count: 1,
         items: [
           'Looks like I bought more a little early today. I just like the stock though. 4 Shares ✋💎💎💎🤚',
@@ -11233,10 +10634,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "$GME - I'm holding. I picked a number I was comfortable losing before investing. **** the HF, I am holding",
-        text:
-          "$GME - I'm holding. I picked a number I was comfortable losing before investing. **** the HF, I am holding",
+        id: "$GME - I'm holding. I picked a number I was comfortable losing before investing. **** the HF, I am holding",
+        text: "$GME - I'm holding. I picked a number I was comfortable losing before investing. **** the HF, I am holding",
         items_count: 1,
         items: [
           "$GME - I'm holding. I picked a number I was comfortable losing before investing. **** the HF, I am holding",
@@ -11253,18 +10652,14 @@ export const clusters: ExampleNode[] = [
   },
   {
     type: 'Cluster',
-    id:
-      'PSA: Check your Robinhood account. They are closing out customer service inquiries without responding unless you specifically ask for a response.',
-    text:
-      'PSA: Check your Robinhood account. They are closing out customer service inquiries without responding unless you specifically ask for a response.',
+    id: 'PSA: Check your Robinhood account. They are closing out customer service inquiries without responding unless you specifically ask for a response.',
+    text: 'PSA: Check your Robinhood account. They are closing out customer service inquiries without responding unless you specifically ask for a response.',
     items_count: 19,
     children: [
       {
         type: 'Phrase',
-        id:
-          'For heavens sake, STOP USING ROBINHOOD. This IS a financial advice.',
-        text:
-          'For heavens sake, STOP USING ROBINHOOD. This IS a financial advice.',
+        id: 'For heavens sake, STOP USING ROBINHOOD. This IS a financial advice.',
+        text: 'For heavens sake, STOP USING ROBINHOOD. This IS a financial advice.',
         items_count: 3,
         items: [
           'For heavens sake, STOP USING ROBINHOOD. This IS a financial advice.',
@@ -11274,10 +10669,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "If you haven't already moved your money from Robinhood, now is the time to buy. Before they place restrictions again.",
-        text:
-          "If you haven't already moved your money from Robinhood, now is the time to buy. Before they place restrictions again.",
+        id: "If you haven't already moved your money from Robinhood, now is the time to buy. Before they place restrictions again.",
+        text: "If you haven't already moved your money from Robinhood, now is the time to buy. Before they place restrictions again.",
         items_count: 3,
         items: [
           "If you haven't already moved your money from Robinhood, now is the time to buy. Before they place restrictions again.",
@@ -11287,10 +10680,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'PSA: Check your Robinhood account. They are closing out customer service inquiries without responding unless you specifically ask for a response.',
-        text:
-          'PSA: Check your Robinhood account. They are closing out customer service inquiries without responding unless you specifically ask for a response.',
+        id: 'PSA: Check your Robinhood account. They are closing out customer service inquiries without responding unless you specifically ask for a response.',
+        text: 'PSA: Check your Robinhood account. They are closing out customer service inquiries without responding unless you specifically ask for a response.',
         items_count: 2,
         items: [
           'PSA: Check your Robinhood account. They are closing out customer service inquiries without responding unless you specifically ask for a response.',
@@ -11310,10 +10701,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Just got this little update. I've had my robinhood account for about 3 years. Time to move to a different platform.",
-        text:
-          "Just got this little update. I've had my robinhood account for about 3 years. Time to move to a different platform.",
+        id: "Just got this little update. I've had my robinhood account for about 3 years. Time to move to a different platform.",
+        text: "Just got this little update. I've had my robinhood account for about 3 years. Time to move to a different platform.",
         items_count: 1,
         items: [
           "Just got this little update. I've had my robinhood account for about 3 years. Time to move to a different platform.",
@@ -11335,10 +10724,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Just got off the phone with Robinhood, they will let you exercise your contracts if you get on the line with one of the support members. $AMC🚀🚀🚀🚀',
-        text:
-          'Just got off the phone with Robinhood, they will let you exercise your contracts if you get on the line with one of the support members. $AMC🚀🚀🚀🚀',
+        id: 'Just got off the phone with Robinhood, they will let you exercise your contracts if you get on the line with one of the support members. $AMC🚀🚀🚀🚀',
+        text: 'Just got off the phone with Robinhood, they will let you exercise your contracts if you get on the line with one of the support members. $AMC🚀🚀🚀🚀',
         items_count: 1,
         items: [
           'Just got off the phone with Robinhood, they will let you exercise your contracts if you get on the line with one of the support members. $AMC🚀🚀🚀🚀',
@@ -11360,10 +10747,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Robinhood trying to steal from me now! I did not place this transfer.',
-        text:
-          'Robinhood trying to steal from me now! I did not place this transfer.',
+        id: 'Robinhood trying to steal from me now! I did not place this transfer.',
+        text: 'Robinhood trying to steal from me now! I did not place this transfer.',
         items_count: 1,
         items: [
           'Robinhood trying to steal from me now! I did not place this transfer.',
@@ -11371,10 +10756,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Robinhood forcing you to pay $75 to transfer from their platform. 🖕🏻 robinhood',
-        text:
-          'Robinhood forcing you to pay $75 to transfer from their platform. 🖕🏻 robinhood',
+        id: 'Robinhood forcing you to pay $75 to transfer from their platform. 🖕🏻 robinhood',
+        text: 'Robinhood forcing you to pay $75 to transfer from their platform. 🖕🏻 robinhood',
         items_count: 1,
         items: [
           'Robinhood forcing you to pay $75 to transfer from their platform. 🖕🏻 robinhood',
@@ -11397,10 +10780,8 @@ export const clusters: ExampleNode[] = [
     children: [
       {
         type: 'Phrase',
-        id:
-          'Just bought one share of $GME at the dip. All I had spare to help the ****! 🚀🚀🚀🚀🚀',
-        text:
-          'Just bought one share of $GME at the dip. All I had spare to help the ****! 🚀🚀🚀🚀🚀',
+        id: 'Just bought one share of $GME at the dip. All I had spare to help the ****! 🚀🚀🚀🚀🚀',
+        text: 'Just bought one share of $GME at the dip. All I had spare to help the ****! 🚀🚀🚀🚀🚀',
         items_count: 4,
         items: [
           'Just bought one share of $GME at the dip. All I had spare to help the ****! 🚀🚀🚀🚀🚀',
@@ -11414,10 +10795,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Just bought my first stock ever due to all you **** out there. Guess I'm a retard too. Going for AMC hard 💎💎💎👐",
-        text:
-          "Just bought my first stock ever due to all you **** out there. Guess I'm a retard too. Going for AMC hard 💎💎💎👐",
+        id: "Just bought my first stock ever due to all you **** out there. Guess I'm a retard too. Going for AMC hard 💎💎💎👐",
+        text: "Just bought my first stock ever due to all you **** out there. Guess I'm a retard too. Going for AMC hard 💎💎💎👐",
         items_count: 2,
         items: [
           "Just bought my first stock ever due to all you **** out there. Guess I'm a retard too. Going for AMC hard 💎💎💎👐",
@@ -11448,8 +10827,7 @@ export const clusters: ExampleNode[] = [
       {
         type: 'Phrase',
         id: 'Kept buying the dip. Definitely am retarded. YOLO!! AMC!! GME!!!',
-        text:
-          'Kept buying the dip. Definitely am retarded. YOLO!! AMC!! GME!!!',
+        text: 'Kept buying the dip. Definitely am retarded. YOLO!! AMC!! GME!!!',
         items_count: 1,
         items: [
           'Kept buying the dip. Definitely am retarded. YOLO!! AMC!! GME!!!',
@@ -11457,10 +10835,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "So, umm, I'm a little bit retarded and decided to actually buy the dip",
-        text:
-          "So, umm, I'm a little bit retarded and decided to actually buy the dip",
+        id: "So, umm, I'm a little bit retarded and decided to actually buy the dip",
+        text: "So, umm, I'm a little bit retarded and decided to actually buy the dip",
         items_count: 1,
         items: [
           "So, umm, I'm a little bit retarded and decided to actually buy the dip",
@@ -11468,10 +10844,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Bought the dip, AMC to the **** noon🚀 eat my ass hedge fund cocksocks',
-        text:
-          'Bought the dip, AMC to the **** noon🚀 eat my ass hedge fund cocksocks',
+        id: 'Bought the dip, AMC to the **** noon🚀 eat my ass hedge fund cocksocks',
+        text: 'Bought the dip, AMC to the **** noon🚀 eat my ass hedge fund cocksocks',
         items_count: 1,
         items: [
           'Bought the dip, AMC to the **** noon🚀 eat my ass hedge fund cocksocks',
@@ -11479,10 +10853,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Bought all I could for the Retard Army. Dip -&gt; Buy Dip -&gt; Buy',
-        text:
-          'Bought all I could for the Retard Army. Dip -&gt; Buy Dip -&gt; Buy',
+        id: 'Bought all I could for the Retard Army. Dip -&gt; Buy Dip -&gt; Buy',
+        text: 'Bought all I could for the Retard Army. Dip -&gt; Buy Dip -&gt; Buy',
         items_count: 1,
         items: [
           'Bought all I could for the Retard Army. Dip -&gt; Buy Dip -&gt; Buy',
@@ -11497,10 +10869,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Another retarded from Germany joining in and buying the dip! 🚀🚀🚀🚀🚀🚀🚀🚀🚀',
-        text:
-          'Another retarded from Germany joining in and buying the dip! 🚀🚀🚀🚀🚀🚀🚀🚀🚀',
+        id: 'Another retarded from Germany joining in and buying the dip! 🚀🚀🚀🚀🚀🚀🚀🚀🚀',
+        text: 'Another retarded from Germany joining in and buying the dip! 🚀🚀🚀🚀🚀🚀🚀🚀🚀',
         items_count: 1,
         items: [
           'Another retarded from Germany joining in and buying the dip! 🚀🚀🚀🚀🚀🚀🚀🚀🚀',
@@ -11525,8 +10895,7 @@ export const clusters: ExampleNode[] = [
       {
         type: 'Phrase',
         id: 'Bought before the dip and feeling slightly retarded now 😭🚀🚀🚀',
-        text:
-          'Bought before the dip and feeling slightly retarded now 😭🚀🚀🚀',
+        text: 'Bought before the dip and feeling slightly retarded now 😭🚀🚀🚀',
         items_count: 1,
         items: [
           'Bought before the dip and feeling slightly retarded now 😭🚀🚀🚀',
@@ -11617,16 +10986,13 @@ export const clusters: ExampleNode[] = [
   {
     type: 'Cluster',
     id: 'Robinhood lifting the GME and AMC restrictions feels like a bad thing',
-    text:
-      'Robinhood lifting the GME and AMC restrictions feels like a bad thing',
+    text: 'Robinhood lifting the GME and AMC restrictions feels like a bad thing',
     items_count: 18,
     children: [
       {
         type: 'Phrase',
-        id:
-          'Robinhood lifting the GME and AMC restrictions feels like a bad thing',
-        text:
-          'Robinhood lifting the GME and AMC restrictions feels like a bad thing',
+        id: 'Robinhood lifting the GME and AMC restrictions feels like a bad thing',
+        text: 'Robinhood lifting the GME and AMC restrictions feels like a bad thing',
         items_count: 4,
         items: [
           'Robinhood lifting the GME and AMC restrictions feels like a bad thing',
@@ -11637,10 +11003,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'did they remove restrictions on robinhood for gme bc i am not seeing any restriction list anymore',
-        text:
-          'did they remove restrictions on robinhood for gme bc i am not seeing any restriction list anymore',
+        id: 'did they remove restrictions on robinhood for gme bc i am not seeing any restriction list anymore',
+        text: 'did they remove restrictions on robinhood for gme bc i am not seeing any restriction list anymore',
         items_count: 4,
         items: [
           'did they remove restrictions on robinhood for gme bc i am not seeing any restriction list anymore',
@@ -11653,10 +11017,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Robinhood Won't Let You Exercise Your GME Calls. Be Careful! (flaired as meme to get through the automod filter)",
-        text:
-          "Robinhood Won't Let You Exercise Your GME Calls. Be Careful! (flaired as meme to get through the automod filter)",
+        id: "Robinhood Won't Let You Exercise Your GME Calls. Be Careful! (flaired as meme to get through the automod filter)",
+        text: "Robinhood Won't Let You Exercise Your GME Calls. Be Careful! (flaired as meme to get through the automod filter)",
         items_count: 2,
         items: [
           "Robinhood Won't Let You Exercise Your GME Calls. Be Careful! (flaired as meme to get through the automod filter)",
@@ -11665,10 +11027,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Robinhood changed the rules on me! Not gme related but still ****ed',
-        text:
-          'Robinhood changed the rules on me! Not gme related but still ****ed',
+        id: 'Robinhood changed the rules on me! Not gme related but still ****ed',
+        text: 'Robinhood changed the rules on me! Not gme related but still ****ed',
         items_count: 1,
         items: [
           'Robinhood changed the rules on me! Not gme related but still ****ed',
@@ -11676,10 +11036,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Robinhood has further increased limits on positions in AMC and GME',
-        text:
-          'Robinhood has further increased limits on positions in AMC and GME',
+        id: 'Robinhood has further increased limits on positions in AMC and GME',
+        text: 'Robinhood has further increased limits on positions in AMC and GME',
         items_count: 1,
         items: [
           'Robinhood has further increased limits on positions in AMC and GME',
@@ -11687,10 +11045,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'ROBINHOOD RAISED LIMITS ON GME, AMC AND OTHERS NOW WE CAN TAKE CONTROL!',
-        text:
-          'ROBINHOOD RAISED LIMITS ON GME, AMC AND OTHERS NOW WE CAN TAKE CONTROL!',
+        id: 'ROBINHOOD RAISED LIMITS ON GME, AMC AND OTHERS NOW WE CAN TAKE CONTROL!',
+        text: 'ROBINHOOD RAISED LIMITS ON GME, AMC AND OTHERS NOW WE CAN TAKE CONTROL!',
         items_count: 1,
         items: [
           'ROBINHOOD RAISED LIMITS ON GME, AMC AND OTHERS NOW WE CAN TAKE CONTROL!',
@@ -11705,10 +11061,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Robinhood’s restrictions are the only reason that the stocks down $AMC$GME$NOK',
-        text:
-          'Robinhood’s restrictions are the only reason that the stocks down $AMC$GME$NOK',
+        id: 'Robinhood’s restrictions are the only reason that the stocks down $AMC$GME$NOK',
+        text: 'Robinhood’s restrictions are the only reason that the stocks down $AMC$GME$NOK',
         items_count: 1,
         items: [
           'Robinhood’s restrictions are the only reason that the stocks down $AMC$GME$NOK',
@@ -11716,10 +11070,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Robinhood increased the number of GME shares you can buy - crawling back in the game you autists',
-        text:
-          'Robinhood increased the number of GME shares you can buy - crawling back in the game you autists',
+        id: 'Robinhood increased the number of GME shares you can buy - crawling back in the game you autists',
+        text: 'Robinhood increased the number of GME shares you can buy - crawling back in the game you autists',
         items_count: 1,
         items: [
           'Robinhood increased the number of GME shares you can buy - crawling back in the game you autists',
@@ -11727,10 +11079,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Robinhood blocking people from exercising their GME options. Even though they said you could.',
-        text:
-          'Robinhood blocking people from exercising their GME options. Even though they said you could.',
+        id: 'Robinhood blocking people from exercising their GME options. Even though they said you could.',
+        text: 'Robinhood blocking people from exercising their GME options. Even though they said you could.',
         items_count: 1,
         items: [
           'Robinhood blocking people from exercising their GME options. Even though they said you could.',
@@ -11738,10 +11088,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Robinhood only allowing 1 share of GME to be held and blocks purchase of additional shares.',
-        text:
-          'Robinhood only allowing 1 share of GME to be held and blocks purchase of additional shares.',
+        id: 'Robinhood only allowing 1 share of GME to be held and blocks purchase of additional shares.',
+        text: 'Robinhood only allowing 1 share of GME to be held and blocks purchase of additional shares.',
         items_count: 1,
         items: [
           'Robinhood only allowing 1 share of GME to be held and blocks purchase of additional shares.',
@@ -11787,10 +11135,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'IDGAF. Holding 9 shares GME@$240, 10 shares AMC@$13, 10 shares BB@$16.',
-        text:
-          'IDGAF. Holding 9 shares GME@$240, 10 shares AMC@$13, 10 shares BB@$16.',
+        id: 'IDGAF. Holding 9 shares GME@$240, 10 shares AMC@$13, 10 shares BB@$16.',
+        text: 'IDGAF. Holding 9 shares GME@$240, 10 shares AMC@$13, 10 shares BB@$16.',
         items_count: 1,
         items: [
           'IDGAF. Holding 9 shares GME@$240, 10 shares AMC@$13, 10 shares BB@$16.',
@@ -11798,10 +11144,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "I bought GME 17 shares @ $39 so I'm technically still up, but this still hurts my soul. Holding until $10k or $0.",
-        text:
-          "I bought GME 17 shares @ $39 so I'm technically still up, but this still hurts my soul. Holding until $10k or $0.",
+        id: "I bought GME 17 shares @ $39 so I'm technically still up, but this still hurts my soul. Holding until $10k or $0.",
+        text: "I bought GME 17 shares @ $39 so I'm technically still up, but this still hurts my soul. Holding until $10k or $0.",
         items_count: 1,
         items: [
           "I bought GME 17 shares @ $39 so I'm technically still up, but this still hurts my soul. Holding until $10k or $0.",
@@ -11809,10 +11153,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'All in on GME, $5K worth of 150c by end of the week. I like the stock now.',
-        text:
-          'All in on GME, $5K worth of 150c by end of the week. I like the stock now.',
+        id: 'All in on GME, $5K worth of 150c by end of the week. I like the stock now.',
+        text: 'All in on GME, $5K worth of 150c by end of the week. I like the stock now.',
         items_count: 1,
         items: [
           'All in on GME, $5K worth of 150c by end of the week. I like the stock now.',
@@ -11820,10 +11162,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'My Pledge to all of you tards that are holding: I WILL HOLD, but for now I have not 1 tendies to spendy because I just bought 30 shares of GME.',
-        text:
-          'My Pledge to all of you tards that are holding: I WILL HOLD, but for now I have not 1 tendies to spendy because I just bought 30 shares of GME.',
+        id: 'My Pledge to all of you tards that are holding: I WILL HOLD, but for now I have not 1 tendies to spendy because I just bought 30 shares of GME.',
+        text: 'My Pledge to all of you tards that are holding: I WILL HOLD, but for now I have not 1 tendies to spendy because I just bought 30 shares of GME.',
         items_count: 1,
         items: [
           'My Pledge to all of you tards that are holding: I WILL HOLD, but for now I have not 1 tendies to spendy because I just bought 30 shares of GME.',
@@ -11831,10 +11171,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Picked up more on the way down. 350 GME shares now in my collection. Still holding.',
-        text:
-          'Picked up more on the way down. 350 GME shares now in my collection. Still holding.',
+        id: 'Picked up more on the way down. 350 GME shares now in my collection. Still holding.',
+        text: 'Picked up more on the way down. 350 GME shares now in my collection. Still holding.',
         items_count: 1,
         items: [
           'Picked up more on the way down. 350 GME shares now in my collection. Still holding.',
@@ -11842,10 +11180,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Just bought 9 more shares ($1000) of GME however I can feel my power waning.. my diamond hands...',
-        text:
-          'Just bought 9 more shares ($1000) of GME however I can feel my power waning.. my diamond hands...',
+        id: 'Just bought 9 more shares ($1000) of GME however I can feel my power waning.. my diamond hands...',
+        text: 'Just bought 9 more shares ($1000) of GME however I can feel my power waning.. my diamond hands...',
         items_count: 1,
         items: [
           'Just bought 9 more shares ($1000) of GME however I can feel my power waning.. my diamond hands...',
@@ -11867,10 +11203,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I‘m holding 2 $gme Shares and shitting my pants rn, can‘t even imagine what you guys with 100+ shares must feel like💎🙌🏻',
-        text:
-          'I‘m holding 2 $gme Shares and shitting my pants rn, can‘t even imagine what you guys with 100+ shares must feel like💎🙌🏻',
+        id: 'I‘m holding 2 $gme Shares and shitting my pants rn, can‘t even imagine what you guys with 100+ shares must feel like💎🙌🏻',
+        text: 'I‘m holding 2 $gme Shares and shitting my pants rn, can‘t even imagine what you guys with 100+ shares must feel like💎🙌🏻',
         items_count: 1,
         items: [
           'I‘m holding 2 $gme Shares and shitting my pants rn, can‘t even imagine what you guys with 100+ shares must feel like💎🙌🏻',
@@ -11957,10 +11291,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Not if it’s already out there but RH increased the limit of shares you can own for GME(20) and AMC(350)💎🙌🚀🚀🚀',
-        text:
-          'Not if it’s already out there but RH increased the limit of shares you can own for GME(20) and AMC(350)💎🙌🚀🚀🚀',
+        id: 'Not if it’s already out there but RH increased the limit of shares you can own for GME(20) and AMC(350)💎🙌🚀🚀🚀',
+        text: 'Not if it’s already out there but RH increased the limit of shares you can own for GME(20) and AMC(350)💎🙌🚀🚀🚀',
         items_count: 2,
         items: [
           'Not if it’s already out there but RH increased the limit of shares you can own for GME(20) and AMC(350)💎🙌🚀🚀🚀',
@@ -11980,10 +11312,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'RobinDaHood has increased buy limits for GME to 500 shares and 5,500 shares for AMC',
-        text:
-          'RobinDaHood has increased buy limits for GME to 500 shares and 5,500 shares for AMC',
+        id: 'RobinDaHood has increased buy limits for GME to 500 shares and 5,500 shares for AMC',
+        text: 'RobinDaHood has increased buy limits for GME to 500 shares and 5,500 shares for AMC',
         items_count: 1,
         items: [
           'RobinDaHood has increased buy limits for GME to 500 shares and 5,500 shares for AMC',
@@ -11991,10 +11321,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'RH increased the maximum AMC to 1,250 shares and GME to 100 shares. Time for a Rally boys!',
-        text:
-          'RH increased the maximum AMC to 1,250 shares and GME to 100 shares. Time for a Rally boys!',
+        id: 'RH increased the maximum AMC to 1,250 shares and GME to 100 shares. Time for a Rally boys!',
+        text: 'RH increased the maximum AMC to 1,250 shares and GME to 100 shares. Time for a Rally boys!',
         items_count: 1,
         items: [
           'RH increased the maximum AMC to 1,250 shares and GME to 100 shares. Time for a Rally boys!',
@@ -12002,10 +11330,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Suspicious? I only use RH for what I’ve already put into GME but they’ve been limiting people from buying. And all of a sudden NOW you are able to buy pieces of shares? Why the change when it drops low??',
-        text:
-          'Suspicious? I only use RH for what I’ve already put into GME but they’ve been limiting people from buying. And all of a sudden NOW you are able to buy pieces of shares? Why the change when it drops low??',
+        id: 'Suspicious? I only use RH for what I’ve already put into GME but they’ve been limiting people from buying. And all of a sudden NOW you are able to buy pieces of shares? Why the change when it drops low??',
+        text: 'Suspicious? I only use RH for what I’ve already put into GME but they’ve been limiting people from buying. And all of a sudden NOW you are able to buy pieces of shares? Why the change when it drops low??',
         items_count: 1,
         items: [
           'Suspicious? I only use RH for what I’ve already put into GME but they’ve been limiting people from buying. And all of a sudden NOW you are able to buy pieces of shares? Why the change when it drops low??',
@@ -12013,10 +11339,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'RH raises GME share limit to 100. This is where the beginning of the end.',
-        text:
-          'RH raises GME share limit to 100. This is where the beginning of the end.',
+        id: 'RH raises GME share limit to 100. This is where the beginning of the end.',
+        text: 'RH raises GME share limit to 100. This is where the beginning of the end.',
         items_count: 1,
         items: [
           'RH raises GME share limit to 100. This is where the beginning of the end.',
@@ -12024,10 +11348,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'RH changes GME restriction to 100 stocks, but you should move away from RH now',
-        text:
-          'RH changes GME restriction to 100 stocks, but you should move away from RH now',
+        id: 'RH changes GME restriction to 100 stocks, but you should move away from RH now',
+        text: 'RH changes GME restriction to 100 stocks, but you should move away from RH now',
         items_count: 1,
         items: [
           'RH changes GME restriction to 100 stocks, but you should move away from RH now',
@@ -12035,10 +11357,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          '**** RH! Switch to something better NOW. FYI Schwab has no GME buy limits and you can get a $100 to $500 sign-on bonus!',
-        text:
-          '**** RH! Switch to something better NOW. FYI Schwab has no GME buy limits and you can get a $100 to $500 sign-on bonus!',
+        id: '**** RH! Switch to something better NOW. FYI Schwab has no GME buy limits and you can get a $100 to $500 sign-on bonus!',
+        text: '**** RH! Switch to something better NOW. FYI Schwab has no GME buy limits and you can get a $100 to $500 sign-on bonus!',
         items_count: 1,
         items: [
           '**** RH! Switch to something better NOW. FYI Schwab has no GME buy limits and you can get a $100 to $500 sign-on bonus!',
@@ -12046,10 +11366,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Looks like RH just opened GME back up to buy and exceed the 5 share limit.',
-        text:
-          'Looks like RH just opened GME back up to buy and exceed the 5 share limit.',
+        id: 'Looks like RH just opened GME back up to buy and exceed the 5 share limit.',
+        text: 'Looks like RH just opened GME back up to buy and exceed the 5 share limit.',
         items_count: 1,
         items: [
           'Looks like RH just opened GME back up to buy and exceed the 5 share limit.',
@@ -12064,10 +11382,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'PSA: RH set a new $5k maximum for limit sell orders on GME - place new ones if yours were above that.',
-        text:
-          'PSA: RH set a new $5k maximum for limit sell orders on GME - place new ones if yours were above that.',
+        id: 'PSA: RH set a new $5k maximum for limit sell orders on GME - place new ones if yours were above that.',
+        text: 'PSA: RH set a new $5k maximum for limit sell orders on GME - place new ones if yours were above that.',
         items_count: 1,
         items: [
           'PSA: RH set a new $5k maximum for limit sell orders on GME - place new ones if yours were above that.',
@@ -12121,10 +11437,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'My (totally uneducated) theory on what might be going on right now with GME',
-        text:
-          'My (totally uneducated) theory on what might be going on right now with GME',
+        id: 'My (totally uneducated) theory on what might be going on right now with GME',
+        text: 'My (totally uneducated) theory on what might be going on right now with GME',
         items_count: 1,
         items: [
           'My (totally uneducated) theory on what might be going on right now with GME',
@@ -12132,10 +11446,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Quit the speculation, what are some facts about the GME situation.',
-        text:
-          'Quit the speculation, what are some facts about the GME situation.',
+        id: 'Quit the speculation, what are some facts about the GME situation.',
+        text: 'Quit the speculation, what are some facts about the GME situation.',
         items_count: 1,
         items: [
           'Quit the speculation, what are some facts about the GME situation.',
@@ -12220,10 +11532,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I can’t buy anymore AMC stock on CashApp. These MF’Ed are trying to manipulate the market by suppressing our ability to buy more stock.',
-        text:
-          'I can’t buy anymore AMC stock on CashApp. These MF’Ed are trying to manipulate the market by suppressing our ability to buy more stock.',
+        id: 'I can’t buy anymore AMC stock on CashApp. These MF’Ed are trying to manipulate the market by suppressing our ability to buy more stock.',
+        text: 'I can’t buy anymore AMC stock on CashApp. These MF’Ed are trying to manipulate the market by suppressing our ability to buy more stock.',
         items_count: 4,
         items: [
           'I can’t buy anymore AMC stock on CashApp. These MF’Ed are trying to manipulate the market by suppressing our ability to buy more stock.',
@@ -12237,10 +11547,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Anyone else getting blocked on the AMC dip buy in? Wanted to get a grip on some more shares but Cash app has me denied.',
-        text:
-          'Anyone else getting blocked on the AMC dip buy in? Wanted to get a grip on some more shares but Cash app has me denied.',
+        id: 'Anyone else getting blocked on the AMC dip buy in? Wanted to get a grip on some more shares but Cash app has me denied.',
+        text: 'Anyone else getting blocked on the AMC dip buy in? Wanted to get a grip on some more shares but Cash app has me denied.',
         items_count: 3,
         items: [
           'Anyone else getting blocked on the AMC dip buy in? Wanted to get a grip on some more shares but Cash app has me denied.',
@@ -12252,10 +11560,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Cash App Users Blocked From Buying AMC, Nokia Stocks. 250%!!!!!!!!!',
-        text:
-          'Cash App Users Blocked From Buying AMC, Nokia Stocks. 250%!!!!!!!!!',
+        id: 'Cash App Users Blocked From Buying AMC, Nokia Stocks. 250%!!!!!!!!!',
+        text: 'Cash App Users Blocked From Buying AMC, Nokia Stocks. 250%!!!!!!!!!',
         items_count: 1,
         items: [
           'Cash App Users Blocked From Buying AMC, Nokia Stocks. 250%!!!!!!!!!',
@@ -12263,10 +11569,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'There not letting us buy stocks on cashapp now they are losing hahahaha',
-        text:
-          'There not letting us buy stocks on cashapp now they are losing hahahaha',
+        id: 'There not letting us buy stocks on cashapp now they are losing hahahaha',
+        text: 'There not letting us buy stocks on cashapp now they are losing hahahaha',
         items_count: 1,
         items: [
           'There not letting us buy stocks on cashapp now they are losing hahahaha',
@@ -12274,10 +11578,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Cash app blocking buys!! We've got them on the rope my fellow smooth brains!!",
-        text:
-          "Cash app blocking buys!! We've got them on the rope my fellow smooth brains!!",
+        id: "Cash app blocking buys!! We've got them on the rope my fellow smooth brains!!",
+        text: "Cash app blocking buys!! We've got them on the rope my fellow smooth brains!!",
         items_count: 1,
         items: [
           "Cash app blocking buys!! We've got them on the rope my fellow smooth brains!!",
@@ -12285,10 +11587,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Cash App has restricted buying AMC on the dip!? This not right. Free and fair market my arse!',
-        text:
-          'Cash App has restricted buying AMC on the dip!? This not right. Free and fair market my arse!',
+        id: 'Cash App has restricted buying AMC on the dip!? This not right. Free and fair market my arse!',
+        text: 'Cash App has restricted buying AMC on the dip!? This not right. Free and fair market my arse!',
         items_count: 1,
         items: [
           'Cash App has restricted buying AMC on the dip!? This not right. Free and fair market my arse!',
@@ -12296,10 +11596,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Looks like Cashapp's Axos is blocking AMC and Nokia now. EVERYONE HOLD!",
-        text:
-          "Looks like Cashapp's Axos is blocking AMC and Nokia now. EVERYONE HOLD!",
+        id: "Looks like Cashapp's Axos is blocking AMC and Nokia now. EVERYONE HOLD!",
+        text: "Looks like Cashapp's Axos is blocking AMC and Nokia now. EVERYONE HOLD!",
         items_count: 1,
         items: [
           "Looks like Cashapp's Axos is blocking AMC and Nokia now. EVERYONE HOLD!",
@@ -12307,10 +11605,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Cash App is fricken holding AMC stock purchases, HOLD you **** the cash app users are coming slowly!',
-        text:
-          'Cash App is fricken holding AMC stock purchases, HOLD you **** the cash app users are coming slowly!',
+        id: 'Cash App is fricken holding AMC stock purchases, HOLD you **** the cash app users are coming slowly!',
+        text: 'Cash App is fricken holding AMC stock purchases, HOLD you **** the cash app users are coming slowly!',
         items_count: 1,
         items: [
           'Cash App is fricken holding AMC stock purchases, HOLD you **** the cash app users are coming slowly!',
@@ -12349,10 +11645,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'LOOK A THIS MESS, DriveWealth blocks BUYS and removes GME AMC from stock search‼️🔎💎',
-        text:
-          'LOOK A THIS MESS, DriveWealth blocks BUYS and removes GME AMC from stock search‼️🔎💎',
+        id: 'LOOK A THIS MESS, DriveWealth blocks BUYS and removes GME AMC from stock search‼️🔎💎',
+        text: 'LOOK A THIS MESS, DriveWealth blocks BUYS and removes GME AMC from stock search‼️🔎💎',
         items_count: 2,
         items: [
           'LOOK A THIS MESS, DriveWealth blocks BUYS and removes GME AMC from stock search‼️🔎💎',
@@ -12361,10 +11655,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut no longer offers GME AMC - DriveWealth is blocking them to do so',
-        text:
-          'Revolut no longer offers GME AMC - DriveWealth is blocking them to do so',
+        id: 'Revolut no longer offers GME AMC - DriveWealth is blocking them to do so',
+        text: 'Revolut no longer offers GME AMC - DriveWealth is blocking them to do so',
         items_count: 2,
         items: [
           'Revolut no longer offers GME AMC - DriveWealth is blocking them to do so',
@@ -12374,10 +11666,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut also uses Drivewealth. Buying GME and AMC stocks no longer possible in the Revolut app.',
-        text:
-          'Revolut also uses Drivewealth. Buying GME and AMC stocks no longer possible in the Revolut app.',
+        id: 'Revolut also uses Drivewealth. Buying GME and AMC stocks no longer possible in the Revolut app.',
+        text: 'Revolut also uses Drivewealth. Buying GME and AMC stocks no longer possible in the Revolut app.',
         items_count: 1,
         items: [
           'Revolut also uses Drivewealth. Buying GME and AMC stocks no longer possible in the Revolut app.',
@@ -12385,10 +11675,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'DTC restricting trades on DriveWealth(Revolut) for GME and AMC. Sell orders only',
-        text:
-          'DTC restricting trades on DriveWealth(Revolut) for GME and AMC. Sell orders only',
+        id: 'DTC restricting trades on DriveWealth(Revolut) for GME and AMC. Sell orders only',
+        text: 'DTC restricting trades on DriveWealth(Revolut) for GME and AMC. Sell orders only',
         items_count: 1,
         items: [
           'DTC restricting trades on DriveWealth(Revolut) for GME and AMC. Sell orders only',
@@ -12396,10 +11684,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut broker-dealer DriveWealth preventing users buying GME AMC 💎👐💎',
-        text:
-          'Revolut broker-dealer DriveWealth preventing users buying GME AMC 💎👐💎',
+        id: 'Revolut broker-dealer DriveWealth preventing users buying GME AMC 💎👐💎',
+        text: 'Revolut broker-dealer DriveWealth preventing users buying GME AMC 💎👐💎',
         items_count: 1,
         items: [
           'Revolut broker-dealer DriveWealth preventing users buying GME AMC 💎👐💎',
@@ -12407,10 +11693,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut trading app (DriveWealth) closed buying option for AMC and GME. Guess who is one of the main investors of DRIVEWEALTH?!',
-        text:
-          'Revolut trading app (DriveWealth) closed buying option for AMC and GME. Guess who is one of the main investors of DRIVEWEALTH?!',
+        id: 'Revolut trading app (DriveWealth) closed buying option for AMC and GME. Guess who is one of the main investors of DRIVEWEALTH?!',
+        text: 'Revolut trading app (DriveWealth) closed buying option for AMC and GME. Guess who is one of the main investors of DRIVEWEALTH?!',
         items_count: 1,
         items: [
           'Revolut trading app (DriveWealth) closed buying option for AMC and GME. Guess who is one of the main investors of DRIVEWEALTH?!',
@@ -12425,10 +11709,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut stops accepting buy orders for GME and AMC - blaming DriveWealth',
-        text:
-          'Revolut stops accepting buy orders for GME and AMC - blaming DriveWealth',
+        id: 'Revolut stops accepting buy orders for GME and AMC - blaming DriveWealth',
+        text: 'Revolut stops accepting buy orders for GME and AMC - blaming DriveWealth',
         items_count: 1,
         items: [
           'Revolut stops accepting buy orders for GME and AMC - blaming DriveWealth',
@@ -12436,10 +11718,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'DriveWealth, will not be able to offer Buys on GameStop (NYSE: $GME) and AMC Entertainment (|NYSE: $AMC) due to increased capital requirements set by the Depository Trust Company (DTC).',
-        text:
-          'DriveWealth, will not be able to offer Buys on GameStop (NYSE: $GME) and AMC Entertainment (|NYSE: $AMC) due to increased capital requirements set by the Depository Trust Company (DTC).',
+        id: 'DriveWealth, will not be able to offer Buys on GameStop (NYSE: $GME) and AMC Entertainment (|NYSE: $AMC) due to increased capital requirements set by the Depository Trust Company (DTC).',
+        text: 'DriveWealth, will not be able to offer Buys on GameStop (NYSE: $GME) and AMC Entertainment (|NYSE: $AMC) due to increased capital requirements set by the Depository Trust Company (DTC).',
         items_count: 1,
         items: [
           'DriveWealth, will not be able to offer Buys on GameStop (NYSE: $GME) and AMC Entertainment (|NYSE: $AMC) due to increased capital requirements set by the Depository Trust Company (DTC).',
@@ -12551,10 +11831,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "At the very least, hold till 02/09 when the official short interest data is published. It'll be a mad scramble for GME if it shows all the projections of &lt; 50% SI were bad analytics at best blatant lies at worst.",
-        text:
-          "At the very least, hold till 02/09 when the official short interest data is published. It'll be a mad scramble for GME if it shows all the projections of &lt; 50% SI were bad analytics at best blatant lies at worst.",
+        id: "At the very least, hold till 02/09 when the official short interest data is published. It'll be a mad scramble for GME if it shows all the projections of &lt; 50% SI were bad analytics at best blatant lies at worst.",
+        text: "At the very least, hold till 02/09 when the official short interest data is published. It'll be a mad scramble for GME if it shows all the projections of &lt; 50% SI were bad analytics at best blatant lies at worst.",
         items_count: 1,
         items: [
           "At the very least, hold till 02/09 when the official short interest data is published. It'll be a mad scramble for GME if it shows all the projections of &lt; 50% SI were bad analytics at best blatant lies at worst.",
@@ -12562,10 +11840,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Short Interest is at 226.42, so is this the end of the GME journey?',
-        text:
-          'Short Interest is at 226.42, so is this the end of the GME journey?',
+        id: 'Short Interest is at 226.42, so is this the end of the GME journey?',
+        text: 'Short Interest is at 226.42, so is this the end of the GME journey?',
         items_count: 1,
         items: [
           'Short Interest is at 226.42, so is this the end of the GME journey?',
@@ -12647,10 +11923,8 @@ export const clusters: ExampleNode[] = [
     children: [
       {
         type: 'Phrase',
-        id:
-          'So glad I finally get to own my entire 2 shares of GME! See you guys on the moon! 🚀🚀🚀🌑🌑🙌💎💎',
-        text:
-          'So glad I finally get to own my entire 2 shares of GME! See you guys on the moon! 🚀🚀🚀🌑🌑🙌💎💎',
+        id: 'So glad I finally get to own my entire 2 shares of GME! See you guys on the moon! 🚀🚀🚀🌑🌑🙌💎💎',
+        text: 'So glad I finally get to own my entire 2 shares of GME! See you guys on the moon! 🚀🚀🚀🌑🌑🙌💎💎',
         items_count: 2,
         items: [
           'So glad I finally get to own my entire 2 shares of GME! See you guys on the moon! 🚀🚀🚀🌑🌑🙌💎💎',
@@ -12660,10 +11934,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I really wish I could have joined you guys for $GME... but I blew up my account a 3 to 4 months ago. I went from my life savings of $28k to $162k to $280, mostly because I’m actually a retard hahaha.... I’ll still be supporting you guys. $GME to the **** moon!!!',
-        text:
-          'I really wish I could have joined you guys for $GME... but I blew up my account a 3 to 4 months ago. I went from my life savings of $28k to $162k to $280, mostly because I’m actually a retard hahaha.... I’ll still be supporting you guys. $GME to the **** moon!!!',
+        id: 'I really wish I could have joined you guys for $GME... but I blew up my account a 3 to 4 months ago. I went from my life savings of $28k to $162k to $280, mostly because I’m actually a retard hahaha.... I’ll still be supporting you guys. $GME to the **** moon!!!',
+        text: 'I really wish I could have joined you guys for $GME... but I blew up my account a 3 to 4 months ago. I went from my life savings of $28k to $162k to $280, mostly because I’m actually a retard hahaha.... I’ll still be supporting you guys. $GME to the **** moon!!!',
         items_count: 2,
         items: [
           'I really wish I could have joined you guys for $GME... but I blew up my account a 3 to 4 months ago. I went from my life savings of $28k to $162k to $280, mostly because I’m actually a retard hahaha.... I’ll still be supporting you guys. $GME to the **** moon!!!',
@@ -12687,10 +11959,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Just bought 1k of #GME at a discounted price! Also holding 10k of #Nok! To the moon!! 🚀🚀🚀🚀',
-        text:
-          'Just bought 1k of #GME at a discounted price! Also holding 10k of #Nok! To the moon!! 🚀🚀🚀🚀',
+        id: 'Just bought 1k of #GME at a discounted price! Also holding 10k of #Nok! To the moon!! 🚀🚀🚀🚀',
+        text: 'Just bought 1k of #GME at a discounted price! Also holding 10k of #Nok! To the moon!! 🚀🚀🚀🚀',
         items_count: 1,
         items: [
           'Just bought 1k of #GME at a discounted price! Also holding 10k of #Nok! To the moon!! 🚀🚀🚀🚀',
@@ -12698,10 +11968,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I don’t know about you guys, but I really appreciate all of these shitbag manipulators hooking us all up with a HUGE discount on $GME! I originally got in at like $330, but now I was able to grab more for just $90!!! Super generous of them!!! WE HOLD THESE!!!',
-        text:
-          'I don’t know about you guys, but I really appreciate all of these shitbag manipulators hooking us all up with a HUGE discount on $GME! I originally got in at like $330, but now I was able to grab more for just $90!!! Super generous of them!!! WE HOLD THESE!!!',
+        id: 'I don’t know about you guys, but I really appreciate all of these shitbag manipulators hooking us all up with a HUGE discount on $GME! I originally got in at like $330, but now I was able to grab more for just $90!!! Super generous of them!!! WE HOLD THESE!!!',
+        text: 'I don’t know about you guys, but I really appreciate all of these shitbag manipulators hooking us all up with a HUGE discount on $GME! I originally got in at like $330, but now I was able to grab more for just $90!!! Super generous of them!!! WE HOLD THESE!!!',
         items_count: 1,
         items: [
           'I don’t know about you guys, but I really appreciate all of these shitbag manipulators hooking us all up with a HUGE discount on $GME! I originally got in at like $330, but now I was able to grab more for just $90!!! Super generous of them!!! WE HOLD THESE!!!',
@@ -12716,10 +11984,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Lets thank the shorties for the discounts on $GME today :rocketstonk: :rocketstonk: :rocketstonk:',
-        text:
-          'Lets thank the shorties for the discounts on $GME today :rocketstonk: :rocketstonk: :rocketstonk:',
+        id: 'Lets thank the shorties for the discounts on $GME today :rocketstonk: :rocketstonk: :rocketstonk:',
+        text: 'Lets thank the shorties for the discounts on $GME today :rocketstonk: :rocketstonk: :rocketstonk:',
         items_count: 1,
         items: [
           'Lets thank the shorties for the discounts on $GME today :rocketstonk: :rocketstonk: :rocketstonk:',
@@ -12734,10 +12000,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Bought my first GME share at $252!!! To the moon!!!! 🚀🌕🚀🌕🚀🌕💎🤲💎',
-        text:
-          'Bought my first GME share at $252!!! To the moon!!!! 🚀🌕🚀🌕🚀🌕💎🤲💎',
+        id: 'Bought my first GME share at $252!!! To the moon!!!! 🚀🌕🚀🌕🚀🌕💎🤲💎',
+        text: 'Bought my first GME share at $252!!! To the moon!!!! 🚀🌕🚀🌕🚀🌕💎🤲💎',
         items_count: 1,
         items: [
           'Bought my first GME share at $252!!! To the moon!!!! 🚀🌕🚀🌕🚀🌕💎🤲💎',
@@ -12745,10 +12009,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Our family of 2 gamers put our $’s in GME (33 shares total now) just holding out over here!',
-        text:
-          'Our family of 2 gamers put our $’s in GME (33 shares total now) just holding out over here!',
+        id: 'Our family of 2 gamers put our $’s in GME (33 shares total now) just holding out over here!',
+        text: 'Our family of 2 gamers put our $’s in GME (33 shares total now) just holding out over here!',
         items_count: 1,
         items: [
           'Our family of 2 gamers put our $’s in GME (33 shares total now) just holding out over here!',
@@ -12763,10 +12025,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'WE LOVE GME!!! Thank you for making my life wonderful, and this within one month :D',
-        text:
-          'WE LOVE GME!!! Thank you for making my life wonderful, and this within one month :D',
+        id: 'WE LOVE GME!!! Thank you for making my life wonderful, and this within one month :D',
+        text: 'WE LOVE GME!!! Thank you for making my life wonderful, and this within one month :D',
         items_count: 1,
         items: [
           'WE LOVE GME!!! Thank you for making my life wonderful, and this within one month :D',
@@ -12774,10 +12034,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Aussie here supporting the cause! GME and BB with another $10k ready for market open. 💎🙌 Strong together!',
-        text:
-          'Aussie here supporting the cause! GME and BB with another $10k ready for market open. 💎🙌 Strong together!',
+        id: 'Aussie here supporting the cause! GME and BB with another $10k ready for market open. 💎🙌 Strong together!',
+        text: 'Aussie here supporting the cause! GME and BB with another $10k ready for market open. 💎🙌 Strong together!',
         items_count: 1,
         items: [
           'Aussie here supporting the cause! GME and BB with another $10k ready for market open. 💎🙌 Strong together!',
@@ -12837,10 +12095,8 @@ export const clusters: ExampleNode[] = [
   },
   {
     type: 'Cluster',
-    id:
-      'Revolut joined the dark side, just like Robin Hood! Fully banned buying of GME and AMC!',
-    text:
-      'Revolut joined the dark side, just like Robin Hood! Fully banned buying of GME and AMC!',
+    id: 'Revolut joined the dark side, just like Robin Hood! Fully banned buying of GME and AMC!',
+    text: 'Revolut joined the dark side, just like Robin Hood! Fully banned buying of GME and AMC!',
     items_count: 16,
     children: [
       {
@@ -12881,10 +12137,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut joined the dark side, just like Robin Hood! Fully banned buying of GME and AMC!',
-        text:
-          'Revolut joined the dark side, just like Robin Hood! Fully banned buying of GME and AMC!',
+        id: 'Revolut joined the dark side, just like Robin Hood! Fully banned buying of GME and AMC!',
+        text: 'Revolut joined the dark side, just like Robin Hood! Fully banned buying of GME and AMC!',
         items_count: 1,
         items: [
           'Revolut joined the dark side, just like Robin Hood! Fully banned buying of GME and AMC!',
@@ -12915,10 +12169,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Lurker who just bought 1 1/2 more of GME . Its not much but I just like the stock.',
-        text:
-          'Lurker who just bought 1 1/2 more of GME . Its not much but I just like the stock.',
+        id: 'Lurker who just bought 1 1/2 more of GME . Its not much but I just like the stock.',
+        text: 'Lurker who just bought 1 1/2 more of GME . Its not much but I just like the stock.',
         items_count: 4,
         items: [
           'Lurker who just bought 1 1/2 more of GME . Its not much but I just like the stock.',
@@ -12932,10 +12184,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "I'm doing my part. 10 shares at $32, bought 2 more today at a nice discounted $90. If this works it'll be historic, if not GME is still an undervalued company and its a great long term hold.",
-        text:
-          "I'm doing my part. 10 shares at $32, bought 2 more today at a nice discounted $90. If this works it'll be historic, if not GME is still an undervalued company and its a great long term hold.",
+        id: "I'm doing my part. 10 shares at $32, bought 2 more today at a nice discounted $90. If this works it'll be historic, if not GME is still an undervalued company and its a great long term hold.",
+        text: "I'm doing my part. 10 shares at $32, bought 2 more today at a nice discounted $90. If this works it'll be historic, if not GME is still an undervalued company and its a great long term hold.",
         items_count: 2,
         items: [
           "I'm doing my part. 10 shares at $32, bought 2 more today at a nice discounted $90. If this works it'll be historic, if not GME is still an undervalued company and its a great long term hold.",
@@ -12959,10 +12209,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "GME is no longer just a stock, try and forget about the money, it's the price we pay for CHANGE.",
-        text:
-          "GME is no longer just a stock, try and forget about the money, it's the price we pay for CHANGE.",
+        id: "GME is no longer just a stock, try and forget about the money, it's the price we pay for CHANGE.",
+        text: "GME is no longer just a stock, try and forget about the money, it's the price we pay for CHANGE.",
         items_count: 1,
         items: [
           "GME is no longer just a stock, try and forget about the money, it's the price we pay for CHANGE.",
@@ -12972,17 +12220,14 @@ export const clusters: ExampleNode[] = [
   },
   {
     type: 'Cluster',
-    id:
-      "I Ain't **** Selling!! I Should Have Bought In Today Instead Of Yesterday,But Im Holding💎🙌💎🚀🚀🚀🚀🚀",
-    text:
-      "I Ain't **** Selling!! I Should Have Bought In Today Instead Of Yesterday,But Im Holding💎🙌💎🚀🚀🚀🚀🚀",
+    id: "I Ain't **** Selling!! I Should Have Bought In Today Instead Of Yesterday,But Im Holding💎🙌💎🚀🚀🚀🚀🚀",
+    text: "I Ain't **** Selling!! I Should Have Bought In Today Instead Of Yesterday,But Im Holding💎🙌💎🚀🚀🚀🚀🚀",
     items_count: 15,
     children: [
       {
         type: 'Phrase',
         id: "I'm with you brothers and sisters and I'm not **** selling! 💎👐",
-        text:
-          "I'm with you brothers and sisters and I'm not **** selling! 💎👐",
+        text: "I'm with you brothers and sisters and I'm not **** selling! 💎👐",
         items_count: 3,
         items: [
           "I'm with you brothers and sisters and I'm not **** selling! 💎👐",
@@ -12993,10 +12238,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "I Ain't **** Selling!! I Should Have Bought In Today Instead Of Yesterday,But Im Holding💎🙌💎🚀🚀🚀🚀🚀",
-        text:
-          "I Ain't **** Selling!! I Should Have Bought In Today Instead Of Yesterday,But Im Holding💎🙌💎🚀🚀🚀🚀🚀",
+        id: "I Ain't **** Selling!! I Should Have Bought In Today Instead Of Yesterday,But Im Holding💎🙌💎🚀🚀🚀🚀🚀",
+        text: "I Ain't **** Selling!! I Should Have Bought In Today Instead Of Yesterday,But Im Holding💎🙌💎🚀🚀🚀🚀🚀",
         items_count: 1,
         items: [
           "I Ain't **** Selling!! I Should Have Bought In Today Instead Of Yesterday,But Im Holding💎🙌💎🚀🚀🚀🚀🚀",
@@ -13004,10 +12247,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I aint ****in sellin. Matter a fact i bought 3 more 🚀🚀🚀🚀🚀🚀🦍🦍🦍🦍🦍🥂 💎👐💎',
-        text:
-          'I aint ****in sellin. Matter a fact i bought 3 more 🚀🚀🚀🚀🚀🚀🦍🦍🦍🦍🦍🥂 💎👐💎',
+        id: 'I aint ****in sellin. Matter a fact i bought 3 more 🚀🚀🚀🚀🚀🚀🦍🦍🦍🦍🦍🥂 💎👐💎',
+        text: 'I aint ****in sellin. Matter a fact i bought 3 more 🚀🚀🚀🚀🚀🚀🦍🦍🦍🦍🦍🥂 💎👐💎',
         items_count: 1,
         items: [
           'I aint ****in sellin. Matter a fact i bought 3 more 🚀🚀🚀🚀🚀🚀🦍🦍🦍🦍🦍🥂 💎👐💎',
@@ -13015,10 +12256,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Not **** selling!!!! I bought another 12 shares today.... I think I’m retarded, but it’s not a loss if I don’t sell',
-        text:
-          'Not **** selling!!!! I bought another 12 shares today.... I think I’m retarded, but it’s not a loss if I don’t sell',
+        id: 'Not **** selling!!!! I bought another 12 shares today.... I think I’m retarded, but it’s not a loss if I don’t sell',
+        text: 'Not **** selling!!!! I bought another 12 shares today.... I think I’m retarded, but it’s not a loss if I don’t sell',
         items_count: 1,
         items: [
           'Not **** selling!!!! I bought another 12 shares today.... I think I’m retarded, but it’s not a loss if I don’t sell',
@@ -13026,10 +12265,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          '💎🙌🏽. Not selling! Eef RH. Vanguard deposit clears tomorrow and will be buying the ****in dip!',
-        text:
-          '💎🙌🏽. Not selling! Eef RH. Vanguard deposit clears tomorrow and will be buying the ****in dip!',
+        id: '💎🙌🏽. Not selling! Eef RH. Vanguard deposit clears tomorrow and will be buying the ****in dip!',
+        text: '💎🙌🏽. Not selling! Eef RH. Vanguard deposit clears tomorrow and will be buying the ****in dip!',
         items_count: 1,
         items: [
           '💎🙌🏽. Not selling! Eef RH. Vanguard deposit clears tomorrow and will be buying the ****in dip!',
@@ -13058,10 +12295,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I’m down almost 40% for the day... And there’s not a chance in the world I’m going to sell. 💎🙌🏻',
-        text:
-          'I’m down almost 40% for the day... And there’s not a chance in the world I’m going to sell. 💎🙌🏻',
+        id: 'I’m down almost 40% for the day... And there’s not a chance in the world I’m going to sell. 💎🙌🏻',
+        text: 'I’m down almost 40% for the day... And there’s not a chance in the world I’m going to sell. 💎🙌🏻',
         items_count: 1,
         items: [
           'I’m down almost 40% for the day... And there’s not a chance in the world I’m going to sell. 💎🙌🏻',
@@ -13069,10 +12304,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Everyone telling me to sell but I got 💎🙏 could’ve cashed out at 30k went down but I’m not selling till 10k 🚀🚀🚀🚀🚀🚀',
-        text:
-          'Everyone telling me to sell but I got 💎🙏 could’ve cashed out at 30k went down but I’m not selling till 10k 🚀🚀🚀🚀🚀🚀',
+        id: 'Everyone telling me to sell but I got 💎🙏 could’ve cashed out at 30k went down but I’m not selling till 10k 🚀🚀🚀🚀🚀🚀',
+        text: 'Everyone telling me to sell but I got 💎🙏 could’ve cashed out at 30k went down but I’m not selling till 10k 🚀🚀🚀🚀🚀🚀',
         items_count: 1,
         items: [
           'Everyone telling me to sell but I got 💎🙏 could’ve cashed out at 30k went down but I’m not selling till 10k 🚀🚀🚀🚀🚀🚀',
@@ -13080,10 +12313,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Bought another 6 shares before closing. Not **** selling and buying more when I can 💎🤲',
-        text:
-          'Bought another 6 shares before closing. Not **** selling and buying more when I can 💎🤲',
+        id: 'Bought another 6 shares before closing. Not **** selling and buying more when I can 💎🤲',
+        text: 'Bought another 6 shares before closing. Not **** selling and buying more when I can 💎🤲',
         items_count: 1,
         items: [
           'Bought another 6 shares before closing. Not **** selling and buying more when I can 💎🤲',
@@ -13176,10 +12407,8 @@ export const clusters: ExampleNode[] = [
     children: [
       {
         type: 'Phrase',
-        id:
-          'JUST BOUGHT THE DIP AND DOUBLED MY SHARES! DIMOND HANDS 💎🤲 HOLD ON!',
-        text:
-          'JUST BOUGHT THE DIP AND DOUBLED MY SHARES! DIMOND HANDS 💎🤲 HOLD ON!',
+        id: 'JUST BOUGHT THE DIP AND DOUBLED MY SHARES! DIMOND HANDS 💎🤲 HOLD ON!',
+        text: 'JUST BOUGHT THE DIP AND DOUBLED MY SHARES! DIMOND HANDS 💎🤲 HOLD ON!',
         items_count: 4,
         items: [
           'JUST BOUGHT THE DIP AND DOUBLED MY SHARES! DIMOND HANDS 💎🤲 HOLD ON!',
@@ -13219,10 +12448,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'BUY THE DIP HOLD THE LINE! These measly 5 shares are a drop in the bucket but WE GOT THIS 💎✋🏿',
-        text:
-          'BUY THE DIP HOLD THE LINE! These measly 5 shares are a drop in the bucket but WE GOT THIS 💎✋🏿',
+        id: 'BUY THE DIP HOLD THE LINE! These measly 5 shares are a drop in the bucket but WE GOT THIS 💎✋🏿',
+        text: 'BUY THE DIP HOLD THE LINE! These measly 5 shares are a drop in the bucket but WE GOT THIS 💎✋🏿',
         items_count: 1,
         items: [
           'BUY THE DIP HOLD THE LINE! These measly 5 shares are a drop in the bucket but WE GOT THIS 💎✋🏿',
@@ -13230,10 +12457,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Might be slightly retarded. Upped my total holdings to 36 shares. BUY THE DIP. 💎👐🚀🚀🚀🚀🚀',
-        text:
-          'Might be slightly retarded. Upped my total holdings to 36 shares. BUY THE DIP. 💎👐🚀🚀🚀🚀🚀',
+        id: 'Might be slightly retarded. Upped my total holdings to 36 shares. BUY THE DIP. 💎👐🚀🚀🚀🚀🚀',
+        text: 'Might be slightly retarded. Upped my total holdings to 36 shares. BUY THE DIP. 💎👐🚀🚀🚀🚀🚀',
         items_count: 1,
         items: [
           'Might be slightly retarded. Upped my total holdings to 36 shares. BUY THE DIP. 💎👐🚀🚀🚀🚀🚀',
@@ -13241,10 +12466,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Bought 4 shares during the dip. Trust me lads, we've got 💎🤚💎🤚💎🤚",
-        text:
-          "Bought 4 shares during the dip. Trust me lads, we've got 💎🤚💎🤚💎🤚",
+        id: "Bought 4 shares during the dip. Trust me lads, we've got 💎🤚💎🤚💎🤚",
+        text: "Bought 4 shares during the dip. Trust me lads, we've got 💎🤚💎🤚💎🤚",
         items_count: 1,
         items: [
           "Bought 4 shares during the dip. Trust me lads, we've got 💎🤚💎🤚💎🤚",
@@ -13266,10 +12489,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I’m not selling! 💎🙌🏻 I’ll keep buying the dip. 156 shares @ $329 and 4 shares @ $187',
-        text:
-          'I’m not selling! 💎🙌🏻 I’ll keep buying the dip. 156 shares @ $329 and 4 shares @ $187',
+        id: 'I’m not selling! 💎🙌🏻 I’ll keep buying the dip. 156 shares @ $329 and 4 shares @ $187',
+        text: 'I’m not selling! 💎🙌🏻 I’ll keep buying the dip. 156 shares @ $329 and 4 shares @ $187',
         items_count: 1,
         items: [
           'I’m not selling! 💎🙌🏻 I’ll keep buying the dip. 156 shares @ $329 and 4 shares @ $187',
@@ -13315,10 +12536,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Bought the dips and ill be buying more in the morning. This don’t phase me 💎👆🏼',
-        text:
-          'Bought the dips and ill be buying more in the morning. This don’t phase me 💎👆🏼',
+        id: 'Bought the dips and ill be buying more in the morning. This don’t phase me 💎👆🏼',
+        text: 'Bought the dips and ill be buying more in the morning. This don’t phase me 💎👆🏼',
         items_count: 1,
         items: [
           'Bought the dips and ill be buying more in the morning. This don’t phase me 💎👆🏼',
@@ -13340,10 +12559,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I can no longer buy the dips, but god dammit I’m going to 💎 🙌🏼until this 🚀 reaches the edge of space. 🦍 🦍 🦍 💪',
-        text:
-          'I can no longer buy the dips, but god dammit I’m going to 💎 🙌🏼until this 🚀 reaches the edge of space. 🦍 🦍 🦍 💪',
+        id: 'I can no longer buy the dips, but god dammit I’m going to 💎 🙌🏼until this 🚀 reaches the edge of space. 🦍 🦍 🦍 💪',
+        text: 'I can no longer buy the dips, but god dammit I’m going to 💎 🙌🏼until this 🚀 reaches the edge of space. 🦍 🦍 🦍 💪',
         items_count: 1,
         items: [
           'I can no longer buy the dips, but god dammit I’m going to 💎 🙌🏼until this 🚀 reaches the edge of space. 🦍 🦍 🦍 💪',
@@ -13408,10 +12625,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Please, Melvin. Stop. My wee wee can only get so hard. 😩 Tripled down and bought 54 more shares in another account yesterday to top off. 250 shares of $GME @ 40, 70, 100, 118, 217 💎🤲',
-        text:
-          'Please, Melvin. Stop. My wee wee can only get so hard. 😩 Tripled down and bought 54 more shares in another account yesterday to top off. 250 shares of $GME @ 40, 70, 100, 118, 217 💎🤲',
+        id: 'Please, Melvin. Stop. My wee wee can only get so hard. 😩 Tripled down and bought 54 more shares in another account yesterday to top off. 250 shares of $GME @ 40, 70, 100, 118, 217 💎🤲',
+        text: 'Please, Melvin. Stop. My wee wee can only get so hard. 😩 Tripled down and bought 54 more shares in another account yesterday to top off. 250 shares of $GME @ 40, 70, 100, 118, 217 💎🤲',
         items_count: 1,
         items: [
           'Please, Melvin. Stop. My wee wee can only get so hard. 😩 Tripled down and bought 54 more shares in another account yesterday to top off. 250 shares of $GME @ 40, 70, 100, 118, 217 💎🤲',
@@ -13419,10 +12634,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'GME 1000 shares for 93,000 ! A few days ago it would have cost me $500,000! What a bargain! NOW is the time to jump on board!',
-        text:
-          'GME 1000 shares for 93,000 ! A few days ago it would have cost me $500,000! What a bargain! NOW is the time to jump on board!',
+        id: 'GME 1000 shares for 93,000 ! A few days ago it would have cost me $500,000! What a bargain! NOW is the time to jump on board!',
+        text: 'GME 1000 shares for 93,000 ! A few days ago it would have cost me $500,000! What a bargain! NOW is the time to jump on board!',
         items_count: 1,
         items: [
           'GME 1000 shares for 93,000 ! A few days ago it would have cost me $500,000! What a bargain! NOW is the time to jump on board!',
@@ -13430,10 +12643,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Went long 4300 GME shares! Let's all put our retirement money in it",
-        text:
-          "Went long 4300 GME shares! Let's all put our retirement money in it",
+        id: "Went long 4300 GME shares! Let's all put our retirement money in it",
+        text: "Went long 4300 GME shares! Let's all put our retirement money in it",
         items_count: 1,
         items: [
           "Went long 4300 GME shares! Let's all put our retirement money in it",
@@ -13441,10 +12652,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I did it. I bought a share in GME yesterday and am holding. Would’ve bought more but couldn’t afford it. 💎💎💎💎💎🚀🚀🚀🚀🚀 Here goes nothing!',
-        text:
-          'I did it. I bought a share in GME yesterday and am holding. Would’ve bought more but couldn’t afford it. 💎💎💎💎💎🚀🚀🚀🚀🚀 Here goes nothing!',
+        id: 'I did it. I bought a share in GME yesterday and am holding. Would’ve bought more but couldn’t afford it. 💎💎💎💎💎🚀🚀🚀🚀🚀 Here goes nothing!',
+        text: 'I did it. I bought a share in GME yesterday and am holding. Would’ve bought more but couldn’t afford it. 💎💎💎💎💎🚀🚀🚀🚀🚀 Here goes nothing!',
         items_count: 1,
         items: [
           'I did it. I bought a share in GME yesterday and am holding. Would’ve bought more but couldn’t afford it. 💎💎💎💎💎🚀🚀🚀🚀🚀 Here goes nothing!',
@@ -13452,10 +12661,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "I jumped in and bought a stock at $90! Let's goooooooooo! GME to the moon!",
-        text:
-          "I jumped in and bought a stock at $90! Let's goooooooooo! GME to the moon!",
+        id: "I jumped in and bought a stock at $90! Let's goooooooooo! GME to the moon!",
+        text: "I jumped in and bought a stock at $90! Let's goooooooooo! GME to the moon!",
         items_count: 1,
         items: [
           "I jumped in and bought a stock at $90! Let's goooooooooo! GME to the moon!",
@@ -13463,10 +12670,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Lord Elon we praise you 🙏 with our sacrifice. Sold everything except TSLA to go all in GME still holding. 2021 X refresh. Hoping my GME gains will pay this off for me 💎🙌🚀',
-        text:
-          'Lord Elon we praise you 🙏 with our sacrifice. Sold everything except TSLA to go all in GME still holding. 2021 X refresh. Hoping my GME gains will pay this off for me 💎🙌🚀',
+        id: 'Lord Elon we praise you 🙏 with our sacrifice. Sold everything except TSLA to go all in GME still holding. 2021 X refresh. Hoping my GME gains will pay this off for me 💎🙌🚀',
+        text: 'Lord Elon we praise you 🙏 with our sacrifice. Sold everything except TSLA to go all in GME still holding. 2021 X refresh. Hoping my GME gains will pay this off for me 💎🙌🚀',
         items_count: 1,
         items: [
           'Lord Elon we praise you 🙏 with our sacrifice. Sold everything except TSLA to go all in GME still holding. 2021 X refresh. Hoping my GME gains will pay this off for me 💎🙌🚀',
@@ -13474,10 +12679,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          '66 more GME shares today. 99% of my entire Roth account is GME. It all started with 9k worth of TSLA in Feb 2017. 🚀🚀💎👐',
-        text:
-          '66 more GME shares today. 99% of my entire Roth account is GME. It all started with 9k worth of TSLA in Feb 2017. 🚀🚀💎👐',
+        id: '66 more GME shares today. 99% of my entire Roth account is GME. It all started with 9k worth of TSLA in Feb 2017. 🚀🚀💎👐',
+        text: '66 more GME shares today. 99% of my entire Roth account is GME. It all started with 9k worth of TSLA in Feb 2017. 🚀🚀💎👐',
         items_count: 1,
         items: [
           '66 more GME shares today. 99% of my entire Roth account is GME. It all started with 9k worth of TSLA in Feb 2017. 🚀🚀💎👐',
@@ -13485,10 +12688,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Chose an amount I'm willing to lose, bought shares of GME to do my part. Let's go tards! (rocket emojis)",
-        text:
-          "Chose an amount I'm willing to lose, bought shares of GME to do my part. Let's go tards! (rocket emojis)",
+        id: "Chose an amount I'm willing to lose, bought shares of GME to do my part. Let's go tards! (rocket emojis)",
+        text: "Chose an amount I'm willing to lose, bought shares of GME to do my part. Let's go tards! (rocket emojis)",
         items_count: 1,
         items: [
           "Chose an amount I'm willing to lose, bought shares of GME to do my part. Let's go tards! (rocket emojis)",
@@ -13561,10 +12762,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Cash App broker stopping AMC and NOK sales right now Cash App disagrees with choice',
-        text:
-          'Cash App broker stopping AMC and NOK sales right now Cash App disagrees with choice',
+        id: 'Cash App broker stopping AMC and NOK sales right now Cash App disagrees with choice',
+        text: 'Cash App broker stopping AMC and NOK sales right now Cash App disagrees with choice',
         items_count: 1,
         items: [
           'Cash App broker stopping AMC and NOK sales right now Cash App disagrees with choice',
@@ -13581,10 +12780,8 @@ export const clusters: ExampleNode[] = [
   },
   {
     type: 'Cluster',
-    id:
-      'The only thing you should be worried about during these dips is buying moreeeee 🚀 GME to the moon 🚀',
-    text:
-      'The only thing you should be worried about during these dips is buying moreeeee 🚀 GME to the moon 🚀',
+    id: 'The only thing you should be worried about during these dips is buying moreeeee 🚀 GME to the moon 🚀',
+    text: 'The only thing you should be worried about during these dips is buying moreeeee 🚀 GME to the moon 🚀',
     items_count: 15,
     children: [
       {
@@ -13615,10 +12812,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'The only thing you should be worried about during these dips is buying moreeeee 🚀 GME to the moon 🚀',
-        text:
-          'The only thing you should be worried about during these dips is buying moreeeee 🚀 GME to the moon 🚀',
+        id: 'The only thing you should be worried about during these dips is buying moreeeee 🚀 GME to the moon 🚀',
+        text: 'The only thing you should be worried about during these dips is buying moreeeee 🚀 GME to the moon 🚀',
         items_count: 1,
         items: [
           'The only thing you should be worried about during these dips is buying moreeeee 🚀 GME to the moon 🚀',
@@ -13626,10 +12821,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'GME WILL TAKE OFF GET RID OF THOSE WEAK BABY HANDS AND BUY THE DIP AND HOLD ON TIGHT FOR THE MOON 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀',
-        text:
-          'GME WILL TAKE OFF GET RID OF THOSE WEAK BABY HANDS AND BUY THE DIP AND HOLD ON TIGHT FOR THE MOON 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀',
+        id: 'GME WILL TAKE OFF GET RID OF THOSE WEAK BABY HANDS AND BUY THE DIP AND HOLD ON TIGHT FOR THE MOON 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀',
+        text: 'GME WILL TAKE OFF GET RID OF THOSE WEAK BABY HANDS AND BUY THE DIP AND HOLD ON TIGHT FOR THE MOON 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀',
         items_count: 1,
         items: [
           'GME WILL TAKE OFF GET RID OF THOSE WEAK BABY HANDS AND BUY THE DIP AND HOLD ON TIGHT FOR THE MOON 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀',
@@ -13637,10 +12830,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Not too sure why everyone is scared? I’m kinda happy it dipped today, I can buy thousands more shares before it flies 🤣 We are actually so **** lucky to have this opportunity! 🚀🍿🌈🐻 #AMC #GME',
-        text:
-          'Not too sure why everyone is scared? I’m kinda happy it dipped today, I can buy thousands more shares before it flies 🤣 We are actually so **** lucky to have this opportunity! 🚀🍿🌈🐻 #AMC #GME',
+        id: 'Not too sure why everyone is scared? I’m kinda happy it dipped today, I can buy thousands more shares before it flies 🤣 We are actually so **** lucky to have this opportunity! 🚀🍿🌈🐻 #AMC #GME',
+        text: 'Not too sure why everyone is scared? I’m kinda happy it dipped today, I can buy thousands more shares before it flies 🤣 We are actually so **** lucky to have this opportunity! 🚀🍿🌈🐻 #AMC #GME',
         items_count: 1,
         items: [
           'Not too sure why everyone is scared? I’m kinda happy it dipped today, I can buy thousands more shares before it flies 🤣 We are actually so **** lucky to have this opportunity! 🚀🍿🌈🐻 #AMC #GME',
@@ -13648,10 +12839,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'For the amateur traders🤛🤛🤛- you do NOT panic when it dips. AMC and GME buy and hold 🚀🚀🚀',
-        text:
-          'For the amateur traders🤛🤛🤛- you do NOT panic when it dips. AMC and GME buy and hold 🚀🚀🚀',
+        id: 'For the amateur traders🤛🤛🤛- you do NOT panic when it dips. AMC and GME buy and hold 🚀🚀🚀',
+        text: 'For the amateur traders🤛🤛🤛- you do NOT panic when it dips. AMC and GME buy and hold 🚀🚀🚀',
         items_count: 1,
         items: [
           'For the amateur traders🤛🤛🤛- you do NOT panic when it dips. AMC and GME buy and hold 🚀🚀🚀',
@@ -13659,10 +12848,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'BUY THE DIP YOU LOVELY APES BUY THE DIP GUYS THEY ARE TRYING TO SCARE US OFF IT ONLY WORKS IF WE SELL BUY THE **** DIP. WHEN GME SPIKES BACK UP 300% WE WILL ALL BE SHOVING MONEY IN OUR ASSES AND LAUGHING AT THESE WALLSTREET BASTERDS',
-        text:
-          'BUY THE DIP YOU LOVELY APES BUY THE DIP GUYS THEY ARE TRYING TO SCARE US OFF IT ONLY WORKS IF WE SELL BUY THE **** DIP. WHEN GME SPIKES BACK UP 300% WE WILL ALL BE SHOVING MONEY IN OUR ASSES AND LAUGHING AT THESE WALLSTREET BASTERDS',
+        id: 'BUY THE DIP YOU LOVELY APES BUY THE DIP GUYS THEY ARE TRYING TO SCARE US OFF IT ONLY WORKS IF WE SELL BUY THE **** DIP. WHEN GME SPIKES BACK UP 300% WE WILL ALL BE SHOVING MONEY IN OUR ASSES AND LAUGHING AT THESE WALLSTREET BASTERDS',
+        text: 'BUY THE DIP YOU LOVELY APES BUY THE DIP GUYS THEY ARE TRYING TO SCARE US OFF IT ONLY WORKS IF WE SELL BUY THE **** DIP. WHEN GME SPIKES BACK UP 300% WE WILL ALL BE SHOVING MONEY IN OUR ASSES AND LAUGHING AT THESE WALLSTREET BASTERDS',
         items_count: 1,
         items: [
           'BUY THE DIP YOU LOVELY APES BUY THE DIP GUYS THEY ARE TRYING TO SCARE US OFF IT ONLY WORKS IF WE SELL BUY THE **** DIP. WHEN GME SPIKES BACK UP 300% WE WILL ALL BE SHOVING MONEY IN OUR ASSES AND LAUGHING AT THESE WALLSTREET BASTERDS',
@@ -13670,10 +12857,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'aint much but im doing what i can!! $GME TO THE MOON 🚀🚀 BUY THE DIP AND HOLD (not financial advice) 💎💎',
-        text:
-          'aint much but im doing what i can!! $GME TO THE MOON 🚀🚀 BUY THE DIP AND HOLD (not financial advice) 💎💎',
+        id: 'aint much but im doing what i can!! $GME TO THE MOON 🚀🚀 BUY THE DIP AND HOLD (not financial advice) 💎💎',
+        text: 'aint much but im doing what i can!! $GME TO THE MOON 🚀🚀 BUY THE DIP AND HOLD (not financial advice) 💎💎',
         items_count: 1,
         items: [
           'aint much but im doing what i can!! $GME TO THE MOON 🚀🚀 BUY THE DIP AND HOLD (not financial advice) 💎💎',
@@ -13690,18 +12875,14 @@ export const clusters: ExampleNode[] = [
   },
   {
     type: 'Cluster',
-    id:
-      'Revolut UK just stopped buy calls for GME and AMC. Sell only allowed. Sophisticated investing at its finest',
-    text:
-      'Revolut UK just stopped buy calls for GME and AMC. Sell only allowed. Sophisticated investing at its finest',
+    id: 'Revolut UK just stopped buy calls for GME and AMC. Sell only allowed. Sophisticated investing at its finest',
+    text: 'Revolut UK just stopped buy calls for GME and AMC. Sell only allowed. Sophisticated investing at its finest',
     items_count: 15,
     children: [
       {
         type: 'Phrase',
-        id:
-          'Now Revolut is preventing buys on GME and AMC. Keep holding these shitty tactics are still not going to make us sell. We like the stock, deal with it.',
-        text:
-          'Now Revolut is preventing buys on GME and AMC. Keep holding these shitty tactics are still not going to make us sell. We like the stock, deal with it.',
+        id: 'Now Revolut is preventing buys on GME and AMC. Keep holding these shitty tactics are still not going to make us sell. We like the stock, deal with it.',
+        text: 'Now Revolut is preventing buys on GME and AMC. Keep holding these shitty tactics are still not going to make us sell. We like the stock, deal with it.',
         items_count: 3,
         items: [
           'Now Revolut is preventing buys on GME and AMC. Keep holding these shitty tactics are still not going to make us sell. We like the stock, deal with it.',
@@ -13713,10 +12894,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut blocking buying option for GME and AMC 5 minutes before market opening.',
-        text:
-          'Revolut blocking buying option for GME and AMC 5 minutes before market opening.',
+        id: 'Revolut blocking buying option for GME and AMC 5 minutes before market opening.',
+        text: 'Revolut blocking buying option for GME and AMC 5 minutes before market opening.',
         items_count: 3,
         items: [
           'Revolut blocking buying option for GME and AMC 5 minutes before market opening.',
@@ -13728,10 +12907,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Revolut Is stopping buy orders for $AMC and $GME, still not selling 💎🙌 I'm with you in this everyone don't let them scare you HOLD!!! We will come back from this, you don't lose money if you hold, all you need is patience and 💎🙌!!!",
-        text:
-          "Revolut Is stopping buy orders for $AMC and $GME, still not selling 💎🙌 I'm with you in this everyone don't let them scare you HOLD!!! We will come back from this, you don't lose money if you hold, all you need is patience and 💎🙌!!!",
+        id: "Revolut Is stopping buy orders for $AMC and $GME, still not selling 💎🙌 I'm with you in this everyone don't let them scare you HOLD!!! We will come back from this, you don't lose money if you hold, all you need is patience and 💎🙌!!!",
+        text: "Revolut Is stopping buy orders for $AMC and $GME, still not selling 💎🙌 I'm with you in this everyone don't let them scare you HOLD!!! We will come back from this, you don't lose money if you hold, all you need is patience and 💎🙌!!!",
         items_count: 2,
         items: [
           "Revolut Is stopping buy orders for $AMC and $GME, still not selling 💎🙌 I'm with you in this everyone don't let them scare you HOLD!!! We will come back from this, you don't lose money if you hold, all you need is patience and 💎🙌!!!",
@@ -13741,10 +12918,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut UK just stopped buy calls for GME and AMC. Sell only allowed. Sophisticated investing at its finest',
-        text:
-          'Revolut UK just stopped buy calls for GME and AMC. Sell only allowed. Sophisticated investing at its finest',
+        id: 'Revolut UK just stopped buy calls for GME and AMC. Sell only allowed. Sophisticated investing at its finest',
+        text: 'Revolut UK just stopped buy calls for GME and AMC. Sell only allowed. Sophisticated investing at its finest',
         items_count: 1,
         items: [
           'Revolut UK just stopped buy calls for GME and AMC. Sell only allowed. Sophisticated investing at its finest',
@@ -13759,10 +12934,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut changing their AMC and GME shares to SELL only. Now is the to hold on even tighter. 💎🙌💎',
-        text:
-          'Revolut changing their AMC and GME shares to SELL only. Now is the to hold on even tighter. 💎🙌💎',
+        id: 'Revolut changing their AMC and GME shares to SELL only. Now is the to hold on even tighter. 💎🙌💎',
+        text: 'Revolut changing their AMC and GME shares to SELL only. Now is the to hold on even tighter. 💎🙌💎',
         items_count: 1,
         items: [
           'Revolut changing their AMC and GME shares to SELL only. Now is the to hold on even tighter. 💎🙌💎',
@@ -13770,10 +12943,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut Ireland has ceased buy options on GME. We’ve done our part. Hold hold hold.',
-        text:
-          'Revolut Ireland has ceased buy options on GME. We’ve done our part. Hold hold hold.',
+        id: 'Revolut Ireland has ceased buy options on GME. We’ve done our part. Hold hold hold.',
+        text: 'Revolut Ireland has ceased buy options on GME. We’ve done our part. Hold hold hold.',
         items_count: 1,
         items: [
           'Revolut Ireland has ceased buy options on GME. We’ve done our part. Hold hold hold.',
@@ -13781,10 +12952,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'In Europe Revolut just banned GME and AMC buying. Guys use Fidelity or Saxxo! Not selling a share. 🚀🚀🚀',
-        text:
-          'In Europe Revolut just banned GME and AMC buying. Guys use Fidelity or Saxxo! Not selling a share. 🚀🚀🚀',
+        id: 'In Europe Revolut just banned GME and AMC buying. Guys use Fidelity or Saxxo! Not selling a share. 🚀🚀🚀',
+        text: 'In Europe Revolut just banned GME and AMC buying. Guys use Fidelity or Saxxo! Not selling a share. 🚀🚀🚀',
         items_count: 1,
         items: [
           'In Europe Revolut just banned GME and AMC buying. Guys use Fidelity or Saxxo! Not selling a share. 🚀🚀🚀',
@@ -13801,10 +12970,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Revolut just took away buying options for $GME $AMC. Switch broker, buy the dip and HOLD 💎🖐🏼',
-        text:
-          'Revolut just took away buying options for $GME $AMC. Switch broker, buy the dip and HOLD 💎🖐🏼',
+        id: 'Revolut just took away buying options for $GME $AMC. Switch broker, buy the dip and HOLD 💎🖐🏼',
+        text: 'Revolut just took away buying options for $GME $AMC. Switch broker, buy the dip and HOLD 💎🖐🏼',
         items_count: 1,
         items: [
           'Revolut just took away buying options for $GME $AMC. Switch broker, buy the dip and HOLD 💎🖐🏼',
@@ -13860,10 +13027,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "🇮🇪Ireland isn't just holding! We are buying! Drop the Average and grow the pile!🇮🇪 Squeeze!",
-        text:
-          "🇮🇪Ireland isn't just holding! We are buying! Drop the Average and grow the pile!🇮🇪 Squeeze!",
+        id: "🇮🇪Ireland isn't just holding! We are buying! Drop the Average and grow the pile!🇮🇪 Squeeze!",
+        text: "🇮🇪Ireland isn't just holding! We are buying! Drop the Average and grow the pile!🇮🇪 Squeeze!",
         items_count: 1,
         items: [
           "🇮🇪Ireland isn't just holding! We are buying! Drop the Average and grow the pile!🇮🇪 Squeeze!",
@@ -13878,10 +13043,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Don’t buy more don’t buy more. No 🧻✋, but dam my avg is high, so tempting to sell and buy back at a lower price but noo.... we hold',
-        text:
-          'Don’t buy more don’t buy more. No 🧻✋, but dam my avg is high, so tempting to sell and buy back at a lower price but noo.... we hold',
+        id: 'Don’t buy more don’t buy more. No 🧻✋, but dam my avg is high, so tempting to sell and buy back at a lower price but noo.... we hold',
+        text: 'Don’t buy more don’t buy more. No 🧻✋, but dam my avg is high, so tempting to sell and buy back at a lower price but noo.... we hold',
         items_count: 1,
         items: [
           'Don’t buy more don’t buy more. No 🧻✋, but dam my avg is high, so tempting to sell and buy back at a lower price but noo.... we hold',
@@ -13889,10 +13052,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'I’m Buying HOLD Just Like Everyone Is Talking About. I’m Never Selling 💎 🙌🏼',
-        text:
-          'I’m Buying HOLD Just Like Everyone Is Talking About. I’m Never Selling 💎 🙌🏼',
+        id: 'I’m Buying HOLD Just Like Everyone Is Talking About. I’m Never Selling 💎 🙌🏼',
+        text: 'I’m Buying HOLD Just Like Everyone Is Talking About. I’m Never Selling 💎 🙌🏼',
         items_count: 1,
         items: [
           'I’m Buying HOLD Just Like Everyone Is Talking About. I’m Never Selling 💎 🙌🏼',
@@ -13902,18 +13063,14 @@ export const clusters: ExampleNode[] = [
   },
   {
     type: 'Cluster',
-    id:
-      "It ain't much but here's my loss ****, but it's not a real loss cause I AIN'T **** SELLING 💎✋🏻",
-    text:
-      "It ain't much but here's my loss ****, but it's not a real loss cause I AIN'T **** SELLING 💎✋🏻",
+    id: "It ain't much but here's my loss ****, but it's not a real loss cause I AIN'T **** SELLING 💎✋🏻",
+    text: "It ain't much but here's my loss ****, but it's not a real loss cause I AIN'T **** SELLING 💎✋🏻",
     items_count: 14,
     children: [
       {
         type: 'Phrase',
-        id:
-          "It ain't much but here's my loss ****, but it's not a real loss cause I AIN'T **** SELLING 💎✋🏻",
-        text:
-          "It ain't much but here's my loss ****, but it's not a real loss cause I AIN'T **** SELLING 💎✋🏻",
+        id: "It ain't much but here's my loss ****, but it's not a real loss cause I AIN'T **** SELLING 💎✋🏻",
+        text: "It ain't much but here's my loss ****, but it's not a real loss cause I AIN'T **** SELLING 💎✋🏻",
         items_count: 5,
         items: [
           "It ain't much but here's my loss ****, but it's not a real loss cause I AIN'T **** SELLING 💎✋🏻",
@@ -13950,10 +13107,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Daily obligitory loss ****. -$27,000 💎 🙌 NOT **** SELLING 🚀🚀🚀🚀🚀🚀🚀',
-        text:
-          'Daily obligitory loss ****. -$27,000 💎 🙌 NOT **** SELLING 🚀🚀🚀🚀🚀🚀🚀',
+        id: 'Daily obligitory loss ****. -$27,000 💎 🙌 NOT **** SELLING 🚀🚀🚀🚀🚀🚀🚀',
+        text: 'Daily obligitory loss ****. -$27,000 💎 🙌 NOT **** SELLING 🚀🚀🚀🚀🚀🚀🚀',
         items_count: 1,
         items: [
           'Daily obligitory loss ****. -$27,000 💎 🙌 NOT **** SELLING 🚀🚀🚀🚀🚀🚀🚀',
@@ -13961,10 +13116,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Casual AM loss ****. It ain’t a loss if I never sell. GME ➡️🌝🚀🚀🚀🚀🚀🦍🦍',
-        text:
-          'Casual AM loss ****. It ain’t a loss if I never sell. GME ➡️🌝🚀🚀🚀🚀🚀🦍🦍',
+        id: 'Casual AM loss ****. It ain’t a loss if I never sell. GME ➡️🌝🚀🚀🚀🚀🚀🦍🦍',
+        text: 'Casual AM loss ****. It ain’t a loss if I never sell. GME ➡️🌝🚀🚀🚀🚀🚀🦍🦍',
         items_count: 1,
         items: [
           'Casual AM loss ****. It ain’t a loss if I never sell. GME ➡️🌝🚀🚀🚀🚀🚀🦍🦍',
@@ -13986,10 +13139,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Some more scrumptious loss ****. Down 250k today and I AINT ****IN SELLIN!!!',
-        text:
-          'Some more scrumptious loss ****. Down 250k today and I AINT ****IN SELLIN!!!',
+        id: 'Some more scrumptious loss ****. Down 250k today and I AINT ****IN SELLIN!!!',
+        text: 'Some more scrumptious loss ****. Down 250k today and I AINT ****IN SELLIN!!!',
         items_count: 1,
         items: [
           'Some more scrumptious loss ****. Down 250k today and I AINT ****IN SELLIN!!!',
@@ -14075,10 +13226,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Holding. Money was already gone anyway. Unfortunately don’t have much to thro back in at the time. Get it while you can folks',
-        text:
-          'Holding. Money was already gone anyway. Unfortunately don’t have much to thro back in at the time. Get it while you can folks',
+        id: 'Holding. Money was already gone anyway. Unfortunately don’t have much to thro back in at the time. Get it while you can folks',
+        text: 'Holding. Money was already gone anyway. Unfortunately don’t have much to thro back in at the time. Get it while you can folks',
         items_count: 1,
         items: [
           'Holding. Money was already gone anyway. Unfortunately don’t have much to thro back in at the time. Get it while you can folks',
@@ -14086,10 +13235,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Bought at the top losing so hard but I’m holding who is at the same boat with me? What’s next? I thought the deal closed on Friday. Should I sell it?',
-        text:
-          'Bought at the top losing so hard but I’m holding who is at the same boat with me? What’s next? I thought the deal closed on Friday. Should I sell it?',
+        id: 'Bought at the top losing so hard but I’m holding who is at the same boat with me? What’s next? I thought the deal closed on Friday. Should I sell it?',
+        text: 'Bought at the top losing so hard but I’m holding who is at the same boat with me? What’s next? I thought the deal closed on Friday. Should I sell it?',
         items_count: 1,
         items: [
           'Bought at the top losing so hard but I’m holding who is at the same boat with me? What’s next? I thought the deal closed on Friday. Should I sell it?',
@@ -14192,10 +13339,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'Long time lurker and I’ve been waiting for a dip to buy. Just doing my part to support all you apes and get some gains for myself in the process. $GME 🙌💎🙌',
-        text:
-          'Long time lurker and I’ve been waiting for a dip to buy. Just doing my part to support all you apes and get some gains for myself in the process. $GME 🙌💎🙌',
+        id: 'Long time lurker and I’ve been waiting for a dip to buy. Just doing my part to support all you apes and get some gains for myself in the process. $GME 🙌💎🙌',
+        text: 'Long time lurker and I’ve been waiting for a dip to buy. Just doing my part to support all you apes and get some gains for myself in the process. $GME 🙌💎🙌',
         items_count: 1,
         items: [
           'Long time lurker and I’ve been waiting for a dip to buy. Just doing my part to support all you apes and get some gains for myself in the process. $GME 🙌💎🙌',
@@ -14203,10 +13348,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          'This is how I know you apes are still in this, EVERYONES BUYING THE DIP WE DONT HAVE PAPER HANDS IN THIS BITCH',
-        text:
-          'This is how I know you apes are still in this, EVERYONES BUYING THE DIP WE DONT HAVE PAPER HANDS IN THIS BITCH',
+        id: 'This is how I know you apes are still in this, EVERYONES BUYING THE DIP WE DONT HAVE PAPER HANDS IN THIS BITCH',
+        text: 'This is how I know you apes are still in this, EVERYONES BUYING THE DIP WE DONT HAVE PAPER HANDS IN THIS BITCH',
         items_count: 1,
         items: [
           'This is how I know you apes are still in this, EVERYONES BUYING THE DIP WE DONT HAVE PAPER HANDS IN THIS BITCH',
@@ -14214,10 +13357,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          '📄🙌 are all about being real apes. Look at the volume. BUY THE DIP!',
-        text:
-          '📄🙌 are all about being real apes. Look at the volume. BUY THE DIP!',
+        id: '📄🙌 are all about being real apes. Look at the volume. BUY THE DIP!',
+        text: '📄🙌 are all about being real apes. Look at the volume. BUY THE DIP!',
         items_count: 1,
         items: [
           '📄🙌 are all about being real apes. Look at the volume. BUY THE DIP!',
@@ -14232,10 +13373,8 @@ export const clusters: ExampleNode[] = [
       },
       {
         type: 'Phrase',
-        id:
-          "Hold strong apes. I've been here to watch the market manipulation over the last year only to see so many fall. Today we stand strong, theyre throwing everything they have at us, but we can stay retarded longer than they can stay solvent!",
-        text:
-          "Hold strong apes. I've been here to watch the market manipulation over the last year only to see so many fall. Today we stand strong, theyre throwing everything they have at us, but we can stay retarded longer than they can stay solvent!",
+        id: "Hold strong apes. I've been here to watch the market manipulation over the last year only to see so many fall. Today we stand strong, theyre throwing everything they have at us, but we can stay retarded longer than they can stay solvent!",
+        text: "Hold strong apes. I've been here to watch the market manipulation over the last year only to see so many fall. Today we stand strong, theyre throwing everything they have at us, but we can stay retarded longer than they can stay solvent!",
         items_count: 1,
         items: [
           "Hold strong apes. I've been here to watch the market manipulation over the last year only to see so many fall. Today we stand strong, theyre throwing everything they have at us, but we can stay retarded longer than they can stay solvent!",

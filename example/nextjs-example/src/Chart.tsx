@@ -8447,6 +8447,7 @@ export default function Chart() {
   return (
     <OneAIAnalyticsStaticDataWrapper
       exampleNodes={getData() as ExampleNode[]}
+      collection="example"
     />
   );
 }

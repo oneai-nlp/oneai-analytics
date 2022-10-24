@@ -17,8 +17,8 @@ export const ItemsListDisplay: FC<ItemsDisplayComponentProps> = ({
     <div style={{ backgroundColor: bgColor, color: textColor }}>
       {items.map((item, i) => (
         <div className="p-2 flex flex-wrap w-full" key={i}>
-          <span className="w-10/12 truncate">{item.original_text}</span>
-          <div className="w-2/12">
+          <span className="w-9/12 truncate">{item.original_text}</span>
+          <div className="w-3/12">
             <CountersLabelsDisplay
               metadata={item.metadata}
               counters={counters.filter(

@@ -71,26 +71,46 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   const { width, height, ref } = useResizeDetector();
   const [metaData, setMetaData] = useState({} as MetaData);
   const [nodes, setNodes] = useState([] as DataNode[]);
-  const [labels, setLabels] = useState(
-    sessionStorage
-      ? JSON.parse(sessionStorage.getItem(labelsStorageKey) ?? '[]')
-      : ([] as string[])
-  );
-  const [counters, setCounters] = useState(
-    getInitialCounters(defaultCalculations, [
-      {
-        metadataKeyValue: { key: CUSTOM_METADATA_KEY },
-        calculationName: totalSumCalculationName,
-      },
-    ]) as CounterType[]
-  );
+  const [labels, setLabels] = useState([] as string[]);
+  const [counters, setCounters] = useState([] as CounterType[]);
   const [countersConfigurations, setCountersConfigurations] = useState(
     {} as CountersConfigurations
   );
   const [fromDate, setFromDate] = useState(null as Date | null);
   const [toDate, setToDate] = useState(null as Date | null);
-
   const loadedNodes = useRef([] as { type: string; id: string }[]);
+  const currentCollection = useRef(null as string | null);
+
+  useEffect(() => {
+    if (
+      !nodesPath ||
+      nodesPath.length === 0 ||
+      currentCollection.current === nodesPath[0]
+    )
+      return;
+
+    currentCollection.current = nodesPath[0];
+    setLabels(
+      JSON.parse(
+        localStorage.getItem(
+          getCurrentStorageKey(labelsStorageKey, currentCollection.current)
+        ) ?? '[]'
+      )
+    );
+
+    setCounters(
+      getInitialCounters(
+        defaultCalculations,
+        [
+          {
+            metadataKeyValue: { key: CUSTOM_METADATA_KEY },
+            calculationName: totalSumCalculationName,
+          },
+        ],
+        currentCollection.current
+      ) as CounterType[]
+    );
+  }, [nodesPath]);
 
   useEffect(() => {
     setMetaData((currentMetadata) => {
@@ -208,8 +228,17 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
         calculationName: counter.calculationConfiguration.name,
       } as CountersLocalStorageObject;
     });
-    sessionStorage.setItem(countersStorageKey, JSON.stringify(storedCounters));
-    sessionStorage.setItem(labelsStorageKey, JSON.stringify(labels));
+
+    if (currentCollection.current) {
+      localStorage.setItem(
+        getCurrentStorageKey(countersStorageKey, currentCollection.current),
+        JSON.stringify(storedCounters)
+      );
+      localStorage.setItem(
+        getCurrentStorageKey(labelsStorageKey, currentCollection.current),
+        JSON.stringify(labels)
+      );
+    }
   }, [counters, labels]);
 
   useEffect(() => {
@@ -573,11 +602,13 @@ function mergeMetadata(metadata1: MetaData, metadata2: MetaData): MetaData {
 
 function getInitialCounters(
   calculationConfiguration: CalculationConfiguration[],
-  defaultCounters: CountersLocalStorageObject[]
+  defaultCounters: CountersLocalStorageObject[],
+  collection: string
 ): CounterType[] {
-  if (!sessionStorage) return [];
   const storedCounters: CountersLocalStorageObject[] = JSON.parse(
-    sessionStorage.getItem(countersStorageKey) ?? '[]'
+    localStorage.getItem(
+      getCurrentStorageKey(countersStorageKey, collection)
+    ) ?? '[]'
   );
   const counters = storedCounters.length > 0 ? storedCounters : defaultCounters;
 
@@ -591,4 +622,8 @@ function getInitialCounters(
       } as CounterType;
     })
     .filter((calc) => calc.calculationConfiguration !== undefined);
+}
+
+function getCurrentStorageKey(prefix: string, collection: string) {
+  return `${prefix}-${collection}`;
 }
