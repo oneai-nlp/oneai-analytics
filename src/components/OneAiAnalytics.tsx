@@ -3,6 +3,7 @@ import { useResizeDetector } from 'react-resize-detector';
 import ReactTooltip from 'react-tooltip';
 import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
 import CustomizeTab from '../common/components/CustomizeTab';
+import DatesFilters from '../common/components/DatesFilters';
 import { totalSumCalculationName } from '../common/configurations/calculationsConfigurations';
 import {
   labelsStorageKey,
@@ -71,7 +72,9 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   const [metaData, setMetaData] = useState({} as MetaData);
   const [nodes, setNodes] = useState([] as DataNode[]);
   const [labels, setLabels] = useState(
-    JSON.parse(sessionStorage.getItem(labelsStorageKey) ?? '[]') as string[]
+    sessionStorage
+      ? JSON.parse(sessionStorage.getItem(labelsStorageKey) ?? '[]')
+      : ([] as string[])
   );
   const [counters, setCounters] = useState(
     getInitialCounters(defaultCalculations, [
@@ -280,6 +283,10 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 calculationsConfigurations={defaultCalculations}
                 countersChanged={setCounters}
                 labelsChanged={setLabels}
+              />
+            </div>
+            <div className={`${loading && 'hidden'}`}>
+              <DatesFilters
                 fromDate={fromDate}
                 fromDateChanged={setFromDate}
                 toDate={toDate}
@@ -568,6 +575,7 @@ function getInitialCounters(
   calculationConfiguration: CalculationConfiguration[],
   defaultCounters: CountersLocalStorageObject[]
 ): CounterType[] {
+  if (!sessionStorage) return [];
   const storedCounters: CountersLocalStorageObject[] = JSON.parse(
     sessionStorage.getItem(countersStorageKey) ?? '[]'
   );

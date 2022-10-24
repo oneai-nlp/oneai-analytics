@@ -7,7 +7,6 @@ import {
   CounterType,
 } from '../types/customizeBarTypes';
 import Counters from './CustomizeTab/Counters';
-import Datepicker from './CustomizeTab/Datepicker';
 import Labels from './CustomizeTab/Labels';
 
 export default function CustomizeTab({
@@ -18,22 +17,14 @@ export default function CustomizeTab({
   labelsOptions,
   countersChanged,
   labelsChanged,
-  fromDate,
-  toDate,
-  fromDateChanged,
-  toDateChanged,
 }: {
   currentCounters: CounterType[];
   selectedLabels: string[];
   countersConfigurations: CountersConfigurations;
   calculationsConfigurations: CalculationConfiguration[];
   labelsOptions: string[];
-  fromDate: Date | null;
-  toDate: Date | null;
   countersChanged: (counters: CounterType[]) => void;
   labelsChanged: (labels: string[]) => void;
-  fromDateChanged: (date: Date) => void;
-  toDateChanged: (date: Date) => void;
 }) {
   return (
     <div className="max-w-sm">
@@ -78,24 +69,6 @@ export default function CustomizeTab({
                         labelsOptions={labelsOptions.sort()}
                         labelsChanged={labelsChanged}
                       />
-                    </div>
-                    <div className="w-full mt-2">
-                      <div className="flex flex-wrap w-full mt-3">
-                        <div className="w-64">
-                          <Datepicker
-                            selectedDate={fromDate}
-                            dateChanged={fromDateChanged}
-                            placeholder="From"
-                          />
-                        </div>
-                        <div className="w-64 ml-3">
-                          <Datepicker
-                            selectedDate={toDate}
-                            dateChanged={toDateChanged}
-                            placeholder="To"
-                          />
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>

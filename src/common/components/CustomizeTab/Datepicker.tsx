@@ -123,7 +123,7 @@ export default function Datepicker({
   }, [datepickerHeaderDate]);
 
   return (
-    <div className="mb-5 w-full">
+    <div className="mb-5 w-64">
       <label
         htmlFor="datepicker"
         className="font-bold mb-1 text-gray-700 block"
