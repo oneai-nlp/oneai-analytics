@@ -12,6 +12,7 @@ export const topValueCalculationName = 'Top value total sum';
 export const topValuePercentCalculationName = 'Top value %';
 export const topGroupCalculationName = 'Top group total';
 export const topGroupPercentCalculationName = 'Top group %';
+export const percentOfAllCalculationName = '% of all';
 
 export const totalSumCalculationConfiguration: CalculationConfiguration = {
   name: totalSumCalculationName,
