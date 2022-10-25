@@ -215,7 +215,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     }) ?? []
                 ),
         };
-        newCountersConfigurations[key] = counterConfiguration;
+        newCountersConfigurations[key.toLowerCase()] = counterConfiguration;
       });
 
     setCountersConfigurations(newCountersConfigurations);

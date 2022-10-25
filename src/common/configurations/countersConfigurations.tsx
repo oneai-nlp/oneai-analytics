@@ -3,11 +3,30 @@ import {
   FaceFrownIcon,
   FaceSmileIcon,
   UserIcon,
+  HandThumbDownIcon,
+  HandThumbUpIcon,
+  GlobeAltIcon,
+  BuildingOffice2Icon,
+  MapPinIcon,
+  UsersIcon,
+  FilmIcon,
+  ScaleIcon,
+  CalendarIcon,
+  HeartIcon,
 } from '@heroicons/react/20/solid';
 import React from 'react';
 
 export const defaultCountersConfigurations: CountersConfigurations = {
   signals: {
+    display: {
+      color: 'white',
+      icon: (
+        <span className="flex flex-col" style={{ height: '1em' }}>
+          <HandThumbUpIcon />
+          <HandThumbDownIcon />
+        </span>
+      ),
+    },
     items: [
       {
         label: 'positive',
@@ -41,7 +60,86 @@ export const defaultCountersConfigurations: CountersConfigurations = {
       icon: <UserIcon />,
     },
   },
+  topic: {
+    display: {
+      color: 'white',
+      icon: <span>#</span>,
+    },
+  },
+  geo: {
+    display: {
+      color: 'white',
+      icon: <GlobeAltIcon />,
+    },
+  },
+  org: {
+    display: {
+      color: 'white',
+      icon: <BuildingOffice2Icon />,
+    },
+  },
+  location: {
+    display: {
+      color: 'white',
+      icon: <MapPinIcon />,
+    },
+  },
+  groups: {
+    display: {
+      color: 'white',
+      icon: <UsersIcon />,
+    },
+  },
+  art: {
+    display: {
+      color: 'white',
+      icon: <FilmIcon />,
+    },
+  },
+  law: {
+    display: {
+      color: 'white',
+      icon: <ScaleIcon />,
+    },
+  },
+  event: {
+    display: {
+      color: 'white',
+      icon: <CalendarIcon />,
+    },
+  },
+  sentiment: {
+    display: {
+      color: 'white',
+      icon: (
+        <span className="flex flex-col" style={{ height: '1em' }}>
+          <HandThumbUpIcon />
+          <HandThumbDownIcon />
+        </span>
+      ),
+    },
+    items: [
+      {
+        label: 'POS',
+        display: {
+          color: 'green',
+          icon: <HandThumbUpIcon />,
+        },
+      },
+      {
+        label: 'NEG',
+        display: {
+          color: 'red',
+          icon: <HandThumbDownIcon />,
+        },
+      },
+    ],
+  },
   emotion: {
+    display: {
+      color: 'white',
+      icon: <HeartIcon />,
+    },
     items: [
       {
         label: 'positive',

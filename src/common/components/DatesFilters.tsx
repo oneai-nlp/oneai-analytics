@@ -43,11 +43,14 @@ export default function DatesFilters({
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
           >
-            <Popover.Panel className="absolute z-10 mt-3 transform max-w-xs">
+            <Popover.Panel
+              tabIndex={0}
+              className="absolute z-10 mt-3 transform max-w-md"
+            >
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                 <div className="relative bg-white p-5">
                   <div className="w-full">
-                    <div className="flex flex-wrap w-full mt-3">
+                    <div className="flex flex-wrap w-full mt-3 justify-between">
                       <div className="flex items-center">
                         <Datepicker
                           selectedDate={fromDate}
@@ -64,7 +67,7 @@ export default function DatesFilters({
                           </button>
                         </div>
                       </div>
-                      <div className="flex ml-3 items-center">
+                      <div className="flex items-center">
                         <Datepicker
                           selectedDate={toDate}
                           dateChanged={toDateChanged}

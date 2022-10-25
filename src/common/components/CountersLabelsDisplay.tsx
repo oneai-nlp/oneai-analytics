@@ -72,12 +72,18 @@ export default function CountersLabelsDisplay({
           prev.count > current.count ? prev : current
         );
         if (!meta) return <Fragment key={i}></Fragment>;
+        const config = countersConfiguration[label.toLowerCase()];
         return (
           <span
             key={i}
-            className="ml-1 text-gray-500 p-1 cursor-pointer hover:text-gray-300"
+            className="ml-1 flex items-center text-sm text-gray-500 p-1 cursor-pointer hover:text-gray-300"
             onClick={() => labelClicked(label, meta.value)}
           >
+            {config && config.display && config.display.icon !== null && (
+              <span style={{ width: '1em', height: '1em', marginRight: '1px' }}>
+                {config.display.icon}
+              </span>
+            )}
             {meta.value ?? ''}
           </span>
         );
