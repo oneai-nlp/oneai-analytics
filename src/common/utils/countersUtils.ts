@@ -72,10 +72,10 @@ export function topValuePercentCalculation(
   );
   if (!counter) return { counter: counter, result: 0 };
 
-  const max = getMaxItemValue(counter.members, counter.groups, metadata);
+  const max = getMaxItemValue(counter.members, counter.items, metadata);
   const sum = calculateSumItemsInMetadata(
     counter.members,
-    counter.groups,
+    counter.items,
     metadata
   );
 
@@ -103,7 +103,7 @@ export function topValueCalculation(
   );
   if (!counter) return { counter: counter, result: 0 };
 
-  const maxItem = getMaxItemValue(counter.members, counter.groups, metadata);
+  const maxItem = getMaxItemValue(counter.members, counter.items, metadata);
 
   return {
     result: maxItem.count,
@@ -136,7 +136,7 @@ export function totalSumCalculation(
   return {
     result: calculateSumItemsInMetadata(
       counter.members,
-      counter.groups,
+      counter.items,
       metadata
     ),
     counter: counter,
@@ -160,7 +160,7 @@ function getCounterGroups(
 ): CounterConfiguration[] {
   if (!counter) return [];
 
-  return counter.groups?.filter((group) => group.isGroup ?? false) ?? [];
+  return counter.items?.filter((group) => group.isGroup ?? false) ?? [];
 }
 
 export function getMetadataKeyValueConfiguration(
@@ -168,10 +168,11 @@ export function getMetadataKeyValueConfiguration(
   countersConfigurations: CountersConfigurations
 ): CounterConfiguration | null {
   if (!metadataKeyValue) return null;
-  const keyConfig = countersConfigurations[metadataKeyValue.key];
+  const keyConfig = countersConfigurations[metadataKeyValue.key.toLowerCase()];
   if (!metadataKeyValue.value) return keyConfig;
-  const memberConfig = keyConfig.groups?.find(
-    (group) => group.label === metadataKeyValue.value
+  const memberConfig = keyConfig.items?.find(
+    (group) =>
+      group.label?.toLowerCase() === metadataKeyValue.value?.toLowerCase()
   );
   if (!memberConfig) return keyConfig;
   return memberConfig;
@@ -241,5 +242,5 @@ export function getItemCounterConfiguration(
 ): CounterConfiguration | null {
   if (!metadata || !value) return null;
   const counterConfig = countersConfigurations[metadata];
-  return counterConfig.groups?.find((group) => group.label === value) ?? null;
+  return counterConfig.items?.find((group) => group.label === value) ?? null;
 }

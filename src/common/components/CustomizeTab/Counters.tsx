@@ -73,7 +73,7 @@ export default function Counters({
         <Listbox onChange={addCounter}>
           <div className="relative ml-1 mb-1">
             <Listbox.Button className="relative cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-              <span className="block truncate lowercase first-letter:uppercase">
+              <span className="block truncate lowercase first-letter:uppercase text-gray-800">
                 Add counter
               </span>
               <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -266,7 +266,7 @@ function CascadedOption({
   return (
     <Fragment key={index}>
       <div className="w-full flex">
-        {configData.groups && configData.groups.length > 0 && (
+        {configData.items && configData.items.length > 0 && (
           <button
             type="button"
             className="ml-1"
@@ -288,7 +288,7 @@ function CascadedOption({
         />
       </div>
       {opened &&
-        uniqBy(configData.groups ?? [], (group) => group.label).map(
+        uniqBy(configData.items ?? [], (group) => group.label).map(
           (group, i) => {
             return (
               <Option

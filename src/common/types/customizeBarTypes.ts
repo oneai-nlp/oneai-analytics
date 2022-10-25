@@ -14,7 +14,7 @@ export interface CounterConfiguration {
   label?: string;
   display?: DisplayConfig;
   members?: GroupMembers[];
-  groups?: CounterConfiguration[];
+  items?: CounterConfiguration[];
   isGroup?: boolean;
 }
 

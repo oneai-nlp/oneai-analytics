@@ -177,17 +177,17 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
       .forEach((key) => {
         const defaultConfig = defaultCountersConfigurations[key];
         const valuesConfigured =
-          defaultConfig?.groups?.map((group) => group.label) ?? [];
+          defaultConfig?.items?.map((group) => group.label) ?? [];
         const counterConfiguration: CounterConfiguration = {
-          label: defaultConfig?.label ?? key,
+          label: (defaultConfig?.label ?? key).toLowerCase(),
           display: defaultConfig?.display,
           members: defaultConfig?.members ?? [{ metadataName: key }],
           isGroup: defaultConfig?.isGroup ?? false,
-          groups:
+          items:
             key === CUSTOM_METADATA_KEY
               ? undefined
               : (
-                  defaultConfig?.groups?.map((group) => {
+                  defaultConfig?.items?.map((group) => {
                     return {
                       label: group.label,
                       display: group.display,
@@ -301,7 +301,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 />
               </svg>
             </div>
-            <div className={`${loading && 'hidden'}`}>
+            <div>
               <CustomizeTab
                 currentCounters={counters}
                 selectedLabels={labels}
@@ -314,7 +314,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 labelsChanged={setLabels}
               />
             </div>
-            <div className={`${loading && 'hidden'}`}>
+            <div>
               <DatesFilters
                 fromDate={fromDate}
                 fromDateChanged={setFromDate}

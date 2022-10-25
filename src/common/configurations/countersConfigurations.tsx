@@ -1,10 +1,14 @@
 import { CountersConfigurations } from '../types/customizeBarTypes';
-import { FaceFrownIcon, FaceSmileIcon } from '@heroicons/react/20/solid';
+import {
+  FaceFrownIcon,
+  FaceSmileIcon,
+  UserIcon,
+} from '@heroicons/react/20/solid';
 import React from 'react';
 
 export const defaultCountersConfigurations: CountersConfigurations = {
   signals: {
-    groups: [
+    items: [
       {
         label: 'positive',
         display: {
@@ -31,8 +35,14 @@ export const defaultCountersConfigurations: CountersConfigurations = {
       },
     ],
   },
+  person: {
+    display: {
+      color: 'white',
+      icon: <UserIcon />,
+    },
+  },
   emotion: {
-    groups: [
+    items: [
       {
         label: 'positive',
         display: {
@@ -40,7 +50,6 @@ export const defaultCountersConfigurations: CountersConfigurations = {
           icon: <FaceSmileIcon />,
         },
         members: [{ values: ['happiness'] }],
-        isGroup: true,
       },
       {
         label: 'negative',
@@ -49,13 +58,40 @@ export const defaultCountersConfigurations: CountersConfigurations = {
           icon: <FaceFrownIcon />,
         },
         members: [{ values: ['anger', 'sadness'] }],
-        isGroup: true,
       },
       {
         label: 'happiness',
         display: {
           color: 'green',
           icon: <FaceSmileIcon />,
+        },
+      },
+      {
+        label: 'surprise',
+        display: {
+          color: 'green',
+          icon: <FaceSmileIcon />,
+        },
+      },
+      {
+        label: 'happiness',
+        display: {
+          color: 'green',
+          icon: <FaceSmileIcon />,
+        },
+      },
+      {
+        label: 'anger',
+        display: {
+          color: 'red',
+          icon: <FaceFrownIcon />,
+        },
+      },
+      {
+        label: 'sadness',
+        display: {
+          color: 'red',
+          icon: <FaceFrownIcon />,
         },
       },
     ],
