@@ -177,20 +177,23 @@ function Counter({
               leaveTo="opacity-0"
             >
               <Listbox.Options className="fixed mt-1 z-10 max-h-60 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                {uniqBy(Object.keys(countersConfigurations), (key) => key).map(
-                  (key, i) => (
-                    <CascadedOption
-                      countersConfigurations={countersConfigurations}
-                      optionName={key}
-                      index={i}
-                      selected={
-                        (counterData.metadataKeyValue?.key ?? '') === key &&
-                        counterData.metadataKeyValue?.value !== undefined
-                      }
-                      key={i}
-                    />
-                  )
-                )}
+                {uniqBy(
+                  Object.keys(countersConfigurations).sort((a, b) =>
+                    a < b ? -1 : a > b ? 1 : 0
+                  ),
+                  (key) => key
+                ).map((key, i) => (
+                  <CascadedOption
+                    countersConfigurations={countersConfigurations}
+                    optionName={key}
+                    index={i}
+                    selected={
+                      (counterData.metadataKeyValue?.key ?? '') === key &&
+                      counterData.metadataKeyValue?.value !== undefined
+                    }
+                    key={i}
+                  />
+                ))}
               </Listbox.Options>
             </Transition>
           </div>
@@ -225,8 +228,8 @@ function Counter({
                   countersConfigurations
                 )
                   .sort(function (a, b) {
-                    const textA = a.name.toUpperCase();
-                    const textB = b.name.toUpperCase();
+                    const textA = a.name.toLowerCase();
+                    const textB = b.name.toLowerCase();
                     return textA < textB ? -1 : textA > textB ? 1 : 0;
                   })
                   .map((counter) => (
