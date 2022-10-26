@@ -1,9 +1,10 @@
 import { format, parse } from 'date-fns';
-import React from 'react';
-import { FC } from 'react';
-import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
+import React, { FC } from 'react';
+import CounterDisplay from '../common/components/CountersLabels/CounterDisplay';
+import MaxLabelDisplay from '../common/components/CountersLabels/MaxLabelDisplay';
 import { CUSTOM_METADATA_KEY } from '../common/configurations/commonConfigurations';
 import { ItemsDisplayComponentProps } from '../common/types/componentsInputs';
+import { getMetadataKeyValueDisplay } from '../common/utils/displayUtils';
 
 export const ItemsListDisplay: FC<ItemsDisplayComponentProps> = ({
   items,
@@ -16,37 +17,75 @@ export const ItemsListDisplay: FC<ItemsDisplayComponentProps> = ({
 }) => {
   return (
     <div style={{ backgroundColor: bgColor, color: textColor }}>
-      {items.map((item, i) => {
-        const item_date = parseDate(item.create_date);
-        return (
-          <div className="p-2 flex flex-wrap w-full" key={i}>
-            <span className="w-9/12 truncate">{item.original_text}</span>
-            <div className="w-3/12 flex items-center">
-              <div>
-                <span
+      <table className="table-auto w-full h-full text-left">
+        <thead className="border-b-2 border-b-slate-500">
+          <tr>
+            <th className="p-1">Items</th>
+            <th className="p-1">Time</th>
+            {counters
+              .filter(
+                (counter) =>
+                  counter.metadataKeyValue?.key !== CUSTOM_METADATA_KEY
+              )
+              .map((counter, i) => (
+                <th className="p-1 lowercase first-letter:uppercase" key={i}>
+                  {counter.metadataKeyValue
+                    ? getMetadataKeyValueDisplay(counter.metadataKeyValue)
+                    : ''}
+                </th>
+              ))}
+            {labels.map((label, i) => (
+              <th className="p-1 lowercase first-letter:uppercase" key={i}>
+                {label}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item, i) => {
+            const item_date = parseDate(item.create_date);
+            return (
+              <tr key={i}>
+                <td className="max-w-[40ch] truncate p-1">
+                  {item.original_text}
+                </td>
+                <td
+                  className="p-1"
                   data-for="global"
                   data-tip={item_date}
                   style={{ width: '1em', height: '1em' }}
                 >
                   {item_date.split(' ').at(0)}
-                </span>
-              </div>
-              <div>
-                <CountersLabelsDisplay
-                  metadata={item.metadata}
-                  counters={counters.filter(
+                </td>
+                {counters
+                  .filter(
                     (counter) =>
                       counter.metadataKeyValue?.key !== CUSTOM_METADATA_KEY
-                  )}
-                  labels={labels}
-                  countersConfiguration={countersConfiguration}
-                  labelClicked={labelClicked}
-                />
-              </div>
-            </div>
-          </div>
-        );
-      })}
+                  )
+                  .map((counter, i) => (
+                    <td key={i} className="p-1">
+                      <CounterDisplay
+                        counter={counter}
+                        countersConfiguration={countersConfiguration}
+                        metadata={item.metadata}
+                      />
+                    </td>
+                  ))}
+                {labels.map((label, i) => (
+                  <td key={i}>
+                    <MaxLabelDisplay
+                      metadataKey={label}
+                      labelClicked={labelClicked}
+                      countersConfiguration={countersConfiguration}
+                      metadata={item.metadata}
+                    />
+                  </td>
+                ))}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 };

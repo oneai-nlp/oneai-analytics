@@ -1,15 +1,16 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 import ReactTooltip from 'react-tooltip';
+import LabelDisplay from '../common/components/CountersLabels/LabelDisplay';
 import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
 import CustomizeTab from '../common/components/CustomizeTab';
 import DatesFilters from '../common/components/DatesFilters';
 import { totalSumCalculationName } from '../common/configurations/calculationsConfigurations';
 import {
-  labelsStorageKey,
-  defaultCalculations,
   countersStorageKey,
   CUSTOM_METADATA_KEY,
+  defaultCalculations,
+  labelsStorageKey,
 } from '../common/configurations/commonConfigurations';
 import { defaultCountersConfigurations } from '../common/configurations/countersConfigurations';
 import {
@@ -368,7 +369,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 </button>
               )}
 
-              <div className="ml-4 text-gray-300 font-bold truncate self-center flex">
+              <div className="ml-4 text-gray-300 font-bold truncate self-center flex items-center">
                 {nodesPath.map((node, i) => (
                   <div key={i} className="flex">
                     <div className="max-w-[20ch] truncate">
@@ -387,18 +388,19 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 {(labelsFilters?.length ?? 0) > 0 &&
                   labelsFilters
                     ?.filter((label) => label.value)
-                    .map((label, i) => (
-                      <span
-                        key={i}
-                        data-for="global"
-                        data-tip="click to delete"
-                        className="ml-1 text-gray-500 cursor-pointer max-w-[15ch] truncate"
-                        onClick={() => {
-                          labelFilterDeleted(i);
-                          ReactTooltip.hide();
-                        }}
-                      >
-                        / {label.value}
+                    .map((keyValue, i) => (
+                      <span key={i} className="flex">
+                        <span className="text-gray-500 ml-1">/ </span>
+                        <LabelDisplay
+                          tooltip="click to delete"
+                          metadataKey={keyValue.key}
+                          value={keyValue.value ?? ''}
+                          countersConfiguration={countersConfigurations}
+                          labelClicked={() => {
+                            labelFilterDeleted(i);
+                            ReactTooltip.hide();
+                          }}
+                        />
                       </span>
                     ))}
                 {totalPagesAmount > 1 && currentPage > 0 && (
