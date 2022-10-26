@@ -13,6 +13,7 @@ import {
   ScaleIcon,
   CalendarIcon,
   HeartIcon,
+  HashtagIcon,
 } from '@heroicons/react/20/solid';
 import React from 'react';
 
@@ -63,7 +64,7 @@ export const defaultCountersConfigurations: CountersConfigurations = {
   topic: {
     display: {
       color: 'white',
-      icon: <span>#</span>,
+      icon: <HashtagIcon />,
     },
   },
   geo: {

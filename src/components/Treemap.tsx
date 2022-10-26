@@ -100,7 +100,9 @@ export const Treemap: FC<TreemapProps> = ({
               fontWeight: 300,
               fontStyle: 'normal',
               color: textColor,
-              borderWidth: `${borderWidth}px`,
+              borderRightWidth: `${borderWidth}px`,
+              borderLeftWidth: `${borderWidth}px`,
+              borderBottomWidth: `${borderWidth}px`,
               borderColor: borderColor,
             }}
           >

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import {
   CountersConfigurations,
   CounterType,
@@ -20,74 +20,29 @@ export default function CountersLabelsDisplay({
   labelClicked: (key: string, value: string) => void;
 }) {
   return (
-    <span className="truncate flex w-full">
+    <span className="truncate flex w-full items-center">
       {counters
         .filter((counter) => counter.metadataKeyValue !== null)
-        .map((counter, i) => {
-          const metadataKeyValue = counter.metadataKeyValue;
-          if (!metadataKeyValue) return <Fragment key={i}></Fragment>;
-          const displayResult = counter.calculationConfiguration.calculate(
-            metadataKeyValue,
-            metadata,
-            countersConfiguration
-          );
-          if (!displayResult.counter) return <Fragment key={i}></Fragment>;
-
-          return (
-            <span
-              key={i}
-              data-tip={
-                `${getMetadataKeyValueDisplay(metadataKeyValue)} - ${
-                  counter.calculationConfiguration.name
-                }` +
-                getMetadataValueTitle(
-                  displayResult.metadataKey,
-                  displayResult.value
-                )
-              }
-              data-for="global"
-              className={`ml-1 flex items-center text-sm ${
-                displayResult.counter.display
-                  ? displayResult.counter.display.color === 'green'
-                    ? 'text-emerald-400'
-                    : displayResult.counter.display.color === 'red'
-                    ? 'text-red-400'
-                    : 'text-white'
-                  : 'text-white'
-              }`}
-            >
-              {displayResult.counter.display &&
-                displayResult.counter.display.icon !== null && (
-                  <span style={{ width: '1em', height: '1em' }}>
-                    {displayResult.counter.display.icon}
-                  </span>
-                )}
-              {displayResult.result}
-              {counter.calculationConfiguration.type === 'percentage' && '%'}
-            </span>
-          );
-        })}
-      {labels.map((label, i) => {
-        const meta = metadata[label]?.reduce((prev, current) =>
-          prev.count > current.count ? prev : current
-        );
-        if (!meta) return <Fragment key={i}></Fragment>;
-        const config = countersConfiguration[label.toLowerCase()];
-        return (
-          <span
+        .map((counter, i) => (
+          <div key={i} className="ml-1">
+            <CounterDisplay
+              counter={counter}
+              countersConfiguration={countersConfiguration}
+              metadata={metadata}
+            />
+          </div>
+        ))}
+      {labels.map((label, i) => (
+        <div key={i} className="ml-1">
+          <LabelDisplay
             key={i}
-            className="ml-1 flex items-center text-sm text-gray-500 p-1 cursor-pointer hover:text-gray-300"
-            onClick={() => labelClicked(label, meta.value)}
-          >
-            {config && config.display && config.display.icon !== null && (
-              <span style={{ width: '1em', height: '1em', marginRight: '1px' }}>
-                {config.display.icon}
-              </span>
-            )}
-            {meta.value ?? ''}
-          </span>
-        );
-      })}
+            countersConfiguration={countersConfiguration}
+            label={label}
+            labelClicked={labelClicked}
+            metadata={metadata}
+          />
+        </div>
+      ))}
     </span>
   );
 }
@@ -106,4 +61,84 @@ function getMetadataValueTitle(
   }
 
   return '';
+}
+
+function CounterDisplay({
+  counter,
+  metadata,
+  countersConfiguration,
+}: {
+  counter: CounterType;
+  metadata: MetaData;
+  countersConfiguration: CountersConfigurations;
+}) {
+  const metadataKeyValue = counter.metadataKeyValue;
+  if (!metadataKeyValue) return <></>;
+  const displayResult = counter.calculationConfiguration.calculate(
+    metadataKeyValue,
+    metadata,
+    countersConfiguration
+  );
+  if (!displayResult.counter) return <></>;
+
+  return (
+    <span
+      data-tip={
+        `${getMetadataKeyValueDisplay(metadataKeyValue)} - ${
+          counter.calculationConfiguration.name
+        }` +
+        getMetadataValueTitle(displayResult.metadataKey, displayResult.value)
+      }
+      data-for="global"
+      className={`flex items-center text-sm ${
+        displayResult.counter.display
+          ? displayResult.counter.display.color === 'green'
+            ? 'text-emerald-400'
+            : displayResult.counter.display.color === 'red'
+            ? 'text-red-400'
+            : 'text-white'
+          : 'text-white'
+      }`}
+    >
+      {displayResult.counter.display &&
+        displayResult.counter.display.icon !== null && (
+          <span style={{ width: '1em', height: '1em' }}>
+            {displayResult.counter.display.icon}
+          </span>
+        )}
+      {displayResult.result}
+      {counter.calculationConfiguration.type === 'percentage' && '%'}
+    </span>
+  );
+}
+
+function LabelDisplay({
+  label,
+  metadata,
+  countersConfiguration,
+  labelClicked,
+}: {
+  label: string;
+  metadata: MetaData;
+  countersConfiguration: CountersConfigurations;
+  labelClicked: (key: string, value: string) => void;
+}) {
+  const meta = metadata[label]?.reduce((prev, current) =>
+    prev.count > current.count ? prev : current
+  );
+  if (!meta) return <></>;
+  const config = countersConfiguration[label.toLowerCase()];
+  return (
+    <span
+      className="flex items-center text-sm text-gray-500 p-1 cursor-pointer hover:text-gray-300"
+      onClick={() => labelClicked(label, meta.value)}
+    >
+      {config && config.display && config.display.icon !== null && (
+        <span style={{ width: '1em', height: '1em', marginRight: '1px' }}>
+          {config.display.icon}
+        </span>
+      )}
+      {meta.value ?? ''}
+    </span>
+  );
 }
