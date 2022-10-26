@@ -16,7 +16,10 @@ export const ItemsListDisplay: FC<ItemsDisplayComponentProps> = ({
   labelClicked,
 }) => {
   return (
-    <div style={{ backgroundColor: bgColor, color: textColor }}>
+    <div
+      style={{ backgroundColor: bgColor, color: textColor }}
+      className="overflow-x-auto"
+    >
       <table className="table-auto w-full h-full text-left">
         <thead className="border-b-2 border-b-slate-500">
           <tr>
@@ -46,7 +49,7 @@ export const ItemsListDisplay: FC<ItemsDisplayComponentProps> = ({
             const item_date = parseDate(item.create_date);
             return (
               <tr key={i}>
-                <td className="max-w-[40ch] truncate p-1">
+                <td className="max-w-[60ch] truncate p-1">
                   {item.original_text}
                 </td>
                 <td

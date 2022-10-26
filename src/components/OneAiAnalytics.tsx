@@ -68,7 +68,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   labelClicked = () => {},
   labelFilterDeleted = () => {},
 }) => {
-  const [display, setDisplay] = useState('Treemap' as Displays);
+  const [display, setDisplay] = useState('BarChart' as Displays);
   const { width, height, ref } = useResizeDetector();
   const [metaData, setMetaData] = useState({} as MetaData);
   const [nodes, setNodes] = useState([] as DataNode[]);
@@ -545,6 +545,10 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                   }
                   fontFamily={treemapFontFamily}
                   textColor={treemapTextColor}
+                  labels={labels}
+                  counters={counters}
+                  countersConfiguration={countersConfigurations}
+                  labelClicked={labelClicked}
                 />
               )}
             </div>

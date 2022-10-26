@@ -1,5 +1,6 @@
 import { extent, scaleBand, scaleLinear } from 'd3';
 import React, { FC, useMemo } from 'react';
+import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
 import { BarChartProps } from '../common/types/componentsInputs';
 
 const BAR_PADDING = 0.1;
@@ -11,6 +12,10 @@ export const BarChart: FC<BarChartProps> = ({
   nodeClicked,
   fontFamily = 'sans-serif',
   textColor,
+  counters,
+  countersConfiguration,
+  labels,
+  labelClicked,
 }) => {
   const barsHeight = dataNodes.length * 40;
   // Y axis is for groups since the barplot is horizontal
@@ -84,8 +89,15 @@ export const BarChart: FC<BarChartProps> = ({
               color: textColor,
             }}
           >
-            <span className="truncate">
-              {d.amount} - {d.text}
+            <span className="max-w-[60ch] truncate">{d.text}</span>
+            <span className="ml-2">
+              <CountersLabelsDisplay
+                counters={counters}
+                countersConfiguration={countersConfiguration}
+                labels={labels}
+                metadata={d.metadata}
+                labelClicked={labelClicked}
+              />
             </span>
           </div>
         </foreignObject>

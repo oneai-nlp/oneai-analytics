@@ -39,6 +39,10 @@ export interface BarChartProps {
   nodeClicked: (node: DataNode) => void;
   fontFamily?: string;
   textColor?: string;
+  labels: string[];
+  counters: CounterType[];
+  countersConfiguration: CountersConfigurations;
+  labelClicked: (key: string, value: string) => void;
 }
 
 export type NodeType = 'Cluster' | 'Phrase' | 'Item';
