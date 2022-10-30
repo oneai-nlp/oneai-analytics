@@ -1,6 +1,7 @@
 import React from 'react';
 import { CountersConfigurations } from '../../types/customizeBarTypes';
 import { MetaData } from '../../types/modals';
+import { toLowerKeys } from '../../utils/utils';
 import LabelDisplay from './LabelDisplay';
 
 export default function MaxLabelDisplay({
@@ -8,14 +9,19 @@ export default function MaxLabelDisplay({
   metadata,
   countersConfiguration,
   labelClicked,
+  width,
+  maxWidth,
 }: {
   metadataKey: string;
   metadata: MetaData;
   countersConfiguration: CountersConfigurations;
   labelClicked: (key: string, value: string) => void;
+  width?: string;
+  maxWidth?: string;
 }) {
-  const meta = metadata[metadataKey]?.reduce((prev, current) =>
-    prev.count > current.count ? prev : current
+  const lowerKeysMetadata = toLowerKeys(metadata) as MetaData;
+  const meta = lowerKeysMetadata[metadataKey.toLowerCase()]?.reduce(
+    (prev, current) => (prev.count > current.count ? prev : current)
   );
   if (!meta) return <></>;
   return (
@@ -24,6 +30,8 @@ export default function MaxLabelDisplay({
       value={meta.value}
       countersConfiguration={countersConfiguration}
       labelClicked={labelClicked}
+      width={width}
+      maxWidth={maxWidth}
     />
   );
 }

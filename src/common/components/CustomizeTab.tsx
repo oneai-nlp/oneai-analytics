@@ -5,7 +5,9 @@ import {
   CalculationConfiguration,
   CountersConfigurations,
   CounterType,
+  MetadataKeyValue,
 } from '../types/customizeBarTypes';
+import KeyValueSingleSelect from './CountersLabels/KeyValueSingleSelect';
 import Counters from './CustomizeTab/Counters';
 import Labels from './CustomizeTab/Labels';
 
@@ -17,6 +19,10 @@ export default function CustomizeTab({
   labelsOptions,
   countersChanged,
   labelsChanged,
+  currentColorsAxis,
+  selectedSizeAxis,
+  colorsAxisChanged,
+  sizeAxisChanged,
 }: {
   currentCounters: CounterType[];
   selectedLabels: string[];
@@ -25,6 +31,10 @@ export default function CustomizeTab({
   labelsOptions: string[];
   countersChanged: (counters: CounterType[]) => void;
   labelsChanged: (labels: string[]) => void;
+  currentColorsAxis: string[];
+  selectedSizeAxis: MetadataKeyValue | null;
+  colorsAxisChanged: (counters: string[]) => void;
+  sizeAxisChanged: (metadataKeyValue: MetadataKeyValue) => void;
 }) {
   return (
     <div className="max-w-sm">
@@ -57,7 +67,7 @@ export default function CustomizeTab({
                 className="absolute z-10 mt-3 w-screen max-w-sm transform lg:max-w-4xl"
               >
                 <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                  <div className="relative bg-white p-5">
+                  <div className="relative bg-white p-5 max-h-[85vh] overflow-y-scroll overflow-x-hidden">
                     <div className="w-full">
                       <Counters
                         countersConfigurations={countersConfigurations}
@@ -73,6 +83,23 @@ export default function CustomizeTab({
                         currentLabels={selectedLabels}
                         labelsOptions={labelsOptions.sort()}
                         labelsChanged={labelsChanged}
+                      />
+                    </div>
+                    <div className="w-full mt-2">
+                      <p className="text-xl text-gray-600">Size Axis</p>
+                      <KeyValueSingleSelect
+                        metadataKeyValue={selectedSizeAxis}
+                        placeholder="Select"
+                        countersConfigurations={countersConfigurations}
+                        selectedMetadataKeyValueChange={sizeAxisChanged}
+                      />
+                    </div>
+                    <div className="w-full mt-2">
+                      <Labels
+                        currentLabels={currentColorsAxis}
+                        labelsOptions={labelsOptions.sort()}
+                        labelsChanged={colorsAxisChanged}
+                        title="Color Axis"
                       />
                     </div>
                   </div>

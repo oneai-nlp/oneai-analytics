@@ -2,7 +2,9 @@ import { scale, valid } from 'chroma-js';
 import { hierarchy, treemap } from 'd3';
 import React, { FC, useMemo } from 'react';
 import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
+import { CUSTOM_METADATA_KEY } from '../common/configurations/commonConfigurations';
 import { DataNode, TreemapProps } from '../common/types/componentsInputs';
+import { totalSumCalculation } from '../common/utils/countersUtils';
 import { calculateFontSize } from '../common/utils/utils';
 
 type TreemapNode = DataNode & { children: TreemapNode[] };
@@ -26,18 +28,27 @@ export const Treemap: FC<TreemapProps> = ({
   counters,
   countersConfiguration,
   labelClicked,
+  sizeAxis,
 }) => {
   const mainNode: TreemapNode = useMemo(() => {
     return {
       id: '',
       children: dataNodes.map((c) => {
-        return { ...c, children: [] };
+        return {
+          ...c,
+          amount:
+            sizeAxis?.key === CUSTOM_METADATA_KEY
+              ? c.amount
+              : totalSumCalculation(sizeAxis, c.metadata, countersConfiguration)
+                  .result,
+          children: [],
+        };
       }),
       amount: 0,
       metadata: {},
       type: '',
     };
-  }, [dataNodes]);
+  }, [dataNodes, sizeAxis]);
 
   const treeHierarchy = useMemo(() => {
     const elementsValues = mainNode.children!.map((item) => item.amount);

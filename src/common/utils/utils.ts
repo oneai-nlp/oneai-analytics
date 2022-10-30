@@ -44,3 +44,10 @@ export function uniqBy<T, K>(arr: T[], getKey: (item: T) => K) {
     return seen.has(k) ? false : seen.add(k);
   });
 }
+
+export function toLowerKeys(obj: { [key: string]: {} }) {
+  return Object.keys(obj).reduce((accumulator, key) => {
+    accumulator[key.toLowerCase()] = obj[key];
+    return accumulator;
+  }, {} as { [key: string]: {} });
+}

@@ -1,7 +1,12 @@
 import { extent, scaleBand, scaleLinear } from 'd3';
-import React, { FC, useMemo } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
+import { CUSTOM_METADATA_KEY } from '../common/configurations/commonConfigurations';
 import { BarChartProps } from '../common/types/componentsInputs';
+import {
+  groupsPercentsCalculation,
+  totalSumCalculation,
+} from '../common/utils/countersUtils';
 
 const BAR_PADDING = 0.1;
 
@@ -16,12 +21,28 @@ export const BarChart: FC<BarChartProps> = ({
   countersConfiguration,
   labels,
   labelClicked,
+  sizeAxis,
+  colorAxis,
 }) => {
   const barsHeight = dataNodes.length * 40;
-  // Y axis is for groups since the barplot is horizontal
-  const groups = dataNodes
-    .sort((a, b) => b.amount - a.amount)
-    .map((d) => d.text ?? '');
+
+  const [groups, setGroups] = useState([] as string[]);
+
+  useEffect(() => {
+    // Y axis is for groups since the barplot is horizontal
+    setGroups(
+      dataNodes
+        .sort((a, b) =>
+          sizeAxis?.key === CUSTOM_METADATA_KEY
+            ? b.amount - a.amount
+            : totalSumCalculation(sizeAxis, b.metadata, countersConfiguration)
+                .result -
+              totalSumCalculation(sizeAxis, a.metadata, countersConfiguration)
+                .result
+        )
+        .map((d) => d.text ?? '')
+    );
+  }, [dataNodes, sizeAxis]);
 
   const yScale = useMemo(() => {
     return scaleBand()
@@ -31,8 +52,16 @@ export const BarChart: FC<BarChartProps> = ({
   }, [height, groups]);
 
   const max = useMemo(
-    () => extent(dataNodes.map((d) => d.amount))[1] ?? 20,
-    [dataNodes]
+    () =>
+      extent(
+        dataNodes.map((d) =>
+          sizeAxis?.key === CUSTOM_METADATA_KEY
+            ? d.amount
+            : totalSumCalculation(sizeAxis, d.metadata, countersConfiguration)
+                .result
+        )
+      )[1] ?? 20,
+    [dataNodes, sizeAxis]
   );
 
   // X axis
@@ -46,14 +75,37 @@ export const BarChart: FC<BarChartProps> = ({
   const allShapes = dataNodes.map((d, i) => {
     const x = xScale(0);
     const y = yScale(d.text ?? '') ?? 0;
+    const result =
+      sizeAxis?.key === CUSTOM_METADATA_KEY
+        ? d.amount
+        : totalSumCalculation(sizeAxis, d.metadata, countersConfiguration)
+            .result;
     const barWidth = xScale(
-      d.amount === max ? d.amount : Math.min(max - 1, d.amount + max * 0.1)
+      result === max ? result : Math.min(max - 1, result + max * 0.1)
     );
     const barHeight = yScale.bandwidth();
     const opacity = 0.7;
     const fill = '#72b1ca';
     const fillOpacity = 0.3;
     const rx = 1;
+
+    const colorsConfig = colorAxis.map((label) => {
+      const groups = groupsPercentsCalculation(
+        label,
+        d.metadata,
+        countersConfiguration
+      ).sort((group1, group2) => (group2.result ?? 0) - (group1.result ?? 0));
+      if (!groups.some((group) => group.result && group.result > 0)) return '';
+      let backgroundString = '';
+      groups.forEach(
+        (group) =>
+          (backgroundString =
+            backgroundString +
+            `,${group.counter?.display?.color ?? 'white'} ${group.result}%`)
+      );
+      return `linear-gradient(90deg${backgroundString})`;
+    });
+
     return (
       <g
         key={i}
@@ -81,7 +133,23 @@ export const BarChart: FC<BarChartProps> = ({
           rx={rx}
         >
           <div
-            className="flex h-full items-center"
+            style={{
+              width: barWidth,
+              opacity: fillOpacity,
+            }}
+            className="h-full absolute flex flex-col"
+          >
+            {colorsConfig.map((colorConfig) => (
+              <div
+                className="w-full grow"
+                style={{
+                  background: colorConfig,
+                }}
+              ></div>
+            ))}
+          </div>
+          <div
+            className="flex h-full items-center ml-1 relative"
             style={{
               fontFamily: fontFamily,
               fontWeight: 300,
@@ -97,6 +165,8 @@ export const BarChart: FC<BarChartProps> = ({
                 labels={labels}
                 metadata={d.metadata}
                 labelClicked={labelClicked}
+                counterWidth="6ch"
+                labelWidth="15ch"
               />
             </span>
           </div>

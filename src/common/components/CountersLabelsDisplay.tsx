@@ -13,12 +13,20 @@ export default function CountersLabelsDisplay({
   metadata,
   countersConfiguration,
   labelClicked,
+  counterWidth,
+  counterMaxWidth,
+  labelWidth,
+  labelMaxWidth,
 }: {
   counters: CounterType[];
   labels: string[];
   metadata: MetaData;
   countersConfiguration: CountersConfigurations;
   labelClicked: (key: string, value: string) => void;
+  counterWidth?: string;
+  counterMaxWidth?: string;
+  labelWidth?: string;
+  labelMaxWidth?: string;
 }) {
   return (
     <span className="truncate flex w-full items-center">
@@ -30,6 +38,8 @@ export default function CountersLabelsDisplay({
               counter={counter}
               countersConfiguration={countersConfiguration}
               metadata={metadata}
+              width={counterWidth}
+              maxWidth={counterMaxWidth}
             />
           </div>
         ))}
@@ -40,6 +50,8 @@ export default function CountersLabelsDisplay({
             metadataKey={label}
             labelClicked={labelClicked}
             metadata={metadata}
+            width={labelWidth}
+            maxWidth={labelMaxWidth}
           />
         </div>
       ))}

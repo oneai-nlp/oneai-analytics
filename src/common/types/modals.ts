@@ -1,5 +1,5 @@
 export interface MetaData {
-  [name: string]: { value: string; count: number }[];
+  [key: string]: { value: string; count: number }[];
 }
 export interface Item {
   id: number;

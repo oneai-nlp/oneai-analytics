@@ -7,10 +7,12 @@ export default function Labels({
   currentLabels,
   labelsOptions,
   labelsChanged,
+  title = 'Labels',
 }: {
   currentLabels: string[];
   labelsOptions: string[];
   labelsChanged: (labels: string[]) => void;
+  title?: string;
 }) {
   const [selectedLabels, setSelectedLabels] = useState(
     currentLabels as string[]
@@ -23,7 +25,7 @@ export default function Labels({
 
   return (
     <div className="w-full">
-      <p className="text-xl text-gray-600">Labels</p>
+      <p className="text-xl text-gray-600">{title}</p>
       <Listbox value={selectedLabels} onChange={handleChange} multiple>
         <div className="relative">
           <Listbox.Button className="relative cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">

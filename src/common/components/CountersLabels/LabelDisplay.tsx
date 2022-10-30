@@ -8,12 +8,16 @@ export default function LabelDisplay({
   countersConfiguration,
   labelClicked,
   tooltip = '',
+  width,
+  maxWidth = '20ch',
 }: {
   metadataKey: string;
   value: string;
   countersConfiguration: CountersConfigurations;
   labelClicked: (key: string, value: string) => void;
   tooltip?: string;
+  width?: string;
+  maxWidth?: string;
 }) {
   const config = getMetadataKeyValueConfiguration(
     { key: metadataKey, value: value },
@@ -32,7 +36,9 @@ export default function LabelDisplay({
           {config.display.icon}
         </span>
       )}
-      <span className="max-w-[20ch] truncate">{value}</span>
+      <span style={{ width, maxWidth }} className="truncate">
+        {value}
+      </span>
     </span>
   );
 }

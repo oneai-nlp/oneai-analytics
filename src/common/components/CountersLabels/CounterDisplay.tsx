@@ -10,10 +10,14 @@ export default function CounterDisplay({
   counter,
   metadata,
   countersConfiguration,
+  width,
+  maxWidth = '6ch',
 }: {
   counter: CounterType;
   metadata: MetaData;
   countersConfiguration: CountersConfigurations;
+  width?: string;
+  maxWidth?: string;
 }) {
   const metadataKeyValue = counter.metadataKeyValue;
   if (!metadataKeyValue) return <></>;
@@ -49,8 +53,10 @@ export default function CounterDisplay({
             {displayResult.counter.display.icon}
           </span>
         )}
-      {displayResult.result}
-      {counter.calculationConfiguration.type === 'percentage' && '%'}
+      <span style={{ width, maxWidth }}>
+        {displayResult.result}
+        {counter.calculationConfiguration.type === 'percentage' && '%'}
+      </span>
     </span>
   );
 }

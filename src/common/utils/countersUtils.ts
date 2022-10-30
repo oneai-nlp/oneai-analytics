@@ -5,7 +5,7 @@ import {
   MetadataKeyValue,
 } from '../types/customizeBarTypes';
 import { MetaData } from '../types/modals';
-import { sum } from './utils';
+import { sum, toLowerKeys } from './utils';
 
 export function topGroupPercentCalculation(
   metadataKeyValue: MetadataKeyValue | null,
@@ -27,10 +27,46 @@ export function topGroupPercentCalculation(
   const groupsSum = sum(sums);
   return {
     result: groupsSum === 0 ? 0 : Math.round((max / groupsSum) * 100),
-    counter: maxGroup ?? counter,
+    counter: max > 0 ? maxGroup ?? counter : counter,
     metadataKey: maxGroup.label,
     value: undefined,
   };
+}
+
+export function groupsPercentsCalculation(
+  label: string,
+  metadata: MetaData,
+  countersConfigurations: CountersConfigurations
+): {
+  result?: number;
+  counter?: CounterConfiguration;
+  metadataKey?: string;
+  value?: string;
+}[] {
+  const counter = getMetadataKeyValueConfiguration(
+    { key: label },
+    countersConfigurations
+  );
+  const groups = getCounterGroups(counter);
+  if (!counter || groups.length === 0) return [];
+
+  const sums = groups.map((group) => {
+    return {
+      group: group,
+      result: calculateSumItemsInMetadata(group.members, [], metadata),
+    };
+  });
+  const groupsSum = sum(sums.map((g) => g.result));
+  if (groupsSum === 0) return [];
+
+  return sums.map((groupSum) => {
+    return {
+      result: Math.round((groupSum.result / groupsSum) * 100),
+      counter: groupSum.group ?? counter,
+      metadataKey: groupSum.group.label,
+      value: undefined,
+    };
+  });
 }
 
 export function topGroupCalculation(
@@ -55,7 +91,7 @@ export function topGroupCalculation(
   const maxGroup = groups[sums.indexOf(max)];
   return {
     result: max,
-    counter: maxGroup ?? counter,
+    counter: max > 0 ? maxGroup ?? counter : counter,
     metadataKey: maxGroup.label,
     value: undefined,
   };
@@ -206,13 +242,14 @@ function getValuesAndCounts(
   groups: CounterConfiguration[] | undefined,
   metadata: MetaData
 ): { metadata?: string; value: string; count: number }[] {
-  const membersData = filterRelevantValues(members, metadata);
+  const lowerKeysMetadata = toLowerKeys(metadata) as MetaData;
+  const membersData = filterRelevantValues(members, lowerKeysMetadata);
 
   if (membersData.length > 0) return membersData;
 
   return filterRelevantValues(
     groups?.flatMap((group) => group.members ?? []) ?? [],
-    metadata
+    lowerKeysMetadata
   );
 }
 

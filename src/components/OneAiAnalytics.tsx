@@ -7,10 +7,12 @@ import CustomizeTab from '../common/components/CustomizeTab';
 import DatesFilters from '../common/components/DatesFilters';
 import { totalSumCalculationName } from '../common/configurations/calculationsConfigurations';
 import {
+  colorAxisStorageKey,
   countersStorageKey,
   CUSTOM_METADATA_KEY,
   defaultCalculations,
   labelsStorageKey,
+  sizeAxisStorageKey,
 } from '../common/configurations/commonConfigurations';
 import { defaultCountersConfigurations } from '../common/configurations/countersConfigurations';
 import {
@@ -23,6 +25,7 @@ import {
   CountersConfigurations,
   CountersLocalStorageObject,
   CounterType,
+  MetadataKeyValue,
 } from '../common/types/customizeBarTypes';
 import { Item, MetaData } from '../common/types/modals';
 import {
@@ -74,6 +77,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   const [nodes, setNodes] = useState([] as DataNode[]);
   const [labels, setLabels] = useState([] as string[]);
   const [counters, setCounters] = useState([] as CounterType[]);
+  const [sizeAxis, setSizeAxis] = useState(null as MetadataKeyValue | null);
+  const [colorAxis, setColorAxis] = useState([] as string[]);
   const [countersConfigurations, setCountersConfigurations] = useState(
     {} as CountersConfigurations
   );
@@ -100,7 +105,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
     );
 
     setCounters(
-      getInitialCounters(
+      getInitialCounterTypes(
         defaultCalculations,
         [
           {
@@ -108,8 +113,24 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
             calculationName: totalSumCalculationName,
           },
         ],
-        currentCollection.current
+        currentCollection.current,
+        countersStorageKey
       ) as CounterType[]
+    );
+
+    const storedSizeAxis = localStorage.getItem(
+      getCurrentStorageKey(sizeAxisStorageKey, currentCollection.current)
+    );
+    setSizeAxis(
+      storedSizeAxis ? JSON.parse(storedSizeAxis) : { key: CUSTOM_METADATA_KEY }
+    );
+
+    setColorAxis(
+      JSON.parse(
+        localStorage.getItem(
+          getCurrentStorageKey(colorAxisStorageKey, currentCollection.current)
+        ) ?? '[]'
+      )
     );
   }, [nodesPath]);
 
@@ -239,8 +260,16 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
         getCurrentStorageKey(labelsStorageKey, currentCollection.current),
         JSON.stringify(labels)
       );
+      localStorage.setItem(
+        getCurrentStorageKey(colorAxisStorageKey, currentCollection.current),
+        JSON.stringify(colorAxis)
+      );
+      localStorage.setItem(
+        getCurrentStorageKey(sizeAxisStorageKey, currentCollection.current),
+        JSON.stringify(sizeAxis)
+      );
     }
-  }, [counters, labels]);
+  }, [counters, labels, sizeAxis, colorAxis]);
 
   useEffect(() => {
     dateRangeChanged(fromDate, toDate);
@@ -313,6 +342,10 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 calculationsConfigurations={defaultCalculations}
                 countersChanged={setCounters}
                 labelsChanged={setLabels}
+                selectedSizeAxis={sizeAxis}
+                sizeAxisChanged={setSizeAxis}
+                currentColorsAxis={colorAxis}
+                colorsAxisChanged={setColorAxis}
               />
             </div>
             <div>
@@ -400,6 +433,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                             labelFilterDeleted(i);
                             ReactTooltip.hide();
                           }}
+                          width="20ch"
                         />
                       </span>
                     ))}
@@ -527,6 +561,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                   borderColor={treemapBorderColor}
                   countersConfiguration={countersConfigurations}
                   labelClicked={labelClicked}
+                  sizeAxis={sizeAxis}
+                  colorAxis={colorAxis}
                 />
               ) : (
                 <BarChart
@@ -549,6 +585,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                   counters={counters}
                   countersConfiguration={countersConfigurations}
                   labelClicked={labelClicked}
+                  sizeAxis={sizeAxis}
+                  colorAxis={colorAxis}
                 />
               )}
             </div>
@@ -606,15 +644,14 @@ function mergeMetadata(metadata1: MetaData, metadata2: MetaData): MetaData {
   return newMetadata;
 }
 
-function getInitialCounters(
+function getInitialCounterTypes(
   calculationConfiguration: CalculationConfiguration[],
   defaultCounters: CountersLocalStorageObject[],
-  collection: string
+  collection: string,
+  storageKey: string
 ): CounterType[] {
   const storedCounters: CountersLocalStorageObject[] = JSON.parse(
-    localStorage.getItem(
-      getCurrentStorageKey(countersStorageKey, collection)
-    ) ?? '[]'
+    localStorage.getItem(getCurrentStorageKey(storageKey, collection)) ?? '[]'
   );
   const counters = storedCounters.length > 0 ? storedCounters : defaultCounters;
 
