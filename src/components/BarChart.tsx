@@ -81,7 +81,7 @@ export const BarChart: FC<BarChartProps> = ({
           rx={rx}
         >
           <div
-            className="flex h-full items-center ml-2 truncate"
+            className="flex h-full items-center"
             style={{
               fontFamily: fontFamily,
               fontWeight: 300,
@@ -89,8 +89,8 @@ export const BarChart: FC<BarChartProps> = ({
               color: textColor,
             }}
           >
-            <span className="max-w-[60ch] truncate">{d.text}</span>
-            <span className="ml-2">
+            <span className="w-1/3 truncate">{d.text}</span>
+            <span className="ml-2 w-2/3">
               <CountersLabelsDisplay
                 counters={counters}
                 countersConfiguration={countersConfiguration}

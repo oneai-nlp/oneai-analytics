@@ -7,7 +7,11 @@ import {
   XMarkIcon,
 } from '@heroicons/react/20/solid';
 import React, { Fragment, useState } from 'react';
-import { totalSumCalculationName } from '../../configurations/calculationsConfigurations';
+import {
+  topGroupPercentCalculationName,
+  topValuePercentCalculationName,
+  totalSumCalculationName,
+} from '../../configurations/calculationsConfigurations';
 import { CUSTOM_METADATA_KEY } from '../../configurations/commonConfigurations';
 import {
   CalculationConfiguration,
@@ -24,11 +28,15 @@ export default function Counters({
   calculationsConfigurations,
   currentCounters,
   countersChanged,
+  addCounterText,
+  title,
 }: {
   countersConfigurations: CountersConfigurations;
   calculationsConfigurations: CalculationConfiguration[];
   currentCounters: CounterType[];
   countersChanged: (counters: CounterType[]) => void;
+  addCounterText: string;
+  title: string;
 }) {
   const addCounter = (newMetadataKeyValue: MetadataKeyValue) => {
     const allowedCalculations = getCalculationTypes(
@@ -40,7 +48,7 @@ export default function Counters({
       ...currentCounters,
       {
         metadataKeyValue: newMetadataKeyValue,
-        calculationConfiguration: allowedCalculations[0],
+        calculationConfiguration: getDefaultCalculation(allowedCalculations),
       },
     ]);
   };
@@ -57,7 +65,7 @@ export default function Counters({
 
   return (
     <div className="w-full">
-      <p className="text-xl text-gray-600">Counters</p>
+      <p className="text-xl text-gray-600">{title}</p>
       <div className="flex w-full flex-wrap items-center">
         {currentCounters.map((addedCounter, i) => (
           <div className="ml-1 mb-1" key={i}>
@@ -74,7 +82,7 @@ export default function Counters({
           <div className="relative ml-1 mb-1">
             <Listbox.Button className="relative cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
               <span className="block truncate lowercase first-letter:uppercase text-gray-800">
-                Add counter
+                {addCounterText}
               </span>
               <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                 <ChevronUpDownIcon
@@ -140,7 +148,7 @@ function Counter({
         (calc) => calc.name === counterData.calculationConfiguration.name
       )
         ? counterData.calculationConfiguration
-        : allowedCalculations[0],
+        : getDefaultCalculation(allowedCalculations),
     });
   };
 
@@ -368,5 +376,19 @@ function getCalculationTypes(
 
   return calculationTypes.filter(
     (calc) => calc.hasGroups === hasGroups || !calc.hasGroups
+  );
+}
+
+function getDefaultCalculation(
+  allowedCalculations: CalculationConfiguration[]
+): CalculationConfiguration {
+  return (
+    allowedCalculations.find(
+      (calc) => calc.name === topGroupPercentCalculationName
+    ) ??
+    allowedCalculations.find(
+      (calc) => calc.name === topValuePercentCalculationName
+    ) ??
+    allowedCalculations[0]
   );
 }

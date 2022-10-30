@@ -1,5 +1,6 @@
 import React from 'react';
 import { CountersConfigurations } from '../../types/customizeBarTypes';
+import { getMetadataKeyValueConfiguration } from '../../utils/countersUtils';
 
 export default function LabelDisplay({
   metadataKey,
@@ -14,7 +15,11 @@ export default function LabelDisplay({
   labelClicked: (key: string, value: string) => void;
   tooltip?: string;
 }) {
-  const config = countersConfiguration[metadataKey.toLowerCase()];
+  const config = getMetadataKeyValueConfiguration(
+    { key: metadataKey, value: value },
+    countersConfiguration
+  );
+
   return (
     <span
       data-for="global"

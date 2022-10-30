@@ -34,7 +34,7 @@ export default function CounterDisplay({
       }
       data-for="global"
       className={`flex items-center text-sm ${
-        displayResult.counter.display
+        displayResult.result > 0 && displayResult.counter.display
           ? displayResult.counter.display.color === 'green'
             ? 'text-emerald-400'
             : displayResult.counter.display.color === 'red'

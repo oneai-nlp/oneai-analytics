@@ -64,6 +64,8 @@ export default function CustomizeTab({
                         calculationsConfigurations={calculationsConfigurations}
                         currentCounters={currentCounters}
                         countersChanged={countersChanged}
+                        addCounterText="Add counter"
+                        title="Counters"
                       />
                     </div>
                     <div className="w-full mt-2">

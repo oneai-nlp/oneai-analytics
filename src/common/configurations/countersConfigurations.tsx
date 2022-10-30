@@ -149,6 +149,7 @@ export const defaultCountersConfigurations: CountersConfigurations = {
           icon: <FaceSmileIcon />,
         },
         members: [{ values: ['happiness'] }],
+        isGroup: true,
       },
       {
         label: 'negative',
@@ -157,6 +158,7 @@ export const defaultCountersConfigurations: CountersConfigurations = {
           icon: <FaceFrownIcon />,
         },
         members: [{ values: ['anger', 'sadness'] }],
+        isGroup: true,
       },
       {
         label: 'happiness',
@@ -167,13 +169,6 @@ export const defaultCountersConfigurations: CountersConfigurations = {
       },
       {
         label: 'surprise',
-        display: {
-          color: 'green',
-          icon: <FaceSmileIcon />,
-        },
-      },
-      {
-        label: 'happiness',
         display: {
           color: 'green',
           icon: <FaceSmileIcon />,

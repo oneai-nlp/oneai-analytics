@@ -169,6 +169,7 @@ export function getMetadataKeyValueConfiguration(
 ): CounterConfiguration | null {
   if (!metadataKeyValue) return null;
   const keyConfig = countersConfigurations[metadataKeyValue.key.toLowerCase()];
+  if (!keyConfig) return null;
   if (!metadataKeyValue.value) return keyConfig;
   const memberConfig = keyConfig.items?.find(
     (group) =>
