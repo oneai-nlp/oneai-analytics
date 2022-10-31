@@ -31,9 +31,9 @@ export default function CustomizeTab({
   labelsOptions: string[];
   countersChanged: (counters: CounterType[]) => void;
   labelsChanged: (labels: string[]) => void;
-  currentColorsAxis: string[];
+  currentColorsAxis: CounterType[];
   selectedSizeAxis: MetadataKeyValue | null;
-  colorsAxisChanged: (counters: string[]) => void;
+  colorsAxisChanged: (counters: CounterType[]) => void;
   sizeAxisChanged: (metadataKeyValue: MetadataKeyValue) => void;
 }) {
   return (
@@ -95,10 +95,14 @@ export default function CustomizeTab({
                       />
                     </div>
                     <div className="w-full mt-2">
-                      <Labels
-                        currentLabels={currentColorsAxis}
-                        labelsOptions={labelsOptions.sort()}
-                        labelsChanged={colorsAxisChanged}
+                      <Counters
+                        countersConfigurations={countersConfigurations}
+                        calculationsConfigurations={calculationsConfigurations.filter(
+                          (calc) => calc.type === 'percentage'
+                        )}
+                        currentCounters={currentColorsAxis}
+                        countersChanged={colorsAxisChanged}
+                        addCounterText="Add axis"
                         title="Color Axis"
                       />
                     </div>

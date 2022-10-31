@@ -3,10 +3,8 @@ import React, { FC, useEffect, useMemo, useState } from 'react';
 import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
 import { CUSTOM_METADATA_KEY } from '../common/configurations/commonConfigurations';
 import { BarChartProps } from '../common/types/componentsInputs';
-import {
-  groupsPercentsCalculation,
-  totalSumCalculation,
-} from '../common/utils/countersUtils';
+import { totalSumCalculation } from '../common/utils/countersUtils';
+import { getBackgroundColorLayers } from '../common/utils/displayUtils';
 
 const BAR_PADDING = 0.1;
 
@@ -89,22 +87,11 @@ export const BarChart: FC<BarChartProps> = ({
     const fillOpacity = 0.3;
     const rx = 1;
 
-    const colorsConfig = colorAxis.map((label) => {
-      const groups = groupsPercentsCalculation(
-        label,
-        d.metadata,
-        countersConfiguration
-      ).sort((group1, group2) => (group2.result ?? 0) - (group1.result ?? 0));
-      if (!groups.some((group) => group.result && group.result > 0)) return '';
-      let backgroundString = '';
-      groups.forEach(
-        (group) =>
-          (backgroundString =
-            backgroundString +
-            `,${group.counter?.display?.color ?? 'white'} ${group.result}%`)
-      );
-      return `linear-gradient(90deg${backgroundString})`;
-    });
+    const colorsConfig = getBackgroundColorLayers(
+      colorAxis,
+      d.metadata,
+      countersConfiguration
+    );
 
     return (
       <g
@@ -139,8 +126,9 @@ export const BarChart: FC<BarChartProps> = ({
             }}
             className="h-full absolute flex flex-col"
           >
-            {colorsConfig.map((colorConfig) => (
+            {colorsConfig.map((colorConfig, i) => (
               <div
+                key={i}
                 className="w-full grow"
                 style={{
                   background: colorConfig,

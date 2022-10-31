@@ -5,6 +5,7 @@ import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
 import { CUSTOM_METADATA_KEY } from '../common/configurations/commonConfigurations';
 import { DataNode, TreemapProps } from '../common/types/componentsInputs';
 import { totalSumCalculation } from '../common/utils/countersUtils';
+import { getBackgroundColorLayers } from '../common/utils/displayUtils';
 import { calculateFontSize } from '../common/utils/utils';
 
 type TreemapNode = DataNode & { children: TreemapNode[] };
@@ -29,6 +30,7 @@ export const Treemap: FC<TreemapProps> = ({
   countersConfiguration,
   labelClicked,
   sizeAxis,
+  colorAxis,
 }) => {
   const mainNode: TreemapNode = useMemo(() => {
     return {
@@ -93,6 +95,12 @@ export const Treemap: FC<TreemapProps> = ({
       Math.floor((height - paddingY + 20) / lineHeight) - 3
     ); // -2 is for the d.data.value and <br />, 20 is for the value absolute top padding
 
+    const colorsConfig = getBackgroundColorLayers(
+      colorAxis,
+      leaf.data.metadata,
+      countersConfiguration
+    );
+
     return (
       <g key={index}>
         <rect
@@ -105,7 +113,24 @@ export const Treemap: FC<TreemapProps> = ({
         />
         <foreignObject x={leaf.x0} y={leaf.y0} width={width} height={height}>
           <div
-            className="flex flex-col h-full w-full p-1"
+            style={{
+              width: width,
+              opacity: 0.3,
+            }}
+            className="h-full absolute flex flex-col"
+          >
+            {colorsConfig.map((colorConfig, i) => (
+              <div
+                key={i}
+                className="w-full grow"
+                style={{
+                  background: colorConfig,
+                }}
+              ></div>
+            ))}
+          </div>
+          <div
+            className="flex flex-col h-full w-full p-1 relative"
             style={{
               fontFamily: fontFamily,
               fontWeight: 300,

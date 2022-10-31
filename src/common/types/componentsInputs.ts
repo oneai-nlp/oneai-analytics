@@ -31,7 +31,7 @@ export interface TreemapProps {
   countersConfiguration: CountersConfigurations;
   labelClicked: (key: string, value: string) => void;
   sizeAxis: MetadataKeyValue | null;
-  colorAxis: string[];
+  colorAxis: CounterType[];
 }
 
 export interface BarChartProps {
@@ -46,7 +46,7 @@ export interface BarChartProps {
   countersConfiguration: CountersConfigurations;
   labelClicked: (key: string, value: string) => void;
   sizeAxis: MetadataKeyValue | null;
-  colorAxis: string[];
+  colorAxis: CounterType[];
 }
 
 export type NodeType = 'Cluster' | 'Phrase' | 'Item';

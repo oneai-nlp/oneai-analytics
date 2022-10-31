@@ -31,6 +31,7 @@ export interface CalculationConfiguration {
   name: string;
   type: 'number' | 'percentage';
   hasGroups: boolean;
+  hasMultipleMembers: boolean;
   calculate: (
     selectedMetadataKeyValue: MetadataKeyValue | null,
     metadata: MetaData,

@@ -1,3 +1,4 @@
+import { CUSTOM_METADATA_KEY } from '../configurations/commonConfigurations';
 import {
   CounterConfiguration,
   CountersConfigurations,
@@ -179,6 +180,82 @@ export function totalSumCalculation(
   };
 }
 
+export function percentOfItemsCalculation(
+  metadataKeyValue: MetadataKeyValue | null,
+  metadata: MetaData,
+  countersConfigurations: CountersConfigurations
+) {
+  if (!metadataKeyValue) return { counter: null, result: 0 };
+  const itemCounter = getMetadataKeyValueConfiguration(
+    metadataKeyValue,
+    countersConfigurations
+  );
+
+  const keyCounter = getMetadataKeyValueConfiguration(
+    { key: metadataKeyValue.key },
+    countersConfigurations
+  );
+
+  if (!itemCounter || !keyCounter) return { counter: null, result: 0 };
+
+  const itemCount = calculateSumItemsInMetadata(
+    itemCounter.members,
+    itemCounter.items,
+    metadata
+  );
+
+  const keyCount = calculateSumItemsInMetadata(
+    keyCounter.members,
+    keyCounter.items,
+    metadata
+  );
+
+  return {
+    result: keyCount === 0 ? 0 : Math.round((itemCount / keyCount) * 100),
+    counter: itemCounter ?? keyCounter,
+    metadataKey: metadataKeyValue.key,
+    value: metadataKeyValue.value,
+  };
+}
+
+export function percentOfAllItemsCalculation(
+  metadataKeyValue: MetadataKeyValue | null,
+  metadata: MetaData,
+  countersConfigurations: CountersConfigurations
+) {
+  if (!metadataKeyValue) return { counter: null, result: 0 };
+  const itemCounter = getMetadataKeyValueConfiguration(
+    metadataKeyValue,
+    countersConfigurations
+  );
+
+  const keyCounter = getMetadataKeyValueConfiguration(
+    { key: CUSTOM_METADATA_KEY },
+    countersConfigurations
+  );
+
+  if (!itemCounter || !keyCounter) return { counter: null, result: 0 };
+
+  const itemCount = calculateSumItemsInMetadata(
+    itemCounter.members,
+    itemCounter.items,
+    metadata
+  );
+
+  const keyCount = calculateSumItemsInMetadata(
+    keyCounter.members,
+    keyCounter.items,
+    metadata
+  );
+
+  return {
+    result: keyCount === 0 ? 0 : Math.round((itemCount / keyCount) * 100),
+    counter: itemCounter ?? keyCounter,
+    metadataKey: metadataKeyValue.key,
+    value: metadataKeyValue.value,
+  };
+}
+
 export function getMetadataKeyValueGroups(
   metadataKeyValue: MetadataKeyValue | null,
   countersConfigurations: CountersConfigurations
@@ -197,6 +274,21 @@ function getCounterGroups(
   if (!counter) return [];
 
   return counter.items?.filter((group) => group.isGroup ?? false) ?? [];
+}
+
+export function hasMultipleMembers(
+  metadataKeyValue: MetadataKeyValue | null,
+  countersConfigurations: CountersConfigurations
+): boolean {
+  const counter = getMetadataKeyValueConfiguration(
+    metadataKeyValue,
+    countersConfigurations
+  );
+  if (!counter) return false;
+  if (counter.isGroup) return true;
+  let sum = 0;
+  counter.members?.forEach((member) => (sum += member.values?.length ?? 2));
+  return sum > 1;
 }
 
 export function getMetadataKeyValueConfiguration(

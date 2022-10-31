@@ -71,14 +71,14 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   labelClicked = () => {},
   labelFilterDeleted = () => {},
 }) => {
-  const [display, setDisplay] = useState('BarChart' as Displays);
+  const [display, setDisplay] = useState('Treemap' as Displays);
   const { width, height, ref } = useResizeDetector();
   const [metaData, setMetaData] = useState({} as MetaData);
   const [nodes, setNodes] = useState([] as DataNode[]);
   const [labels, setLabels] = useState([] as string[]);
   const [counters, setCounters] = useState([] as CounterType[]);
   const [sizeAxis, setSizeAxis] = useState(null as MetadataKeyValue | null);
-  const [colorAxis, setColorAxis] = useState([] as string[]);
+  const [colorAxis, setColorAxis] = useState([] as CounterType[]);
   const [countersConfigurations, setCountersConfigurations] = useState(
     {} as CountersConfigurations
   );
@@ -126,11 +126,12 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
     );
 
     setColorAxis(
-      JSON.parse(
-        localStorage.getItem(
-          getCurrentStorageKey(colorAxisStorageKey, currentCollection.current)
-        ) ?? '[]'
-      )
+      getInitialCounterTypes(
+        defaultCalculations,
+        [],
+        currentCollection.current,
+        colorAxisStorageKey
+      ) as CounterType[]
     );
   }, [nodesPath]);
 
@@ -251,6 +252,13 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
       } as CountersLocalStorageObject;
     });
 
+    const storedColorAxis = colorAxis.map((counter) => {
+      return {
+        metadataKeyValue: counter.metadataKeyValue,
+        calculationName: counter.calculationConfiguration.name,
+      } as CountersLocalStorageObject;
+    });
+
     if (currentCollection.current) {
       localStorage.setItem(
         getCurrentStorageKey(countersStorageKey, currentCollection.current),
@@ -262,7 +270,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
       );
       localStorage.setItem(
         getCurrentStorageKey(colorAxisStorageKey, currentCollection.current),
-        JSON.stringify(colorAxis)
+        JSON.stringify(storedColorAxis)
       );
       localStorage.setItem(
         getCurrentStorageKey(sizeAxisStorageKey, currentCollection.current),

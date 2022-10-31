@@ -4,16 +4,17 @@ import React, { Fragment } from 'react';
 import {
   topGroupPercentCalculationName,
   topValuePercentCalculationName,
-  totalSumCalculationName,
 } from '../../configurations/calculationsConfigurations';
-import { CUSTOM_METADATA_KEY } from '../../configurations/commonConfigurations';
 import {
   CalculationConfiguration,
   CountersConfigurations,
   CounterType,
   MetadataKeyValue,
 } from '../../types/customizeBarTypes';
-import { getMetadataKeyValueGroups } from '../../utils/countersUtils';
+import {
+  getMetadataKeyValueGroups,
+  hasMultipleMembers,
+} from '../../utils/countersUtils';
 import DropdownOption from '../CountersLabels/DropdownOption';
 import KeyValueSingleSelect from '../CountersLabels/KeyValueSingleSelect';
 
@@ -190,17 +191,24 @@ function getCalculationTypes(
   countersConfiguration: CountersConfigurations
 ): CalculationConfiguration[] {
   if (!selectedMetadataKeyValue)
-    return calculationTypes.filter((calc) => !calc.hasGroups);
-  if (selectedMetadataKeyValue.key === CUSTOM_METADATA_KEY)
     return calculationTypes.filter(
-      (calc) => calc.name === totalSumCalculationName
+      (calc) => !calc.hasGroups && !calc.hasMultipleMembers
     );
+
   const hasGroups =
     getMetadataKeyValueGroups(selectedMetadataKeyValue, countersConfiguration)
       .length > 0;
+  if (hasGroups) return calculationTypes;
+
+  const keyValueHasMultipleMembers = hasMultipleMembers(
+    selectedMetadataKeyValue,
+    countersConfiguration
+  );
+  if (keyValueHasMultipleMembers)
+    return calculationTypes.filter((calc) => !calc.hasGroups);
 
   return calculationTypes.filter(
-    (calc) => calc.hasGroups === hasGroups || !calc.hasGroups
+    (calc) => !calc.hasGroups && !calc.hasMultipleMembers
   );
 }
 
