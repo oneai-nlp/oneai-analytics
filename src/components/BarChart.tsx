@@ -1,6 +1,7 @@
 import { extent, scaleBand, scaleLinear } from 'd3';
 import React, { FC, useEffect, useMemo, useState } from 'react';
-import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
+import CounterDisplay from '../common/components/CountersLabels/CounterDisplay';
+import MaxLabelDisplay from '../common/components/CountersLabels/MaxLabelDisplay';
 import { CUSTOM_METADATA_KEY } from '../common/configurations/commonConfigurations';
 import { BarChartProps } from '../common/types/componentsInputs';
 import { totalSumCalculation } from '../common/utils/countersUtils';
@@ -129,9 +130,11 @@ export const BarChart: FC<BarChartProps> = ({
             {colorsConfig.map((colorConfig, i) => (
               <div
                 key={i}
-                className="w-full grow"
+                className="w-full"
                 style={{
                   background: colorConfig,
+                  height: '25%',
+                  marginTop: 'auto',
                 }}
               ></div>
             ))}
@@ -145,17 +148,33 @@ export const BarChart: FC<BarChartProps> = ({
               color: textColor,
             }}
           >
-            <span className="w-1/3 truncate">{d.text}</span>
-            <span className="ml-2 w-2/3">
-              <CountersLabelsDisplay
-                counters={counters}
-                countersConfiguration={countersConfiguration}
-                labels={labels}
-                metadata={d.metadata}
-                labelClicked={labelClicked}
-                counterWidth="6ch"
-                labelWidth="15ch"
-              />
+            <span className="flex items-center w-fit">
+              {counters
+                .filter((counter) => counter.metadataKeyValue !== null)
+                .map((counter, i) => (
+                  <div key={i} className="ml-1">
+                    <CounterDisplay
+                      counter={counter}
+                      countersConfiguration={countersConfiguration}
+                      metadata={d.metadata}
+                      width="6ch"
+                    />
+                  </div>
+                ))}
+            </span>
+            <span className="truncate">{d.text}</span>
+            <span className="ml-2 truncate flex items-center">
+              {labels.map((label, i) => (
+                <div key={i} className="ml-1">
+                  <MaxLabelDisplay
+                    countersConfiguration={countersConfiguration}
+                    metadataKey={label}
+                    labelClicked={labelClicked}
+                    metadata={d.metadata}
+                    width="15ch"
+                  />
+                </div>
+              ))}
             </span>
           </div>
         </foreignObject>

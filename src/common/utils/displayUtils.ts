@@ -18,7 +18,6 @@ export function getBackgroundColorLayers(
 ) {
   return groupCounters(colorAxis, countersConfiguration)
     .map((countersGroup) => {
-      console.log(countersGroup);
       const groups = countersGroup
         .map((counter) =>
           counter.calculationConfiguration.calculate(
@@ -30,13 +29,18 @@ export function getBackgroundColorLayers(
         .sort((group1, group2) => (group2.result ?? 0) - (group1.result ?? 0));
       if (!groups.some((group) => group.result && group.result > 0)) return '';
       let backgroundString = '';
-      groups.forEach(
-        (group) =>
-          (backgroundString =
-            backgroundString +
-            `,${group.counter?.display?.color ?? '#D3D3D3'} ${group.result}%`)
-      );
-      backgroundString = backgroundString + ',rgba(255,0,0,0)';
+      let totalPercentage = 0;
+      groups.forEach((group) => {
+        backgroundString =
+          backgroundString +
+          `,${
+            group.counter?.display?.color ?? 'rgba(255,0,0,0)'
+          } ${totalPercentage}% ${totalPercentage + group.result}%`;
+        totalPercentage += group.result;
+      });
+      backgroundString = `${backgroundString},rgba(255,0,0,0) ${totalPercentage}% ${
+        100 - totalPercentage
+      }%`;
       return `linear-gradient(90deg${backgroundString})`;
     })
     .filter((str) => str !== '');
