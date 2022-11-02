@@ -124,7 +124,7 @@ export const BarChart: FC<BarChartProps> = ({
             <div
               style={{
                 width: barWidth,
-                opacity: fillOpacity,
+                opacity: 0.6,
               }}
               className="h-full fixed flex flex-col"
             >
@@ -134,8 +134,8 @@ export const BarChart: FC<BarChartProps> = ({
                   className="w-full"
                   style={{
                     background: colorConfig,
-                    height: '25%',
-                    marginTop: 'auto',
+                    height: '4px',
+                    marginTop: i === 0 ? 'auto' : '',
                   }}
                 ></div>
               ))}
