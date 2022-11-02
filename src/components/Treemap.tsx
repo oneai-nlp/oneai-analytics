@@ -112,72 +112,74 @@ export const Treemap: FC<TreemapProps> = ({
           fill={colors(index).hex()}
         />
         <foreignObject x={leaf.x0} y={leaf.y0} width={width} height={height}>
-          <div
-            style={{
-              width: width,
-              opacity: 0.3,
-            }}
-            className="h-full absolute flex flex-col"
-          >
-            {colorsConfig.map((colorConfig, i) => (
-              <div
-                key={i}
-                className="w-full grow"
-                style={{
-                  background: colorConfig,
-                }}
-              ></div>
-            ))}
-          </div>
-          <div
-            className="flex flex-col h-full w-full p-1 relative"
-            style={{
-              fontFamily: fontFamily,
-              fontWeight: 300,
-              fontStyle: 'normal',
-              color: textColor,
-              borderRightWidth: `${borderWidth}px`,
-              borderLeftWidth: `${borderWidth}px`,
-              borderBottomWidth: `${borderWidth}px`,
-              borderColor: borderColor,
-            }}
-          >
+          <div className="h-full w-full">
             <div
-              className="flex"
               style={{
-                fontSize: `${countFontSize}px`,
+                width: width,
+                opacity: 0.3,
               }}
+              className="h-full fixed flex flex-col"
             >
-              <CountersLabelsDisplay
-                counters={counters}
-                labels={labels}
-                metadata={leaf.data.metadata}
-                countersConfiguration={countersConfiguration}
-                labelClicked={labelClicked}
-              />
+              {colorsConfig.map((colorConfig, i) => (
+                <div
+                  key={i}
+                  className="w-full grow"
+                  style={{
+                    background: colorConfig,
+                  }}
+                ></div>
+              ))}
             </div>
-            <span
-              className="items-center flex justify-center h-full hover:cursor-pointer"
-              onClick={() => nodeClicked(leaf.data)}
+            <div
+              className="flex flex-col h-full w-full p-1 relative"
               style={{
-                fontSize: `${fontSize}px`,
+                fontFamily: fontFamily,
+                fontWeight: 300,
+                fontStyle: 'normal',
+                color: textColor,
+                borderRightWidth: `${borderWidth}px`,
+                borderLeftWidth: `${borderWidth}px`,
+                borderBottomWidth: `${borderWidth}px`,
+                borderColor: borderColor,
               }}
             >
-              <span
-                data-element="rect-text"
-                className="overflow-hidden text-center"
+              <div
+                className="flex"
                 style={{
-                  lineHeight: `${lineHeight}px`,
-                  wordBreak: 'break-word',
-                  WebkitLineClamp: lines,
-                  WebkitTouchCallout: 'none',
-                  display: '-webkit-box',
-                  WebkitBoxOrient: 'vertical',
+                  fontSize: `${countFontSize}px`,
                 }}
               >
-                {leaf.data.text}
+                <CountersLabelsDisplay
+                  counters={counters}
+                  labels={labels}
+                  metadata={leaf.data.metadata}
+                  countersConfiguration={countersConfiguration}
+                  labelClicked={labelClicked}
+                />
+              </div>
+              <span
+                className="items-center flex justify-center h-full hover:cursor-pointer"
+                onClick={() => nodeClicked(leaf.data)}
+                style={{
+                  fontSize: `${fontSize}px`,
+                }}
+              >
+                <span
+                  data-element="rect-text"
+                  className="overflow-hidden text-center"
+                  style={{
+                    lineHeight: `${lineHeight}px`,
+                    wordBreak: 'break-word',
+                    WebkitLineClamp: lines,
+                    WebkitTouchCallout: 'none',
+                    display: '-webkit-box',
+                    WebkitBoxOrient: 'vertical',
+                  }}
+                >
+                  {leaf.data.text}
+                </span>
               </span>
-            </span>
+            </div>
           </div>
         </foreignObject>
       </g>

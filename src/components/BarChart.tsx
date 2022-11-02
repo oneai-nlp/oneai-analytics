@@ -120,62 +120,64 @@ export const BarChart: FC<BarChartProps> = ({
           fillOpacity={fillOpacity}
           rx={rx}
         >
-          <div
-            style={{
-              width: barWidth,
-              opacity: fillOpacity,
-            }}
-            className="h-full absolute flex flex-col"
-          >
-            {colorsConfig.map((colorConfig, i) => (
-              <div
-                key={i}
-                className="w-full"
-                style={{
-                  background: colorConfig,
-                  height: '25%',
-                  marginTop: 'auto',
-                }}
-              ></div>
-            ))}
-          </div>
-          <div
-            className="flex h-full items-center ml-1 relative"
-            style={{
-              fontFamily: fontFamily,
-              fontWeight: 300,
-              fontStyle: 'normal',
-              color: textColor,
-            }}
-          >
-            <span className="flex items-center w-fit">
-              {counters
-                .filter((counter) => counter.metadataKeyValue !== null)
-                .map((counter, i) => (
+          <div className="h-full w-full">
+            <div
+              style={{
+                width: barWidth,
+                opacity: fillOpacity,
+              }}
+              className="h-full fixed flex flex-col"
+            >
+              {colorsConfig.map((colorConfig, i) => (
+                <div
+                  key={i}
+                  className="w-full"
+                  style={{
+                    background: colorConfig,
+                    height: '25%',
+                    marginTop: 'auto',
+                  }}
+                ></div>
+              ))}
+            </div>
+            <div
+              className="flex h-full items-center ml-1 relative"
+              style={{
+                fontFamily: fontFamily,
+                fontWeight: 300,
+                fontStyle: 'normal',
+                color: textColor,
+              }}
+            >
+              <span className="flex items-center w-fit">
+                {counters
+                  .filter((counter) => counter.metadataKeyValue !== null)
+                  .map((counter, i) => (
+                    <div key={i} className="ml-1">
+                      <CounterDisplay
+                        counter={counter}
+                        countersConfiguration={countersConfiguration}
+                        metadata={d.metadata}
+                        width="6ch"
+                      />
+                    </div>
+                  ))}
+              </span>
+              <span className="truncate">{d.text}</span>
+              <span className="ml-2 truncate flex items-center">
+                {labels.map((label, i) => (
                   <div key={i} className="ml-1">
-                    <CounterDisplay
-                      counter={counter}
+                    <MaxLabelDisplay
                       countersConfiguration={countersConfiguration}
+                      metadataKey={label}
+                      labelClicked={labelClicked}
                       metadata={d.metadata}
-                      width="6ch"
+                      width="15ch"
                     />
                   </div>
                 ))}
-            </span>
-            <span className="truncate">{d.text}</span>
-            <span className="ml-2 truncate flex items-center">
-              {labels.map((label, i) => (
-                <div key={i} className="ml-1">
-                  <MaxLabelDisplay
-                    countersConfiguration={countersConfiguration}
-                    metadataKey={label}
-                    labelClicked={labelClicked}
-                    metadata={d.metadata}
-                    width="15ch"
-                  />
-                </div>
-              ))}
-            </span>
+              </span>
+            </div>
           </div>
         </foreignObject>
       </g>
