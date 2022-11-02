@@ -28,7 +28,7 @@ export default function LabelDisplay({
     <span
       data-for="global"
       data-tip={tooltip}
-      className="flex items-center text-sm text-gray-500 p-1 cursor-pointer hover:text-gray-300"
+      className="flex items-center text-sm text-white p-1 cursor-pointer hover:text-gray-300"
       onClick={() => labelClicked(metadataKey, value)}
     >
       {config && config.display && config.display.icon !== null && (

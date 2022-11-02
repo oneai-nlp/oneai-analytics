@@ -1,3 +1,4 @@
+import { HomeIcon } from '@heroicons/react/20/solid';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 import ReactTooltip from 'react-tooltip';
@@ -296,9 +297,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
       <div
         className="w-full mb-1 rounded-md"
         style={{
-          height: '10%',
-          minHeight: '3rem',
-          maxHeight: '4rem',
+          height: '65px',
           background: navbarColor,
           fontFamily: treemapFontFamily,
         }}
@@ -312,30 +311,59 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
                 fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                {' '}
-                <path stroke="none" d="M0 0h24v24H0z" />{' '}
-                <rect x="4" y="4" width="16" height="16" rx="2" />{' '}
-                <line x1="4" y1="10" x2="20" y2="10" />{' '}
-                <line x1="10" y1="4" x2="10" y2="20" />
+                <path
+                  d="M3.5 5.89477C3.5 5.06635 4.17157 4.39478 5 4.39478H19C19.8284 4.39478 20.5 5.06635 20.5 5.89478V11.9211H3.5V5.89477Z"
+                  stroke={display === 'Treemap' ? 'white' : '#747189'}
+                />
+                <path
+                  d="M3.5 11.9736H13.8684V19.4999H5C4.17157 19.4999 3.5 18.8284 3.5 17.9999V11.9736Z"
+                  stroke={display === 'Treemap' ? 'white' : '#747189'}
+                />
+                <path
+                  d="M13.9211 11.9736H20.5001V17.9999C20.5001 18.8284 19.8285 19.4999 19.0001 19.4999H13.9211V11.9736Z"
+                  stroke={display === 'Treemap' ? 'white' : '#747189'}
+                />
+                <path
+                  d="M8.68433 4.36841V11.4737"
+                  stroke={display === 'Treemap' ? 'white' : '#747189'}
+                />
               </svg>
+
               <svg
                 className={getVisualizationLogoClasses(display === 'BarChart')}
                 onClick={() => setDisplay('BarChart')}
-                fill="none"
+                width="24"
+                height="24"
                 viewBox="0 0 24 24"
-                stroke="currentColor"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                  d="M3.75 20.25V3.75"
+                  stroke={display === 'BarChart' ? 'white' : '#747189'}
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M3.75 9.75H15.75C15.75 11.5074 15.75 12.4926 15.75 14.25H3.75"
+                  stroke={display === 'BarChart' ? 'white' : '#747189'}
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M20.25 5.25H3.75V9.75H20.25V5.25Z"
+                  stroke={display === 'BarChart' ? 'white' : '#747189'}
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M12.75 14.25V18.75H3.75"
+                  stroke={display === 'BarChart' ? 'white' : '#747189'}
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
                 />
               </svg>
             </div>
@@ -375,15 +403,13 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
         <div
           className="w-full"
           style={{
-            height: '5%',
-            minHeight: '3rem',
-            maxHeight: '4rem',
+            height: '65px',
             fontFamily: treemapFontFamily,
           }}
         >
           <div className="flex flex-row items-center p-5 h-full">
             <div className="flex flex-row w-10/12 justify-start">
-              {currentNode && (
+              {currentNode ? (
                 <button
                   type="button"
                   onClick={() => goBackClicked(1)}
@@ -407,6 +433,12 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     <line x1="5" y1="12" x2="9" y2="8" />
                   </svg>
                   <span className="sr-only">Go back</span>
+                </button>
+              ) : (
+                <button type="button" disabled>
+                  <HomeIcon className="h-4 w-4 text-white" />
+
+                  <span className="sr-only">Go Home</span>
                 </button>
               )}
 
@@ -637,7 +669,7 @@ function getVisualizationLogoClasses(active: boolean) {
   return `h-7 w-7   ${
     active
       ? 'text-white'
-      : 'text-slate-500 hover:cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-100 hover:text-white'
+      : 'text-[#747189] hover:cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-100 hover:text-white'
   }`;
 }
 

@@ -60,7 +60,7 @@ export default function Counters({
 
   return (
     <div className="w-full">
-      <p className="text-xl text-gray-600">{title}</p>
+      <p className="text-xl text-white mb-1">{title}</p>
       <div className="flex w-full flex-wrap items-center">
         {currentCounters.map((addedCounter, i) => (
           <div className="ml-1 mb-1" key={i}>
@@ -73,12 +73,14 @@ export default function Counters({
             />
           </div>
         ))}
-        <KeyValueSingleSelect
-          metadataKeyValue={null}
-          countersConfigurations={countersConfigurations}
-          selectedMetadataKeyValueChange={addCounter}
-          placeholder={addCounterText}
-        />
+        <div className="ml-1">
+          <KeyValueSingleSelect
+            metadataKeyValue={null}
+            countersConfigurations={countersConfigurations}
+            selectedMetadataKeyValueChange={addCounter}
+            placeholder={addCounterText}
+          />
+        </div>
       </div>
     </div>
   );
@@ -124,7 +126,7 @@ function Counter({
 
   return (
     <div className="w-full">
-      <div className="flex bg-gray-200 rounded-full p-2 w-fit">
+      <div className="flex bg-[#272535] p-2 w-fit">
         <KeyValueSingleSelect
           metadataKeyValue={counterData.metadataKeyValue}
           countersConfigurations={countersConfigurations}
@@ -137,8 +139,8 @@ function Counter({
           by="name"
         >
           <div className="relative ml-1">
-            <Listbox.Button className="relative cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-              <span className="block truncate lowercase first-letter:uppercase text-gray-800">
+            <Listbox.Button className="relative cursor-default rounded-lg bg-[#272535] py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+              <span className="block truncate lowercase first-letter:uppercase text-white">
                 {counterData.calculationConfiguration.name}
               </span>
               <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -154,7 +156,7 @@ function Counter({
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Listbox.Options className="absolute mt-1 z-10 max-h-60 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+              <Listbox.Options className="fixed mt-1 z-10 max-h-60 overflow-auto rounded-md bg-[#272533] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                 {getCalculationTypes(
                   calculationsConfigurations,
                   counterData.metadataKeyValue,

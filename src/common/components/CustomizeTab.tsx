@@ -49,7 +49,7 @@ export default function CustomizeTab({
               <span>Customize</span>
               <ChevronDownIcon
                 className={`${open ? '' : 'text-opacity-70'}
-                  ml-2 h-5 w-5 text-orange-300 transition duration-150 ease-in-out group-hover:text-opacity-80`}
+                  ml-2 h-5 w-5 text-blue-700 transition duration-150 ease-in-out group-hover:text-opacity-80`}
                 aria-hidden="true"
               />
             </Popover.Button>
@@ -67,7 +67,7 @@ export default function CustomizeTab({
                 className="absolute z-10 mt-3 w-screen max-w-sm transform lg:max-w-4xl"
               >
                 <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                  <div className="relative bg-white p-5 max-h-[85vh] overflow-y-scroll overflow-x-hidden">
+                  <div className="relative bg-[#1D1C27] p-5 max-h-[85vh] text-white">
                     <div className="w-full">
                       <Counters
                         countersConfigurations={countersConfigurations}
@@ -86,7 +86,7 @@ export default function CustomizeTab({
                       />
                     </div>
                     <div className="w-full mt-2">
-                      <p className="text-xl text-gray-600">Size Axis</p>
+                      <p className="text-xl mb-1">Size Axis</p>
                       <KeyValueSingleSelect
                         metadataKeyValue={selectedSizeAxis}
                         placeholder="Select"

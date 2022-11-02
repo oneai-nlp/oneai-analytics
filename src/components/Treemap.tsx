@@ -1,6 +1,7 @@
 import { scale, valid } from 'chroma-js';
 import { hierarchy, treemap } from 'd3';
 import React, { FC, useMemo } from 'react';
+import { ColorsAxis } from '../common/components/CountersLabels/ColorsAxis';
 import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
 import { CUSTOM_METADATA_KEY } from '../common/configurations/commonConfigurations';
 import { DataNode, TreemapProps } from '../common/types/componentsInputs';
@@ -113,23 +114,7 @@ export const Treemap: FC<TreemapProps> = ({
         />
         <foreignObject x={leaf.x0} y={leaf.y0} width={width} height={height}>
           <div className="h-full w-full">
-            <div
-              style={{
-                width: width,
-                opacity: 0.3,
-              }}
-              className="h-full fixed flex flex-col"
-            >
-              {colorsConfig.map((colorConfig, i) => (
-                <div
-                  key={i}
-                  className="w-full grow"
-                  style={{
-                    background: colorConfig,
-                  }}
-                ></div>
-              ))}
-            </div>
+            <ColorsAxis width={width} colorsConfig={colorsConfig} />
             <div
               className="flex flex-col h-full w-full p-1 relative"
               style={{

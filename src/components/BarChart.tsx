@@ -1,5 +1,6 @@
 import { extent, scaleBand, scaleLinear } from 'd3';
 import React, { FC, useEffect, useMemo, useState } from 'react';
+import { ColorsAxis } from '../common/components/CountersLabels/ColorsAxis';
 import CounterDisplay from '../common/components/CountersLabels/CounterDisplay';
 import MaxLabelDisplay from '../common/components/CountersLabels/MaxLabelDisplay';
 import { CUSTOM_METADATA_KEY } from '../common/configurations/commonConfigurations';
@@ -72,20 +73,20 @@ export const BarChart: FC<BarChartProps> = ({
 
   // Build the shapes
   const allShapes = dataNodes.map((d, i) => {
-    const x = xScale(0);
+    const x = 24;
     const y = yScale(d.text ?? '') ?? 0;
     const result =
       sizeAxis?.key === CUSTOM_METADATA_KEY
         ? d.amount
         : totalSumCalculation(sizeAxis, d.metadata, countersConfiguration)
             .result;
-    const barWidth = xScale(
-      result === max ? result : Math.min(max - 1, result + max * 0.1)
-    );
-    const barHeight = yScale.bandwidth();
-    const opacity = 0.7;
-    const fill = '#72b1ca';
-    const fillOpacity = 0.3;
+    const barWidth =
+      xScale(result === max ? result : Math.min(max - 1, result + max * 0.1)) -
+      24;
+    const barHeight = 36;
+    const opacity = 1;
+    const fill = '#322F46';
+    const fillOpacity = 1;
     const rx = 1;
 
     const colorsConfig = getBackgroundColorLayers(
@@ -97,7 +98,7 @@ export const BarChart: FC<BarChartProps> = ({
     return (
       <g
         key={i}
-        className="hover:text-blue-700 hover:cursor-pointer"
+        className="hover:text-blue-700 hover:cursor-pointer pr-1"
         onClick={() => nodeClicked(d)}
       >
         <rect
@@ -121,25 +122,7 @@ export const BarChart: FC<BarChartProps> = ({
           rx={rx}
         >
           <div className="h-full w-full">
-            <div
-              style={{
-                width: barWidth,
-                opacity: 0.6,
-              }}
-              className="h-full fixed flex flex-col"
-            >
-              {colorsConfig.map((colorConfig, i) => (
-                <div
-                  key={i}
-                  className="w-full"
-                  style={{
-                    background: colorConfig,
-                    height: '4px',
-                    marginTop: i === 0 ? 'auto' : '',
-                  }}
-                ></div>
-              ))}
-            </div>
+            <ColorsAxis width={barWidth} colorsConfig={colorsConfig} />
             <div
               className="flex h-full items-center ml-1 relative"
               style={{
