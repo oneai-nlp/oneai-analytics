@@ -146,7 +146,7 @@ export const BarChart: FC<BarChartProps> = ({
                     </div>
                   ))}
               </span>
-              <span className="truncate">{d.text}</span>
+              <span className="truncate w-4/6">{d.text}</span>
               <span className="ml-2 truncate flex items-center">
                 {labels.map((label, i) => (
                   <div key={i} className="ml-1">

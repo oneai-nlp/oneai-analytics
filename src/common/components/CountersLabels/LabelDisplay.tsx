@@ -28,15 +28,13 @@ export default function LabelDisplay({
     <span
       data-for="global"
       data-tip={tooltip}
-      className="flex items-center text-sm text-white p-1 cursor-pointer hover:text-gray-300"
+      className="flex items-center text-sm text-white p-1 cursor-pointer hover:text-gray-300 w-fit"
       onClick={() => labelClicked(metadataKey, value)}
     >
       {config && config.display && config.display.icon !== null && (
-        <span style={{ width: '1em', height: '1em', marginRight: '1px' }}>
-          {config.display.icon}
-        </span>
+        <span className="w-[1em] h-[1em] mr-[1px]">{config.display.icon}</span>
       )}
-      <span style={{ width, maxWidth }} className="truncate">
+      <span style={{ width, maxWidth }} className="truncate italic">
         {value}
       </span>
     </span>

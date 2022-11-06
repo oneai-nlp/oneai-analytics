@@ -344,26 +344,26 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 <path
                   d="M3.75 20.25V3.75"
                   stroke={display === 'BarChart' ? 'white' : '#747189'}
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M3.75 9.75H15.75C15.75 11.5074 15.75 12.4926 15.75 14.25H3.75"
                   stroke={display === 'BarChart' ? 'white' : '#747189'}
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M20.25 5.25H3.75V9.75H20.25V5.25Z"
                   stroke={display === 'BarChart' ? 'white' : '#747189'}
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M12.75 14.25V18.75H3.75"
                   stroke={display === 'BarChart' ? 'white' : '#747189'}
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </div>

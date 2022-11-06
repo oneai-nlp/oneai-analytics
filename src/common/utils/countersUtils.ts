@@ -303,7 +303,7 @@ export function getMetadataKeyValueConfiguration(
     (group) =>
       group.label?.toLowerCase() === metadataKeyValue.value?.toLowerCase()
   );
-  if (!memberConfig) return keyConfig;
+  if (!memberConfig || !memberConfig.display) return keyConfig;
   return memberConfig;
 }
 
