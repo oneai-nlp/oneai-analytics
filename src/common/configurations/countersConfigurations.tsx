@@ -9,13 +9,14 @@ import {
   BuildingOffice2Icon,
   MapPinIcon,
   UsersIcon,
-  FilmIcon,
   ScaleIcon,
   CalendarIcon,
   HeartIcon,
   HashtagIcon,
-} from '@heroicons/react/20/solid';
+  KeyIcon,
+} from '@heroicons/react/24/outline';
 import React from 'react';
+import { FilmIcon } from '@heroicons/react/20/solid';
 
 export const defaultCountersConfigurations: CountersConfigurations = {
   signals: {
@@ -65,6 +66,12 @@ export const defaultCountersConfigurations: CountersConfigurations = {
     display: {
       color: 'white',
       icon: <HashtagIcon />,
+    },
+  },
+  keyword: {
+    display: {
+      color: 'white',
+      icon: <KeyIcon />,
     },
   },
   geo: {

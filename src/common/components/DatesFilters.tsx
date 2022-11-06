@@ -30,7 +30,7 @@ export default function DatesFilters({
             <CalendarDaysIcon className="h-7 w-7" />
             <ChevronDownIcon
               className={`${open ? '' : 'text-opacity-70'}
-                  ml-2 h-5 w-5 text-orange-300 transition duration-150 ease-in-out group-hover:text-opacity-80`}
+                  ml-2 h-5 w-5 text-blue-700 transition duration-150 ease-in-out group-hover:text-opacity-80`}
               aria-hidden="true"
             />
           </Popover.Button>
@@ -48,7 +48,7 @@ export default function DatesFilters({
               className="absolute z-10 mt-3 transform max-w-md"
             >
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                <div className="relative bg-white p-5">
+                <div className="relative bg-[#272535] p-5">
                   <div className="w-full">
                     <div className="flex flex-wrap w-full mt-3 justify-between">
                       <div className="flex items-center">
@@ -62,7 +62,7 @@ export default function DatesFilters({
                             type="button"
                             onClick={() => fromDateChanged(null)}
                           >
-                            <XMarkIcon className="h-4 w-4 text-gray-600 hover:scale-125 transition duration-100 ease-linear" />
+                            <XMarkIcon className="h-4 w-4 text-gray-200 hover:scale-125 transition duration-100 ease-linear" />
                             <span className="sr-only">Clear dates filters</span>
                           </button>
                         </div>
@@ -78,7 +78,7 @@ export default function DatesFilters({
                             type="button"
                             onClick={() => toDateChanged(null)}
                           >
-                            <XMarkIcon className="h-4 w-4 text-gray-600 hover:scale-125 transition duration-100 ease-linear" />
+                            <XMarkIcon className="h-4 w-4 text-gray-200 hover:scale-125 transition duration-100 ease-linear" />
                             <span className="sr-only">Clear dates filters</span>
                           </button>
                         </div>

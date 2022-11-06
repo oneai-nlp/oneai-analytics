@@ -8,8 +8,9 @@ export default function LabelDisplay({
   countersConfiguration,
   labelClicked,
   tooltip = '',
-  width,
+  width = '100%',
   maxWidth = '20ch',
+  color = 'white',
 }: {
   metadataKey: string;
   value: string;
@@ -18,6 +19,7 @@ export default function LabelDisplay({
   tooltip?: string;
   width?: string;
   maxWidth?: string;
+  color?: string;
 }) {
   const config = getMetadataKeyValueConfiguration(
     { key: metadataKey, value: value },
@@ -28,13 +30,21 @@ export default function LabelDisplay({
     <span
       data-for="global"
       data-tip={tooltip}
-      className="flex items-center text-sm text-white p-1 cursor-pointer hover:text-gray-300 w-fit"
+      className="flex items-center text-sm p-1 cursor-pointer hover:text-gray-300 w-fit"
+      style={{ color }}
       onClick={() => labelClicked(metadataKey, value)}
     >
       {config && config.display && config.display.icon !== null && (
-        <span className="w-[1em] h-[1em] mr-[1px]">{config.display.icon}</span>
+        <span className="w-[1em] h-[1em]">{config.display.icon}</span>
       )}
-      <span style={{ width, maxWidth }} className="truncate italic">
+      <span
+        style={{
+          width,
+          maxWidth,
+          marginLeft: metadataKey === 'topic' ? '-1px' : '1px',
+        }}
+        className="truncate italic"
+      >
         {value}
       </span>
     </span>

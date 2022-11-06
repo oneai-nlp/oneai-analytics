@@ -124,10 +124,7 @@ export default function Datepicker({
 
   return (
     <div className="mb-5 w-64">
-      <label
-        htmlFor="datepicker"
-        className="font-bold mb-1 text-gray-700 block"
-      >
+      <label htmlFor="datepicker" className="font-bold mb-1 text-white block">
         {placeholder}
       </label>
       <div className="relative">
@@ -135,7 +132,7 @@ export default function Datepicker({
         <input
           type="text"
           readOnly
-          className="cursor-pointer w-full pl-4 pr-10 py-3 leading-none rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+          className="cursor-pointer w-full pl-4 pr-10 py-3 leading-none rounded-lg shadow-sm focus:outline-none focus:shadow-outline bg-[#2C293D] text-white font-medium"
           placeholder="Select date"
           value={selectedDate ? format(selectedDate, 'dd/MM/yyyy') : ''}
           onClick={toggleDatepicker}
@@ -145,7 +142,7 @@ export default function Datepicker({
           onClick={toggleDatepicker}
         >
           <svg
-            className="h-6 w-6 text-gray-400"
+            className="h-6 w-6 text-gray-300"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -160,18 +157,18 @@ export default function Datepicker({
         </div>
         {showDatepicker && (
           <div
-            className="bg-white mt-1 rounded-lg shadow p-4 fixed z-10 overflow-auto"
+            className="bg-[#272535] mt-1 rounded-lg shadow p-4 fixed z-10 overflow-auto"
             style={{ width: '16rem' }}
           >
             <div className="flex justify-between items-center mb-2">
               <div>
                 <button
                   type="button"
-                  className="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                  className="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 hover:text-gray-700 p-1 rounded-full"
                   onClick={decrement}
                 >
                   <svg
-                    className="h-6 w-6 text-gray-500 inline-flex"
+                    className="h-6 w-6 text-gray-300 hover:text-gray-700 inline-flex"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -188,7 +185,7 @@ export default function Datepicker({
               {type === 'date' && (
                 <div
                   onClick={showMonthPicker}
-                  className="flex-grow p-1 text-lg font-bold text-gray-800 cursor-pointer hover:bg-gray-200 rounded-lg"
+                  className="flex-grow p-1 text-lg font-bold text-gray-200 cursor-pointer hover:bg-gray-200 hover:text-gray-700 rounded-lg"
                 >
                   <p className="text-center">
                     {format(datepickerHeaderDate, 'MMMM')}
@@ -197,7 +194,7 @@ export default function Datepicker({
               )}
               <div
                 onClick={showYearPicker}
-                className="flex-grow p-1 text-lg font-bold text-gray-800 cursor-pointer hover:bg-gray-200 rounded-lg"
+                className="flex-grow p-1 text-lg font-bold text-gray-200 cursor-pointer hover:bg-gray-200 hover:text-gray-700 rounded-lg"
               >
                 <p className="text-center">
                   {format(datepickerHeaderDate, 'yyyy')}
@@ -206,11 +203,11 @@ export default function Datepicker({
               <div>
                 <button
                   type="button"
-                  className="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                  className="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 hover:text-gray-700 p-1 rounded-full"
                   onClick={increment}
                 >
                   <svg
-                    className="h-6 w-6 text-gray-500 inline-flex"
+                    className="h-6 w-6 text-gray-300 hover:text-gray-700 inline-flex"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -230,7 +227,7 @@ export default function Datepicker({
                 <div className="flex flex-wrap mb-3 -mx-1">
                   {DAYS.map((day, i) => (
                     <div key={i} style={{ width: '14.26%' }} className="px-1">
-                      <div className="text-gray-800 font-medium text-center text-xs">
+                      <div className="text-gray-400 font-medium text-center text-xs">
                         {day}
                       </div>
                     </div>
@@ -255,7 +252,7 @@ export default function Datepicker({
                         className={`cursor-pointer text-center text-sm rounded-full leading-loose transition ease-in-out duration-100 ${
                           isToday(d)
                             ? 'bg-blue-500 text-white'
-                            : 'text-gray-700 hover:bg-blue-200'
+                            : 'text-gray-200 hover:bg-blue-200'
                         }`}
                       >
                         {d}
@@ -276,10 +273,10 @@ export default function Datepicker({
                       style={{ width: '25%' }}
                     >
                       <div
-                        className={`cursor-pointer p-5 font-semibold text-center text-sm rounded-lg hover:bg-gray-200 ${
+                        className={`cursor-pointer p-5 font-semibold text-center text-sm rounded-lg hover:bg-gray-200 hover:text-gray-700 ${
                           isSelectedMonth(i)
                             ? 'bg-blue-500 text-white'
-                            : 'text-gray-700 hover:bg-blue-200'
+                            : 'text-gray-200 hover:bg-blue-200'
                         }`}
                       >
                         {format(

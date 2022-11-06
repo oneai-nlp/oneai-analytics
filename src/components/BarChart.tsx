@@ -96,11 +96,7 @@ export const BarChart: FC<BarChartProps> = ({
     );
 
     return (
-      <g
-        key={i}
-        className="hover:text-blue-700 hover:cursor-pointer pr-1"
-        onClick={() => nodeClicked(d)}
-      >
+      <g key={i}>
         <rect
           x={x}
           y={y}
@@ -124,15 +120,16 @@ export const BarChart: FC<BarChartProps> = ({
           <div className="h-full w-full">
             <ColorsAxis width={barWidth} colorsConfig={colorsConfig} />
             <div
-              className="flex h-full items-center ml-1 relative"
+              className="flex h-full w-full items-center ml-1 relative"
               style={{
                 fontFamily: fontFamily,
                 fontWeight: 300,
                 fontStyle: 'normal',
                 color: textColor,
+                fontSize: '14px',
               }}
             >
-              <span className="flex items-center w-fit">
+              <span className="flex items-center max-w-[30%] truncate mr-2">
                 {counters
                   .filter((counter) => counter.metadataKeyValue !== null)
                   .map((counter, i) => (
@@ -146,10 +143,15 @@ export const BarChart: FC<BarChartProps> = ({
                     </div>
                   ))}
               </span>
-              <span className="truncate w-4/6">{d.text}</span>
-              <span className="ml-2 truncate flex items-center">
+              <span
+                className="truncate w-3/6 hover:text-gray-300 hover:cursor-pointer"
+                onClick={() => nodeClicked(d)}
+              >
+                {d.text}
+              </span>
+              <span className="truncate flex items-center w-2/6 ml-auto">
                 {labels.map((label, i) => (
-                  <div key={i} className="ml-1">
+                  <div key={i}>
                     <MaxLabelDisplay
                       countersConfiguration={countersConfiguration}
                       metadataKey={label}

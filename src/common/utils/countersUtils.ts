@@ -372,5 +372,9 @@ export function getItemCounterConfiguration(
 ): CounterConfiguration | null {
   if (!metadata || !value) return null;
   const counterConfig = countersConfigurations[metadata];
-  return counterConfig.items?.find((group) => group.label === value) ?? null;
+  const valueCounterConfig = counterConfig.items?.find(
+    (group) => group.label === value
+  );
+  if (!valueCounterConfig || !valueCounterConfig.display) return null;
+  return valueCounterConfig;
 }

@@ -29,7 +29,7 @@ export default function CountersLabelsDisplay({
   labelMaxWidth?: string;
 }) {
   return (
-    <span className="truncate flex w-full items-center">
+    <span className="truncate flex items-center">
       {counters
         .filter((counter) => counter.metadataKeyValue !== null)
         .map((counter, i) => (
@@ -44,7 +44,7 @@ export default function CountersLabelsDisplay({
           </div>
         ))}
       {labels.map((label, i) => (
-        <div key={i} className="ml-1">
+        <div key={i}>
           <MaxLabelDisplay
             countersConfiguration={countersConfiguration}
             metadataKey={label}

@@ -302,7 +302,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
           fontFamily: treemapFontFamily,
         }}
       >
-        <div className="flex flex-row items-center p-5 h-full">
+        <div className="flex flex-row items-center py-5 ml-[24px] h-full">
           <div className="flex flex-row w-5/12 justify-start items-center">
             <div className="h-full flex">
               <svg
@@ -407,14 +407,19 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
             fontFamily: treemapFontFamily,
           }}
         >
-          <div className="flex flex-row items-center p-5 h-full">
-            <div className="flex flex-row w-10/12 justify-start">
-              {currentNode ? (
-                <button
-                  type="button"
-                  onClick={() => goBackClicked(1)}
-                  className="text-slate-700 hover:bg-slate-700 hover:text-white font-medium rounded-lg text-sm p-1 text-center inline-flex items-center"
-                >
+          <div className="flex flex-row items-center py-4 ml-[24px] h-full">
+            <div className="flex flex-row justify-start mr-4">
+              <button
+                type="button"
+                onClick={() => goBackClicked(1)}
+                disabled={currentNode === null}
+                className={`text-slate-700 font-medium rounded-lg text-sm p-1 text-center inline-flex items-center ${
+                  currentNode
+                    ? 'hover:bg-slate-700 hover:text-white'
+                    : 'hover:cursor-default'
+                }`}
+              >
+                {currentNode ? (
                   <svg
                     className="h-4 w-4 text-white"
                     width="24"
@@ -432,17 +437,22 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     <line x1="5" y1="12" x2="9" y2="16" />{' '}
                     <line x1="5" y1="12" x2="9" y2="8" />
                   </svg>
-                  <span className="sr-only">Go back</span>
-                </button>
-              ) : (
-                <button type="button" disabled>
+                ) : (
                   <HomeIcon className="h-4 w-4 text-white" />
+                )}
 
-                  <span className="sr-only">Go Home</span>
-                </button>
-              )}
+                <span className="sr-only">Go back</span>
+              </button>
 
-              <div className="ml-4 text-gray-300 font-bold truncate self-center flex items-center">
+              <div
+                className="ml-1 text-gray-300 truncate self-center flex items-center"
+                style={{
+                  fontFamily: treemapFontFamily,
+                  fontWeight: 300,
+                  fontStyle: 'normal',
+                  fontSize: '14px',
+                }}
+              >
                 {nodesPath.map((node, i) => (
                   <div key={i} className="flex">
                     <div className="max-w-[20ch] truncate">
@@ -462,7 +472,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                   labelsFilters
                     ?.filter((label) => label.value)
                     .map((keyValue, i) => (
-                      <span key={i} className="flex">
+                      <span key={i} className="flex items-center">
                         <span className="text-gray-500 ml-1">/ </span>
                         <LabelDisplay
                           tooltip="click to delete"
@@ -474,6 +484,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                             ReactTooltip.hide();
                           }}
                           width="20ch"
+                          color="#747189"
                         />
                       </span>
                     ))}
@@ -484,7 +495,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 )}
               </div>
             </div>
-            <div className="flex w-2/12 justify-end">
+            <div className="flex justify-end ml-auto">
               {!loading && (
                 <CountersLabelsDisplay
                   counters={counters}
