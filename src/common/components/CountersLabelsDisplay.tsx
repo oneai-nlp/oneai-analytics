@@ -44,16 +44,15 @@ export default function CountersLabelsDisplay({
           </div>
         ))}
       {labels.map((label, i) => (
-        <div key={i}>
-          <MaxLabelDisplay
-            countersConfiguration={countersConfiguration}
-            metadataKey={label}
-            labelClicked={labelClicked}
-            metadata={metadata}
-            width={labelWidth}
-            maxWidth={labelMaxWidth}
-          />
-        </div>
+        <MaxLabelDisplay
+          key={i}
+          countersConfiguration={countersConfiguration}
+          metadataKey={label}
+          labelClicked={labelClicked}
+          metadata={metadata}
+          width={labelWidth}
+          maxWidth={labelMaxWidth}
+        />
       ))}
     </span>
   );

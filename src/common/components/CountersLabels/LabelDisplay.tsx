@@ -8,8 +8,8 @@ export default function LabelDisplay({
   countersConfiguration,
   labelClicked,
   tooltip = '',
-  width = '100%',
-  maxWidth = '20ch',
+  width,
+  maxWidth = '10ch',
   color = 'white',
 }: {
   metadataKey: string;
@@ -30,7 +30,7 @@ export default function LabelDisplay({
     <span
       data-for="global"
       data-tip={tooltip}
-      className="flex items-center text-sm px-1 cursor-pointer hover:text-gray-300 w-fit"
+      className="flex items-center px-1 cursor-pointer hover:text-gray-300"
       style={{ color }}
       onClick={() => labelClicked(metadataKey, value)}
     >
@@ -43,7 +43,7 @@ export default function LabelDisplay({
           maxWidth,
           marginLeft: metadataKey === 'topic' ? '-1px' : '1px',
         }}
-        className="truncate italic"
+        className="italic truncate pr-1"
       >
         {value}
       </span>

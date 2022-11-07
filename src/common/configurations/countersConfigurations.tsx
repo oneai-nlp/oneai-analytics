@@ -12,11 +12,10 @@ import {
   ScaleIcon,
   CalendarIcon,
   HeartIcon,
-  HashtagIcon,
   KeyIcon,
 } from '@heroicons/react/24/outline';
 import React from 'react';
-import { FilmIcon } from '@heroicons/react/20/solid';
+import { FilmIcon, HashtagIcon } from '@heroicons/react/20/solid';
 
 export const defaultCountersConfigurations: CountersConfigurations = {
   signals: {
