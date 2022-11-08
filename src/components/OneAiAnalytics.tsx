@@ -312,24 +312,13 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
+                stroke="currentColor"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M3.5 5.89477C3.5 5.06635 4.17157 4.39478 5 4.39478H19C19.8284 4.39478 20.5 5.06635 20.5 5.89478V11.9211H3.5V5.89477Z"
-                  stroke={display === 'Treemap' ? 'white' : '#747189'}
-                />
-                <path
-                  d="M3.5 11.9736H13.8684V19.4999H5C4.17157 19.4999 3.5 18.8284 3.5 17.9999V11.9736Z"
-                  stroke={display === 'Treemap' ? 'white' : '#747189'}
-                />
-                <path
-                  d="M13.9211 11.9736H20.5001V17.9999C20.5001 18.8284 19.8285 19.4999 19.0001 19.4999H13.9211V11.9736Z"
-                  stroke={display === 'Treemap' ? 'white' : '#747189'}
-                />
-                <path
-                  d="M8.68433 4.36841V11.4737"
-                  stroke={display === 'Treemap' ? 'white' : '#747189'}
-                />
+                <path d="M3.5 5.89477C3.5 5.06635 4.17157 4.39478 5 4.39478H19C19.8284 4.39478 20.5 5.06635 20.5 5.89478V11.9211H3.5V5.89477Z" />
+                <path d="M3.5 11.9736H13.8684V19.4999H5C4.17157 19.4999 3.5 18.8284 3.5 17.9999V11.9736Z" />
+                <path d="M13.9211 11.9736H20.5001V17.9999C20.5001 18.8284 19.8285 19.4999 19.0001 19.4999H13.9211V11.9736Z" />
+                <path d="M8.68433 4.36841V11.4737" />
               </svg>
 
               <svg
@@ -338,33 +327,14 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
+                stroke="currentColor"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M3.75 20.25V3.75"
-                  stroke={display === 'BarChart' ? 'white' : '#747189'}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M3.75 9.75H15.75C15.75 11.5074 15.75 12.4926 15.75 14.25H3.75"
-                  stroke={display === 'BarChart' ? 'white' : '#747189'}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M20.25 5.25H3.75V9.75H20.25V5.25Z"
-                  stroke={display === 'BarChart' ? 'white' : '#747189'}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M12.75 14.25V18.75H3.75"
-                  stroke={display === 'BarChart' ? 'white' : '#747189'}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+                <path d="M3.75 20.25V3.75" />
+                <path d="M3.75 9.75H15.75C15.75 11.5074 15.75 12.4926 15.75 14.25H3.75" />
+                <path d="M20.25 5.25H3.75V9.75H20.25V5.25Z" />
+                <path d="M12.75 14.25V18.75H3.75" />
               </svg>
             </div>
             <div>
@@ -407,13 +377,21 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
             fontFamily: treemapFontFamily,
           }}
         >
-          <div className="flex flex-row items-center py-4 ml-[24px] h-full">
-            <div className="flex flex-row justify-start mr-4">
+          <div className="flex flex-row items-center ml-[24px] h-full">
+            <div
+              className="flex flex-row justify-start mr-4 items-center"
+              style={{
+                fontFamily: treemapFontFamily,
+                fontWeight: 300,
+                fontStyle: 'normal',
+                fontSize: '14px',
+              }}
+            >
               <button
                 type="button"
                 onClick={() => goBackClicked(1)}
                 disabled={currentNode === null}
-                className={`text-slate-700 font-medium rounded-lg text-sm p-1 text-center inline-flex items-center ${
+                className={`text-slate-700 rounded-lg inline-flex ${
                   currentNode
                     ? 'hover:bg-slate-700 hover:text-white'
                     : 'hover:cursor-default'
@@ -421,7 +399,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               >
                 {currentNode ? (
                   <svg
-                    className="h-4 w-4 text-white"
+                    className="h-[1em] w-[1em] self-center text-white"
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
@@ -438,21 +416,13 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     <line x1="5" y1="12" x2="9" y2="8" />
                   </svg>
                 ) : (
-                  <HomeIcon className="h-4 w-4 text-white" />
+                  <HomeIcon className="h-[0.9em] w-[1em] text-white" />
                 )}
 
                 <span className="sr-only">Go back</span>
               </button>
 
-              <div
-                className="ml-1 text-gray-300 truncate self-center flex items-center"
-                style={{
-                  fontFamily: treemapFontFamily,
-                  fontWeight: 300,
-                  fontStyle: 'normal',
-                  fontSize: '14px',
-                }}
-              >
+              <div className="ml-1 text-gray-300 truncate flex items-center">
                 {nodesPath.map((node, i) => (
                   <div key={i} className="flex">
                     <div className="max-w-[20ch] truncate">
@@ -512,7 +482,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
             </div>
           </div>
         </div>
-        <div className="w-full grow flex flex-col overflow-x-hidden">
+        <div className="w-full h-full flex flex-col overflow-x-hidden">
           {loading && (
             <div className="grow w-full justify-center items-center flex">
               <div className="text-center">
@@ -677,10 +647,10 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
 };
 
 function getVisualizationLogoClasses(active: boolean) {
-  return `h-7 w-7   ${
+  return `h-7 w-7 mr-1 ${
     active
       ? 'text-white'
-      : 'text-[#747189] hover:cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-100 hover:text-white'
+      : 'text-[#747189] hover:cursor-pointer hover:text-white'
   }`;
 }
 

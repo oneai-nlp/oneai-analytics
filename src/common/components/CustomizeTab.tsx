@@ -69,23 +69,6 @@ export default function CustomizeTab({
                 <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                   <div className="relative bg-[#1D1C27] p-5 max-h-[85vh] text-white">
                     <div className="w-full">
-                      <Counters
-                        countersConfigurations={countersConfigurations}
-                        calculationsConfigurations={calculationsConfigurations}
-                        currentCounters={currentCounters}
-                        countersChanged={countersChanged}
-                        addCounterText="Add counter"
-                        title="Counters"
-                      />
-                    </div>
-                    <div className="w-full mt-2">
-                      <Labels
-                        currentLabels={selectedLabels}
-                        labelsOptions={labelsOptions.sort()}
-                        labelsChanged={labelsChanged}
-                      />
-                    </div>
-                    <div className="w-full mt-2">
                       <p className="text-xl mb-1">Size Axis</p>
                       <KeyValueSingleSelect
                         metadataKeyValue={selectedSizeAxis}
@@ -104,6 +87,23 @@ export default function CustomizeTab({
                         countersChanged={colorsAxisChanged}
                         addCounterText="Add axis"
                         title="Color Axis"
+                      />
+                    </div>
+                    <div className="w-full mt-2">
+                      <Counters
+                        countersConfigurations={countersConfigurations}
+                        calculationsConfigurations={calculationsConfigurations}
+                        currentCounters={currentCounters}
+                        countersChanged={countersChanged}
+                        addCounterText="Add counter"
+                        title="Counters"
+                      />
+                    </div>
+                    <div className="w-full mt-2">
+                      <Labels
+                        currentLabels={selectedLabels}
+                        labelsOptions={labelsOptions.sort()}
+                        labelsChanged={labelsChanged}
                       />
                     </div>
                   </div>

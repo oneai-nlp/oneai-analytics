@@ -35,7 +35,12 @@ export default function LabelDisplay({
       onClick={() => labelClicked(metadataKey, value)}
     >
       {config && config.display && config.display.icon !== null && (
-        <span className="w-[1em] h-[1em]">{config.display.icon}</span>
+        <span
+          className="w-[1em] h-[1em]"
+          style={{ color: config.display.color }}
+        >
+          {config.display.icon}
+        </span>
       )}
       <span
         style={{
