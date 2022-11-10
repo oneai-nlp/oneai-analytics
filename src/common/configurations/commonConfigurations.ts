@@ -6,6 +6,7 @@ import {
   topValueCalculationConfiguration,
   topValuePercentCalculationConfiguration,
   totalSumCalculationConfiguration,
+  trendCalculationConfiguration,
 } from './calculationsConfigurations';
 
 export const CUSTOM_METADATA_KEY = 'item count';
@@ -21,4 +22,5 @@ export const defaultCalculations = [
   topGroupPercentCalculationConfiguration,
   percentOfItemsCalculationConfiguration,
   percentOfAllItemsCalculationConfiguration,
+  trendCalculationConfiguration,
 ];

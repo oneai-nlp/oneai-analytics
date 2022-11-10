@@ -1,6 +1,16 @@
 export interface MetaData {
   [key: string]: { value: string; count: number }[];
 }
+
+export interface Trend {
+  period_start_date: string;
+  period_end_date: string;
+  days: number;
+  items_count: number;
+  phrases_count: number;
+  metadata: MetaData;
+}
+
 export interface Item {
   id: number;
   create_date: string;
@@ -22,6 +32,7 @@ export interface Phrase {
   text: string;
   items_count: number;
   metadata: MetaData;
+  trends: Trend[];
 }
 
 export interface Cluster {
@@ -31,4 +42,5 @@ export interface Cluster {
   phrases_count: number;
   metadata: MetaData;
   items_count: number;
+  trends: Trend[];
 }

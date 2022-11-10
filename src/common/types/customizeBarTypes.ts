@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { MetaData } from './modals';
+import { MetaData, Trend } from './modals';
 
 export interface CounterType {
   metadataKeyValue: MetadataKeyValue | null;
@@ -29,12 +29,13 @@ export interface DisplayConfig {
 }
 export interface CalculationConfiguration {
   name: string;
-  type: 'number' | 'percentage';
+  type: 'number' | 'percentage' | 'trend';
   hasGroups: boolean;
   hasMultipleMembers: boolean;
   calculate: (
     selectedMetadataKeyValue: MetadataKeyValue | null,
     metadata: MetaData,
+    trends: Trend[],
     allCountersConfigurations: CountersConfigurations
   ) => {
     counter: CounterConfiguration | null;

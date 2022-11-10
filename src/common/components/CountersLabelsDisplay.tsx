@@ -3,7 +3,7 @@ import {
   CountersConfigurations,
   CounterType,
 } from '../types/customizeBarTypes';
-import { MetaData } from '../types/modals';
+import { MetaData, Trend } from '../types/modals';
 import CounterDisplay from './CountersLabels/CounterDisplay';
 import MaxLabelDisplay from './CountersLabels/MaxLabelDisplay';
 
@@ -12,6 +12,7 @@ export default function CountersLabelsDisplay({
   labels,
   metadata,
   countersConfiguration,
+  trends,
   labelClicked,
   counterWidth,
   counterMaxWidth,
@@ -22,6 +23,7 @@ export default function CountersLabelsDisplay({
   labels: string[];
   metadata: MetaData;
   countersConfiguration: CountersConfigurations;
+  trends: Trend[];
   labelClicked: (key: string, value: string) => void;
   counterWidth?: string;
   counterMaxWidth?: string;
@@ -38,6 +40,7 @@ export default function CountersLabelsDisplay({
               counter={counter}
               countersConfiguration={countersConfiguration}
               metadata={metadata}
+              trends={trends}
               width={counterWidth}
               maxWidth={counterMaxWidth}
             />

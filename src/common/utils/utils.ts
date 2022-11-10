@@ -51,3 +51,18 @@ export function toLowerKeys(obj: { [key: string]: {} }) {
     return accumulator;
   }, {} as { [key: string]: {} });
 }
+
+export function percentageIncrease(previous: number, current: number): number {
+  let percent;
+  if (current !== 0) {
+    if (previous !== 0) {
+      percent = ((current - previous) / previous) * 100;
+    } else {
+      percent = current * 100;
+    }
+  } else {
+    percent = -previous * 100;
+  }
+
+  return Math.floor(percent);
+}

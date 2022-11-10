@@ -3,7 +3,7 @@ import {
   CounterType,
   MetadataKeyValue,
 } from '../types/customizeBarTypes';
-import { MetaData } from '../types/modals';
+import { MetaData, Trend } from '../types/modals';
 import { getMetadataKeyValueGroups, hasMultipleMembers } from './countersUtils';
 
 export function getMetadataKeyValueDisplay(metadataKeyValue: MetadataKeyValue) {
@@ -14,6 +14,7 @@ export function getMetadataKeyValueDisplay(metadataKeyValue: MetadataKeyValue) {
 export function getBackgroundColorLayers(
   colorAxis: CounterType[],
   metadata: MetaData,
+  trends: Trend[],
   countersConfiguration: CountersConfigurations
 ) {
   return groupCounters(colorAxis, countersConfiguration)
@@ -23,6 +24,7 @@ export function getBackgroundColorLayers(
           counter.calculationConfiguration.calculate(
             counter.metadataKeyValue,
             metadata,
+            trends,
             countersConfiguration
           )
         )

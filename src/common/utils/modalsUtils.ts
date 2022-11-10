@@ -1,5 +1,5 @@
 import { OneAIDataNode } from '../types/componentsInputs';
-import { Cluster, Item, Phrase } from '../types/modals';
+import { Cluster, Item, Phrase, Trend } from '../types/modals';
 
 export const COLLECTION_TYPE = 'Collection';
 
@@ -37,4 +37,13 @@ export function getNodeDetails(
   const currentNodeId = node ? getNodeId(node) : collection;
 
   return { id: currentNodeId, type: currentNodeType };
+}
+
+export function getNodeTrends(node: OneAIDataNode | undefined): Trend[] {
+  if (!node) return [];
+  return node.type === 'Cluster'
+    ? (node.data as Cluster).trends ?? []
+    : node.type === 'Phrase'
+    ? (node.data as Phrase).trends ?? []
+    : [];
 }

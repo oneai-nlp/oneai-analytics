@@ -71,6 +71,7 @@ export const ItemsListDisplay: FC<ItemsDisplayComponentProps> = ({
                         counter={counter}
                         countersConfiguration={countersConfiguration}
                         metadata={item.metadata}
+                        trends={[]}
                       />
                     </td>
                   ))}

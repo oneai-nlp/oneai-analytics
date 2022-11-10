@@ -35,10 +35,18 @@ export const BarChart: FC<BarChartProps> = ({
         .sort((a, b) =>
           sizeAxis?.key === CUSTOM_METADATA_KEY
             ? b.amount - a.amount
-            : totalSumCalculation(sizeAxis, b.metadata, countersConfiguration)
-                .result -
-              totalSumCalculation(sizeAxis, a.metadata, countersConfiguration)
-                .result
+            : totalSumCalculation(
+                sizeAxis,
+                b.metadata,
+                b.trends,
+                countersConfiguration
+              ).result -
+              totalSumCalculation(
+                sizeAxis,
+                a.metadata,
+                b.trends,
+                countersConfiguration
+              ).result
         )
         .map((d) => d.text ?? '')
     );
@@ -57,8 +65,12 @@ export const BarChart: FC<BarChartProps> = ({
         dataNodes.map((d) =>
           sizeAxis?.key === CUSTOM_METADATA_KEY
             ? d.amount
-            : totalSumCalculation(sizeAxis, d.metadata, countersConfiguration)
-                .result
+            : totalSumCalculation(
+                sizeAxis,
+                d.metadata,
+                d.trends,
+                countersConfiguration
+              ).result
         )
       )[1] ?? 20,
     [dataNodes, sizeAxis]
@@ -78,11 +90,16 @@ export const BarChart: FC<BarChartProps> = ({
     const result =
       sizeAxis?.key === CUSTOM_METADATA_KEY
         ? d.amount
-        : totalSumCalculation(sizeAxis, d.metadata, countersConfiguration)
-            .result;
-    const barWidth =
+        : totalSumCalculation(
+            sizeAxis,
+            d.metadata,
+            d.trends,
+            countersConfiguration
+          ).result;
+    const xWidth =
       xScale(result === max ? result : Math.min(max - 1, result + max * 0.1)) -
       24;
+    const barWidth = xWidth > 0 ? xWidth : 0;
     const barHeight = 36;
     const opacity = 1;
     const fill = '#322F46';
@@ -92,6 +109,7 @@ export const BarChart: FC<BarChartProps> = ({
     const colorsConfig = getBackgroundColorLayers(
       colorAxis,
       d.metadata,
+      d.trends,
       countersConfiguration
     );
 
@@ -138,6 +156,7 @@ export const BarChart: FC<BarChartProps> = ({
                         counter={counter}
                         countersConfiguration={countersConfiguration}
                         metadata={d.metadata}
+                        trends={d.trends}
                         width="6ch"
                       />
                     </div>

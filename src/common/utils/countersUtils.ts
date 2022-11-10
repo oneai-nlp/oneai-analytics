@@ -5,12 +5,13 @@ import {
   GroupMembers,
   MetadataKeyValue,
 } from '../types/customizeBarTypes';
-import { MetaData } from '../types/modals';
-import { sum, toLowerKeys } from './utils';
+import { MetaData, Trend } from '../types/modals';
+import { percentageIncrease, sum, toLowerKeys } from './utils';
 
 export function topGroupPercentCalculation(
   metadataKeyValue: MetadataKeyValue | null,
   metadata: MetaData,
+  _: Trend[],
   countersConfigurations: CountersConfigurations
 ) {
   const counter = getMetadataKeyValueConfiguration(
@@ -37,6 +38,7 @@ export function topGroupPercentCalculation(
 export function groupsPercentsCalculation(
   label: string,
   metadata: MetaData,
+  _: Trend[],
   countersConfigurations: CountersConfigurations
 ): {
   result?: number;
@@ -73,6 +75,7 @@ export function groupsPercentsCalculation(
 export function topGroupCalculation(
   metadataKeyValue: MetadataKeyValue | null,
   metadata: MetaData,
+  _: Trend[],
   countersConfigurations: CountersConfigurations
 ) {
   const counter = getMetadataKeyValueConfiguration(
@@ -101,6 +104,7 @@ export function topGroupCalculation(
 export function topValuePercentCalculation(
   metadataKeyValue: MetadataKeyValue | null,
   metadata: MetaData,
+  _: Trend[],
   countersConfigurations: CountersConfigurations
 ) {
   const counter = getMetadataKeyValueConfiguration(
@@ -132,6 +136,7 @@ export function topValuePercentCalculation(
 export function topValueCalculation(
   metadataKeyValue: MetadataKeyValue | null,
   metadata: MetaData,
+  _: Trend[],
   countersConfigurations: CountersConfigurations
 ) {
   const counter = getMetadataKeyValueConfiguration(
@@ -158,6 +163,7 @@ export function topValueCalculation(
 export function totalSumCalculation(
   metadataKeyValue: MetadataKeyValue | null,
   metadata: MetaData,
+  _: Trend[],
   countersConfigurations: CountersConfigurations
 ): {
   counter: CounterConfiguration | null;
@@ -183,6 +189,7 @@ export function totalSumCalculation(
 export function percentOfItemsCalculation(
   metadataKeyValue: MetadataKeyValue | null,
   metadata: MetaData,
+  _: Trend[],
   countersConfigurations: CountersConfigurations
 ) {
   if (!metadataKeyValue) return { counter: null, result: 0 };
@@ -221,6 +228,7 @@ export function percentOfItemsCalculation(
 export function percentOfAllItemsCalculation(
   metadataKeyValue: MetadataKeyValue | null,
   metadata: MetaData,
+  _: Trend[],
   countersConfigurations: CountersConfigurations
 ) {
   if (!metadataKeyValue) return { counter: null, result: 0 };
@@ -250,6 +258,47 @@ export function percentOfAllItemsCalculation(
 
   return {
     result: keyCount === 0 ? 0 : Math.round((itemCount / keyCount) * 100),
+    counter: itemCounter ?? keyCounter,
+    metadataKey: metadataKeyValue.key,
+    value: metadataKeyValue.value,
+  };
+}
+
+export function trendCalculation(
+  metadataKeyValue: MetadataKeyValue | null,
+  _: MetaData,
+  trends: Trend[],
+  countersConfigurations: CountersConfigurations
+) {
+  if (!metadataKeyValue || trends.length < 2)
+    return { counter: null, result: 0 };
+  const itemCounter = getMetadataKeyValueConfiguration(
+    metadataKeyValue,
+    countersConfigurations
+  );
+
+  const keyCounter = getMetadataKeyValueConfiguration(
+    { key: metadataKeyValue.key },
+    countersConfigurations
+  );
+
+  if (!itemCounter || !keyCounter) return { counter: null, result: 0 };
+
+  const trendsCounts = trends.map((trend) =>
+    calculateSumItemsInMetadata(
+      itemCounter.members,
+      itemCounter.items,
+      trend.metadata
+    )
+  );
+  const latestTrend = trendsCounts.at(0) ?? 0;
+  const previousTrendsSum = sum(trendsCounts.slice(1, trendsCounts.length));
+  const previousTrendsMean =
+    previousTrendsSum > 0 ? previousTrendsSum / trendsCounts.length - 1 : 0;
+  const trend = percentageIncrease(previousTrendsMean, latestTrend);
+
+  return {
+    result: trend,
     counter: itemCounter ?? keyCounter,
     metadataKey: metadataKeyValue.key,
     value: metadataKeyValue.value,

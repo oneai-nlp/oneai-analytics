@@ -7,6 +7,7 @@ import {
   topValueCalculation,
   topValuePercentCalculation,
   totalSumCalculation,
+  trendCalculation,
 } from '../utils/countersUtils';
 
 export const totalSumCalculationName = 'Total SUM';
@@ -16,6 +17,7 @@ export const topGroupCalculationName = 'Top group total';
 export const topGroupPercentCalculationName = 'Top group %';
 export const percentOfItemsCalculationName = '% of items';
 export const percentOfAllCalculationName = '% of all items';
+export const trendCalculationName = 'trend';
 
 export const totalSumCalculationConfiguration: CalculationConfiguration = {
   name: totalSumCalculationName,
@@ -76,3 +78,11 @@ export const percentOfAllItemsCalculationConfiguration: CalculationConfiguration
     type: 'percentage',
     calculate: percentOfAllItemsCalculation,
   };
+
+export const trendCalculationConfiguration: CalculationConfiguration = {
+  name: trendCalculationName,
+  hasGroups: false,
+  hasMultipleMembers: false,
+  type: 'trend',
+  calculate: trendCalculation,
+};

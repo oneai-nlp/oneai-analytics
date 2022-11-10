@@ -1,21 +1,24 @@
+import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/20/solid';
 import React from 'react';
 import {
   CountersConfigurations,
   CounterType,
 } from '../../types/customizeBarTypes';
-import { MetaData } from '../../types/modals';
+import { MetaData, Trend } from '../../types/modals';
 import { getMetadataKeyValueDisplay } from '../../utils/displayUtils';
 
 export default function CounterDisplay({
   counter,
   metadata,
   countersConfiguration,
+  trends,
   width,
   maxWidth = '6ch',
 }: {
   counter: CounterType;
   metadata: MetaData;
   countersConfiguration: CountersConfigurations;
+  trends: Trend[];
   width?: string;
   maxWidth?: string;
 }) {
@@ -24,6 +27,7 @@ export default function CounterDisplay({
   const displayResult = counter.calculationConfiguration.calculate(
     metadataKeyValue,
     metadata,
+    trends,
     countersConfiguration
   );
   if (!displayResult.counter) return <></>;
@@ -38,7 +42,10 @@ export default function CounterDisplay({
       }
       data-for="global"
       className={`flex items-center text-sm ${
-        displayResult.result > 0 && displayResult.counter.display
+        counter.calculationConfiguration.type !== 'trend' &&
+        displayResult.result < 1
+          ? 'text-white'
+          : displayResult.counter.display
           ? displayResult.counter.display.color === 'green'
             ? 'text-emerald-400'
             : displayResult.counter.display.color === 'red'
@@ -47,15 +54,46 @@ export default function CounterDisplay({
           : 'text-white'
       }`}
     >
+      {counter.calculationConfiguration.type === 'trend' &&
+      displayResult.result > 0 ? (
+        <span
+          className="text-emerald-400"
+          style={{ width: '1em', height: '1em' }}
+        >
+          <ArrowUpIcon />
+        </span>
+      ) : (
+        counter.calculationConfiguration.type === 'trend' &&
+        displayResult.result < 0 && (
+          <span
+            className="text-red-400"
+            style={{ width: '1em', height: '1em' }}
+          >
+            <ArrowDownIcon />
+          </span>
+        )
+      )}
       {displayResult.counter.display &&
         displayResult.counter.display.icon !== null && (
           <span style={{ width: '1em', height: '1em' }}>
             {displayResult.counter.display.icon}
           </span>
         )}
-      <span style={{ width, maxWidth }}>
+      <span
+        className={`${
+          counter.calculationConfiguration.type === 'trend'
+            ? displayResult.result > 0
+              ? 'text-emerald-400'
+              : displayResult.result < 0
+              ? 'text-red-400'
+              : 'text-white'
+            : ''
+        }`}
+        style={{ width, maxWidth }}
+      >
         {displayResult.result}
-        {counter.calculationConfiguration.type === 'percentage' && '%'}
+        {counter.calculationConfiguration.type === 'percentage' ||
+          (counter.calculationConfiguration.type === 'trend' && '%')}
       </span>
     </span>
   );

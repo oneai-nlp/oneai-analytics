@@ -47,8 +47,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
     null,
   ] as Array<Date | null>);
   const [labelsFilters, setLabelsFilters] = useState([] as MetadataKeyValue[]);
-
   const [localRefreshToken, setLocalRefreshToken] = useState(refreshToken);
+  const [trendPeriods, setTrendPeriods] = useState(2);
 
   const previousValues = useRef({
     domain: null as string | null,
@@ -109,7 +109,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             currentPage,
             dateRange[0],
             dateRange[1],
-            labelsFilters
+            labelsFilters,
+            trendPeriods
           );
 
           const newNodes = clusters.data.map((c) => {
@@ -150,7 +151,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             currentPage,
             dateRange[0],
             dateRange[1],
-            labelsFilters
+            labelsFilters,
+            trendPeriods
           );
 
           const newNodes = phrases.data.map((p) => {
@@ -188,7 +190,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             currentPage,
             dateRange[0],
             dateRange[1],
-            labelsFilters
+            labelsFilters,
+            trendPeriods
           );
 
           const newNodes = items.data.map((i) => {
@@ -331,6 +334,13 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             return current + '1';
           })
         }
+        trendPeriods={trendPeriods}
+        trendPeriodsChanged={(newTrendPeriod) =>
+          setLocalRefreshToken((current) => {
+            setTrendPeriods(newTrendPeriod);
+            return current + '1';
+          })
+        }
         {...rest}
       />
     )
@@ -344,7 +354,8 @@ async function fetchClusters(
   page: number,
   from: Date | null,
   to: Date | null,
-  labelsFilters: MetadataKeyValue[]
+  labelsFilters: MetadataKeyValue[],
+  trendPeriods: number
 ): Promise<{ totalPages: number; data: Cluster[] }> {
   return await fetchApi(
     `${domain}/clustering/v1/collections/${collection}/clusters`,
@@ -353,7 +364,8 @@ async function fetchClusters(
     page,
     from,
     to,
-    labelsFilters
+    labelsFilters,
+    trendPeriods
   );
 }
 
@@ -365,7 +377,8 @@ async function fetchPhrases(
   page: number,
   from: Date | null,
   to: Date | null,
-  labelsFilters: MetadataKeyValue[]
+  labelsFilters: MetadataKeyValue[],
+  trendPeriods: number
 ): Promise<{ totalPages: number; data: Phrase[] }> {
   return await fetchApi(
     `${domain}/clustering/v1/collections/${collection}/clusters/${clusterId}/phrases`,
@@ -374,7 +387,8 @@ async function fetchPhrases(
     page,
     from,
     to,
-    labelsFilters
+    labelsFilters,
+    trendPeriods
   );
 }
 
@@ -386,7 +400,8 @@ async function fetchItems(
   page: number,
   from: Date | null,
   to: Date | null,
-  labelsFilters: MetadataKeyValue[]
+  labelsFilters: MetadataKeyValue[],
+  trendPeriods: number
 ): Promise<{ totalPages: number; data: Item[] }> {
   return await fetchApi(
     `${domain}/clustering/v1/collections/${collection}/phrases/${phraseId}/items`,
@@ -395,7 +410,8 @@ async function fetchItems(
     page,
     from,
     to,
-    labelsFilters
+    labelsFilters,
+    trendPeriods
   );
 }
 
@@ -406,7 +422,8 @@ async function fetchApi<T>(
   page: number,
   from: Date | null,
   to: Date | null,
-  labelsFilters: MetadataKeyValue[]
+  labelsFilters: MetadataKeyValue[],
+  trendPeriods: number
 ): Promise<{ totalPages: number; data: T[] }> {
   const labelsFiltersString = labelsFilters
     .map((metadataKeyValue) =>
@@ -423,6 +440,9 @@ async function fetchApi<T>(
         (to ? `&to-date=${format(to, 'yyyy-MM-dd')}` : '') +
         (labelsFiltersString.length > 0
           ? `&item-metadata=${labelsFiltersString.join()}`
+          : '') +
+        (trendPeriods > 1
+          ? `&include-trends=true&trend-periods-limit=${trendPeriods}`
           : ''),
       {
         method: 'GET',

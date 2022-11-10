@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Cluster, Item, MetaData, Phrase } from './modals';
+import { Cluster, Item, MetaData, Phrase, Trend } from './modals';
 import {
   CountersConfigurations,
   CounterType,
@@ -11,6 +11,7 @@ export interface DataNode {
   amount: number;
   text?: string;
   metadata: MetaData;
+  trends: Trend[];
   type: string;
 }
 
@@ -80,6 +81,8 @@ export interface OneAiAnalyticsProps {
   labelsFilters?: MetadataKeyValue[];
   labelClicked?: (key: string, value: string) => void;
   labelFilterDeleted?: (index: number) => void;
+  trendPeriods?: number;
+  trendPeriodsChanged?: (index: number) => void;
 }
 
 export type OneAIAnalyticsStaticDataWrapperProps = Omit<

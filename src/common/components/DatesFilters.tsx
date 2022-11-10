@@ -12,11 +12,15 @@ export default function DatesFilters({
   toDate,
   fromDateChanged,
   toDateChanged,
+  trendPeriods,
+  trendPeriodsChanged,
 }: {
   fromDate: Date | null;
   toDate: Date | null;
   fromDateChanged: (date: Date | null) => void;
   toDateChanged: (date: Date | null) => void;
+  trendPeriods?: number;
+  trendPeriodsChanged?: (index: number) => void;
 }) {
   return (
     <Popover className="relative">
@@ -83,6 +87,27 @@ export default function DatesFilters({
                           </button>
                         </div>
                       </div>
+                      {trendPeriods !== undefined && trendPeriodsChanged && (
+                        <div className="flex items-center">
+                          <div>
+                            <label
+                              htmlFor="small-input"
+                              className="block mb-2 text-sm font-medium text-gray-300"
+                            >
+                              Trend periods amount
+                            </label>
+                            <input
+                              type="number"
+                              id="small-input"
+                              onChange={(e) =>
+                                trendPeriodsChanged(Number(e.target.value))
+                              }
+                              value={trendPeriods}
+                              className="block p-2 w-1/2 rounded-lg border sm:text-xs bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                            />
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

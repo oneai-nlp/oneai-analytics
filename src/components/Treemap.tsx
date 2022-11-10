@@ -42,13 +42,18 @@ export const Treemap: FC<TreemapProps> = ({
           amount:
             sizeAxis?.key === CUSTOM_METADATA_KEY
               ? c.amount
-              : totalSumCalculation(sizeAxis, c.metadata, countersConfiguration)
-                  .result,
+              : totalSumCalculation(
+                  sizeAxis,
+                  c.metadata,
+                  c.trends,
+                  countersConfiguration
+                ).result,
           children: [],
         };
       }),
       amount: 0,
       metadata: {},
+      trends: [],
       type: '',
     };
   }, [dataNodes, sizeAxis]);
@@ -99,6 +104,7 @@ export const Treemap: FC<TreemapProps> = ({
     const colorsConfig = getBackgroundColorLayers(
       colorAxis,
       leaf.data.metadata,
+      leaf.data.trends,
       countersConfiguration
     );
 
@@ -138,6 +144,7 @@ export const Treemap: FC<TreemapProps> = ({
                   counters={counters}
                   labels={labels}
                   metadata={leaf.data.metadata}
+                  trends={leaf.data.trends}
                   countersConfiguration={countersConfiguration}
                   labelClicked={labelClicked}
                 />

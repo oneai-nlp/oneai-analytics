@@ -28,12 +28,13 @@ import {
   CounterType,
   MetadataKeyValue,
 } from '../common/types/customizeBarTypes';
-import { Item, MetaData } from '../common/types/modals';
+import { Item, MetaData, Trend } from '../common/types/modals';
 import {
   COLLECTION_TYPE,
   getNodeId,
   getNodeItemsCount,
   getNodeText,
+  getNodeTrends,
 } from '../common/utils/modalsUtils';
 import { BarChart } from './BarChart';
 import { ItemsListDisplay } from './ItemsListDisplay';
@@ -71,6 +72,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   labelsFilters,
   labelClicked = () => {},
   labelFilterDeleted = () => {},
+  trendPeriods,
+  trendPeriodsChanged,
 }) => {
   const [display, setDisplay] = useState('Treemap' as Displays);
   const { width, height, ref } = useResizeDetector();
@@ -188,6 +191,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
             ],
             ...d.data.metadata,
           },
+          trends: getNodeTrends(d),
           type: d.type,
         };
       })
@@ -360,6 +364,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 fromDateChanged={setFromDate}
                 toDate={toDate}
                 toDateChanged={setToDate}
+                trendPeriods={trendPeriods}
+                trendPeriodsChanged={trendPeriodsChanged}
               />
             </div>
           </div>
@@ -475,6 +481,11 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                       mergeMetadata(finalMetadata, currentNode.metadata),
                     {}
                   )}
+                  trends={nodes.reduce(
+                    (finalMetadata, currentNode) =>
+                      mergeTrends(finalMetadata, currentNode.trends),
+                    [] as Trend[]
+                  )}
                   countersConfiguration={countersConfigurations}
                   labelClicked={labelClicked}
                 />
@@ -544,7 +555,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
 
             <div
               ref={ref}
-              className="h-full w-full overflow-y-auto overflow-x-hidden"
+              className="h-full w-full overflow-y-auto no-scrollbar overflow-x-hidden"
             >
               {currentNode && currentNode.type === 'Phrase' ? (
                 itemsDisplay({
@@ -663,6 +674,30 @@ function mergeMetadata(metadata1: MetaData, metadata2: MetaData): MetaData {
   });
 
   return newMetadata;
+}
+
+function mergeTrends(trends1?: Trend[], trends2?: Trend[]): Trend[] {
+  if (!trends1 || !trends2) return [];
+  const newTrends: Trend[] = [];
+  const sourceTrends = trends1.length >= trends2.length ? trends1 : trends2;
+  sourceTrends.forEach((_, i) => {
+    newTrends.push({
+      days: sourceTrends[i].days,
+      period_start_date: sourceTrends[i].period_start_date,
+      period_end_date: sourceTrends[i].period_end_date,
+      items_count:
+        (trends1.at(i)?.items_count ?? 0) + (trends2.at(i)?.items_count ?? 0),
+      phrases_count:
+        (trends1.at(i)?.phrases_count ?? 0) +
+        (trends2.at(i)?.phrases_count ?? 0),
+      metadata: mergeMetadata(
+        trends1.at(i)?.metadata ?? {},
+        trends2.at(i)?.metadata ?? {}
+      ),
+    });
+  });
+
+  return newTrends;
 }
 
 function getInitialCounterTypes(
