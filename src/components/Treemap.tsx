@@ -11,21 +11,21 @@ import { calculateFontSize } from '../common/utils/utils';
 
 type TreemapNode = DataNode & { children: TreemapNode[] };
 
-const BIG_COLOR_DEFAULT = '#031f38';
-const SMALL_COLOR_DEFAULT = '#72b1ca';
+const BIG_COLOR_DEFAULT = '#322F46';
+const SMALL_COLOR_DEFAULT = '#2C293D';
 
 export const Treemap: FC<TreemapProps> = ({
   dataNodes,
   nodeClicked,
   height,
   width,
-  bigColor = BIG_COLOR_DEFAULT,
-  smallColor = SMALL_COLOR_DEFAULT,
+  bigColor,
+  smallColor,
   countFontSize = 14,
-  fontFamily = 'sans-serif',
-  textColor = 'white',
+  fontFamily,
+  textColor,
   borderWidth = 0,
-  borderColor = bigColor,
+  borderColor,
   labels,
   counters,
   countersConfiguration,
@@ -84,7 +84,7 @@ export const Treemap: FC<TreemapProps> = ({
 
   const colors = useMemo(() => {
     const len = root.leaves().length;
-    if (!(valid(bigColor) && valid(smallColor)))
+    if (!bigColor || !smallColor || !(valid(bigColor) && valid(smallColor)))
       return scale([BIG_COLOR_DEFAULT, SMALL_COLOR_DEFAULT]).domain([0, len]);
 
     return scale([bigColor, smallColor]).domain([0, len]);
@@ -122,7 +122,7 @@ export const Treemap: FC<TreemapProps> = ({
           <div className="h-full w-full">
             <ColorsAxis width={width} colorsConfig={colorsConfig} />
             <div
-              className="flex flex-col h-full w-full p-1 relative"
+              className="flex flex-col h-full w-full p-1 relative border-slate-500 dark:border-[#272535] text-black dark:text-white"
               style={{
                 fontFamily: fontFamily,
                 fontWeight: 300,

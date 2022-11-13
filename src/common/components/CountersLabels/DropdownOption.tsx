@@ -20,7 +20,9 @@ export default function DropdownOption({
       style={{ paddingLeft: pl + 'rem' }}
       className={({ active }) =>
         `relative cursor-default select-none py-2 pr-4 ${
-          active ? 'bg-[#444154] text-white' : 'text-[#747189]'
+          active
+            ? 'bg-gray-400 dark:bg-[#444154] text-white'
+            : 'text-gray-300 dark:text-[#747189]'
         }`
       }
       value={value}

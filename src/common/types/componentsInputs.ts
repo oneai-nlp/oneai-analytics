@@ -40,6 +40,7 @@ export interface BarChartProps {
   width: number;
   height: number;
   nodeClicked: (node: DataNode) => void;
+  barColor?: string;
   fontFamily?: string;
   textColor?: string;
   labels: string[];
@@ -65,15 +66,17 @@ export interface OneAiAnalyticsProps {
   goBackClicked?: (skip: number) => void;
   nextPageClicked?: () => void;
   prevPageClicked?: () => void;
+  darkMode?: boolean;
   background?: string;
   treemapBigColor?: string;
   treemapSmallColor?: string;
   treemapCountFontSize?: number;
-  treemapFontFamily?: string;
-  treemapTextColor?: string;
+  fontFamily?: string;
+  textColor?: string;
   treemapBorderWidth?: number;
   treemapBorderColor?: string;
   navbarColor?: string;
+  barColor?: string;
   itemsDisplay?: FC<ItemsDisplayComponentProps>;
   loading?: boolean;
   nodesPath?: string[];
@@ -111,8 +114,8 @@ export interface ExampleNode {
 
 export interface ItemsDisplayComponentProps {
   items: Item[];
-  bgColor: string;
-  textColor: string;
+  bgColor?: string;
+  textColor?: string;
   labels: string[];
   counters: CounterType[];
   countersConfiguration: CountersConfigurations;

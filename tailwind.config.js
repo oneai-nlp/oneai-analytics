@@ -2,7 +2,7 @@
 
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}', './stories/*'],
-  important: true,
+  darkMode: 'class',
   theme: {
     extend: {},
   },

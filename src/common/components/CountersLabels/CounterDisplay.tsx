@@ -44,14 +44,14 @@ export default function CounterDisplay({
       className={`flex items-center text-sm ${
         counter.calculationConfiguration.type !== 'trend' &&
         displayResult.result < 1
-          ? 'text-white'
+          ? 'text-gray-500 dark:text-white'
           : displayResult.counter.display
           ? displayResult.counter.display.color === 'green'
             ? 'text-emerald-400'
             : displayResult.counter.display.color === 'red'
             ? 'text-red-400'
-            : 'text-white'
-          : 'text-white'
+            : 'text-gray-500 dark:text-white'
+          : 'text-gray-500 dark:text-white'
       }`}
     >
       {counter.calculationConfiguration.type === 'trend' &&
@@ -86,7 +86,7 @@ export default function CounterDisplay({
               ? 'text-emerald-400'
               : displayResult.result < 0
               ? 'text-red-400'
-              : 'text-white'
+              : 'text-gray-500 dark:text-white'
             : ''
         }`}
         style={{ width, maxWidth }}

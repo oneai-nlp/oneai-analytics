@@ -15,7 +15,8 @@ export const BarChart: FC<BarChartProps> = ({
   height,
   width,
   nodeClicked,
-  fontFamily = 'sans-serif',
+  barColor,
+  fontFamily,
   textColor,
   counters,
   countersConfiguration,
@@ -102,7 +103,7 @@ export const BarChart: FC<BarChartProps> = ({
     const barWidth = xWidth > 0 ? xWidth : 0;
     const barHeight = 36;
     const opacity = 1;
-    const fill = '#322F46';
+    const fill = barColor;
     const fillOpacity = 1;
     const rx = 1;
 
@@ -138,7 +139,7 @@ export const BarChart: FC<BarChartProps> = ({
           <div className="h-full w-full">
             <ColorsAxis width={barWidth} colorsConfig={colorsConfig} />
             <div
-              className="flex h-full w-full items-center ml-1 relative"
+              className="flex h-full w-full items-center ml-1 relative text-gray-500"
               style={{
                 fontFamily: fontFamily,
                 fontWeight: 300,
@@ -163,7 +164,7 @@ export const BarChart: FC<BarChartProps> = ({
                   ))}
               </span>
               <span
-                className="truncate w-3/6 hover:text-gray-300 hover:cursor-pointer"
+                className="truncate w-3/6 hover:text-gray-400 dark:hover:text-gray-300 hover:cursor-pointer"
                 onClick={() => nodeClicked(d)}
               >
                 {d.text}

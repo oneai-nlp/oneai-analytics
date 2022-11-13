@@ -44,7 +44,7 @@ export default function CustomizeTab({
             <Popover.Button
               className={`
                 ${open ? '' : 'text-opacity-90'}
-                group inline-flex items-center rounded-md px-3 py-2 text-base font-medium text-white hover:text-opacity-100 focus:outline-none `}
+                group inline-flex items-center rounded-md px-3 py-2 text-base font-medium text-gray-500 dark:text-white hover:text-opacity-100 focus:outline-none `}
             >
               <span>Customize</span>
               <ChevronDownIcon
@@ -66,8 +66,8 @@ export default function CustomizeTab({
                 tabIndex={0}
                 className="absolute z-10 mt-3 w-screen max-w-sm transform lg:max-w-4xl"
               >
-                <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                  <div className="relative bg-[#1D1C27] p-5 max-h-[85vh] text-white">
+                <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-gray-500 dark:ring-black ring-opacity-5">
+                  <div className="relative bg-white dark:bg-[#1D1C27] p-5 max-h-[85vh] text-gray-500 dark:text-white">
                     <div className="w-full">
                       <p className="text-xl mb-1">Size Axis</p>
                       <KeyValueSingleSelect

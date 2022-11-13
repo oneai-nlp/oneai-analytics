@@ -48,7 +48,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   ] as Array<Date | null>);
   const [labelsFilters, setLabelsFilters] = useState([] as MetadataKeyValue[]);
   const [localRefreshToken, setLocalRefreshToken] = useState(refreshToken);
-  const [trendPeriods, setTrendPeriods] = useState(2);
+  const [trendPeriods, setTrendPeriods] = useState(0);
 
   const previousValues = useRef({
     domain: null as string | null,
@@ -59,7 +59,6 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
     clickedNodes: null as OneAIDataNode[] | null,
     currentPage: null as number | null,
   });
-  const fetchFinished = useRef(true);
 
   useEffect(() => {
     if (
@@ -87,8 +86,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   }, [domain, apiKey, collection, refreshToken, localRefreshToken]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      fetchFinished.current = false;
+    const fetchData = async (controller: AbortController) => {
       setLoading(true);
       const currentClicked = clickedNodes.at(-1);
 
@@ -103,6 +101,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           setCurrentNodes(cached.nodes);
         } else {
           const clusters = await fetchClusters(
+            controller,
             domain,
             collection,
             apiKey,
@@ -112,6 +111,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             labelsFilters,
             trendPeriods
           );
+          if (clusters.error) return;
 
           const newNodes = clusters.data.map((c) => {
             return { type: 'Cluster' as NodeType, data: c };
@@ -144,6 +144,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           setCurrentNodes(cached.nodes);
         } else {
           const phrases = await fetchPhrases(
+            controller,
             domain,
             collection,
             clusterId,
@@ -154,6 +155,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             labelsFilters,
             trendPeriods
           );
+          if (phrases.error) return;
 
           const newNodes = phrases.data.map((p) => {
             return { type: 'Phrase' as NodeType, data: p };
@@ -183,6 +185,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           setCurrentNodes(cached.nodes);
         } else {
           const items = await fetchItems(
+            controller,
             domain,
             collection,
             phraseId,
@@ -193,6 +196,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             labelsFilters,
             trendPeriods
           );
+          if (items.error) return;
 
           const newNodes = items.data.map((i) => {
             return { type: 'Item' as NodeType, data: i };
@@ -213,8 +217,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
         }
       }
       setLoading(false);
-      fetchFinished.current = true;
     };
+    const controller = new AbortController();
     if (
       previousValues.current.domain !== domain ||
       previousValues.current.apiKey !== apiKey ||
@@ -222,24 +226,25 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       previousValues.current.clickedNodes != clickedNodes ||
       previousValues.current.currentPage !== currentPage
     ) {
-      if (fetchFinished.current) {
-        fetchData().catch((e) => {
-          console.error(e);
-          setLoading(false);
-          fetchFinished.current = true;
-        });
+      fetchData(controller).catch((e) => {
+        console.error(e);
+        setLoading(false);
+      });
 
-        previousValues.current = {
-          domain,
-          apiKey,
-          collection,
-          clickedNodes,
-          currentPage,
-          refreshToken,
-          localRefreshToken,
-        };
-      }
+      previousValues.current = {
+        domain,
+        apiKey,
+        collection,
+        clickedNodes,
+        currentPage,
+        refreshToken,
+        localRefreshToken,
+      };
     }
+
+    return () => {
+      controller.abort();
+    };
   }, [domain, collection, apiKey, clickedNodes, currentPage]);
 
   const nodeClicked = (node: { type: NodeType; id: string }) => {
@@ -348,6 +353,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
 };
 
 async function fetchClusters(
+  controller: AbortController,
   domain: string,
   collection: string,
   apiKey: string,
@@ -356,8 +362,9 @@ async function fetchClusters(
   to: Date | null,
   labelsFilters: MetadataKeyValue[],
   trendPeriods: number
-): Promise<{ totalPages: number; data: Cluster[] }> {
+): Promise<{ totalPages: number; data: Cluster[]; error: string | null }> {
   return await fetchApi(
+    controller,
     `${domain}/clustering/v1/collections/${collection}/clusters`,
     apiKey,
     'clusters',
@@ -370,6 +377,7 @@ async function fetchClusters(
 }
 
 async function fetchPhrases(
+  controller: AbortController,
   domain: string,
   collection: string,
   clusterId: string,
@@ -379,8 +387,9 @@ async function fetchPhrases(
   to: Date | null,
   labelsFilters: MetadataKeyValue[],
   trendPeriods: number
-): Promise<{ totalPages: number; data: Phrase[] }> {
+): Promise<{ totalPages: number; data: Phrase[]; error: string | null }> {
   return await fetchApi(
+    controller,
     `${domain}/clustering/v1/collections/${collection}/clusters/${clusterId}/phrases`,
     apiKey,
     'phrases',
@@ -393,6 +402,7 @@ async function fetchPhrases(
 }
 
 async function fetchItems(
+  controller: AbortController,
   domain: string,
   collection: string,
   phraseId: string,
@@ -402,8 +412,9 @@ async function fetchItems(
   to: Date | null,
   labelsFilters: MetadataKeyValue[],
   trendPeriods: number
-): Promise<{ totalPages: number; data: Item[] }> {
+): Promise<{ totalPages: number; data: Item[]; error: string | null }> {
   return await fetchApi(
+    controller,
     `${domain}/clustering/v1/collections/${collection}/phrases/${phraseId}/items`,
     apiKey,
     'items',
@@ -416,6 +427,7 @@ async function fetchItems(
 }
 
 async function fetchApi<T>(
+  controller: AbortController,
   url: string,
   apiKey: string,
   accessor: string,
@@ -424,7 +436,7 @@ async function fetchApi<T>(
   to: Date | null,
   labelsFilters: MetadataKeyValue[],
   trendPeriods: number
-): Promise<{ totalPages: number; data: T[] }> {
+): Promise<{ totalPages: number; data: T[]; error: string | null }> {
   const labelsFiltersString = labelsFilters
     .map((metadataKeyValue) =>
       metadataKeyValue.key && metadataKeyValue.value
@@ -447,17 +459,23 @@ async function fetchApi<T>(
       {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', 'api-key': apiKey },
+        signal: controller.signal,
       }
     );
 
-    if (res.status !== 200 || !res.ok) return { totalPages: 0, data: [] };
+    if (res.status !== 200 || !res.ok)
+      return { totalPages: 0, data: [], error: 'response code != 200' };
 
     const json = await res.json();
 
-    return { totalPages: json['total_pages'], data: json[accessor] };
+    return {
+      totalPages: json['total_pages'],
+      data: json[accessor],
+      error: null,
+    };
   } catch (e) {
     console.error('error occurred ->', e);
-    return { totalPages: 0, data: [] };
+    return { totalPages: 0, data: [], error: String(e) };
   }
 }
 

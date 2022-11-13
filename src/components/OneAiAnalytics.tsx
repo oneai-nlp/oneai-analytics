@@ -57,15 +57,17 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   nextPageClicked = () => {},
   prevPageClicked = () => {},
   itemsDisplay = ItemsListDisplay,
-  background = '#161414',
-  treemapBigColor = '#322F46',
-  treemapSmallColor = '#2C293D',
+  darkMode = true,
+  background,
+  treemapBigColor = darkMode ? '#322F46' : '#F7F7F7',
+  treemapSmallColor = darkMode ? '#2C293D' : '#F7F7F7',
   treemapCountFontSize = 14,
-  treemapFontFamily = "'Poppins', sans-serif",
-  treemapTextColor = 'white',
+  fontFamily = "'Poppins', sans-serif",
+  textColor = darkMode ? 'white' : '#111111',
   treemapBorderWidth = 1,
-  navbarColor = '#272535',
-  treemapBorderColor = navbarColor,
+  navbarColor,
+  treemapBorderColor = darkMode ? '#272535' : 'white',
+  barColor = darkMode ? '#322F46' : '#F7F7F7',
   loading,
   nodesPath = [],
   dateRangeChanged = () => {},
@@ -294,362 +296,373 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
 
   return (
     <div
-      className="oneai-analytics-namespace h-full w-full flex flex-col overflow-hidden"
-      style={{ background: background }}
+      className={`oneai-analytics-namespace h-full w-full overflow-hidden ${
+        darkMode && 'dark'
+      }`}
     >
-      <ReactTooltip id="global" />
       <div
-        className="w-full mb-1 rounded-md"
-        style={{
-          height: '65px',
-          background: navbarColor,
-          fontFamily: treemapFontFamily,
-        }}
+        className="h-full w-full flex flex-col overflow-hidden bg-[#E5E5E5] dark:bg-[#161414] p-1"
+        style={{ background: background }}
       >
-        <div className="flex flex-row items-center py-5 ml-[24px] h-full">
-          <div className="flex flex-row w-5/12 justify-start items-center">
-            <div className="h-full flex">
-              <svg
-                className={getVisualizationLogoClasses(display === 'Treemap')}
-                onClick={() => setDisplay('Treemap')}
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M3.5 5.89477C3.5 5.06635 4.17157 4.39478 5 4.39478H19C19.8284 4.39478 20.5 5.06635 20.5 5.89478V11.9211H3.5V5.89477Z" />
-                <path d="M3.5 11.9736H13.8684V19.4999H5C4.17157 19.4999 3.5 18.8284 3.5 17.9999V11.9736Z" />
-                <path d="M13.9211 11.9736H20.5001V17.9999C20.5001 18.8284 19.8285 19.4999 19.0001 19.4999H13.9211V11.9736Z" />
-                <path d="M8.68433 4.36841V11.4737" />
-              </svg>
-
-              <svg
-                className={getVisualizationLogoClasses(display === 'BarChart')}
-                onClick={() => setDisplay('BarChart')}
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M3.75 20.25V3.75" />
-                <path d="M3.75 9.75H15.75C15.75 11.5074 15.75 12.4926 15.75 14.25H3.75" />
-                <path d="M20.25 5.25H3.75V9.75H20.25V5.25Z" />
-                <path d="M12.75 14.25V18.75H3.75" />
-              </svg>
-            </div>
-            <div>
-              <CustomizeTab
-                currentCounters={counters}
-                selectedLabels={labels}
-                countersConfigurations={countersConfigurations}
-                labelsOptions={Object.keys(metaData).filter(
-                  (key) => key !== CUSTOM_METADATA_KEY
-                )}
-                calculationsConfigurations={defaultCalculations}
-                countersChanged={setCounters}
-                labelsChanged={setLabels}
-                selectedSizeAxis={sizeAxis}
-                sizeAxisChanged={setSizeAxis}
-                currentColorsAxis={colorAxis}
-                colorsAxisChanged={setColorAxis}
-              />
-            </div>
-            <div>
-              <DatesFilters
-                fromDate={fromDate}
-                fromDateChanged={setFromDate}
-                toDate={toDate}
-                toDateChanged={setToDate}
-                trendPeriods={trendPeriods}
-                trendPeriodsChanged={trendPeriodsChanged}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        className="w-full rounded-md grow flex flex-col overflow-hidden"
-        style={{ background: navbarColor }}
-      >
+        <ReactTooltip id="global" />
         <div
-          className="w-full"
+          className="w-full mb-1 rounded-md bg-white dark:bg-[#272535]"
           style={{
             height: '65px',
-            fontFamily: treemapFontFamily,
+            background: navbarColor,
+            fontFamily: fontFamily,
           }}
         >
-          <div className="flex flex-row items-center ml-[24px] h-full">
-            <div
-              className="flex flex-row justify-start mr-4 items-center"
-              style={{
-                fontFamily: treemapFontFamily,
-                fontWeight: 300,
-                fontStyle: 'normal',
-                fontSize: '14px',
-              }}
-            >
-              <button
-                type="button"
-                onClick={() => goBackClicked(1)}
-                disabled={currentNode === null}
-                className={`text-slate-700 rounded-lg inline-flex ${
-                  currentNode
-                    ? 'hover:bg-slate-700 hover:text-white'
-                    : 'hover:cursor-default'
-                }`}
-              >
-                {currentNode ? (
-                  <svg
-                    className="h-[1em] w-[1em] self-center text-white"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    strokeWidth="2"
-                    stroke="currentColor"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    {' '}
-                    <path stroke="none" d="M0 0h24v24H0z" />{' '}
-                    <line x1="5" y1="12" x2="19" y2="12" />{' '}
-                    <line x1="5" y1="12" x2="9" y2="16" />{' '}
-                    <line x1="5" y1="12" x2="9" y2="8" />
-                  </svg>
-                ) : (
-                  <HomeIcon className="h-[0.9em] w-[1em] text-white" />
-                )}
+          <div className="flex flex-row items-center py-5 ml-[24px] h-full">
+            <div className="flex flex-row w-5/12 justify-start items-center">
+              <div className="h-full flex">
+                <svg
+                  className={getVisualizationLogoClasses(display === 'Treemap')}
+                  onClick={() => setDisplay('Treemap')}
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M3.5 5.89477C3.5 5.06635 4.17157 4.39478 5 4.39478H19C19.8284 4.39478 20.5 5.06635 20.5 5.89478V11.9211H3.5V5.89477Z" />
+                  <path d="M3.5 11.9736H13.8684V19.4999H5C4.17157 19.4999 3.5 18.8284 3.5 17.9999V11.9736Z" />
+                  <path d="M13.9211 11.9736H20.5001V17.9999C20.5001 18.8284 19.8285 19.4999 19.0001 19.4999H13.9211V11.9736Z" />
+                  <path d="M8.68433 4.36841V11.4737" />
+                </svg>
 
-                <span className="sr-only">Go back</span>
-              </button>
-
-              <div className="ml-1 text-gray-300 truncate flex items-center">
-                {nodesPath.map((node, i) => (
-                  <div key={i} className="flex">
-                    <div className="max-w-[20ch] truncate">
-                      <span
-                        className="cursor-pointer hover:text-gray-50"
-                        onClick={() => goBackClicked(nodesPath.length - 1 - i)}
-                      >
-                        {node}
-                      </span>
-                    </div>
-                    {nodesPath.length - 1 !== i && (
-                      <span className="ml-1 mr-1">/</span>
-                    )}
-                  </div>
-                ))}
-                {(labelsFilters?.length ?? 0) > 0 &&
-                  labelsFilters
-                    ?.filter((label) => label.value)
-                    .map((keyValue, i) => (
-                      <span key={i} className="flex items-center">
-                        <span className="text-gray-500 ml-1">/ </span>
-                        <LabelDisplay
-                          tooltip="click to delete"
-                          metadataKey={keyValue.key}
-                          value={keyValue.value ?? ''}
-                          countersConfiguration={countersConfigurations}
-                          labelClicked={() => {
-                            labelFilterDeleted(i);
-                            ReactTooltip.hide();
-                          }}
-                          width="20ch"
-                          color="#747189"
-                        />
-                      </span>
-                    ))}
-                {totalPagesAmount > 1 && currentPage > 0 && (
-                  <span className="ml-1 text-gray-500">
-                    / {currentPage + 1}
-                  </span>
-                )}
+                <svg
+                  className={getVisualizationLogoClasses(
+                    display === 'BarChart'
+                  )}
+                  onClick={() => setDisplay('BarChart')}
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M3.75 20.25V3.75" />
+                  <path d="M3.75 9.75H15.75C15.75 11.5074 15.75 12.4926 15.75 14.25H3.75" />
+                  <path d="M20.25 5.25H3.75V9.75H20.25V5.25Z" />
+                  <path d="M12.75 14.25V18.75H3.75" />
+                </svg>
               </div>
-            </div>
-            <div className="flex justify-end ml-auto">
-              {!loading && (
-                <CountersLabelsDisplay
-                  counters={counters}
-                  labels={labels}
-                  metadata={nodes.reduce(
-                    (finalMetadata, currentNode) =>
-                      mergeMetadata(finalMetadata, currentNode.metadata),
-                    {}
+              <div>
+                <CustomizeTab
+                  currentCounters={counters}
+                  selectedLabels={labels}
+                  countersConfigurations={countersConfigurations}
+                  labelsOptions={Object.keys(metaData).filter(
+                    (key) => key !== CUSTOM_METADATA_KEY
                   )}
-                  trends={nodes.reduce(
-                    (finalMetadata, currentNode) =>
-                      mergeTrends(finalMetadata, currentNode.trends),
-                    [] as Trend[]
-                  )}
-                  countersConfiguration={countersConfigurations}
-                  labelClicked={labelClicked}
+                  calculationsConfigurations={defaultCalculations}
+                  countersChanged={setCounters}
+                  labelsChanged={setLabels}
+                  selectedSizeAxis={sizeAxis}
+                  sizeAxisChanged={setSizeAxis}
+                  currentColorsAxis={colorAxis}
+                  colorsAxisChanged={setColorAxis}
                 />
-              )}
+              </div>
+              <div>
+                <DatesFilters
+                  fromDate={fromDate}
+                  fromDateChanged={setFromDate}
+                  toDate={toDate}
+                  toDateChanged={setToDate}
+                  trendPeriods={trendPeriods}
+                  trendPeriodsChanged={trendPeriodsChanged}
+                />
+              </div>
             </div>
           </div>
         </div>
-        <div className="w-full h-full flex flex-col overflow-x-hidden">
-          {loading && (
-            <div className="grow w-full justify-center items-center flex">
-              <div className="text-center">
-                <div role="status">
-                  <svg
-                    className="inline mr-2 w-8 h-8 text-gray-200 animate-spin fill-blue-600"
-                    viewBox="0 0 100 101"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                      fill="currentColor"
-                    />
-                    <path
-                      d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                      fill="currentFill"
-                    />
-                  </svg>
-                  <span className="sr-only">Loading...</span>
+
+        <div
+          className="w-full rounded-md grow flex flex-col overflow-hidden bg-white dark:bg-[#272535]"
+          style={{ background: navbarColor }}
+        >
+          <div
+            className="w-full"
+            style={{
+              height: '65px',
+              fontFamily: fontFamily,
+            }}
+          >
+            <div className="flex flex-row items-center ml-[24px] h-full">
+              <div
+                className="flex flex-row justify-start mr-4 items-center"
+                style={{
+                  fontFamily: fontFamily,
+                  fontWeight: 300,
+                  fontStyle: 'normal',
+                  fontSize: '14px',
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={() => goBackClicked(1)}
+                  disabled={currentNode === null}
+                  className={`rounded-lg inline-flex ${
+                    currentNode
+                      ? 'hover:bg-[#EFEFEF] dark:hover:bg-slate-700'
+                      : 'hover:cursor-default'
+                  }`}
+                >
+                  {currentNode ? (
+                    <svg
+                      className="h-[1em] w-[1em] self-center text-[#111111] dark:text-white"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      strokeWidth="2"
+                      stroke="currentColor"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      {' '}
+                      <path stroke="none" d="M0 0h24v24H0z" />{' '}
+                      <line x1="5" y1="12" x2="19" y2="12" />{' '}
+                      <line x1="5" y1="12" x2="9" y2="16" />{' '}
+                      <line x1="5" y1="12" x2="9" y2="8" />
+                    </svg>
+                  ) : (
+                    <HomeIcon className="h-[0.9em] w-[1em] text-[#111111] dark:text-white" />
+                  )}
+
+                  <span className="sr-only">Go back</span>
+                </button>
+
+                <div className="ml-1 text-[#111111] dark:text-gray-300 truncate flex items-center">
+                  {nodesPath.map((node, i) => (
+                    <div key={i} className="flex">
+                      <div className="max-w-[20ch] truncate">
+                        <span
+                          className="cursor-pointer hover:text-gray-600 dark:hover:text-gray-50"
+                          onClick={() =>
+                            goBackClicked(nodesPath.length - 1 - i)
+                          }
+                        >
+                          {node}
+                        </span>
+                      </div>
+                      {nodesPath.length - 1 !== i && (
+                        <span className="ml-1 mr-1">/</span>
+                      )}
+                    </div>
+                  ))}
+                  {(labelsFilters?.length ?? 0) > 0 &&
+                    labelsFilters
+                      ?.filter((label) => label.value)
+                      .map((keyValue, i) => (
+                        <span key={i} className="flex items-center">
+                          <span className="text-gray-500 ml-1">/ </span>
+                          <LabelDisplay
+                            tooltip="click to delete"
+                            metadataKey={keyValue.key}
+                            value={keyValue.value ?? ''}
+                            countersConfiguration={countersConfigurations}
+                            labelClicked={() => {
+                              labelFilterDeleted(i);
+                              ReactTooltip.hide();
+                            }}
+                            width="20ch"
+                            color="#747189"
+                          />
+                        </span>
+                      ))}
+                  {totalPagesAmount > 1 && currentPage > 0 && (
+                    <span className="ml-1 text-gray-500">
+                      / {currentPage + 1}
+                    </span>
+                  )}
                 </div>
               </div>
+              <div className="flex justify-end ml-auto">
+                {!loading && (
+                  <CountersLabelsDisplay
+                    counters={counters}
+                    labels={labels}
+                    metadata={nodes.reduce(
+                      (finalMetadata, currentNode) =>
+                        mergeMetadata(finalMetadata, currentNode.metadata),
+                      {}
+                    )}
+                    trends={nodes.reduce(
+                      (finalMetadata, currentNode) =>
+                        mergeTrends(finalMetadata, currentNode.trends),
+                      [] as Trend[]
+                    )}
+                    countersConfiguration={countersConfigurations}
+                    labelClicked={labelClicked}
+                  />
+                )}
+              </div>
             </div>
-          )}
-          <div
-            className={`flex flex-row flex-grow ${
-              loading
-                ? 'invisible pointer-events-none w-0 h-0'
-                : 'w-full h-full'
-            }`}
-          >
-            {currentPage > 0 && (
-              <div
-                className="h-full flex items-center justify-center hover:cursor-pointer"
-                onClick={prevPageClicked}
-                style={{ width: '3%', backgroundColor: treemapBigColor }}
-              >
-                <button
-                  type="button"
-                  className="text-slate-500 hover:text-slate-700 font-medium rounded-lg text-sm text-center inline-flex items-center"
-                >
-                  <svg
-                    aria-hidden="true"
-                    className="w-5 h-5 rotate-180"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    ></path>
-                  </svg>
-                  <span className="sr-only">Prev</span>
-                </button>
+          </div>
+          <div className="w-full h-full flex flex-col overflow-x-hidden">
+            {loading && (
+              <div className="grow w-full justify-center items-center flex">
+                <div className="text-center">
+                  <div role="status">
+                    <svg
+                      className="inline mr-2 w-8 h-8 text-gray-200 animate-spin fill-blue-600"
+                      viewBox="0 0 100 101"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                        fill="currentColor"
+                      />
+                      <path
+                        d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                        fill="currentFill"
+                      />
+                    </svg>
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                </div>
               </div>
             )}
-
             <div
-              ref={ref}
-              className="h-full w-full overflow-y-auto no-scrollbar overflow-x-hidden"
+              className={`flex flex-row flex-grow ${
+                loading
+                  ? 'invisible pointer-events-none w-0 h-0'
+                  : 'w-full h-full'
+              }`}
             >
-              {currentNode && currentNode.type === 'Phrase' ? (
-                itemsDisplay({
-                  items: dataNodes.map((dataNode) => dataNode.data as Item),
-                  bgColor: treemapSmallColor,
-                  textColor: 'white',
-                  counters: counters,
-                  labels: labels,
-                  labelClicked: labelClicked,
-                  countersConfiguration: countersConfigurations,
-                })
-              ) : display === 'Treemap' ? (
-                <Treemap
-                  dataNodes={nodes}
-                  height={height ?? 0}
-                  width={width ?? 0}
-                  nodeClicked={(node) =>
-                    nodeClicked({
-                      type: !currentNode
-                        ? 'Cluster'
-                        : currentNode.type === 'Cluster'
-                        ? 'Phrase'
-                        : 'Item',
-                      id: node.id,
-                    })
-                  }
-                  labels={labels}
-                  counters={counters}
-                  bigColor={treemapBigColor}
-                  smallColor={treemapSmallColor}
-                  countFontSize={treemapCountFontSize}
-                  fontFamily={treemapFontFamily}
-                  textColor={treemapTextColor}
-                  borderWidth={treemapBorderWidth}
-                  borderColor={treemapBorderColor}
-                  countersConfiguration={countersConfigurations}
-                  labelClicked={labelClicked}
-                  sizeAxis={sizeAxis}
-                  colorAxis={colorAxis}
-                />
-              ) : (
-                <BarChart
-                  dataNodes={nodes}
-                  height={height ?? 0}
-                  width={width ?? 0}
-                  nodeClicked={(node) =>
-                    nodeClicked({
-                      type: !currentNode
-                        ? 'Cluster'
-                        : currentNode.type === 'Cluster'
-                        ? 'Phrase'
-                        : 'Item',
-                      id: node.id,
-                    })
-                  }
-                  fontFamily={treemapFontFamily}
-                  textColor={treemapTextColor}
-                  labels={labels}
-                  counters={counters}
-                  countersConfiguration={countersConfigurations}
-                  labelClicked={labelClicked}
-                  sizeAxis={sizeAxis}
-                  colorAxis={colorAxis}
-                />
+              {currentPage > 0 && (
+                <div
+                  className="h-full flex items-center justify-center hover:cursor-pointer dark:bg-[#322F46]"
+                  onClick={prevPageClicked}
+                  style={{ width: '3%', backgroundColor: treemapBigColor }}
+                >
+                  <button
+                    type="button"
+                    className="text-slate-500 hover:text-slate-700 font-medium rounded-lg text-sm text-center inline-flex items-center"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      className="w-5 h-5 rotate-180"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    <span className="sr-only">Prev</span>
+                  </button>
+                </div>
+              )}
+
+              <div
+                ref={ref}
+                className="h-full w-full overflow-y-auto no-scrollbar overflow-x-hidden"
+              >
+                {currentNode && currentNode.type === 'Phrase' ? (
+                  itemsDisplay({
+                    items: dataNodes.map((dataNode) => dataNode.data as Item),
+                    bgColor: navbarColor,
+                    textColor: textColor,
+                    counters: counters,
+                    labels: labels,
+                    labelClicked: labelClicked,
+                    countersConfiguration: countersConfigurations,
+                  })
+                ) : display === 'Treemap' ? (
+                  <Treemap
+                    dataNodes={nodes}
+                    height={height ?? 0}
+                    width={width ?? 0}
+                    nodeClicked={(node) =>
+                      nodeClicked({
+                        type: !currentNode
+                          ? 'Cluster'
+                          : currentNode.type === 'Cluster'
+                          ? 'Phrase'
+                          : 'Item',
+                        id: node.id,
+                      })
+                    }
+                    labels={labels}
+                    counters={counters}
+                    bigColor={treemapBigColor}
+                    smallColor={treemapSmallColor}
+                    countFontSize={treemapCountFontSize}
+                    fontFamily={fontFamily}
+                    textColor={textColor}
+                    borderWidth={treemapBorderWidth}
+                    borderColor={treemapBorderColor}
+                    countersConfiguration={countersConfigurations}
+                    labelClicked={labelClicked}
+                    sizeAxis={sizeAxis}
+                    colorAxis={colorAxis}
+                  />
+                ) : (
+                  <BarChart
+                    dataNodes={nodes}
+                    height={height ?? 0}
+                    width={width ?? 0}
+                    nodeClicked={(node) =>
+                      nodeClicked({
+                        type: !currentNode
+                          ? 'Cluster'
+                          : currentNode.type === 'Cluster'
+                          ? 'Phrase'
+                          : 'Item',
+                        id: node.id,
+                      })
+                    }
+                    fontFamily={fontFamily}
+                    textColor={textColor}
+                    barColor={barColor}
+                    labels={labels}
+                    counters={counters}
+                    countersConfiguration={countersConfigurations}
+                    labelClicked={labelClicked}
+                    sizeAxis={sizeAxis}
+                    colorAxis={colorAxis}
+                  />
+                )}
+              </div>
+
+              {currentPage < totalPagesAmount - 1 && (
+                <div
+                  className="h-full flex items-center justify-center hover:cursor-pointer"
+                  onClick={nextPageClicked}
+                  style={{ width: '3%', backgroundColor: treemapSmallColor }}
+                >
+                  <button
+                    type="button"
+                    className="text-slate-500 hover:text-slate-700 font-medium rounded-lg text-sm text-center inline-flex items-center"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      className="w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    <span className="sr-only">Next</span>
+                  </button>
+                </div>
               )}
             </div>
-
-            {currentPage < totalPagesAmount - 1 && (
-              <div
-                className="h-full flex items-center justify-center hover:cursor-pointer"
-                onClick={nextPageClicked}
-                style={{ width: '3%', backgroundColor: treemapSmallColor }}
-              >
-                <button
-                  type="button"
-                  className="text-slate-500 hover:text-slate-700 font-medium rounded-lg text-sm text-center inline-flex items-center"
-                >
-                  <svg
-                    aria-hidden="true"
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    ></path>
-                  </svg>
-                  <span className="sr-only">Next</span>
-                </button>
-              </div>
-            )}
           </div>
         </div>
       </div>
@@ -660,8 +673,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
 function getVisualizationLogoClasses(active: boolean) {
   return `h-7 w-7 mr-1 ${
     active
-      ? 'text-white'
-      : 'text-[#747189] hover:cursor-pointer hover:text-white'
+      ? 'bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]'
+      : 'text-[#747189] hover:cursor-pointer dark:hover:text-white'
   }`;
 }
 

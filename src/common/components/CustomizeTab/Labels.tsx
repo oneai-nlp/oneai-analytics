@@ -26,10 +26,10 @@ export default function Labels({
 
   return (
     <div className="w-full">
-      <p className="text-xl text-white mb-1">{title}</p>
+      <p className="text-xl text-gray-500 dark:text-white mb-1">{title}</p>
       <Listbox value={selectedLabels} onChange={handleChange} multiple>
         <div className="relative">
-          <Listbox.Button className="relative cursor-default rounded-lg bg-[#272535] py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+          <Listbox.Button className="relative cursor-default rounded-lg bg-gray-600 dark:bg-[#272535] py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
             <span className="block truncate lowercase first-letter:uppercase text-white">
               {selectedLabels.length === 0
                 ? 'Select'
@@ -48,7 +48,7 @@ export default function Labels({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="fixed mt-1 z-10 max-h-60 overflow-auto rounded-md bg-[#272533] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            <Listbox.Options className="fixed mt-1 z-10 max-h-60 overflow-auto rounded-md bg-gray-600 dark:bg-[#272533] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
               {uniqBy(labelsOptions, (key) => key).map((key) => (
                 <DropdownOption key={key} label={key} value={key} />
               ))}

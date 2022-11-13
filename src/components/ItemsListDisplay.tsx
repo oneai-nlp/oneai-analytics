@@ -17,8 +17,8 @@ export const ItemsListDisplay: FC<ItemsDisplayComponentProps> = ({
 }) => {
   return (
     <div
+      className="overflow-x-auto text-black bg-[#F7F7F7] dark:bg-[#272535] dark:text-white"
       style={{ backgroundColor: bgColor, color: textColor }}
-      className="overflow-x-auto"
     >
       <table className="table-auto w-full h-full text-left">
         <thead className="border-b-2 border-b-slate-500">

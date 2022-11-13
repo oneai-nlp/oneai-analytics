@@ -10,7 +10,7 @@ export default function LabelDisplay({
   tooltip = '',
   width,
   maxWidth = '10ch',
-  color = 'white',
+  color,
 }: {
   metadataKey: string;
   value: string;
@@ -30,7 +30,7 @@ export default function LabelDisplay({
     <span
       data-for="global"
       data-tip={tooltip}
-      className="flex items-center px-1 cursor-pointer hover:text-gray-300"
+      className="flex items-center px-1 cursor-pointer text-gray-500 hover:text-gray-300"
       style={{ color }}
       onClick={() => labelClicked(metadataKey, value)}
     >
