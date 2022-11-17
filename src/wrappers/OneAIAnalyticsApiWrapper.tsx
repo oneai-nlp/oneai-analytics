@@ -578,7 +578,7 @@ async function searchSimilarClusters(
     if (!clusters || clusters.length === 0) return [];
 
     return clusters
-      .sort((c1, c2) => c1.similarity - c2.similarity)
+      .sort((c1, c2) => c2.similarity - c1.similarity)
       .map((c) => {
         return { id: c.cluster_id, text: c.cluster_text };
       });
