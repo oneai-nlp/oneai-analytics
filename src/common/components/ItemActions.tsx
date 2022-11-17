@@ -63,11 +63,11 @@ export default function ItemActions({
 
   useEffect(() => {
     if (searchText === null || !searchSimilarClusters) return;
-    console.log(searchText);
     const fetchData = async (controller: AbortController) => {
       try {
         const res = await searchSimilarClusters(searchText, controller);
         setSimilarClusters(res);
+        console.log(res);
       } catch (e) {
         console.log(e);
       }
@@ -149,7 +149,14 @@ export default function ItemActions({
                   as="h3"
                   className="text-center text-lg font-medium leading-6 text-gray-900"
                 >
-                  Actions for {node?.type} with id - {node?.id}
+                  {action === 'Merge' ? (
+                    <div>Merging {node?.id}:</div>
+                  ) : (
+                    <span>Split {node?.id} to a new cluster:</span>
+                  )}
+                  <span className="flex w-full">
+                    "<span className="truncate">{node?.text}</span>"
+                  </span>
                 </Dialog.Title>
                 {error && (
                   <p
@@ -205,7 +212,9 @@ export default function ItemActions({
                   similarClusters && (
                     <div className="overflow-y-auto max-h-64">
                       <ClustersList
-                        clusters={similarClusters}
+                        clusters={similarClusters.filter(
+                          (c) => c.id.toString() !== node?.id
+                        )}
                         selected={selectedCluster}
                         clusterSelected={setSelectedCluster}
                       />
@@ -218,7 +227,7 @@ export default function ItemActions({
                     type="button"
                     className="text-center w-1/3 rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
                     onClick={invokeAction}
-                    disabled={loading}
+                    disabled={loading || !selectedCluster}
                   >
                     {action}
                   </button>
