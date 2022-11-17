@@ -66,3 +66,42 @@ export function percentageIncrease(previous: number, current: number): number {
 
   return Math.floor(percent);
 }
+
+export function getNumberDescription(num: number, decPlaces: number): string {
+  const prefix = num < 0 ? '-' : '';
+  // 2 decimal places => 100, 3 => 1000, etc
+  decPlaces = Math.pow(10, decPlaces);
+
+  // Enumerate num abbreviations
+  let abbrev = ['k', 'm', 'b', 't'];
+
+  let strResult: string = num.toString();
+  let result: number = Math.abs(num);
+
+  // Go through the array backwards, so we do the largest first
+  for (let i = abbrev.length - 1; i >= 0; i--) {
+    // Convert array index to "1000", "1000000", etc
+    let size = Math.pow(10, (i + 1) * 3);
+
+    // If the num is bigger or equal do the abbreviation
+    if (size <= result) {
+      // Here, we multiply by decPlaces, round, and then divide by decPlaces.
+      // This gives us nice rounding to a particular decimal place.
+      result = Math.round((result * decPlaces) / size) / decPlaces;
+
+      // Handle special case where we round up to the next abbreviation
+      if (result == 1000 && i < abbrev.length - 1) {
+        result = 1;
+        i++;
+      }
+
+      // Add the letter for the abbreviation
+      strResult = result.toString() + abbrev[i];
+
+      // We are done... stop
+      break;
+    }
+  }
+
+  return prefix + strResult;
+}

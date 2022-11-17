@@ -1,6 +1,7 @@
+import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { scale, valid } from 'chroma-js';
 import { hierarchy, treemap } from 'd3';
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 import { ColorsAxis } from '../common/components/CountersLabels/ColorsAxis';
 import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
 import { CUSTOM_METADATA_KEY } from '../common/configurations/commonConfigurations';
@@ -32,6 +33,7 @@ export const Treemap: FC<TreemapProps> = ({
   labelClicked,
   sizeAxis,
   colorAxis,
+  nodeActionsClicked,
 }) => {
   const mainNode: TreemapNode = useMemo(() => {
     return {
@@ -90,6 +92,8 @@ export const Treemap: FC<TreemapProps> = ({
     return scale([bigColor, smallColor]).domain([0, len]);
   }, [root, bigColor, smallColor]);
 
+  const [actionsVisible, setActionsVisible] = useState(null as number | null);
+
   const allShapes = root.leaves().map((leaf, index) => {
     const height = leaf.y1 - leaf.y0;
     const width = leaf.x1 - leaf.x0;
@@ -119,7 +123,11 @@ export const Treemap: FC<TreemapProps> = ({
           fill={colors(index).hex()}
         />
         <foreignObject x={leaf.x0} y={leaf.y0} width={width} height={height}>
-          <div className="h-full w-full">
+          <div
+            className="h-full w-full"
+            onMouseEnter={() => setActionsVisible(index)}
+            onMouseLeave={() => setActionsVisible(null)}
+          >
             <ColorsAxis width={width} colorsConfig={colorsConfig} />
             <div
               className="flex flex-col h-full w-full p-1 relative border-slate-500 dark:border-[#272535] text-black dark:text-white"
@@ -171,6 +179,16 @@ export const Treemap: FC<TreemapProps> = ({
                   {leaf.data.text}
                 </span>
               </span>
+              <div
+                data-for="global"
+                data-tip={leaf.data.type === 'Cluster' ? 'Merge' : 'Split'}
+                className={`self-end hover:cursor-pointer hover:text-white ${
+                  actionsVisible === index ? 'visible' : 'invisible'
+                }`}
+                onClick={() => nodeActionsClicked(leaf.data)}
+              >
+                <EllipsisHorizontalIcon className="h-4 w-4" />
+              </div>
             </div>
           </div>
         </foreignObject>

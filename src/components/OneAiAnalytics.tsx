@@ -6,6 +6,7 @@ import LabelDisplay from '../common/components/CountersLabels/LabelDisplay';
 import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
 import CustomizeTab from '../common/components/CustomizeTab';
 import DatesFilters from '../common/components/DatesFilters';
+import ItemActions from '../common/components/ItemActions';
 import { totalSumCalculationName } from '../common/configurations/calculationsConfigurations';
 import {
   colorAxisStorageKey,
@@ -18,6 +19,7 @@ import {
 import { defaultCountersConfigurations } from '../common/configurations/countersConfigurations';
 import {
   DataNode,
+  NodeType,
   OneAiAnalyticsProps,
 } from '../common/types/componentsInputs';
 import {
@@ -76,6 +78,9 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   labelFilterDeleted = () => {},
   trendPeriods,
   trendPeriodsChanged,
+  splitPhrase,
+  mergeClusters,
+  searchSimilarClusters,
 }) => {
   const [display, setDisplay] = useState('Treemap' as Displays);
   const { width, height, ref } = useResizeDetector();
@@ -88,6 +93,10 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   const [countersConfigurations, setCountersConfigurations] = useState(
     {} as CountersConfigurations
   );
+  const [currentNodeActions, setCurrentNodeActions] = useState(
+    null as { type: NodeType; id: string; text: string } | null
+  );
+
   const [fromDate, setFromDate] = useState(null as Date | null);
   const [toDate, setToDate] = useState(null as Date | null);
   const loadedNodes = useRef([] as { type: string; id: string }[]);
@@ -305,6 +314,12 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
         style={{ background: background }}
       >
         <ReactTooltip id="global" />
+        <ItemActions
+          node={currentNodeActions}
+          splitPhrase={splitPhrase}
+          mergeClusters={mergeClusters}
+          searchSimilarClusters={searchSimilarClusters}
+        />
         <div
           className="w-full mb-1 rounded-md bg-white dark:bg-[#272535]"
           style={{
@@ -606,6 +621,17 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     labelClicked={labelClicked}
                     sizeAxis={sizeAxis}
                     colorAxis={colorAxis}
+                    nodeActionsClicked={(node) =>
+                      setCurrentNodeActions({
+                        type: !currentNode
+                          ? 'Cluster'
+                          : currentNode.type === 'Cluster'
+                          ? 'Phrase'
+                          : 'Item',
+                        id: node.id,
+                        text: node.text ?? '',
+                      })
+                    }
                   />
                 ) : (
                   <BarChart
@@ -631,6 +657,17 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     labelClicked={labelClicked}
                     sizeAxis={sizeAxis}
                     colorAxis={colorAxis}
+                    nodeActionsClicked={(node) =>
+                      setCurrentNodeActions({
+                        type: !currentNode
+                          ? 'Cluster'
+                          : currentNode.type === 'Cluster'
+                          ? 'Phrase'
+                          : 'Item',
+                        id: node.id,
+                        text: node.text ?? '',
+                      })
+                    }
                   />
                 )}
               </div>

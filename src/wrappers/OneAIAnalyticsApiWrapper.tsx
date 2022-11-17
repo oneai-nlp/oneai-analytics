@@ -346,6 +346,30 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             return current + '1';
           })
         }
+        searchSimilarClusters={(text, controller) =>
+          searchSimilarClusters(controller, domain, collection, apiKey, text)
+        }
+        splitPhrase={(phraseId, controller) =>
+          splitPhrase(
+            controller,
+            domain,
+            collection,
+            apiKey,
+            phraseId,
+            setLocalRefreshToken
+          )
+        }
+        mergeClusters={(source, destination, controller) =>
+          mergeClusters(
+            controller,
+            domain,
+            collection,
+            apiKey,
+            source,
+            destination,
+            setLocalRefreshToken
+          )
+        }
         {...rest}
       />
     )
@@ -525,4 +549,122 @@ function setNodePageNumberInCache(
 
 function assembleCacheId(type: string, id: string, page: number = 0): string {
   return `${type}-${id}-${page}`;
+}
+
+async function searchSimilarClusters(
+  controller: AbortController,
+  domain: string,
+  collection: string,
+  apiKey: string,
+  text: string
+): Promise<{ id: string; text: string }[]> {
+  try {
+    const res = await fetch(
+      `${domain}/clustering/v1/collections/${collection}/clusters/find?text=${text}`,
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json', 'api-key': apiKey },
+        signal: controller.signal,
+      }
+    );
+
+    if (res.status !== 200 || !res.ok) return [];
+
+    const clusters = (await res.json()) as {
+      cluster_id: string;
+      cluster_text: string;
+      similarity: number;
+    }[];
+    if (!clusters || clusters.length === 0) return [];
+
+    return clusters
+      .sort((c1, c2) => c1.similarity - c2.similarity)
+      .map((c) => {
+        return { id: c.cluster_id, text: c.cluster_text };
+      });
+  } catch (e) {
+    console.error('error occurred ->', e);
+    return [];
+  }
+}
+
+async function splitPhrase(
+  controller: AbortController,
+  domain: string,
+  collection: string,
+  apiKey: string,
+  phraseId: string,
+  setLocalRefreshToken: React.Dispatch<React.SetStateAction<string>>
+): Promise<{ status: 'Success' | 'error'; message: string }> {
+  try {
+    const res = await fetch(
+      `${domain}/clustering/v1/collections/${collection}/phrases/${phraseId}/split`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'api-key': apiKey },
+        signal: controller.signal,
+      }
+    );
+
+    if (res.status !== 200 || !res.ok)
+      return { status: 'error', message: 'unknown' };
+
+    const json = await res.json();
+
+    if (!json.message) {
+      setLocalRefreshToken((current) => {
+        if (current.length > 5) {
+          return '';
+        }
+
+        return current + '1';
+      });
+    }
+
+    return json;
+  } catch (e) {
+    console.error('error occurred ->', e);
+    return { status: 'error', message: String(e) };
+  }
+}
+
+async function mergeClusters(
+  controller: AbortController,
+  domain: string,
+  collection: string,
+  apiKey: string,
+  source: string,
+  destination: string,
+  setLocalRefreshToken: React.Dispatch<React.SetStateAction<string>>
+): Promise<{ status: 'Success' | 'error'; message: string }> {
+  try {
+    const res = await fetch(
+      `${domain}/clustering/v1/collections/${collection}/merge?source-cluster=${source}&destination-cluster=${destination}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'api-key': apiKey },
+        signal: controller.signal,
+      }
+    );
+
+    if (res.status !== 200 || !res.ok)
+      return { status: 'error', message: 'unknown' };
+
+    const json = await res.json();
+
+    if (!json.message) {
+      setLocalRefreshToken((current) => {
+        if (current.length > 5) {
+          return '';
+        }
+
+        return current + '1';
+      });
+    }
+
+    return json;
+  } catch (e) {
+    console.error('error occurred ->', e);
+    return { status: 'error', message: String(e) };
+  }
 }

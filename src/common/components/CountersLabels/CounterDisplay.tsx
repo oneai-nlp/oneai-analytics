@@ -6,6 +6,7 @@ import {
 } from '../../types/customizeBarTypes';
 import { MetaData, Trend } from '../../types/modals';
 import { getMetadataKeyValueDisplay } from '../../utils/displayUtils';
+import { getNumberDescription } from '../../utils/utils';
 
 export default function CounterDisplay({
   counter,
@@ -91,7 +92,7 @@ export default function CounterDisplay({
         }`}
         style={{ width, maxWidth }}
       >
-        {displayResult.result}
+        {getNumberDescription(displayResult.result, 2)}
         {counter.calculationConfiguration.type === 'percentage' ||
           (counter.calculationConfiguration.type === 'trend' && '%')}
       </span>

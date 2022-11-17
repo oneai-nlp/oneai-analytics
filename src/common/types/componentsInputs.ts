@@ -33,6 +33,7 @@ export interface TreemapProps {
   labelClicked: (key: string, value: string) => void;
   sizeAxis: MetadataKeyValue | null;
   colorAxis: CounterType[];
+  nodeActionsClicked: (node: DataNode) => void;
 }
 
 export interface BarChartProps {
@@ -49,6 +50,7 @@ export interface BarChartProps {
   labelClicked: (key: string, value: string) => void;
   sizeAxis: MetadataKeyValue | null;
   colorAxis: CounterType[];
+  nodeActionsClicked: (node: DataNode) => void;
 }
 
 export type NodeType = 'Cluster' | 'Phrase' | 'Item';
@@ -86,6 +88,19 @@ export interface OneAiAnalyticsProps {
   labelFilterDeleted?: (index: number) => void;
   trendPeriods?: number;
   trendPeriodsChanged?: (index: number) => void;
+  searchSimilarClusters?: (
+    text: string,
+    controller: AbortController
+  ) => Promise<{ id: string; text: string }[]>;
+  splitPhrase?: (
+    phraseId: string,
+    controller: AbortController
+  ) => Promise<{ status: 'Success' | 'error'; message: string }>;
+  mergeClusters?: (
+    source: string,
+    destination: string,
+    controller: AbortController
+  ) => Promise<{ status: 'Success' | 'error'; message: string }>;
 }
 
 export type OneAIAnalyticsStaticDataWrapperProps = Omit<
