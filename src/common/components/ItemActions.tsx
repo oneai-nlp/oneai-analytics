@@ -1,6 +1,5 @@
 import { Dialog, RadioGroup, Transition } from '@headlessui/react';
-import React, { useEffect, useRef } from 'react';
-import { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { NodeType } from '../types/componentsInputs';
 
 export default function ItemActions({
@@ -41,7 +40,7 @@ export default function ItemActions({
     if (!node || !searchSimilarClusters) return;
     if (node.type === 'Cluster') {
       setAction('Merge');
-      setSearchText(node.text);
+      setSearchText('');
     } else if (node.type === 'Phrase') {
       setAction('Split');
     }
@@ -62,20 +61,23 @@ export default function ItemActions({
   }, [isOpen]);
 
   useEffect(() => {
-    if (searchText === null || !searchSimilarClusters) return;
+    if (searchText === null || !node || !searchSimilarClusters) return;
     const fetchData = async (controller: AbortController) => {
       try {
-        const res = await searchSimilarClusters(searchText, controller);
+        setLoading(true);
+        const res = await searchSimilarClusters(
+          searchText === '' ? node.text : searchText,
+          controller
+        );
         setSimilarClusters(res);
-        console.log(res);
       } catch (e) {
         console.log(e);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     const currentController = new AbortController();
-    setLoading(true);
     fetchData(currentController).catch((e) => {
       console.error(e);
     });
@@ -83,7 +85,7 @@ export default function ItemActions({
     return () => {
       currentController.abort();
     };
-  }, [searchText]);
+  }, [searchText, node, searchSimilarClusters]);
 
   function closeModal() {
     setIsOpen(false);
@@ -150,12 +152,15 @@ export default function ItemActions({
                   className="text-center text-lg font-medium leading-6 text-gray-900"
                 >
                   {action === 'Merge' ? (
-                    <div>Merging {node?.id}:</div>
+                    <div>Merging:</div>
                   ) : (
-                    <span>Split {node?.id} to a new cluster:</span>
+                    <span>Split to a new cluster:</span>
                   )}
-                  <span className="flex w-full">
+                  <span className="group relative flex w-full">
                     "<span className="truncate">{node?.text}</span>"
+                    <span className="absolute hidden group-hover:flex -left-5 -translate-y-full px-2 py-1 bg-gray-700 rounded-lg text-center text-white text-sm after:content-[''] after:absolute after:left-1/2 after:top-[100%] after:-translate-x-1/2 after:border-8 after:border-x-transparent after:border-b-transparent after:border-t-gray-700">
+                      {node?.text}
+                    </span>
                   </span>
                 </Dialog.Title>
                 {error && (
@@ -168,19 +173,13 @@ export default function ItemActions({
                 )}
                 {searchText !== null && (
                   <div>
-                    <label
-                      htmlFor="search"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Search
-                    </label>
                     <input
                       type="text"
-                      value={searchText ?? ''}
+                      value={searchText}
                       onChange={(e) => setSearchText(e.target.value)}
                       id="search"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="Search"
+                      placeholder="Search for clusters"
                       required
                     />
                   </div>
