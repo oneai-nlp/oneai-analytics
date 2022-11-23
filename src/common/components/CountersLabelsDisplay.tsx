@@ -32,31 +32,36 @@ export default function CountersLabelsDisplay({
 }) {
   return (
     <span className="truncate flex items-center">
-      {counters
-        .filter((counter) => counter.metadataKeyValue !== null)
-        .map((counter, i) => (
-          <div key={i} className="mr-2">
-            <CounterDisplay
-              counter={counter}
+      <span className="mr-2 truncate flex items-center">
+        {counters
+          .filter((counter) => counter.metadataKeyValue !== null)
+          .map((counter, i) => (
+            <div key={i} className="mr-1">
+              <CounterDisplay
+                counter={counter}
+                countersConfiguration={countersConfiguration}
+                metadata={metadata}
+                trends={trends}
+                width={counterWidth}
+                maxWidth={counterMaxWidth}
+              />
+            </div>
+          ))}
+      </span>
+      <span className="truncate flex items-center">
+        {labels.map((label, i) => (
+          <div key={i} className="mr-1">
+            <MaxLabelDisplay
               countersConfiguration={countersConfiguration}
+              metadataKey={label}
+              labelClicked={labelClicked}
               metadata={metadata}
-              trends={trends}
-              width={counterWidth}
-              maxWidth={counterMaxWidth}
+              width={labelWidth}
+              maxWidth={labelMaxWidth}
             />
           </div>
         ))}
-      {labels.map((label, i) => (
-        <MaxLabelDisplay
-          key={i}
-          countersConfiguration={countersConfiguration}
-          metadataKey={label}
-          labelClicked={labelClicked}
-          metadata={metadata}
-          width={labelWidth}
-          maxWidth={labelMaxWidth}
-        />
-      ))}
+      </span>
     </span>
   );
 }
