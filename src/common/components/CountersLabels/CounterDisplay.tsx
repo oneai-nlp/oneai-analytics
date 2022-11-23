@@ -1,4 +1,8 @@
-import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/20/solid';
+import {
+  ArrowDownIcon,
+  ArrowsUpDownIcon,
+  ArrowUpIcon,
+} from '@heroicons/react/20/solid';
 import React from 'react';
 import {
   CountersConfigurations,
@@ -45,14 +49,14 @@ export default function CounterDisplay({
       className={`flex items-center text-sm ${
         counter.calculationConfiguration.type !== 'trend' &&
         displayResult.result < 1
-          ? 'text-gray-500 dark:text-white'
+          ? 'text-gray-500 dark:text-gray-300'
           : displayResult.counter.display
           ? displayResult.counter.display.color === 'green'
             ? 'text-emerald-400'
             : displayResult.counter.display.color === 'red'
             ? 'text-red-400'
-            : 'text-gray-500 dark:text-white'
-          : 'text-gray-500 dark:text-white'
+            : 'text-gray-500 dark:text-gray-300'
+          : 'text-gray-500 dark:text-gray-300'
       }`}
     >
       {counter.calculationConfiguration.type === 'trend' &&
@@ -63,14 +67,18 @@ export default function CounterDisplay({
         >
           <ArrowUpIcon />
         </span>
+      ) : counter.calculationConfiguration.type === 'trend' &&
+        displayResult.result < 0 ? (
+        <span className="text-red-400" style={{ width: '1em', height: '1em' }}>
+          <ArrowDownIcon />
+        </span>
       ) : (
-        counter.calculationConfiguration.type === 'trend' &&
-        displayResult.result < 0 && (
+        counter.calculationConfiguration.type === 'trend' && (
           <span
-            className="text-red-400"
+            className="text-gray-300"
             style={{ width: '1em', height: '1em' }}
           >
-            <ArrowDownIcon />
+            <ArrowsUpDownIcon />
           </span>
         )
       )}
@@ -87,7 +95,7 @@ export default function CounterDisplay({
               ? 'text-emerald-400'
               : displayResult.result < 0
               ? 'text-red-400'
-              : 'text-gray-500 dark:text-white'
+              : 'text-gray-500 dark:text-gray-300'
             : ''
         }`}
         style={{ width, maxWidth }}

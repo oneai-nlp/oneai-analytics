@@ -35,7 +35,7 @@ export default function CountersLabelsDisplay({
       {counters
         .filter((counter) => counter.metadataKeyValue !== null)
         .map((counter, i) => (
-          <div key={i} className="ml-1">
+          <div key={i} className="mr-2">
             <CounterDisplay
               counter={counter}
               countersConfiguration={countersConfiguration}

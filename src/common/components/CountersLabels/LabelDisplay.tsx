@@ -29,7 +29,7 @@ export default function LabelDisplay({
   return (
     <span
       data-for="global"
-      data-tip={tooltip}
+      data-tip={tooltip !== '' ? tooltip + ': ' + value : value}
       className="flex items-center px-1 cursor-pointer text-gray-500 hover:text-gray-300"
       style={{ color }}
       onClick={() => labelClicked(metadataKey, value)}

@@ -708,7 +708,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
 };
 
 function getVisualizationLogoClasses(active: boolean) {
-  return `h-7 w-7 mr-1 ${
+  return `h-7 w-7 mr-1 p-1 rounded-md ${
     active
       ? 'bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]'
       : 'text-[#747189] hover:cursor-pointer dark:hover:text-white'

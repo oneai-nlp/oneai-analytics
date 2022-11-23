@@ -1,6 +1,6 @@
 import { Listbox, Transition } from '@headlessui/react';
 import {
-  ChevronRightIcon,
+  ChevronDownIcon,
   ChevronUpDownIcon,
   ChevronUpIcon,
 } from '@heroicons/react/20/solid';
@@ -33,7 +33,7 @@ export default function KeyValueSingleSelect({
       by={(a, b) => a?.key === b?.key && a?.value === b?.value}
     >
       <div className="relative">
-        <Listbox.Button className="relative cursor-default rounded-lg bg-gray-600 dark:bg-[#272535] py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+        <Listbox.Button className="relative rounded-lg bg-gray-600 dark:bg-[#272535] py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
           <span className="block truncate lowercase first-letter:uppercase text-white">
             {metadataKeyValue
               ? getMetadataKeyValueDisplay(metadataKeyValue)
@@ -94,26 +94,26 @@ function CascadedOption({
   return (
     <Fragment key={index}>
       <div className="w-full flex">
-        {configData.items && configData.items.length > 0 && (
-          <button
-            type="button"
-            className="ml-1"
-            onClick={() => setOpened((opened) => !opened)}
-          >
-            {opened ? (
-              <ChevronUpIcon className="h-4 w-4 text-gray-300 dark:text-gray-600" />
-            ) : (
-              <ChevronRightIcon className="h-4 w-4 text-gray-300 dark:text-gray-600" />
-            )}
-            <span className="sr-only">Open or Close metadata</span>
-          </button>
-        )}
-
         <DropdownOption
           label={optionName}
           value={{ key: optionName } as MetadataKeyValue}
           key={optionName}
         />
+
+        {configData.items && configData.items.length > 0 && (
+          <button
+            type="button"
+            className="ml-auto"
+            onClick={() => setOpened((opened) => !opened)}
+          >
+            {opened ? (
+              <ChevronUpIcon className="h-4 w-4 text-gray-300 dark:text-gray-600" />
+            ) : (
+              <ChevronDownIcon className="h-4 w-4 text-gray-300 dark:text-gray-600" />
+            )}
+            <span className="sr-only">Open or Close metadata</span>
+          </button>
+        )}
       </div>
       {opened &&
         uniqBy(configData.items ?? [], (group) => group.label).map(
@@ -124,7 +124,7 @@ function CascadedOption({
                 value={
                   { key: optionName, value: group.label } as MetadataKeyValue
                 }
-                pl={3}
+                pl={2}
                 key={optionName + group.label + i.toString()}
               />
             );

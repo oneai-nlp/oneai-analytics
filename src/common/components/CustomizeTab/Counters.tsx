@@ -126,7 +126,7 @@ function Counter({
 
   return (
     <div className="w-full">
-      <div className="flex border-2 border-gray-300 dark:border-gray-600 p-1 w-fit">
+      <div className="flex bg-gray-600 dark:bg-[#272535] p-1 w-fit">
         <KeyValueSingleSelect
           metadataKeyValue={counterData.metadataKeyValue}
           countersConfigurations={countersConfigurations}
@@ -139,7 +139,7 @@ function Counter({
           by="name"
         >
           <div className="relative ml-1">
-            <Listbox.Button className="relative cursor-default rounded-lg bg-gray-600 dark:bg-[#272535] py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+            <Listbox.Button className="relative rounded-lg bg-gray-600 dark:bg-[#272535] py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
               <span className="block truncate lowercase first-letter:uppercase text-white">
                 {counterData.calculationConfiguration.name}
               </span>

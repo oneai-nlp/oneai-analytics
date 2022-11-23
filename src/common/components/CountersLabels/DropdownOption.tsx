@@ -1,9 +1,8 @@
 import { Listbox } from '@headlessui/react';
-import CheckIcon from '@heroicons/react/20/solid/CheckIcon';
 import React from 'react';
 import {
-  MetadataKeyValue,
   CalculationConfiguration,
+  MetadataKeyValue,
 } from '../../types/customizeBarTypes';
 
 export default function DropdownOption({
@@ -29,18 +28,20 @@ export default function DropdownOption({
     >
       {({ selected }) => (
         <span className="w-full flex">
-          {selected ? (
-            <span className="pr-2 pl-1 inset-y-0 left-0 flex items-center text-[#4D4DFE]">
-              <CheckIcon className="h-5 w-5" aria-hidden="true" />
-            </span>
-          ) : null}
-          <span
-            className={`block truncate lowercase first-letter:uppercase ${
-              selected ? 'font-medium' : 'font-normal'
-            }`}
-          >
-            {label}
-          </span>
+          <div className="flex items-center">
+            <input
+              checked={selected}
+              type="radio"
+              className="w-4 h-4 text-[#4D4DFE] bg-gray-100 border-gray-300 focus:ring-[#4D4DFE] dark:ring-offset-gray-800 focus:ring-2 dark:bg-[#322F46] dark:border-[#322F46]"
+            />
+            <label
+              className={`text-sm ml-2 font-medium text-gray-900 dark:text-gray-300 block truncate lowercase first-letter:uppercase ${
+                selected ? 'font-medium' : 'font-normal'
+              }`}
+            >
+              {label}
+            </label>
+          </div>
         </span>
       )}
     </Listbox.Option>
