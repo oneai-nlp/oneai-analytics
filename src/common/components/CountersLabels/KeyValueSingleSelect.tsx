@@ -52,7 +52,7 @@ export default function KeyValueSingleSelect({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="fixed mt-1 z-10 max-h-60 overflow-auto rounded-md bg-gray-600 dark:bg-[#272533] py-1 text-base shadow-lg ring-1 ring-gray-500 dark:ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <Listbox.Options className="fixed mt-1 z-10 max-h-60 scrollbar-thin scrollbar-thumb-[#747189] scrollbar-track-[#272533] overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full rounded-md bg-gray-600 dark:bg-[#272533] py-1 text-base shadow-lg ring-1 ring-gray-500 dark:ring-black ring-opacity-5 focus:outline-none sm:text-sm">
             {uniqBy(
               Object.keys(countersConfigurations).sort((a, b) =>
                 a < b ? -1 : a > b ? 1 : 0
@@ -103,13 +103,13 @@ function CascadedOption({
         {configData.items && configData.items.length > 0 && (
           <button
             type="button"
-            className="ml-auto"
+            className="ml-auto mr-3"
             onClick={() => setOpened((opened) => !opened)}
           >
             {opened ? (
-              <ChevronUpIcon className="h-4 w-4 text-gray-300 dark:text-gray-600" />
+              <ChevronUpIcon className="h-4 w-4 text-gray-300 " />
             ) : (
-              <ChevronDownIcon className="h-4 w-4 text-gray-300 dark:text-gray-600" />
+              <ChevronDownIcon className="h-4 w-4 text-gray-300 " />
             )}
             <span className="sr-only">Open or Close metadata</span>
           </button>
