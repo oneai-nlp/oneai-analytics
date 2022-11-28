@@ -1,4 +1,4 @@
-import { HomeIcon } from '@heroicons/react/20/solid';
+import { HomeIcon, XMarkIcon } from '@heroicons/react/20/solid';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 import ReactTooltip from 'react-tooltip';
@@ -477,17 +477,20 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                         <span key={i} className="flex items-center">
                           <span className="text-gray-500 ml-1">/ </span>
                           <LabelDisplay
-                            tooltip="click to delete"
                             metadataKey={keyValue.key}
                             value={keyValue.value ?? ''}
                             countersConfiguration={countersConfigurations}
-                            labelClicked={() => {
-                              labelFilterDeleted(i);
-                              ReactTooltip.hide();
-                            }}
-                            width="20ch"
+                            labelClicked={() => {}}
+                            maxWidth="20ch"
                             color="#747189"
                           />
+                          <button
+                            type="button"
+                            onClick={() => labelFilterDeleted(i)}
+                          >
+                            <XMarkIcon className="h-4 w-4 text-gray-400 hover:scale-125 transition duration-100 ease-linear" />
+                            <span className="sr-only">Delete label filter</span>
+                          </button>
                         </span>
                       ))}
                   {totalPagesAmount > 1 && currentPage > 0 && (
