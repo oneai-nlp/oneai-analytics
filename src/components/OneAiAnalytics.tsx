@@ -306,11 +306,14 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   return (
     <div
       className={`oneai-analytics-namespace h-full w-full overflow-hidden ${
-        darkMode && 'dark'
+        darkMode ? 'dark' : ''
       }`}
     >
       <div
-        className="h-full w-full flex flex-col overflow-hidden bg-[#E5E5E5] dark:bg-[#161414] p-1"
+        id="headlessui-portal-root"
+        className={`h-full w-full flex flex-col overflow-hidden bg-[#f3e5e5] dark:bg-[#161414] p-1 ${
+          darkMode ? 'dark' : ''
+        }`}
         style={{ background: background }}
       >
         <ReactTooltip id="global" />
