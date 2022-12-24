@@ -81,6 +81,7 @@ export interface OneAiAnalyticsProps {
   barColor?: string;
   itemsDisplay?: FC<ItemsDisplayComponentProps>;
   loading?: boolean;
+  error?: string | null;
   nodesPath?: string[];
   dateRangeChanged?: (from: Date | null, to: Date | null) => void;
   labelsFilters?: MetadataKeyValue[];

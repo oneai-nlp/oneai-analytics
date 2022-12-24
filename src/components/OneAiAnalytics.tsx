@@ -1,4 +1,5 @@
 import { HomeIcon, XMarkIcon } from '@heroicons/react/20/solid';
+import { LanguageIcon } from '@heroicons/react/24/outline';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 import ReactTooltip from 'react-tooltip';
@@ -71,6 +72,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   treemapBorderColor = darkMode ? '#272535' : 'white',
   barColor = darkMode ? '#322F46' : '#F7F7F7',
   loading,
+  error,
   nodesPath = [],
   dateRangeChanged = () => {},
   labelsFilters,
@@ -396,6 +398,15 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 />
               </div>
             </div>
+            <div className="flex flex-row w-full justify-end items-center">
+              <LanguageIcon
+                className={`h-6 w-6 hover:cursor-pointer ${
+                  false
+                    ? 'dark:text-white'
+                    : 'text-[#747189] hover:cursor-pointer dark:hover:text-white'
+                }`}
+              />
+            </div>
           </div>
         </div>
 
@@ -589,7 +600,11 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 ref={ref}
                 className="h-full w-full overflow-y-auto no-scrollbar overflow-x-hidden"
               >
-                {currentNode && currentNode.type === 'Phrase' ? (
+                {error !== null ? (
+                  <p className="h-full w-full text-center dark:text-white">
+                    {error}
+                  </p>
+                ) : currentNode && currentNode.type === 'Phrase' ? (
                   itemsDisplay({
                     items: dataNodes.map((dataNode) => dataNode.data as Item),
                     bgColor: navbarColor,

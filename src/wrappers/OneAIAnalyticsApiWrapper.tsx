@@ -38,6 +38,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   ...rest
 }) => {
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null as string | null);
   const [currentNodes, setCurrentNodes] = useState([] as OneAIDataNode[]);
   const [clickedNodes, setClickedNodes] = useState([] as OneAIDataNode[]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -111,7 +112,15 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             labelsFilters,
             trendPeriods
           );
-          if (clusters.error) return;
+          if (clusters.error) {
+            if (clusters.error.includes('AbortError')) {
+              return;
+            }
+
+            setError(clusters.error);
+            return setLoading(false);
+          }
+          setError(null);
 
           const newNodes = clusters.data.map((c) => {
             return { type: 'Cluster' as NodeType, data: c };
@@ -155,7 +164,14 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             labelsFilters,
             trendPeriods
           );
-          if (phrases.error) return;
+          if (phrases.error) {
+            if (phrases.error.includes('AbortError')) {
+              return;
+            }
+            setError(phrases.error);
+            return setLoading(false);
+          }
+          setError(null);
 
           const newNodes = phrases.data.map((p) => {
             return { type: 'Phrase' as NodeType, data: p };
@@ -196,7 +212,14 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             labelsFilters,
             trendPeriods
           );
-          if (items.error) return;
+          if (items.error) {
+            if (items.error.includes('AbortError')) {
+              return;
+            }
+            setError(items.error);
+            return setLoading(false);
+          }
+          setError(null);
 
           const newNodes = items.data.map((i) => {
             return { type: 'Item' as NodeType, data: i };
@@ -299,81 +322,80 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
     });
   };
 
-  return (
-    currentNodes && (
-      <OneAiAnalytics
-        dataNodes={currentNodes ?? []}
-        currentNode={clickedNodes.at(-1)}
-        nodeClicked={nodeClicked}
-        goBackClicked={goBack}
-        currentPage={currentPage}
-        totalPagesAmount={totalPages}
-        nextPageClicked={() => setCurrentPage((page) => page + 1)}
-        prevPageClicked={() => setCurrentPage((page) => page - 1)}
-        loading={loading}
-        nodesPath={[collection, ...clickedNodes.map(getNodeText)]}
-        dateRangeChanged={(from, to) =>
-          setLocalRefreshToken((current) => {
-            setDateRange([from, to]);
-            return current + '1';
-          })
-        }
-        labelsFilters={labelsFilters}
-        labelClicked={(key, value) => {
-          if (
-            !labelsFilters.some(
-              (keyValue) => keyValue.key === key && keyValue.value === value
-            )
+  return currentNodes ? (
+    <OneAiAnalytics
+      dataNodes={currentNodes ?? []}
+      currentNode={clickedNodes.at(-1)}
+      nodeClicked={nodeClicked}
+      goBackClicked={goBack}
+      currentPage={currentPage}
+      totalPagesAmount={totalPages}
+      nextPageClicked={() => setCurrentPage((page) => page + 1)}
+      prevPageClicked={() => setCurrentPage((page) => page - 1)}
+      loading={loading}
+      error={error}
+      nodesPath={[collection, ...clickedNodes.map(getNodeText)]}
+      dateRangeChanged={(from, to) =>
+        setLocalRefreshToken((current) => {
+          setDateRange([from, to]);
+          return current + '1';
+        })
+      }
+      labelsFilters={labelsFilters}
+      labelClicked={(key, value) => {
+        if (
+          !labelsFilters.some(
+            (keyValue) => keyValue.key === key && keyValue.value === value
           )
-            setLocalRefreshToken((current) => {
-              setLabelsFilters([{ key, value }]);
-              return current + '1';
-            });
-        }}
-        labelFilterDeleted={(i) =>
+        )
           setLocalRefreshToken((current) => {
-            setLabelsFilters((filters) => {
-              filters.splice(i, 1);
-              return [...filters];
-            });
+            setLabelsFilters([{ key, value }]);
             return current + '1';
-          })
-        }
-        trendPeriods={trendPeriods}
-        trendPeriodsChanged={(newTrendPeriod) =>
-          setLocalRefreshToken((current) => {
-            setTrendPeriods(newTrendPeriod);
-            return current + '1';
-          })
-        }
-        searchSimilarClusters={(text, controller) =>
-          searchSimilarClusters(controller, domain, collection, apiKey, text)
-        }
-        splitPhrase={(phraseId, controller) =>
-          splitPhrase(
-            controller,
-            domain,
-            collection,
-            apiKey,
-            phraseId,
-            setLocalRefreshToken
-          )
-        }
-        mergeClusters={(source, destination, controller) =>
-          mergeClusters(
-            controller,
-            domain,
-            collection,
-            apiKey,
-            source,
-            destination,
-            setLocalRefreshToken
-          )
-        }
-        {...rest}
-      />
-    )
-  );
+          });
+      }}
+      labelFilterDeleted={(i) =>
+        setLocalRefreshToken((current) => {
+          setLabelsFilters((filters) => {
+            filters.splice(i, 1);
+            return [...filters];
+          });
+          return current + '1';
+        })
+      }
+      trendPeriods={trendPeriods}
+      trendPeriodsChanged={(newTrendPeriod) =>
+        setLocalRefreshToken((current) => {
+          setTrendPeriods(newTrendPeriod);
+          return current + '1';
+        })
+      }
+      searchSimilarClusters={(text, controller) =>
+        searchSimilarClusters(controller, domain, collection, apiKey, text)
+      }
+      splitPhrase={(phraseId, controller) =>
+        splitPhrase(
+          controller,
+          domain,
+          collection,
+          apiKey,
+          phraseId,
+          setLocalRefreshToken
+        )
+      }
+      mergeClusters={(source, destination, controller) =>
+        mergeClusters(
+          controller,
+          domain,
+          collection,
+          apiKey,
+          source,
+          destination,
+          setLocalRefreshToken
+        )
+      }
+      {...rest}
+    />
+  ) : null;
 };
 
 async function fetchClusters(
@@ -488,7 +510,15 @@ async function fetchApi<T>(
     );
 
     if (res.status !== 200 || !res.ok)
-      return { totalPages: 0, data: [], error: 'response code != 200' };
+      return {
+        totalPages: 0,
+        data: [],
+        error:
+          'Error fetching data, status: ' +
+          res.status +
+          ': ' +
+          (await res.text()),
+      };
 
     const json = await res.json();
 
@@ -498,8 +528,14 @@ async function fetchApi<T>(
       error: null,
     };
   } catch (e) {
-    console.error('error occurred ->', e);
-    return { totalPages: 0, data: [], error: String(e) };
+    const error = String(e);
+    console.error('error occurred ->', error);
+
+    return {
+      totalPages: 0,
+      data: [],
+      error: `Error fetching data, ${error}`,
+    };
   }
 }
 
