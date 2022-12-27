@@ -1,4 +1,4 @@
-import { Dialog, RadioGroup, Transition } from '@headlessui/react';
+import { Dialog, RadioGroup, Switch, Transition } from '@headlessui/react';
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { NodeType } from '../types/componentsInputs';
 
@@ -30,11 +30,12 @@ export default function ItemActions({
   const [similarClusters, setSimilarClusters] = useState(
     null as { id: string; text: string }[] | null
   );
-  const [selectedCluster, setSelectedCluster] = useState(
-    null as { id: string; text: string } | null
+  const [selectedClusters, setSelectedClusters] = useState(
+    null as string[] | null
   );
   const [searchText, setSearchText] = useState(null as string | null);
   const [error, setError] = useState(null as string | null);
+  const [mergeTo, setMergeTo] = useState(true);
 
   useEffect(() => {
     if (!node || !searchSimilarClusters) return;
@@ -54,7 +55,7 @@ export default function ItemActions({
       setLoading(false);
       setAction(null);
       setSimilarClusters(null);
-      setSelectedCluster(null);
+      setSelectedClusters(null);
       setSearchText(null);
       controller.current = new AbortController();
     }
@@ -89,6 +90,13 @@ export default function ItemActions({
 
   function closeModal() {
     setIsOpen(false);
+    setSelectedClusters(null);
+    setMergeTo(true);
+    setSearchText(null);
+    setError(null);
+    setLoading(false);
+    setSimilarClusters(null);
+    setAction(null);
   }
 
   async function invokeAction() {
@@ -104,13 +112,24 @@ export default function ItemActions({
         closeModal();
       }
     } else {
-      if (selectedCluster) {
-        const res = await mergeClusters(
-          node.id,
-          selectedCluster.id,
-          controller.current
-        );
-        if (res.message) {
+      const firstSelectedCluster = selectedClusters?.at(0);
+      if (
+        selectedClusters &&
+        selectedClusters.length > 0 &&
+        firstSelectedCluster
+      ) {
+        let res;
+        if (mergeTo) {
+          res = await mergeClusters(
+            node.id,
+            firstSelectedCluster,
+            controller.current
+          );
+        } else {
+          console.log(selectedClusters);
+        }
+
+        if (res && res.message) {
           setError(res.message);
         } else {
           closeModal();
@@ -118,6 +137,21 @@ export default function ItemActions({
       }
     }
     setLoading(false);
+  }
+
+  function clusterSelected(clusterId: string, selected: boolean) {
+    if (selected)
+      return setSelectedClusters(
+        (current) => current?.filter((c) => c !== clusterId) ?? []
+      );
+
+    if (mergeTo) {
+      return setSelectedClusters([clusterId]);
+    }
+
+    return setSelectedClusters((selected) => {
+      return [...(selected ?? []), clusterId];
+    });
   }
 
   return (
@@ -171,7 +205,7 @@ export default function ItemActions({
                     <span className="font-medium">Oh, snapp!</span> {error}
                   </p>
                 )}
-                {searchText !== null && (
+                {searchText !== null ? (
                   <div>
                     <input
                       type="text"
@@ -183,7 +217,45 @@ export default function ItemActions({
                       required
                     />
                   </div>
-                )}
+                ) : null}
+                {action === 'Merge' ? (
+                  <div className="flex w-full mt-1 items-center align-middle justify-center">
+                    <span
+                      className={`mr-1 ${
+                        mergeTo ? 'text-gray-400 ' : 'text-white'
+                      }`}
+                    >
+                      Merge From
+                    </span>
+                    <Switch
+                      checked={mergeTo}
+                      onChange={() =>
+                        setMergeTo((state) => {
+                          setSelectedClusters([]);
+                          return !state;
+                        })
+                      }
+                      className={`${mergeTo ? 'bg-teal-900' : 'bg-teal-700'}
+          relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
+                    >
+                      <span className="sr-only">Use setting</span>
+                      <span
+                        aria-hidden="true"
+                        className={`${
+                          mergeTo ? 'translate-x-9' : 'translate-x-0'
+                        }
+            pointer-events-none inline-block h-[34px] w-[34px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
+                      />
+                    </Switch>
+                    <span
+                      className={`ml-1 ${
+                        mergeTo ? 'text-white ' : 'text-gray-400'
+                      }`}
+                    >
+                      Merge To
+                    </span>
+                  </div>
+                ) : null}
                 {loading ? (
                   <div className="grow w-full justify-center items-center flex mt-2">
                     <div className="text-center">
@@ -209,13 +281,13 @@ export default function ItemActions({
                   </div>
                 ) : (
                   similarClusters && (
-                    <div className="overflow-y-auto max-h-64">
+                    <div className="overflow-y-auto max-h-64 mt-2">
                       <ClustersList
                         clusters={similarClusters.filter(
                           (c) => c.id.toString() !== node?.id
                         )}
-                        selected={selectedCluster}
-                        clusterSelected={setSelectedCluster}
+                        selected={selectedClusters}
+                        clusterSelected={clusterSelected}
                       />
                     </div>
                   )
@@ -226,7 +298,7 @@ export default function ItemActions({
                     type="button"
                     className="text-center w-1/3 rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
                     onClick={invokeAction}
-                    disabled={loading || !selectedCluster}
+                    disabled={loading || !selectedClusters}
                   >
                     {action}
                   </button>
@@ -253,66 +325,52 @@ function ClustersList({
   clusterSelected,
 }: {
   clusters: { id: string; text: string }[];
-  selected: { id: string; text: string } | null;
-  clusterSelected: (cluster: { id: string; text: string }) => void;
+  selected: string[] | null;
+  clusterSelected: (cluster: string, selected: boolean) => void;
 }) {
   return (
     <div className="w-full pr-1 py-2">
       <div className="mx-auto w-full max-w-md">
-        <RadioGroup value={selected} onChange={clusterSelected}>
+        <RadioGroup>
           <RadioGroup.Label className="sr-only">
             Select Destination Cluster
           </RadioGroup.Label>
           <div className="space-y-2">
-            {clusters.map((cluster) => (
-              <RadioGroup.Option
-                key={cluster.id}
-                value={cluster}
-                className={({ active, checked }) =>
-                  `${
-                    active
-                      ? 'ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300'
-                      : ''
-                  }
+            {clusters.map((cluster) => {
+              const checked = selected?.some((c) => c === cluster.id) ?? false;
+              return (
+                <RadioGroup.Option
+                  key={cluster.id}
+                  value={cluster}
+                  onClick={() => clusterSelected(cluster.id, checked)}
+                  className={`
                   ${
                     checked ? 'bg-sky-900 bg-opacity-75 text-white' : 'bg-white'
                   }
-                    relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
-                }
-              >
-                {({ checked }) => (
-                  <>
-                    <div className="flex w-full items-center justify-between">
-                      <div className="flex items-center">
-                        <div className="text-sm">
-                          <RadioGroup.Label
-                            as="p"
-                            className={`font-medium  ${
-                              checked ? 'text-white' : 'text-gray-900'
-                            }`}
-                          >
-                            {cluster.text}
-                          </RadioGroup.Label>
-                          {/* <RadioGroup.Description
-                            as="span"
-                            className={`inline ${
-                              checked ? 'text-sky-100' : 'text-gray-500'
-                            }`}
-                          >
-                            <span>{cluster.text}</span>
-                          </RadioGroup.Description> */}
-                        </div>
+                    relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`}
+                >
+                  <div className="flex w-full items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="text-sm">
+                        <RadioGroup.Label
+                          as="p"
+                          className={`font-medium  ${
+                            checked ? 'text-white' : 'text-gray-900'
+                          }`}
+                        >
+                          {cluster.text}
+                        </RadioGroup.Label>
                       </div>
-                      {checked && (
-                        <div className="shrink-0 text-white">
-                          <CheckIcon className="h-6 w-6" />
-                        </div>
-                      )}
                     </div>
-                  </>
-                )}
-              </RadioGroup.Option>
-            ))}
+                    {checked && (
+                      <div className="shrink-0 text-white">
+                        <CheckIcon className="h-6 w-6" />
+                      </div>
+                    )}
+                  </div>
+                </RadioGroup.Option>
+              );
+            })}
           </div>
         </RadioGroup>
       </div>

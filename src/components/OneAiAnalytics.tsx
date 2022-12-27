@@ -98,12 +98,12 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   const [currentNodeActions, setCurrentNodeActions] = useState(
     null as { type: NodeType; id: string; text: string } | null
   );
-
+  const [translate, setTranslate] = useState(false);
   const [fromDate, setFromDate] = useState(null as Date | null);
   const [toDate, setToDate] = useState(null as Date | null);
   const loadedNodes = useRef([] as { type: string; id: string }[]);
   const currentCollection = useRef(null as string | null);
-  const currentHoveredNode = useRef(
+  const [currentHoveredNode, setCurrentHoveredNode] = useState(
     null as { type: NodeType; id: string; text: string } | null
   );
 
@@ -201,6 +201,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
           id: getNodeId(d),
           amount: itemsCount,
           text: getNodeText(d),
+          item_original_text: d.data.item_original_text,
+          item_translated_text: d.data.item_translated_text,
           metadata: {
             [CUSTOM_METADATA_KEY]: [
               { value: CUSTOM_METADATA_KEY, count: itemsCount },
@@ -327,27 +329,27 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
           place="top"
           effect="solid"
           clickable={true}
-          backgroundColor="white"
+          className="!p-1"
         >
-          <div className="flex flex-col w-full h-full p-2">
+          <div className="flex flex-col w-full h-full items-baseline">
             <button
               type="button"
               onClick={() => {
                 ReactTooltip.hide();
-                setCurrentNodeActions(currentHoveredNode.current);
+                setCurrentNodeActions(currentHoveredNode);
               }}
-              className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+              className="text-gray-900 w-full bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-2 py-2 mr-1 mb-1 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
             >
-              Merge
+              {currentHoveredNode?.type === 'Cluster' ? 'Merge' : 'Split'}
             </button>
             <button
               type="button"
               onClick={() => {
                 ReactTooltip.hide();
-                setCurrentNodeActions(currentHoveredNode.current);
+                setCurrentNodeActions(currentHoveredNode);
               }}
               disabled
-              className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+              className="text-gray-900 w-full bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-2 py-2 mr-1 mb-1 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
             >
               Hide
             </button>
@@ -434,9 +436,10 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
             </div>
             <div className="flex flex-row w-full justify-end items-center">
               <LanguageIcon
-                className={`h-6 w-6 hover:cursor-pointer ${
-                  false
-                    ? 'dark:text-white'
+                onClick={() => setTranslate((translate) => !translate)}
+                className={`h-6 w-6 p-1 mr-1 hover:cursor-pointer ${
+                  translate
+                    ? 'bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]'
                     : 'text-[#747189] hover:cursor-pointer dark:hover:text-white'
                 }`}
               />
@@ -677,8 +680,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     labelClicked={labelClicked}
                     sizeAxis={sizeAxis}
                     colorAxis={colorAxis}
-                    nodeActionsClicked={(node) =>
-                      (currentHoveredNode.current = {
+                    nodeActionsClicked={(node) => {
+                      setCurrentHoveredNode({
                         type: !currentNode
                           ? 'Cluster'
                           : currentNode.type === 'Cluster'
@@ -686,8 +689,9 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                           : 'Item',
                         id: node.id,
                         text: node.text ?? '',
-                      })
-                    }
+                      });
+                    }}
+                    translate={translate}
                   />
                 ) : (
                   <BarChart
@@ -714,8 +718,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     labelClicked={labelClicked}
                     sizeAxis={sizeAxis}
                     colorAxis={colorAxis}
-                    nodeActionsClicked={(node) =>
-                      (currentHoveredNode.current = {
+                    nodeActionsClicked={(node) => {
+                      setCurrentHoveredNode({
                         type: !currentNode
                           ? 'Cluster'
                           : currentNode.type === 'Cluster'
@@ -723,8 +727,9 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                           : 'Item',
                         id: node.id,
                         text: node.text ?? '',
-                      })
-                    }
+                      });
+                    }}
+                    translate={translate}
                   />
                 )}
               </div>

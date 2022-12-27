@@ -493,7 +493,7 @@ async function fetchApi<T>(
 
   try {
     const res = await fetch(
-      `${url}?page=${page}&limit=${PAGE_SIZE}` +
+      `${url}?page=${page}&limit=${PAGE_SIZE}&translate=true` +
         (from ? `&from-date=${format(from, 'yyyy-MM-dd')}` : '') +
         (to ? `&to-date=${format(to, 'yyyy-MM-dd')}` : '') +
         (labelsFiltersString.length > 0

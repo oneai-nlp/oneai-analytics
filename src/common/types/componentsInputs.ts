@@ -10,6 +10,8 @@ export interface DataNode {
   id: string;
   amount: number;
   text?: string;
+  item_original_text?: string | null;
+  item_translated_text?: string | null;
   metadata: MetaData;
   trends: Trend[];
   type: string;
@@ -34,6 +36,7 @@ export interface TreemapProps {
   sizeAxis: MetadataKeyValue | null;
   colorAxis: CounterType[];
   nodeActionsClicked: (node: DataNode) => void;
+  translate: boolean;
 }
 
 export interface BarChartProps {
@@ -51,6 +54,7 @@ export interface BarChartProps {
   sizeAxis: MetadataKeyValue | null;
   colorAxis: CounterType[];
   nodeActionsClicked: (node: DataNode) => void;
+  translate: boolean;
 }
 
 export type NodeType = 'Cluster' | 'Phrase' | 'Item';

@@ -3,7 +3,8 @@ import React from 'react';
 import * as ResizeObserverModule from 'resize-observer-polyfill';
 import '../src/common/utils/polyfill';
 import { OneAiAnalytics } from '../src/components/OneAiAnalytics';
-(global as any).ResizeObserver = ResizeObserverModule.default;
+
+global.ResizeObserver = ResizeObserverModule.default;
 
 describe('Treemap', () => {
   it('renders without crashing', () => {

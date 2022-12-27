@@ -34,6 +34,7 @@ export const Treemap: FC<TreemapProps> = ({
   sizeAxis,
   colorAxis,
   nodeActionsClicked,
+  translate,
 }) => {
   const mainNode: TreemapNode = useMemo(() => {
     return {
@@ -181,7 +182,12 @@ export const Treemap: FC<TreemapProps> = ({
                     WebkitBoxOrient: 'vertical',
                   }}
                 >
-                  {leaf.data.text}
+                  {translate &&
+                  leaf.data.item_translated_text !== undefined &&
+                  leaf.data.item_translated_text !== null &&
+                  leaf.data.item_translated_text !== ''
+                    ? leaf.data.item_translated_text
+                    : leaf.data.item_original_text}
                 </span>
               </span>
               <div

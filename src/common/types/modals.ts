@@ -17,6 +17,8 @@ export interface Item {
   original_text: string;
   distance_to_phrase: number;
   metadata: MetaData;
+  item_original_text?: string | null;
+  item_translated_text?: string | null;
   phrase: {
     id: number;
     text: string;
@@ -32,6 +34,8 @@ export interface Phrase {
   text: string;
   items_count: number;
   metadata: MetaData;
+  item_original_text?: string | null;
+  item_translated_text?: string | null;
   trends: Trend[];
 }
 
@@ -42,5 +46,7 @@ export interface Cluster {
   phrases_count: number;
   metadata: MetaData;
   items_count: number;
+  item_original_text?: string | null;
+  item_translated_text?: string | null;
   trends: Trend[];
 }

@@ -24,6 +24,7 @@ export const BarChart: FC<BarChartProps> = ({
   labelClicked,
   sizeAxis,
   colorAxis,
+  translate,
 }) => {
   const barsHeight = dataNodes.length * 40;
 
@@ -167,7 +168,12 @@ export const BarChart: FC<BarChartProps> = ({
                 className="truncate w-3/6 hover:text-gray-400 dark:hover:text-gray-300 hover:cursor-pointer"
                 onClick={() => nodeClicked(d)}
               >
-                {d.text}
+                {translate &&
+                d.item_translated_text !== undefined &&
+                d.item_translated_text !== null &&
+                d.item_translated_text !== ''
+                  ? d.item_translated_text
+                  : d.item_original_text}
               </span>
               <span className="truncate flex items-center w-2/6 ml-auto">
                 {labels.map((label, i) => (
