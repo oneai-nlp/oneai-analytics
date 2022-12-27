@@ -125,8 +125,13 @@ export const Treemap: FC<TreemapProps> = ({
         <foreignObject x={leaf.x0} y={leaf.y0} width={width} height={height}>
           <div
             className="h-full w-full"
-            onMouseEnter={() => setActionsVisible(index)}
-            onMouseLeave={() => setActionsVisible(null)}
+            onMouseEnter={() => {
+              nodeActionsClicked(leaf.data);
+              setActionsVisible(index);
+            }}
+            onMouseLeave={() => {
+              setActionsVisible(null);
+            }}
           >
             <ColorsAxis width={width} colorsConfig={colorsConfig} />
             <div
@@ -180,12 +185,12 @@ export const Treemap: FC<TreemapProps> = ({
                 </span>
               </span>
               <div
-                data-for="global"
-                data-tip={leaf.data.type === 'Cluster' ? 'Merge' : 'Split'}
+                data-for="global-actions"
+                data-tip
+                data-event="click"
                 className={`self-end hover:cursor-pointer hover:text-white ${
                   actionsVisible === index ? 'visible' : 'invisible'
                 }`}
-                onClick={() => nodeActionsClicked(leaf.data)}
               >
                 <EllipsisHorizontalIcon className="h-4 w-4" />
               </div>

@@ -185,7 +185,7 @@ export default function ItemActions({
                   </div>
                 )}
                 {loading ? (
-                  <div className="grow w-full justify-center items-center flex mt-1">
+                  <div className="grow w-full justify-center items-center flex mt-2">
                     <div className="text-center">
                       <div role="status">
                         <svg
@@ -257,7 +257,7 @@ function ClustersList({
   clusterSelected: (cluster: { id: string; text: string }) => void;
 }) {
   return (
-    <div className="w-full px-4 py-2">
+    <div className="w-full pr-1 py-2">
       <div className="mx-auto w-full max-w-md">
         <RadioGroup value={selected} onChange={clusterSelected}>
           <RadioGroup.Label className="sr-only">
@@ -291,16 +291,16 @@ function ClustersList({
                               checked ? 'text-white' : 'text-gray-900'
                             }`}
                           >
-                            {cluster.id}
+                            {cluster.text}
                           </RadioGroup.Label>
-                          <RadioGroup.Description
+                          {/* <RadioGroup.Description
                             as="span"
                             className={`inline ${
                               checked ? 'text-sky-100' : 'text-gray-500'
                             }`}
                           >
                             <span>{cluster.text}</span>
-                          </RadioGroup.Description>
+                          </RadioGroup.Description> */}
                         </div>
                       </div>
                       {checked && (

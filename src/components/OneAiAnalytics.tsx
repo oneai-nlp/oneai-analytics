@@ -103,6 +103,9 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   const [toDate, setToDate] = useState(null as Date | null);
   const loadedNodes = useRef([] as { type: string; id: string }[]);
   const currentCollection = useRef(null as string | null);
+  const currentHoveredNode = useRef(
+    null as { type: NodeType; id: string; text: string } | null
+  );
 
   useEffect(() => {
     if (
@@ -319,6 +322,37 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
         style={{ background: background }}
       >
         <ReactTooltip id="global" />
+        <ReactTooltip
+          id="global-actions"
+          place="top"
+          effect="solid"
+          clickable={true}
+          backgroundColor="white"
+        >
+          <div className="flex flex-col w-full h-full p-2">
+            <button
+              type="button"
+              onClick={() => {
+                ReactTooltip.hide();
+                setCurrentNodeActions(currentHoveredNode.current);
+              }}
+              className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+            >
+              Merge
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                ReactTooltip.hide();
+                setCurrentNodeActions(currentHoveredNode.current);
+              }}
+              disabled
+              className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+            >
+              Hide
+            </button>
+          </div>
+        </ReactTooltip>
         <ItemActions
           node={currentNodeActions}
           splitPhrase={splitPhrase}
@@ -619,7 +653,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     dataNodes={nodes}
                     height={height ?? 0}
                     width={width ?? 0}
-                    nodeClicked={(node) =>
+                    nodeClicked={(node) => {
+                      ReactTooltip.hide();
                       nodeClicked({
                         type: !currentNode
                           ? 'Cluster'
@@ -627,8 +662,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                           ? 'Phrase'
                           : 'Item',
                         id: node.id,
-                      })
-                    }
+                      });
+                    }}
                     labels={labels}
                     counters={counters}
                     bigColor={treemapBigColor}
@@ -643,7 +678,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     sizeAxis={sizeAxis}
                     colorAxis={colorAxis}
                     nodeActionsClicked={(node) =>
-                      setCurrentNodeActions({
+                      (currentHoveredNode.current = {
                         type: !currentNode
                           ? 'Cluster'
                           : currentNode.type === 'Cluster'
@@ -659,7 +694,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     dataNodes={nodes}
                     height={height ?? 0}
                     width={width ?? 0}
-                    nodeClicked={(node) =>
+                    nodeClicked={(node) => {
+                      ReactTooltip.hide();
                       nodeClicked({
                         type: !currentNode
                           ? 'Cluster'
@@ -667,8 +703,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                           ? 'Phrase'
                           : 'Item',
                         id: node.id,
-                      })
-                    }
+                      });
+                    }}
                     fontFamily={fontFamily}
                     textColor={textColor}
                     barColor={barColor}
@@ -679,7 +715,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     sizeAxis={sizeAxis}
                     colorAxis={colorAxis}
                     nodeActionsClicked={(node) =>
-                      setCurrentNodeActions({
+                      (currentHoveredNode.current = {
                         type: !currentNode
                           ? 'Cluster'
                           : currentNode.type === 'Cluster'
