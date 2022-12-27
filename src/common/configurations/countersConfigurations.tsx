@@ -196,4 +196,45 @@ export const defaultCountersConfigurations: CountersConfigurations = {
       },
     ],
   },
+  score: {
+    display: {
+      color: 'white',
+      icon: (
+        <span className="flex flex-col" style={{ height: '1em' }}>
+          <HandThumbUpIcon />
+          <HandThumbDownIcon />
+        </span>
+      ),
+    },
+    items: [
+      {
+        label: '2',
+        display: {
+          color: 'green',
+          icon: <HandThumbUpIcon />,
+        },
+      },
+      {
+        label: '1',
+        display: {
+          color: 'green',
+          icon: <HandThumbUpIcon />,
+        },
+      },
+      {
+        label: '-1',
+        display: {
+          color: 'red',
+          icon: <HandThumbDownIcon />,
+        },
+      },
+      {
+        label: '-2',
+        display: {
+          color: 'red',
+          icon: <HandThumbDownIcon />,
+        },
+      },
+    ],
+  },
 };
