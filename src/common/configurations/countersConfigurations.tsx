@@ -235,6 +235,24 @@ export const defaultCountersConfigurations: CountersConfigurations = {
           icon: <HandThumbDownIcon />,
         },
       },
+      {
+        label: 'positive',
+        display: {
+          color: 'green',
+          icon: <HandThumbUpIcon />,
+        },
+        members: [{ values: ['1', '2'] }],
+        isGroup: true,
+      },
+      {
+        label: 'positive',
+        display: {
+          color: 'red',
+          icon: <HandThumbDownIcon />,
+        },
+        members: [{ values: ['-1', '-2'] }],
+        isGroup: true,
+      },
     ],
   },
 };
