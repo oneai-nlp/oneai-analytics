@@ -8,7 +8,11 @@ import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
 import CustomizeTab from '../common/components/CustomizeTab';
 import DatesFilters from '../common/components/DatesFilters';
 import ItemActions from '../common/components/ItemActions';
-import { totalSumCalculationName } from '../common/configurations/calculationsConfigurations';
+import {
+  percentOfItemsCalculationName,
+  topValuePercentCalculationName,
+  totalSumCalculationName,
+} from '../common/configurations/calculationsConfigurations';
 import {
   colorAxisStorageKey,
   countersStorageKey,
@@ -83,6 +87,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   splitPhrase,
   mergeClusters,
   searchSimilarClusters,
+  translationEnabled = true,
 }) => {
   const [display, setDisplay] = useState('Treemap' as Displays);
   const { width, height, ref } = useResizeDetector();
@@ -132,6 +137,10 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
             metadataKeyValue: { key: CUSTOM_METADATA_KEY },
             calculationName: totalSumCalculationName,
           },
+          {
+            metadataKeyValue: { key: 'signals' },
+            calculationName: topValuePercentCalculationName,
+          },
         ],
         currentCollection.current,
         countersStorageKey
@@ -148,7 +157,16 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
     setColorAxis(
       getInitialCounterTypes(
         defaultCalculations,
-        [],
+        [
+          {
+            metadataKeyValue: { key: 'signals', value: 'positive' },
+            calculationName: percentOfItemsCalculationName,
+          },
+          {
+            metadataKeyValue: { key: 'signals', value: 'positive' },
+            calculationName: percentOfItemsCalculationName,
+          },
+        ],
         currentCollection.current,
         colorAxisStorageKey
       ) as CounterType[]
@@ -435,14 +453,16 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               </div>
             </div>
             <div className="flex flex-row w-full justify-end items-center">
-              <LanguageIcon
-                onClick={() => setTranslate((translate) => !translate)}
-                className={`h-6 w-6 p-1 mr-1 hover:cursor-pointer ${
-                  translate
-                    ? 'bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]'
-                    : 'text-[#747189] hover:cursor-pointer dark:hover:text-white'
-                }`}
-              />
+              {translationEnabled ? (
+                <LanguageIcon
+                  onClick={() => setTranslate((translate) => !translate)}
+                  className={`h-6 w-6 p-1 mr-1 hover:cursor-pointer ${
+                    translate
+                      ? 'bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]'
+                      : 'text-[#747189] hover:cursor-pointer dark:hover:text-white'
+                  }`}
+                />
+              ) : null}
             </div>
           </div>
         </div>
@@ -506,7 +526,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 <div className="ml-1 text-[#111111] dark:text-gray-300 truncate flex items-center">
                   {nodesPath.map((node, i) => (
                     <div key={i} className="flex">
-                      <div className="max-w-[20ch] truncate">
+                      <div className="max-w-[35ch] truncate">
                         <span
                           className="cursor-pointer hover:text-gray-600 dark:hover:text-gray-50"
                           onClick={() =>

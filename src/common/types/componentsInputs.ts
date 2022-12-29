@@ -106,6 +106,7 @@ export interface OneAiAnalyticsProps {
     destination: string,
     controller: AbortController
   ) => Promise<{ status: 'Success' | 'error'; message: string }>;
+  translationEnabled?: boolean;
 }
 
 export type OneAIAnalyticsStaticDataWrapperProps = Omit<
