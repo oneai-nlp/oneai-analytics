@@ -18,7 +18,7 @@ export default function ItemActions({
     controller: AbortController
   ) => Promise<{ status: 'Success' | 'error'; message: string }>;
   mergeClusters?: (
-    source: string,
+    source: string[],
     destination: string,
     controller: AbortController
   ) => Promise<{ status: 'Success' | 'error'; message: string }>;
@@ -121,12 +121,16 @@ export default function ItemActions({
         let res;
         if (mergeTo) {
           res = await mergeClusters(
-            node.id,
+            [node.id],
             firstSelectedCluster,
             controller.current
           );
         } else {
-          console.log(selectedClusters);
+          res = await mergeClusters(
+            selectedClusters,
+            node.id,
+            controller.current
+          );
         }
 
         if (res && res.message) {
@@ -298,7 +302,9 @@ export default function ItemActions({
                     type="button"
                     className="text-center w-1/3 rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
                     onClick={invokeAction}
-                    disabled={loading || !selectedClusters}
+                    disabled={
+                      loading || (action === 'Merge' && !selectedClusters)
+                    }
                   >
                     {action}
                   </button>

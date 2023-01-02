@@ -102,7 +102,7 @@ export interface OneAiAnalyticsProps {
     controller: AbortController
   ) => Promise<{ status: 'Success' | 'error'; message: string }>;
   mergeClusters?: (
-    source: string,
+    source: string[],
     destination: string,
     controller: AbortController
   ) => Promise<{ status: 'Success' | 'error'; message: string }>;

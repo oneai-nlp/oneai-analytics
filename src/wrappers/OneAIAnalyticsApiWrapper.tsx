@@ -669,16 +669,24 @@ async function mergeClusters(
   domain: string,
   collection: string,
   apiKey: string,
-  source: string,
+  source: string[],
   destination: string,
   setLocalRefreshToken: React.Dispatch<React.SetStateAction<string>>
 ): Promise<{ status: 'Success' | 'error'; message: string }> {
   try {
     const res = await fetch(
-      `${domain}/clustering/v1/collections/${collection}/merge?source-cluster=${source}&destination-cluster=${destination}`,
+      `${domain}/clustering/v1/collections/${collection}/merge`,
       {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'api-key': apiKey },
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          'api-key': apiKey,
+        },
+        body: JSON.stringify({
+          source_clusters: source,
+          destination_cluster: destination,
+        }),
         signal: controller.signal,
       }
     );
