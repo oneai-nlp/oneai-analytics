@@ -522,7 +522,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 <div className="ml-1 text-[#111111] dark:text-gray-300 truncate flex items-center">
                   {nodesPath.map((node, i) => (
                     <div key={i} className="flex">
-                      <div className="max-w-[35ch] truncate">
+                      <div className="max-w-[80vw] truncate">
                         <span
                           className="cursor-pointer hover:text-gray-600 dark:hover:text-gray-50"
                           onClick={() =>
