@@ -4,6 +4,7 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 import ReactTooltip from 'react-tooltip';
 import LabelDisplay from '../common/components/CountersLabels/LabelDisplay';
+import LabelsFiltersSelect from '../common/components/CountersLabels/LabelsFiltersSelect';
 import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
 import CustomizeTab from '../common/components/CustomizeTab';
 import DatesFilters from '../common/components/DatesFilters';
@@ -59,10 +60,10 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   currentNode,
   currentPage = 0,
   totalPagesAmount = 0,
-  goBackClicked = () => { },
-  nodeClicked = () => { },
-  nextPageClicked = () => { },
-  prevPageClicked = () => { },
+  goBackClicked = () => {},
+  nodeClicked = () => {},
+  nextPageClicked = () => {},
+  prevPageClicked = () => {},
   itemsDisplay = ItemsListDisplay,
   darkMode = true,
   background,
@@ -78,10 +79,10 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   loading,
   error,
   nodesPath = [],
-  dateRangeChanged = () => { },
+  dateRangeChanged = () => {},
   labelsFilters,
-  labelClicked = () => { },
-  labelFilterDeleted = () => { },
+  labelClicked = () => {},
+  labelFilterDeleted = () => {},
   trendPeriods,
   trendPeriodsChanged,
   splitPhrase,
@@ -177,25 +178,25 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
     setMetaData((currentMetadata) => {
       const newMetadata = currentNode
         ? loadedNodes.current.some(
-          (loadedNode) =>
-            loadedNode.type === currentNode.type &&
-            loadedNode.id === getNodeId(currentNode)
-        )
+            (loadedNode) =>
+              loadedNode.type === currentNode.type &&
+              loadedNode.id === getNodeId(currentNode)
+          )
           ? currentMetadata
           : mergeMetadata(currentMetadata, currentNode?.data.metadata ?? {})
         : nodes
-          .filter(
-            (node) =>
-              !loadedNodes.current.some(
-                (loadedNode) =>
-                  loadedNode.id === node.id && loadedNode.type === node.type
-              )
-          )
-          .reduce(
-            (finalMetadata, currentNode) =>
-              mergeMetadata(finalMetadata, currentNode.metadata),
-            currentMetadata
-          );
+            .filter(
+              (node) =>
+                !loadedNodes.current.some(
+                  (loadedNode) =>
+                    loadedNode.id === node.id && loadedNode.type === node.type
+                )
+            )
+            .reduce(
+              (finalMetadata, currentNode) =>
+                mergeMetadata(finalMetadata, currentNode.metadata),
+              currentMetadata
+            );
       loadedNodes.current.push({
         type: currentNode?.type ?? COLLECTION_TYPE,
         id: currentNode ? getNodeId(currentNode) : COLLECTION_TYPE,
@@ -251,33 +252,33 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
             key === CUSTOM_METADATA_KEY
               ? undefined
               : (
-                defaultConfig?.items?.map((group) => {
-                  return {
-                    label: group.label,
-                    display: group.display,
-                    isGroup: group.isGroup,
-                    members: group.members?.map((member) => {
-                      return {
-                        metadataName: member.metadataName ?? key,
-                        values: member.values,
-                      };
-                    }) ?? [
+                  defaultConfig?.items?.map((group) => {
+                    return {
+                      label: group.label,
+                      display: group.display,
+                      isGroup: group.isGroup,
+                      members: group.members?.map((member) => {
+                        return {
+                          metadataName: member.metadataName ?? key,
+                          values: member.values,
+                        };
+                      }) ?? [
                         { metadataName: key, values: [group.label ?? ''] },
                       ],
-                  };
-                }) ?? []
-              ).concat(
-                metaData[key]
-                  ?.filter((meta) => !valuesConfigured.includes(meta.value))
-                  .map((meta) => {
-                    return {
-                      label: meta.value,
-                      members: [{ metadataName: key, values: [meta.value] }],
-                      display: undefined,
-                      isGroup: false,
                     };
                   }) ?? []
-              ),
+                ).concat(
+                  metaData[key]
+                    ?.filter((meta) => !valuesConfigured.includes(meta.value))
+                    .map((meta) => {
+                      return {
+                        label: meta.value,
+                        members: [{ metadataName: key, values: [meta.value] }],
+                        display: undefined,
+                        isGroup: false,
+                      };
+                    }) ?? []
+                ),
         };
         newCountersConfigurations[key.toLowerCase()] = counterConfiguration;
       });
@@ -330,13 +331,15 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
 
   return (
     <div
-      className={`oneai-analytics-namespace h-full w-full overflow-hidden ${darkMode ? 'dark' : ''
-        }`}
+      className={`oneai-analytics-namespace h-full w-full overflow-hidden ${
+        darkMode ? 'dark' : ''
+      }`}
     >
       <div
         id="headlessui-portal-root"
-        className={`h-full w-full flex flex-col overflow-hidden bg-[#f3e5e5] dark:bg-[#161414] p-1 ${darkMode ? 'dark' : ''
-          }`}
+        className={`h-full w-full flex flex-col overflow-hidden bg-[#f3e5e5] dark:bg-[#161414] p-1 ${
+          darkMode ? 'dark' : ''
+        }`}
         style={{ background: background }}
       >
         <ReactTooltip id="global" />
@@ -449,15 +452,26 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                   trendPeriodsChanged={trendPeriodsChanged}
                 />
               </div>
+              <div>
+                <LabelsFiltersSelect
+                  metadataKeyValue={labelsFilters?.at(0) ?? null}
+                  placeholder="Filters"
+                  countersConfigurations={countersConfigurations}
+                  selectedMetadataKeyValueChange={(metadataKeyValue) =>
+                    labelClicked(metadataKeyValue.key, metadataKeyValue.value!)
+                  }
+                />
+              </div>
             </div>
             <div className="flex flex-row w-full justify-end items-center">
               {translationEnabled ? (
                 <LanguageIcon
                   onClick={() => setTranslate((translate) => !translate)}
-                  className={`h-6 w-6 p-1 mr-1 hover:cursor-pointer ${translate
-                    ? 'bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]'
-                    : 'text-[#747189] hover:cursor-pointer dark:hover:text-white'
-                    }`}
+                  className={`h-6 w-6 p-1 mr-1 hover:cursor-pointer ${
+                    translate
+                      ? 'bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]'
+                      : 'text-[#747189] hover:cursor-pointer dark:hover:text-white'
+                  }`}
                 />
               ) : null}
             </div>
@@ -489,10 +503,11 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                   type="button"
                   onClick={() => goBackClicked(1)}
                   disabled={currentNode === null}
-                  className={`rounded-lg inline-flex ${currentNode
-                    ? 'hover:bg-[#EFEFEF] dark:hover:bg-slate-700'
-                    : 'hover:cursor-default'
-                    }`}
+                  className={`rounded-lg inline-flex ${
+                    currentNode
+                      ? 'hover:bg-[#EFEFEF] dark:hover:bg-slate-700'
+                      : 'hover:cursor-default'
+                  }`}
                 >
                   {currentNode ? (
                     <svg
@@ -547,7 +562,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                             metadataKey={keyValue.key}
                             value={keyValue.value ?? ''}
                             countersConfiguration={countersConfigurations}
-                            labelClicked={() => { }}
+                            labelClicked={() => {}}
                             maxWidth="20ch"
                             color="#747189"
                           />
@@ -615,10 +630,11 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               </div>
             )}
             <div
-              className={`flex flex-row flex-grow ${loading
-                ? 'invisible pointer-events-none w-0 h-0'
-                : 'w-full h-full'
-                }`}
+              className={`flex flex-row flex-grow ${
+                loading
+                  ? 'invisible pointer-events-none w-0 h-0'
+                  : 'w-full h-full'
+              }`}
             >
               {currentPage > 0 && (
                 <div
@@ -677,8 +693,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                         type: !currentNode
                           ? 'Cluster'
                           : currentNode.type === 'Cluster'
-                            ? 'Phrase'
-                            : 'Item',
+                          ? 'Phrase'
+                          : 'Item',
                         id: node.id,
                       });
                     }}
@@ -700,8 +716,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                         type: !currentNode
                           ? 'Cluster'
                           : currentNode.type === 'Cluster'
-                            ? 'Phrase'
-                            : 'Item',
+                          ? 'Phrase'
+                          : 'Item',
                         id: node.id,
                         text: node.text ?? '',
                       });
@@ -719,8 +735,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                         type: !currentNode
                           ? 'Cluster'
                           : currentNode.type === 'Cluster'
-                            ? 'Phrase'
-                            : 'Item',
+                          ? 'Phrase'
+                          : 'Item',
                         id: node.id,
                       });
                     }}
@@ -738,8 +754,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                         type: !currentNode
                           ? 'Cluster'
                           : currentNode.type === 'Cluster'
-                            ? 'Phrase'
-                            : 'Item',
+                          ? 'Phrase'
+                          : 'Item',
                         id: node.id,
                         text: node.text ?? '',
                       });
@@ -785,10 +801,11 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
 };
 
 function getVisualizationLogoClasses(active: boolean) {
-  return `h-7 w-7 mr-1 p-1 rounded-md ${active
-    ? 'bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]'
-    : 'text-[#747189] hover:cursor-pointer dark:hover:text-white'
-    }`;
+  return `h-7 w-7 mr-1 p-1 rounded-md ${
+    active
+      ? 'bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]'
+      : 'text-[#747189] hover:cursor-pointer dark:hover:text-white'
+  }`;
 }
 
 function mergeMetadata(metadata1: MetaData, metadata2: MetaData): MetaData {

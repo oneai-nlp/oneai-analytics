@@ -102,7 +102,9 @@ export default function CounterDisplay({
       >
         {getNumberDescription(displayResult.result, 2)}
         {counter.calculationConfiguration.type === 'percentage' ||
-          (counter.calculationConfiguration.type === 'trend' && '%')}
+        counter.calculationConfiguration.type === 'trend'
+          ? '%'
+          : null}
       </span>
     </span>
   );
