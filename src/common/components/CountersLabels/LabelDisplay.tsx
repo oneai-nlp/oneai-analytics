@@ -36,8 +36,13 @@ export default function LabelDisplay({
     >
       {config && config.display && config.display.icon !== null && (
         <span
-          className="w-[1em] h-[1em]"
-          style={{ color: config.display.color }}
+          className={`w-[1em] h-[1em] ${
+            config.display.color === 'green'
+              ? 'text-emerald-400'
+              : config.display.color === 'red'
+              ? 'text-red-400'
+              : 'text-gray-500 dark:text-gray-300'
+          }`}
         >
           {config.display.icon}
         </span>
