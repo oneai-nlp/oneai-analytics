@@ -3,13 +3,13 @@ import {
   ChevronDownIcon,
   ChevronUpDownIcon,
   ChevronUpIcon,
-} from '@heroicons/react/20/solid';
+  FunnelIcon,
+} from '@heroicons/react/24/outline';
 import React, { Fragment, useState } from 'react';
 import {
   CountersConfigurations,
   MetadataKeyValue,
 } from '../../types/customizeBarTypes';
-import { getMetadataKeyValueDisplay } from '../../utils/displayUtils';
 import { uniqBy } from '../../utils/utils';
 import DropdownOption from './DropdownOption';
 
@@ -17,14 +17,12 @@ export default function LabelsFiltersSelect({
   metadataKeyValue,
   countersConfigurations,
   selectedMetadataKeyValueChange,
-  placeholder,
 }: {
   metadataKeyValue: MetadataKeyValue | null;
   selectedMetadataKeyValueChange: (
     newMetadataKeyValue: MetadataKeyValue
   ) => void;
   countersConfigurations: CountersConfigurations;
-  placeholder: string;
 }) {
   return (
     <Listbox
@@ -37,11 +35,12 @@ export default function LabelsFiltersSelect({
       by={(a, b) => a?.key === b?.key && a?.value === b?.value}
     >
       <div className="relative">
-        <Listbox.Button className="relative rounded-lg bg-gray-600 dark:bg-[#272535] py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-          <span className="block truncate lowercase first-letter:uppercase text-white">
-            {metadataKeyValue
-              ? getMetadataKeyValueDisplay(metadataKeyValue)
-              : placeholder}
+        <Listbox.Button className="relative rounded-lg  py-2 pl-3 pr-10 text-left focus:outline-none sm:text-sm">
+          <span
+            className="block truncate lowercase first-letter:uppercase text-black dark:text-white !text-xl"
+            style={{ width: '1em', height: '1em' }}
+          >
+            <FunnelIcon />
           </span>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <ChevronUpDownIcon

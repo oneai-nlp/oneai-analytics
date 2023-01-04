@@ -345,7 +345,9 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       labelClicked={(key, value) => {
         if (
           !labelsFilters.some(
-            (keyValue) => keyValue.key === key && keyValue.value === value
+            (keyValue) =>
+              keyValue.key.toLowerCase() === key.toLowerCase() &&
+              keyValue.value?.toLowerCase() === value.toLowerCase()
           )
         )
           setLocalRefreshToken((current) => {
@@ -493,15 +495,17 @@ async function fetchApi<T>(
 
   try {
     const res = await fetch(
-      `${url}?page=${page}&limit=${PAGE_SIZE}&translate=true` +
-        (from ? `&from-date=${format(from, 'yyyy-MM-dd')}` : '') +
-        (to ? `&to-date=${format(to, 'yyyy-MM-dd')}` : '') +
-        (labelsFiltersString.length > 0
-          ? `&item-metadata=${labelsFiltersString.join()}`
-          : '') +
-        (trendPeriods > 1
-          ? `&include-trends=true&trend-periods-limit=${trendPeriods}`
-          : ''),
+      encodeURI(
+        `${url}?page=${page}&limit=${PAGE_SIZE}&translate=true` +
+          (from ? `&from-date=${format(from, 'yyyy-MM-dd')}` : '') +
+          (to ? `&to-date=${format(to, 'yyyy-MM-dd')}` : '') +
+          (labelsFiltersString.length > 0
+            ? `&item-metadata=${labelsFiltersString.join()}`
+            : '') +
+          (trendPeriods > 1
+            ? `&include-trends=true&trend-periods-limit=${trendPeriods}`
+            : '')
+      ),
       {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', 'api-key': apiKey },
