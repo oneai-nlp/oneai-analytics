@@ -35,7 +35,7 @@ export default function ItemActions({
   );
   const [searchText, setSearchText] = useState(null as string | null);
   const [error, setError] = useState(null as string | null);
-  const [mergeTo, setMergeTo] = useState(true);
+  const [mergeTo, setMergeTo] = useState(false);
 
   useEffect(() => {
     if (!node || !searchSimilarClusters) return;
