@@ -105,3 +105,13 @@ export function getNumberDescription(num: number, decPlaces: number): string {
 
   return prefix + strResult;
 }
+
+export const objectToLowerCase = <T>(obj: Record<string, T>) => {
+  const entries = Object.entries(obj);
+
+  return Object.fromEntries(
+    entries.map(([key, value]) => {
+      return [key.toLowerCase(), value];
+    })
+  );
+};

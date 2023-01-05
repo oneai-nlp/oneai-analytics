@@ -6,7 +6,12 @@ import {
   MetadataKeyValue,
 } from '../types/customizeBarTypes';
 import { MetaData, Trend } from '../types/modals';
-import { percentageIncrease, sum, toLowerKeys } from './utils';
+import {
+  objectToLowerCase,
+  percentageIncrease,
+  sum,
+  toLowerKeys,
+} from './utils';
 
 export function topGroupPercentCalculation(
   metadataKeyValue: MetadataKeyValue | null,
@@ -345,7 +350,9 @@ export function getMetadataKeyValueConfiguration(
   countersConfigurations: CountersConfigurations
 ): CounterConfiguration | null {
   if (!metadataKeyValue) return null;
-  const keyConfig = countersConfigurations[metadataKeyValue.key.toLowerCase()];
+  const keyConfig = objectToLowerCase(countersConfigurations)[
+    metadataKeyValue.key.toLowerCase()
+  ];
   if (!keyConfig) return null;
   if (!metadataKeyValue.value) return keyConfig;
   const memberConfig = keyConfig.items?.find(

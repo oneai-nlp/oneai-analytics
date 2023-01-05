@@ -77,7 +77,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   treemapBorderColor = darkMode ? '#272535' : 'white',
   barColor = darkMode ? '#322F46' : '#F7F7F7',
   loading,
-  error,
+  error = null,
   nodesPath = [],
   dateRangeChanged = () => {},
   labelsFilters,
@@ -216,11 +216,12 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
     setNodes(
       dataNodes.map((d) => {
         const itemsCount = getNodeItemsCount(d);
+        const nodeText = getNodeText(d);
         return {
           id: getNodeId(d),
           amount: itemsCount,
-          text: getNodeText(d),
-          item_original_text: d.data.item_original_text,
+          text: nodeText,
+          item_original_text: d.data.item_original_text ?? nodeText,
           item_translated_text: d.data.item_translated_text,
           metadata: {
             [CUSTOM_METADATA_KEY]: [
@@ -280,7 +281,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     }) ?? []
                 ),
         };
-        newCountersConfigurations[key.toLowerCase()] = counterConfiguration;
+        newCountersConfigurations[key] = counterConfiguration;
       });
 
     setCountersConfigurations(newCountersConfigurations);

@@ -72,7 +72,7 @@ export default function ItemActions({
         );
         setSimilarClusters(res);
       } catch (e) {
-        console.log(e);
+        console.error(e);
       } finally {
         setLoading(false);
       }
