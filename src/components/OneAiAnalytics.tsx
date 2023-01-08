@@ -455,7 +455,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               </div>
               <div>
                 <LabelsFiltersSelect
-                  metadataKeyValue={labelsFilters?.at(0) ?? null}
+                  selectedLabels={labelsFilters ?? []}
                   countersConfigurations={countersConfigurations}
                   selectedMetadataKeyValueChange={(metadataKeyValue) =>
                     labelClicked(metadataKeyValue.key, metadataKeyValue.value!)

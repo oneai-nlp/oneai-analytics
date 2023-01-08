@@ -11,29 +11,20 @@ import {
   MetadataKeyValue,
 } from '../../types/customizeBarTypes';
 import { uniqBy } from '../../utils/utils';
-import DropdownOption from './DropdownOption';
 
 export default function LabelsFiltersSelect({
-  metadataKeyValue,
+  selectedLabels,
   countersConfigurations,
   selectedMetadataKeyValueChange,
 }: {
-  metadataKeyValue: MetadataKeyValue | null;
+  selectedLabels: MetadataKeyValue[];
   selectedMetadataKeyValueChange: (
     newMetadataKeyValue: MetadataKeyValue
   ) => void;
   countersConfigurations: CountersConfigurations;
 }) {
   return (
-    <Listbox
-      value={metadataKeyValue}
-      onChange={(newMetadataKeyValue) =>
-        newMetadataKeyValue?.value
-          ? selectedMetadataKeyValueChange(newMetadataKeyValue)
-          : null
-      }
-      by={(a, b) => a?.key === b?.key && a?.value === b?.value}
-    >
+    <Listbox>
       <div className="relative">
         <Listbox.Button className="relative rounded-lg  py-2 pl-3 pr-10 text-left focus:outline-none sm:text-sm">
           <span
@@ -70,10 +61,8 @@ export default function LabelsFiltersSelect({
                   countersConfigurations={countersConfigurations}
                   optionName={key}
                   index={i}
-                  selected={
-                    (metadataKeyValue?.key ?? '') === key &&
-                    metadataKeyValue?.value !== undefined
-                  }
+                  selected={selectedLabels ?? []}
+                  labelClicked={selectedMetadataKeyValueChange}
                   key={i}
                 />
               ))}
@@ -89,13 +78,16 @@ function CascadedOption({
   optionName,
   index,
   selected,
+  labelClicked,
 }: {
   countersConfigurations: CountersConfigurations;
   optionName: string;
   index: number;
-  selected: boolean;
+  selected: MetadataKeyValue[];
+  labelClicked: (newMetadataKeyValue: MetadataKeyValue) => void;
 }) {
-  const [opened, setOpened] = useState(selected);
+  const keySelected = selected.some((s) => s.key === optionName);
+  const [opened, setOpened] = useState(keySelected);
   const configData = countersConfigurations[optionName];
 
   return (
@@ -127,6 +119,11 @@ function CascadedOption({
                 value={
                   { key: optionName, value: group.label } as MetadataKeyValue
                 }
+                selected={selected.some(
+                  (keyVal) =>
+                    keyVal.key === optionName && keyVal.value === group.label
+                )}
+                labelClicked={labelClicked}
                 pl={2}
                 key={optionName + group.label + i.toString()}
               />
@@ -154,6 +151,52 @@ function MetadataTitle({ label }: { label: string }) {
         <div className="flex items-center">
           <label
             className={`text-sm ml-2 font-medium text-gray-900 dark:text-gray-300 block truncate lowercase first-letter:uppercase`}
+          >
+            {label}
+          </label>
+        </div>
+      </span>
+    </Listbox.Option>
+  );
+}
+
+function DropdownOption({
+  label,
+  value,
+  selected,
+  labelClicked,
+  pl = 1,
+}: {
+  label: string;
+  value: MetadataKeyValue;
+  selected: boolean;
+  labelClicked: (newMetadataKeyValue: MetadataKeyValue) => void;
+  pl?: number;
+}) {
+  return (
+    <Listbox.Option
+      style={{ paddingLeft: pl + 'rem' }}
+      className={({ active }) =>
+        `relative cursor-default select-none py-2 pr-4 ${
+          active
+            ? 'bg-gray-400 dark:bg-[#444154] text-white'
+            : 'text-gray-300 dark:text-[#747189]'
+        }`
+      }
+      onClick={() => labelClicked(value)}
+      value={value}
+    >
+      <span className="w-full flex">
+        <div className="flex items-center">
+          <input
+            checked={selected}
+            type="checkbox"
+            className="w-4 h-4 text-[#4D4DFE] bg-gray-100 border-gray-300 focus:ring-[#4D4DFE] dark:ring-offset-gray-800 focus:ring-2 dark:bg-[#322F46] dark:border-[#322F46]"
+          />
+          <label
+            className={`text-sm ml-2 font-medium text-gray-900 dark:text-gray-300 block truncate lowercase first-letter:uppercase ${
+              selected ? 'font-medium' : 'font-normal'
+            }`}
           >
             {label}
           </label>

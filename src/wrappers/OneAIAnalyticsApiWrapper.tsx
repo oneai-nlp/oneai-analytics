@@ -351,8 +351,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           )
         )
           setLocalRefreshToken((current) => {
-            setLabelsFilters([{ key, value }]);
-            return current + '1';
+            setLabelsFilters((labels) => [...labels, { key, value }]);
+            return current.length > 2 ? '1' : current + '1';
           });
       }}
       labelFilterDeleted={(i) =>
@@ -361,7 +361,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             filters.splice(i, 1);
             return [...filters];
           });
-          return current + '1';
+          return current.length > 2 ? '1' : current + '1';
         })
       }
       trendPeriods={trendPeriods}
@@ -500,7 +500,7 @@ async function fetchApi<T>(
           (from ? `&from-date=${format(from, 'yyyy-MM-dd')}` : '') +
           (to ? `&to-date=${format(to, 'yyyy-MM-dd')}` : '') +
           (labelsFiltersString.length > 0
-            ? `&item-metadata=${labelsFiltersString.join()}`
+            ? `&item-metadata=${labelsFiltersString.join(' and ')}`
             : '') +
           (trendPeriods > 1
             ? `&include-trends=true&trend-periods-limit=${trendPeriods}`
