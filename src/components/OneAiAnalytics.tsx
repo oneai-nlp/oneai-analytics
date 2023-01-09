@@ -681,6 +681,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     labels: labels,
                     labelClicked: labelClicked,
                     countersConfiguration: countersConfigurations,
+                    translate: translate,
                   })
                 ) : display === 'Treemap' ? (
                   <Treemap

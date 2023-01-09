@@ -141,4 +141,5 @@ export interface ItemsDisplayComponentProps {
   counters: CounterType[];
   countersConfiguration: CountersConfigurations;
   labelClicked: (key: string, value: string) => void;
+  translate: boolean;
 }
