@@ -7,12 +7,15 @@ export default function ItemActions({
   searchSimilarClusters,
   splitPhrase,
   mergeClusters,
+  translationEnabled,
 }: {
   node: { type: NodeType; id: string; text: string } | null;
   searchSimilarClusters?: (
     text: string,
     controller: AbortController
-  ) => Promise<{ id: string; text: string }[]>;
+  ) => Promise<
+    { id: string; text: string; translation: string | null | undefined }[]
+  >;
   splitPhrase?: (
     phraseId: string,
     controller: AbortController
@@ -22,13 +25,16 @@ export default function ItemActions({
     destination: string,
     controller: AbortController
   ) => Promise<{ status: 'Success' | 'error'; message: string }>;
+  translationEnabled: boolean;
 }) {
   const controller = useRef(null as AbortController | null);
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [action, setAction] = useState(null as 'Split' | 'Merge' | null);
   const [similarClusters, setSimilarClusters] = useState(
-    null as { id: string; text: string }[] | null
+    null as
+      | { id: string; text: string; translation: string | null | undefined }[]
+      | null
   );
   const [selectedClusters, setSelectedClusters] = useState(
     null as string[] | null
@@ -91,7 +97,7 @@ export default function ItemActions({
   function closeModal() {
     setIsOpen(false);
     setSelectedClusters(null);
-    setMergeTo(true);
+    setMergeTo(false);
     setSearchText(null);
     setError(null);
     setLoading(false);
@@ -292,6 +298,7 @@ export default function ItemActions({
                         )}
                         selected={selectedClusters}
                         clusterSelected={clusterSelected}
+                        translationEnabled={translationEnabled}
                       />
                     </div>
                   )
@@ -329,10 +336,16 @@ function ClustersList({
   clusters,
   selected,
   clusterSelected,
+  translationEnabled,
 }: {
-  clusters: { id: string; text: string }[];
+  clusters: {
+    id: string;
+    text: string;
+    translation: string | null | undefined;
+  }[];
   selected: string[] | null;
   clusterSelected: (cluster: string, selected: boolean) => void;
+  translationEnabled: boolean;
 }) {
   return (
     <div className="w-full pr-1 py-2">
@@ -364,7 +377,9 @@ function ClustersList({
                             checked ? 'text-white' : 'text-gray-900'
                           }`}
                         >
-                          {cluster.text}
+                          {translationEnabled && cluster.translation
+                            ? cluster.translation
+                            : cluster.text}
                         </RadioGroup.Label>
                       </div>
                     </div>

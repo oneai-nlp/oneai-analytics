@@ -597,10 +597,12 @@ async function searchSimilarClusters(
   collection: string,
   apiKey: string,
   text: string
-): Promise<{ id: string; text: string }[]> {
+): Promise<
+  { id: string; text: string; translation: string | null | undefined }[]
+> {
   try {
     const res = await fetch(
-      `${domain}/clustering/v1/collections/${collection}/clusters/find?text=${text}`,
+      `${domain}/clustering/v1/collections/${collection}/clusters/find?text=${text}&translate=true`,
       {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', 'api-key': apiKey },
@@ -614,13 +616,19 @@ async function searchSimilarClusters(
       cluster_id: string;
       cluster_text: string;
       similarity: number;
+      item_original_text: string;
+      item_translated_text?: null | string;
     }[];
     if (!clusters || clusters.length === 0) return [];
 
     return clusters
       .sort((c1, c2) => c2.similarity - c1.similarity)
       .map((c) => {
-        return { id: c.cluster_id, text: c.cluster_text };
+        return {
+          id: c.cluster_id,
+          text: c.cluster_text,
+          translation: c.item_translated_text,
+        };
       });
   } catch (e) {
     console.error('error occurred ->', e);

@@ -327,6 +327,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   }, [fromDate, toDate]);
 
   useEffect(() => {
+    ReactTooltip.hide();
     ReactTooltip.rebuild();
   });
 
@@ -380,6 +381,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
           splitPhrase={splitPhrase}
           mergeClusters={mergeClusters}
           searchSimilarClusters={searchSimilarClusters}
+          translationEnabled={translate}
         />
         <div
           className="w-full mb-1 rounded-md bg-white dark:bg-[#272535]"

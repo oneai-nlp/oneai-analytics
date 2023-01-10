@@ -96,7 +96,9 @@ export interface OneAiAnalyticsProps {
   searchSimilarClusters?: (
     text: string,
     controller: AbortController
-  ) => Promise<{ id: string; text: string }[]>;
+  ) => Promise<
+    { id: string; text: string; translation: string | null | undefined }[]
+  >;
   splitPhrase?: (
     phraseId: string,
     controller: AbortController
