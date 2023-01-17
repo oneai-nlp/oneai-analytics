@@ -92,7 +92,10 @@ export const OneAIAnalyticsStaticDataWrapper: FC<OneAIAnalyticsStaticDataWrapper
         totalPagesAmount={currentPages.length}
         nextPageClicked={() => setCurrentPage((page) => page + 1)}
         prevPageClicked={() => setCurrentPage((page) => page - 1)}
-        nodesPath={[collection, ...clickedNodes.map((node) => node.text)]}
+        nodesPath={[
+          { text: collection },
+          ...clickedNodes.map((node) => ({ text: node.text })),
+        ]}
         {...rest}
       />
     );

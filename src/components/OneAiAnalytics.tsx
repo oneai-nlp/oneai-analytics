@@ -1,5 +1,9 @@
 import { HomeIcon, XMarkIcon } from '@heroicons/react/20/solid';
-import { LanguageIcon } from '@heroicons/react/24/outline';
+import {
+  EyeIcon,
+  EyeSlashIcon,
+  LanguageIcon,
+} from '@heroicons/react/24/outline';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 import ReactTooltip from 'react-tooltip';
@@ -36,7 +40,7 @@ import {
   CounterType,
   MetadataKeyValue,
 } from '../common/types/customizeBarTypes';
-import { Item, MetaData, Trend } from '../common/types/modals';
+import { Item, MetaData, Properties, Trend } from '../common/types/modals';
 import {
   COLLECTION_TYPE,
   getNodeId,
@@ -89,6 +93,9 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   mergeClusters,
   searchSimilarClusters,
   translationEnabled = true,
+  toggleHide = () => {},
+  propertiesFilters = {},
+  setPropertiesFilters = () => {},
 }) => {
   const [display, setDisplay] = useState('Treemap' as Displays);
   const { width, height, ref } = useResizeDetector();
@@ -110,18 +117,23 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   const loadedNodes = useRef([] as { type: string; id: string }[]);
   const currentCollection = useRef(null as string | null);
   const [currentHoveredNode, setCurrentHoveredNode] = useState(
-    null as { type: NodeType; id: string; text: string } | null
+    null as {
+      type: NodeType;
+      id: string;
+      text: string;
+      properties: Properties;
+    } | null
   );
 
   useEffect(() => {
     if (
       !nodesPath ||
       nodesPath.length === 0 ||
-      currentCollection.current === nodesPath[0]
+      currentCollection.current === nodesPath[0].text
     )
       return;
 
-    currentCollection.current = nodesPath[0];
+    currentCollection.current = nodesPath[0].text;
     setLabels(
       JSON.parse(
         localStorage.getItem(
@@ -231,6 +243,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
           },
           trends: getNodeTrends(d),
           type: d.type,
+          properties: d.data.properties,
         };
       })
     );
@@ -367,12 +380,19 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               type="button"
               onClick={() => {
                 ReactTooltip.hide();
-                setCurrentNodeActions(currentHoveredNode);
+                ReactTooltip.rebuild();
+                toggleHide(
+                  currentHoveredNode,
+                  currentHoveredNode?.properties['hide'] === 'true'
+                    ? 'false'
+                    : 'true'
+                );
               }}
-              disabled
               className="text-gray-900 w-full bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-2 py-2 mr-1 mb-1 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
             >
-              Hide
+              {currentHoveredNode?.properties['hide'] === 'true'
+                ? 'Show'
+                : 'Hide'}
             </button>
           </div>
         </ReactTooltip>
@@ -466,6 +486,17 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               </div>
             </div>
             <div className="flex flex-row w-full justify-end items-center">
+              {propertiesFilters['hide'] === 'true' ? (
+                <EyeIcon
+                  onClick={() => setPropertiesFilters({ hide: 'false' })}
+                  className="h-6 w-6 p-1 mr-1 hover:cursor-pointer bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]"
+                />
+              ) : (
+                <EyeSlashIcon
+                  onClick={() => setPropertiesFilters({ hide: 'true' })}
+                  className="h-6 w-6 p-1 mr-1 hover:cursor-pointer text-[#747189] dark:hover:text-white"
+                />
+              )}
               {translationEnabled ? (
                 <LanguageIcon
                   onClick={() => setTranslate((translate) => !translate)}
@@ -546,7 +577,9 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                             goBackClicked(nodesPath.length - 1 - i)
                           }
                         >
-                          {node}
+                          {translate && node.translated
+                            ? node.translated
+                            : node.text}
                         </span>
                       </div>
                       {nodesPath.length - 1 !== i && (
@@ -723,6 +756,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                           : 'Item',
                         id: node.id,
                         text: node.text ?? '',
+                        properties: node.properties,
                       });
                     }}
                     translate={translate}
@@ -761,6 +795,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                           : 'Item',
                         id: node.id,
                         text: node.text ?? '',
+                        properties: node.properties,
                       });
                     }}
                     translate={translate}

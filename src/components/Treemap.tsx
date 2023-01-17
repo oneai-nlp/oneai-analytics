@@ -58,6 +58,7 @@ export const Treemap: FC<TreemapProps> = ({
       metadata: {},
       trends: [],
       type: '',
+      properties: {},
     };
   }, [dataNodes, sizeAxis]);
 

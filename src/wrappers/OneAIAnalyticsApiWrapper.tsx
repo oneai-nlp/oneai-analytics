@@ -6,7 +6,7 @@ import {
   OneAIDataNode,
 } from '../common/types/componentsInputs';
 import { MetadataKeyValue } from '../common/types/customizeBarTypes';
-import { Cluster, Item, Phrase } from '../common/types/modals';
+import { Cluster, Item, Phrase, Properties } from '../common/types/modals';
 import {
   COLLECTION_TYPE,
   getNodeDetails,
@@ -50,6 +50,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   const [labelsFilters, setLabelsFilters] = useState([] as MetadataKeyValue[]);
   const [localRefreshToken, setLocalRefreshToken] = useState(refreshToken);
   const [trendPeriods, setTrendPeriods] = useState(0);
+  const [propertiesFilters, setPropertiesFilters] = useState({} as Properties);
 
   const previousValues = useRef({
     domain: null as string | null,
@@ -110,7 +111,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             dateRange[0],
             dateRange[1],
             labelsFilters,
-            trendPeriods
+            trendPeriods,
+            propertiesFilters
           );
           if (clusters.error) {
             if (clusters.error.includes('AbortError')) {
@@ -162,7 +164,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             dateRange[0],
             dateRange[1],
             labelsFilters,
-            trendPeriods
+            trendPeriods,
+            propertiesFilters
           );
           if (phrases.error) {
             if (phrases.error.includes('AbortError')) {
@@ -210,7 +213,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             dateRange[0],
             dateRange[1],
             labelsFilters,
-            trendPeriods
+            trendPeriods,
+            propertiesFilters
           );
           if (items.error) {
             if (items.error.includes('AbortError')) {
@@ -334,7 +338,13 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       prevPageClicked={() => setCurrentPage((page) => page - 1)}
       loading={loading}
       error={error}
-      nodesPath={[collection, ...clickedNodes.map(getNodeText)]}
+      nodesPath={[
+        { text: collection },
+        ...clickedNodes.map((node) => ({
+          text: getNodeText(node),
+          translated: node.data?.item_translated_text,
+        })),
+      ]}
       dateRangeChanged={(from, to) =>
         setLocalRefreshToken((current) => {
           setDateRange([from, to]);
@@ -395,6 +405,24 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           setLocalRefreshToken
         )
       }
+      toggleHide={(node, hide) =>
+        toggleHide(
+          domain,
+          collection,
+          apiKey,
+          node,
+          hide,
+          clickedNodes.at(-1),
+          setLocalRefreshToken
+        )
+      }
+      propertiesFilters={propertiesFilters}
+      setPropertiesFilters={(properties) =>
+        setLocalRefreshToken((current) => {
+          setPropertiesFilters(properties);
+          return current.length > 2 ? '1' : current + '1';
+        })
+      }
       {...rest}
     />
   ) : null;
@@ -409,7 +437,8 @@ async function fetchClusters(
   from: Date | null,
   to: Date | null,
   labelsFilters: MetadataKeyValue[],
-  trendPeriods: number
+  trendPeriods: number,
+  propertiesFilters: Properties
 ): Promise<{ totalPages: number; data: Cluster[]; error: string | null }> {
   return await fetchApi(
     controller,
@@ -420,7 +449,8 @@ async function fetchClusters(
     from,
     to,
     labelsFilters,
-    trendPeriods
+    trendPeriods,
+    propertiesFilters
   );
 }
 
@@ -434,7 +464,8 @@ async function fetchPhrases(
   from: Date | null,
   to: Date | null,
   labelsFilters: MetadataKeyValue[],
-  trendPeriods: number
+  trendPeriods: number,
+  propertiesFilters: Properties
 ): Promise<{ totalPages: number; data: Phrase[]; error: string | null }> {
   return await fetchApi(
     controller,
@@ -445,7 +476,8 @@ async function fetchPhrases(
     from,
     to,
     labelsFilters,
-    trendPeriods
+    trendPeriods,
+    propertiesFilters
   );
 }
 
@@ -459,7 +491,8 @@ async function fetchItems(
   from: Date | null,
   to: Date | null,
   labelsFilters: MetadataKeyValue[],
-  trendPeriods: number
+  trendPeriods: number,
+  propertiesFilters: Properties
 ): Promise<{ totalPages: number; data: Item[]; error: string | null }> {
   return await fetchApi(
     controller,
@@ -470,7 +503,8 @@ async function fetchItems(
     from,
     to,
     labelsFilters,
-    trendPeriods
+    trendPeriods,
+    propertiesFilters
   );
 }
 
@@ -483,7 +517,8 @@ async function fetchApi<T>(
   from: Date | null,
   to: Date | null,
   labelsFilters: MetadataKeyValue[],
-  trendPeriods: number
+  trendPeriods: number,
+  propertiesFilters: Properties
 ): Promise<{ totalPages: number; data: T[]; error: string | null }> {
   const labelsFiltersString = labelsFilters
     .map((metadataKeyValue) =>
@@ -492,6 +527,15 @@ async function fetchApi<T>(
         : ''
     )
     .filter((str) => str !== '');
+
+  const propertiesFiltersString = Object.keys(propertiesFilters).map((key) => {
+    const value = propertiesFilters[key];
+    if (value) {
+      return `${key} neq '${value}'`;
+    }
+
+    return '';
+  });
 
   try {
     const res = await fetch(
@@ -504,6 +548,9 @@ async function fetchApi<T>(
             : '') +
           (trendPeriods > 1
             ? `&include-trends=true&trend-periods-limit=${trendPeriods}`
+            : '') +
+          (propertiesFiltersString.length > 0
+            ? `&properties-query=${propertiesFiltersString.join(' and ')}`
             : '')
       ),
       {
@@ -722,5 +769,56 @@ async function mergeClusters(
   } catch (e) {
     console.error('error occurred ->', e);
     return { status: 'error', message: String(e) };
+  }
+}
+
+async function toggleHide(
+  domain: string,
+  collection: string,
+  apiKey: string,
+  node: {
+    type: NodeType;
+    id: string;
+    text: string;
+    properties: Properties;
+  } | null,
+  hide: string,
+  currentClickedNode: OneAIDataNode | null | undefined,
+  setLocalRefreshToken: React.Dispatch<React.SetStateAction<string>>
+): Promise<void> {
+  if (!node) return;
+  try {
+    const clusterId =
+      node.type === 'Cluster' ? node.id : getNodeId(currentClickedNode!);
+    const res = await fetch(
+      `${domain}/clustering/v1/collections/${collection}/clusters/${clusterId}${
+        node.type === 'Phrase' ? `/phrases/${node.id}` : ''
+      }/settings`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          'api-key': apiKey,
+        },
+        body: JSON.stringify({
+          properties: {
+            hide: hide,
+          },
+        }),
+      }
+    );
+
+    if (res.status !== 200 || !res.ok) return;
+
+    setLocalRefreshToken((current) => {
+      if (current.length > 5) {
+        return '';
+      }
+
+      return current + '1';
+    });
+  } catch (e) {
+    console.error('error occurred ->', e);
   }
 }

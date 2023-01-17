@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Cluster, Item, MetaData, Phrase, Trend } from './modals';
+import { Cluster, Item, MetaData, Phrase, Properties, Trend } from './modals';
 import {
   CountersConfigurations,
   CounterType,
@@ -13,6 +13,7 @@ export interface DataNode {
   item_original_text?: string | null;
   item_translated_text?: string | null;
   metadata: MetaData;
+  properties: { [key: string]: string };
   trends: Trend[];
   type: string;
 }
@@ -86,7 +87,7 @@ export interface OneAiAnalyticsProps {
   itemsDisplay?: FC<ItemsDisplayComponentProps>;
   loading?: boolean;
   error?: string | null;
-  nodesPath?: string[];
+  nodesPath?: { text: string; translated?: string | null }[];
   dateRangeChanged?: (from: Date | null, to: Date | null) => void;
   labelsFilters?: MetadataKeyValue[];
   labelClicked?: (key: string, value: string) => void;
@@ -109,6 +110,17 @@ export interface OneAiAnalyticsProps {
     controller: AbortController
   ) => Promise<{ status: 'Success' | 'error'; message: string }>;
   translationEnabled?: boolean;
+  toggleHide?: (
+    node: {
+      type: NodeType;
+      id: string;
+      text: string;
+      properties: Properties;
+    } | null,
+    hide: string
+  ) => void;
+  propertiesFilters?: Properties;
+  setPropertiesFilters?: (properties: Properties) => void;
 }
 
 export type OneAIAnalyticsStaticDataWrapperProps = Omit<
