@@ -489,17 +489,25 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               {propertiesFilters['hide'] === 'true' ? (
                 <EyeIcon
                   onClick={() => setPropertiesFilters({ hide: 'false' })}
+                  data-for="global"
+                  data-tip="Show hidden nodes"
                   className="h-6 w-6 p-1 mr-1 hover:cursor-pointer bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]"
                 />
               ) : (
                 <EyeSlashIcon
                   onClick={() => setPropertiesFilters({ hide: 'true' })}
+                  data-for="global"
+                  data-tip="Hide hidden nodes"
                   className="h-6 w-6 p-1 mr-1 hover:cursor-pointer text-[#747189] dark:hover:text-white"
                 />
               )}
               {translationEnabled ? (
                 <LanguageIcon
                   onClick={() => setTranslate((translate) => !translate)}
+                  data-for="global"
+                  data-tip={
+                    translate ? 'Disable translation' : 'Enable translation'
+                  }
                   className={`h-6 w-6 p-1 mr-1 hover:cursor-pointer ${
                     translate
                       ? 'bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]'
@@ -570,12 +578,13 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 <div className="ml-1 text-[#111111] dark:text-gray-300 truncate flex items-center">
                   {nodesPath.map((node, i) => (
                     <div key={i} className="flex">
-                      <div className="max-w-[80vw] truncate">
+                      <div className="max-w-[50ch] truncate">
                         <span
                           className="cursor-pointer hover:text-gray-600 dark:hover:text-gray-50"
                           onClick={() =>
                             goBackClicked(nodesPath.length - 1 - i)
                           }
+                          dir="auto"
                         >
                           {translate && node.translated
                             ? node.translated

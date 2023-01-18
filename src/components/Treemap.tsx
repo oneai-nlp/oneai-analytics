@@ -174,6 +174,7 @@ export const Treemap: FC<TreemapProps> = ({
                 <span
                   data-element="rect-text"
                   className="overflow-hidden text-center"
+                  dir="auto"
                   style={{
                     lineHeight: `${lineHeight}px`,
                     wordBreak: 'break-word',

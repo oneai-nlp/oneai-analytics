@@ -167,6 +167,7 @@ export const BarChart: FC<BarChartProps> = ({
               <span
                 className="truncate w-3/6 hover:text-gray-400 dark:hover:text-gray-300 hover:cursor-pointer"
                 onClick={() => nodeClicked(d)}
+                dir="auto"
               >
                 {translate &&
                 d.item_translated_text !== undefined &&

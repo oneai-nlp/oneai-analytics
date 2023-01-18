@@ -50,7 +50,9 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   const [labelsFilters, setLabelsFilters] = useState([] as MetadataKeyValue[]);
   const [localRefreshToken, setLocalRefreshToken] = useState(refreshToken);
   const [trendPeriods, setTrendPeriods] = useState(0);
-  const [propertiesFilters, setPropertiesFilters] = useState({} as Properties);
+  const [propertiesFilters, setPropertiesFilters] = useState({
+    hide: 'true',
+  } as Properties);
 
   const previousValues = useRef({
     domain: null as string | null,
