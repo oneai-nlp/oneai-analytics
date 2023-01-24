@@ -16,7 +16,7 @@ import {
 import { getSecondsDiff } from '../common/utils/utils';
 import { OneAiAnalytics } from '../components/OneAiAnalytics';
 
-const PAGE_SIZE = 25;
+const PAGE_SIZE = 100;
 
 const cache: Map<
   string,
@@ -543,17 +543,17 @@ async function fetchApi<T>(
     const res = await fetch(
       encodeURI(
         `${url}?page=${page}&limit=${PAGE_SIZE}&translate=true` +
-          (from ? `&from-date=${format(from, 'yyyy-MM-dd')}` : '') +
-          (to ? `&to-date=${format(to, 'yyyy-MM-dd')}` : '') +
-          (labelsFiltersString.length > 0
-            ? `&item-metadata=${labelsFiltersString.join(' and ')}`
-            : '') +
-          (trendPeriods > 1
-            ? `&include-trends=true&trend-periods-limit=${trendPeriods}`
-            : '') +
-          (propertiesFiltersString.length > 0
-            ? `&properties-query=${propertiesFiltersString.join(' and ')}`
-            : '')
+        (from ? `&from-date=${format(from, 'yyyy-MM-dd')}` : '') +
+        (to ? `&to-date=${format(to, 'yyyy-MM-dd')}` : '') +
+        (labelsFiltersString.length > 0
+          ? `&item-metadata=${labelsFiltersString.join(' and ')}`
+          : '') +
+        (trendPeriods > 1
+          ? `&include-trends=true&trend-periods-limit=${trendPeriods}`
+          : '') +
+        (propertiesFiltersString.length > 0
+          ? `&properties-query=${propertiesFiltersString.join(' and ')}`
+          : '')
       ),
       {
         method: 'GET',
@@ -793,8 +793,7 @@ async function toggleHide(
     const clusterId =
       node.type === 'Cluster' ? node.id : getNodeId(currentClickedNode!);
     const res = await fetch(
-      `${domain}/clustering/v1/collections/${collection}/clusters/${clusterId}${
-        node.type === 'Phrase' ? `/phrases/${node.id}` : ''
+      `${domain}/clustering/v1/collections/${collection}/clusters/${clusterId}${node.type === 'Phrase' ? `/phrases/${node.id}` : ''
       }/settings`,
       {
         method: 'POST',
