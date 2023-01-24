@@ -15,8 +15,7 @@ import {
 } from '../common/utils/modalsUtils';
 import { getSecondsDiff } from '../common/utils/utils';
 import { OneAiAnalytics } from '../components/OneAiAnalytics';
-
-const PAGE_SIZE = 100;
+import { PAGE_SIZE } from './OneAIAnalyticsStaticDataWrapper';
 
 const cache: Map<
   string,
