@@ -52,11 +52,11 @@ export const ItemsListDisplay: FC<ItemsDisplayComponentProps> = ({
               <tr key={i}>
                 <td className="max-w-[60ch] truncate p-1">
                   {translate &&
-                  item.item_translated_text !== undefined &&
-                  item.item_translated_text !== null &&
-                  item.item_translated_text !== ''
+                    item.item_translated_text !== undefined &&
+                    item.item_translated_text !== null &&
+                    item.item_translated_text !== ''
                     ? item.item_translated_text
-                    : item.item_original_text}
+                    : item.original_text}
                 </td>
                 <td
                   className="p-1"
