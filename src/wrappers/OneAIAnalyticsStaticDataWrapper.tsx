@@ -9,7 +9,7 @@ import { Cluster, Item, Phrase } from '../common/types/modals';
 import { chunks } from '../common/utils/utils';
 import { OneAiAnalytics } from '../components/OneAiAnalytics';
 
-export const PAGE_SIZE = 100;
+export const PAGE_SIZE = 30;
 
 // Please do not use types off of a default export module or else Storybook Docs will suffer.
 // see: https://github.com/storybookjs/storybook/issues/9556
