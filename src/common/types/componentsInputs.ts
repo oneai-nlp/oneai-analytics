@@ -65,7 +65,7 @@ export interface OneAIDataNode {
 }
 
 export interface OneAiAnalyticsProps {
-  dataNodes: OneAIDataNode[];
+  dataNodes: { totalItems: number; nodes: OneAIDataNode[] };
   currentNode?: OneAIDataNode;
   totalPagesAmount?: number;
   currentPage?: number;

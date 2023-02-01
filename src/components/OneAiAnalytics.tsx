@@ -60,7 +60,7 @@ export type Displays = 'Treemap' | 'BarChart';
  * One Ai Analytics Component
  */
 export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
-  dataNodes = [],
+  dataNodes = { totalItems: 0, nodes: [] },
   currentNode,
   currentPage = 0,
   totalPagesAmount = 0,
@@ -226,7 +226,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
 
   useEffect(() => {
     setNodes(
-      dataNodes.map((d) => {
+      dataNodes.nodes.map((d) => {
         const itemsCount = getNodeItemsCount(d);
         const nodeText = getNodeText(d);
         return {
@@ -633,7 +633,11 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     labels={labels}
                     metadata={nodes.reduce(
                       (finalMetadata, currentNode) =>
-                        mergeMetadata(finalMetadata, currentNode.metadata),
+                        mergeMetadata(
+                          finalMetadata,
+                          currentNode.metadata,
+                          dataNodes.totalItems
+                        ),
                       {}
                     )}
                     trends={nodes.reduce(
@@ -718,7 +722,9 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                   </p>
                 ) : currentNode && currentNode.type === 'Phrase' ? (
                   itemsDisplay({
-                    items: dataNodes.map((dataNode) => dataNode.data as Item),
+                    items: dataNodes.nodes.map(
+                      (dataNode) => dataNode.data as Item
+                    ),
                     bgColor: navbarColor,
                     textColor: textColor,
                     counters: counters,
@@ -855,13 +861,23 @@ function getVisualizationLogoClasses(active: boolean) {
   }`;
 }
 
-function mergeMetadata(metadata1: MetaData, metadata2: MetaData): MetaData {
+function mergeMetadata(
+  metadata1: MetaData,
+  metadata2: MetaData,
+  totalItems?: number
+): MetaData {
   const newMetadata: MetaData = {};
   Array.from(
     new Set([...Object.keys(metadata1), ...Object.keys(metadata2)])
   ).forEach((key) => {
-    newMetadata[key] = [...(metadata1[key] ?? []), ...(metadata2[key] ?? [])];
+    if (totalItems === undefined || key !== CUSTOM_METADATA_KEY)
+      newMetadata[key] = [...(metadata1[key] ?? []), ...(metadata2[key] ?? [])];
   });
+
+  if (totalItems === undefined) return newMetadata;
+  newMetadata[CUSTOM_METADATA_KEY] = [
+    { value: CUSTOM_METADATA_KEY, count: totalItems },
+  ];
 
   return newMetadata;
 }

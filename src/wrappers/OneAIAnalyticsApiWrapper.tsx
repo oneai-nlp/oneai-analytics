@@ -19,7 +19,7 @@ import { PAGE_SIZE } from './OneAIAnalyticsStaticDataWrapper';
 
 const cache: Map<
   string,
-  { nodes: OneAIDataNode[]; totalPages: number; time: Date }
+  { nodes: OneAIDataNode[]; totalItems: number; totalPages: number; time: Date }
 > = new Map();
 
 const nodeToPageCache: Map<string, number> = new Map();
@@ -38,7 +38,10 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
 }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null as string | null);
-  const [currentNodes, setCurrentNodes] = useState([] as OneAIDataNode[]);
+  const [currentNodes, setCurrentNodes] = useState({
+    totalItems: 0,
+    nodes: [],
+  } as { totalItems: number; nodes: OneAIDataNode[] });
   const [clickedNodes, setClickedNodes] = useState([] as OneAIDataNode[]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -71,7 +74,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       previousValues.current.refreshToken !== refreshToken ||
       previousValues.current.localRefreshToken !== localRefreshToken
     ) {
-      setCurrentNodes([]);
+      setCurrentNodes({ totalItems: 0, nodes: [] });
       setClickedNodes([]);
       setCurrentPage(0);
       cache.clear();
@@ -101,7 +104,10 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
         );
         if (cached) {
           setTotalPages(cached.totalPages);
-          setCurrentNodes(cached.nodes);
+          setCurrentNodes({
+            totalItems: cached.totalItems,
+            nodes: cached.nodes,
+          });
         } else {
           const clusters = await fetchClusters(
             controller,
@@ -130,7 +136,10 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           });
 
           if (clickedNodes.at(-1) == currentClicked) {
-            setCurrentNodes(newNodes);
+            setCurrentNodes({
+              totalItems: clusters.totalItems,
+              nodes: newNodes,
+            });
             setTotalPages(clusters.totalPages);
           }
 
@@ -139,7 +148,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             collection,
             currentPage,
             newNodes,
-            clusters.totalPages
+            clusters.totalPages,
+            clusters.totalItems
           );
         }
       } else if (currentClicked.type === 'Cluster') {
@@ -153,7 +163,10 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
         );
         if (cached) {
           setTotalPages(cached.totalPages);
-          setCurrentNodes(cached.nodes);
+          setCurrentNodes({
+            totalItems: cached.totalItems,
+            nodes: cached.nodes,
+          });
         } else {
           const phrases = await fetchPhrases(
             controller,
@@ -182,7 +195,10 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           });
 
           if (clickedNodes.at(-1) == currentClicked) {
-            setCurrentNodes(newNodes);
+            setCurrentNodes({
+              totalItems: phrases.totalItems,
+              nodes: newNodes,
+            });
             setTotalPages(phrases.totalPages);
           }
           setNodesDataInCache(
@@ -190,7 +206,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             clusterId,
             currentPage,
             newNodes,
-            phrases.totalPages
+            phrases.totalPages,
+            phrases.totalItems
           );
         }
       } else if (currentClicked.type === 'Phrase') {
@@ -202,7 +219,10 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
         );
         if (cached) {
           setTotalPages(cached.totalPages);
-          setCurrentNodes(cached.nodes);
+          setCurrentNodes({
+            totalItems: cached.totalItems,
+            nodes: cached.nodes,
+          });
         } else {
           const items = await fetchItems(
             controller,
@@ -231,7 +251,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           });
 
           if (clickedNodes.at(-1) == currentClicked) {
-            setCurrentNodes(newNodes);
+            setCurrentNodes({ totalItems: items.totalItems, nodes: newNodes });
             setTotalPages(items.totalPages);
           }
 
@@ -240,7 +260,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             phraseId,
             currentPage,
             newNodes,
-            items.totalPages
+            items.totalPages,
+            items.totalItems
           );
         }
       }
@@ -285,12 +306,12 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
     let clickedNode: OneAIDataNode | null = null;
     if (node.type === 'Cluster') {
       clickedNode =
-        currentNodes.find(
+        currentNodes.nodes.find(
           (n) => (n.data as Cluster).cluster_id.toString() === node.id
         ) ?? null;
     } else if (node.type === 'Phrase') {
       clickedNode =
-        currentNodes.find(
+        currentNodes.nodes.find(
           (n) => (n.data as Phrase).phrase_id.toString() === node.id
         ) ?? null;
     }
@@ -329,7 +350,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
 
   return currentNodes ? (
     <OneAiAnalytics
-      dataNodes={currentNodes ?? []}
+      dataNodes={currentNodes ?? { totalItems: 0, nodes: [] }}
       currentNode={clickedNodes.at(-1)}
       nodeClicked={nodeClicked}
       goBackClicked={goBack}
@@ -440,7 +461,12 @@ async function fetchClusters(
   labelsFilters: MetadataKeyValue[],
   trendPeriods: number,
   propertiesFilters: Properties
-): Promise<{ totalPages: number; data: Cluster[]; error: string | null }> {
+): Promise<{
+  totalPages: number;
+  totalItems: number;
+  data: Cluster[];
+  error: string | null;
+}> {
   return await fetchApi(
     controller,
     `${domain}/clustering/v1/collections/${collection}/clusters`,
@@ -467,7 +493,12 @@ async function fetchPhrases(
   labelsFilters: MetadataKeyValue[],
   trendPeriods: number,
   propertiesFilters: Properties
-): Promise<{ totalPages: number; data: Phrase[]; error: string | null }> {
+): Promise<{
+  totalPages: number;
+  totalItems: number;
+  data: Phrase[];
+  error: string | null;
+}> {
   return await fetchApi(
     controller,
     `${domain}/clustering/v1/collections/${collection}/clusters/${clusterId}/phrases`,
@@ -494,7 +525,12 @@ async function fetchItems(
   labelsFilters: MetadataKeyValue[],
   trendPeriods: number,
   propertiesFilters: Properties
-): Promise<{ totalPages: number; data: Item[]; error: string | null }> {
+): Promise<{
+  totalPages: number;
+  totalItems: number;
+  data: Item[];
+  error: string | null;
+}> {
   return await fetchApi(
     controller,
     `${domain}/clustering/v1/collections/${collection}/phrases/${phraseId}/items`,
@@ -520,7 +556,12 @@ async function fetchApi<T>(
   labelsFilters: MetadataKeyValue[],
   trendPeriods: number,
   propertiesFilters: Properties
-): Promise<{ totalPages: number; data: T[]; error: string | null }> {
+): Promise<{
+  totalPages: number;
+  totalItems: number;
+  data: T[];
+  error: string | null;
+}> {
   const labelsFiltersString = labelsFilters
     .map((metadataKeyValue) =>
       metadataKeyValue.key && metadataKeyValue.value
@@ -564,6 +605,7 @@ async function fetchApi<T>(
     if (res.status !== 200 || !res.ok)
       return {
         totalPages: 0,
+        totalItems: 0,
         data: [],
         error:
           'Error fetching data, status: ' +
@@ -576,6 +618,7 @@ async function fetchApi<T>(
 
     return {
       totalPages: json['total_pages'],
+      totalItems: json['total_items'],
       data: json[accessor],
       error: null,
     };
@@ -585,6 +628,7 @@ async function fetchApi<T>(
 
     return {
       totalPages: 0,
+      totalItems: 0,
       data: [],
       error: `Error fetching data, ${error}`,
     };
@@ -595,7 +639,12 @@ function getNodesFromCache(
   parentType: string,
   parentId: string,
   page: number
-): { nodes: OneAIDataNode[]; totalPages: number; time: Date } | null {
+): {
+  nodes: OneAIDataNode[];
+  totalItems: number;
+  totalPages: number;
+  time: Date;
+} | null {
   const cached = cache.get(assembleCacheId(parentType, parentId, page));
   if (cached && getSecondsDiff(cached.time, new Date()) < 90) {
     return cached;
@@ -609,12 +658,14 @@ function setNodesDataInCache(
   parentId: string,
   page: number,
   nodes: OneAIDataNode[],
-  totalPages: number
+  totalPages: number,
+  totalItems: number
 ) {
   cache.set(assembleCacheId(parentType, parentId, page), {
     nodes: nodes,
     totalPages: totalPages,
     time: new Date(),
+    totalItems: totalItems,
   });
 }
 

@@ -80,11 +80,16 @@ export const OneAIAnalyticsStaticDataWrapper: FC<OneAIAnalyticsStaticDataWrapper
 
     return (
       <OneAiAnalytics
-        dataNodes={
-          currentPages.at(currentPage)?.map((node, index) => {
-            return { type: node.type, data: getNodeData(node, index)! };
-          }) ?? []
-        }
+        dataNodes={{
+          totalItems: exampleNodes.reduce(
+            (acc, node) => acc + node.items_count,
+            0
+          ),
+          nodes:
+            currentPages.at(currentPage)?.map((node, index) => {
+              return { type: node.type, data: getNodeData(node, index)! };
+            }) ?? [],
+        }}
         currentNode={currentClickedNode}
         nodeClicked={nodeClicked}
         goBackClicked={goBack}
