@@ -8,7 +8,9 @@ global.ResizeObserver = ResizeObserverModule.default;
 
 describe('Treemap', () => {
   it('renders without crashing', () => {
-    const component = render(<OneAiAnalytics dataNodes={[]} />);
+    const component = render(
+      <OneAiAnalytics dataNodes={{ totalItems: 0, nodes: [] }} />
+    );
     component.unmount();
   });
 });
