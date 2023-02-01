@@ -25,6 +25,7 @@ export const BarChart: FC<BarChartProps> = ({
   sizeAxis,
   colorAxis,
   translate,
+  totalItems,
 }) => {
   const barsHeight = dataNodes.length * 40;
 
@@ -41,13 +42,15 @@ export const BarChart: FC<BarChartProps> = ({
                 sizeAxis,
                 b.metadata,
                 b.trends,
-                countersConfiguration
+                countersConfiguration,
+                totalItems
               ).result -
               totalSumCalculation(
                 sizeAxis,
                 a.metadata,
                 b.trends,
-                countersConfiguration
+                countersConfiguration,
+                totalItems
               ).result
         )
         .map((d) => d.text ?? '')
@@ -71,7 +74,8 @@ export const BarChart: FC<BarChartProps> = ({
                 sizeAxis,
                 d.metadata,
                 d.trends,
-                countersConfiguration
+                countersConfiguration,
+                totalItems
               ).result
         )
       )[1] ?? 20,
@@ -96,7 +100,8 @@ export const BarChart: FC<BarChartProps> = ({
             sizeAxis,
             d.metadata,
             d.trends,
-            countersConfiguration
+            countersConfiguration,
+            totalItems
           ).result;
     const xWidth =
       xScale(result === max ? result : Math.min(max - 1, result + max * 0.1)) -
@@ -112,7 +117,8 @@ export const BarChart: FC<BarChartProps> = ({
       colorAxis,
       d.metadata,
       d.trends,
-      countersConfiguration
+      countersConfiguration,
+      totalItems
     );
 
     return (
@@ -160,6 +166,7 @@ export const BarChart: FC<BarChartProps> = ({
                         metadata={d.metadata}
                         trends={d.trends}
                         width="6ch"
+                        totalItems={totalItems}
                       />
                     </div>
                   ))}

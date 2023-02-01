@@ -15,7 +15,8 @@ export function getBackgroundColorLayers(
   colorAxis: CounterType[],
   metadata: MetaData,
   trends: Trend[],
-  countersConfiguration: CountersConfigurations
+  countersConfiguration: CountersConfigurations,
+  totalItems: number
 ) {
   return groupCounters(colorAxis, countersConfiguration)
     .map((countersGroup) => {
@@ -25,7 +26,8 @@ export function getBackgroundColorLayers(
             counter.metadataKeyValue,
             metadata,
             trends,
-            countersConfiguration
+            countersConfiguration,
+            totalItems
           )
         )
         .sort((group1, group2) => (group2.result ?? 0) - (group1.result ?? 0));

@@ -647,6 +647,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     )}
                     countersConfiguration={countersConfigurations}
                     labelClicked={labelClicked}
+                    totalItems={dataNodes.totalItems}
                   />
                 )}
               </div>
@@ -732,6 +733,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     labelClicked: labelClicked,
                     countersConfiguration: countersConfigurations,
                     translate: translate,
+                    totalItems: dataNodes.totalItems,
                   })
                 ) : display === 'Treemap' ? (
                   <Treemap
@@ -775,6 +777,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                       });
                     }}
                     translate={translate}
+                    totalItems={dataNodes.totalItems}
                   />
                 ) : (
                   <BarChart
@@ -814,6 +817,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                       });
                     }}
                     translate={translate}
+                    totalItems={dataNodes.totalItems}
                   />
                 )}
               </div>

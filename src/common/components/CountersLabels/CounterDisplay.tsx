@@ -17,6 +17,7 @@ export default function CounterDisplay({
   metadata,
   countersConfiguration,
   trends,
+  totalItems,
   width,
   maxWidth = '6ch',
 }: {
@@ -24,6 +25,7 @@ export default function CounterDisplay({
   metadata: MetaData;
   countersConfiguration: CountersConfigurations;
   trends: Trend[];
+  totalItems: number;
   width?: string;
   maxWidth?: string;
 }) {
@@ -33,7 +35,8 @@ export default function CounterDisplay({
     metadataKeyValue,
     metadata,
     trends,
-    countersConfiguration
+    countersConfiguration,
+    totalItems
   );
   if (!displayResult.counter) return <></>;
 

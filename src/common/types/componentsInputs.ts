@@ -38,6 +38,7 @@ export interface TreemapProps {
   colorAxis: CounterType[];
   nodeActionsClicked: (node: DataNode) => void;
   translate: boolean;
+  totalItems: number;
 }
 
 export interface BarChartProps {
@@ -56,6 +57,7 @@ export interface BarChartProps {
   colorAxis: CounterType[];
   nodeActionsClicked: (node: DataNode) => void;
   translate: boolean;
+  totalItems: number;
 }
 
 export type NodeType = 'Cluster' | 'Phrase' | 'Item';
@@ -156,4 +158,5 @@ export interface ItemsDisplayComponentProps {
   countersConfiguration: CountersConfigurations;
   labelClicked: (key: string, value: string) => void;
   translate: boolean;
+  totalItems: number;
 }

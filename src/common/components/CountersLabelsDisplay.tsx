@@ -18,6 +18,7 @@ export default function CountersLabelsDisplay({
   counterMaxWidth,
   labelWidth,
   labelMaxWidth,
+  totalItems,
 }: {
   counters: CounterType[];
   labels: string[];
@@ -25,6 +26,7 @@ export default function CountersLabelsDisplay({
   countersConfiguration: CountersConfigurations;
   trends: Trend[];
   labelClicked: (key: string, value: string) => void;
+  totalItems: number;
   counterWidth?: string;
   counterMaxWidth?: string;
   labelWidth?: string;
@@ -43,6 +45,7 @@ export default function CountersLabelsDisplay({
               trends={trends}
               width={counterWidth}
               maxWidth={counterMaxWidth}
+              totalItems={totalItems}
             />
           </div>
         ))}

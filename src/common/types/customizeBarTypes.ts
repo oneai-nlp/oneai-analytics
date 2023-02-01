@@ -36,7 +36,8 @@ export interface CalculationConfiguration {
     selectedMetadataKeyValue: MetadataKeyValue | null,
     metadata: MetaData,
     trends: Trend[],
-    allCountersConfigurations: CountersConfigurations
+    allCountersConfigurations: CountersConfigurations,
+    allItemsCount: number
   ) => {
     counter: CounterConfiguration | null;
     metadataKey?: string;

@@ -17,7 +17,8 @@ export function topGroupPercentCalculation(
   metadataKeyValue: MetadataKeyValue | null,
   metadata: MetaData,
   _: Trend[],
-  countersConfigurations: CountersConfigurations
+  countersConfigurations: CountersConfigurations,
+  __: number
 ) {
   const counter = getMetadataKeyValueConfiguration(
     metadataKeyValue,
@@ -44,7 +45,8 @@ export function groupsPercentsCalculation(
   label: string,
   metadata: MetaData,
   _: Trend[],
-  countersConfigurations: CountersConfigurations
+  countersConfigurations: CountersConfigurations,
+  __: number
 ): {
   result?: number;
   counter?: CounterConfiguration;
@@ -81,7 +83,8 @@ export function topGroupCalculation(
   metadataKeyValue: MetadataKeyValue | null,
   metadata: MetaData,
   _: Trend[],
-  countersConfigurations: CountersConfigurations
+  countersConfigurations: CountersConfigurations,
+  __: number
 ) {
   const counter = getMetadataKeyValueConfiguration(
     metadataKeyValue,
@@ -110,7 +113,8 @@ export function topValuePercentCalculation(
   metadataKeyValue: MetadataKeyValue | null,
   metadata: MetaData,
   _: Trend[],
-  countersConfigurations: CountersConfigurations
+  countersConfigurations: CountersConfigurations,
+  __: number
 ) {
   const counter = getMetadataKeyValueConfiguration(
     metadataKeyValue,
@@ -142,7 +146,8 @@ export function topValueCalculation(
   metadataKeyValue: MetadataKeyValue | null,
   metadata: MetaData,
   _: Trend[],
-  countersConfigurations: CountersConfigurations
+  countersConfigurations: CountersConfigurations,
+  __: number
 ) {
   const counter = getMetadataKeyValueConfiguration(
     metadataKeyValue,
@@ -169,7 +174,8 @@ export function totalSumCalculation(
   metadataKeyValue: MetadataKeyValue | null,
   metadata: MetaData,
   _: Trend[],
-  countersConfigurations: CountersConfigurations
+  countersConfigurations: CountersConfigurations,
+  __: number
 ): {
   counter: CounterConfiguration | null;
   metadata?: string | undefined;
@@ -195,7 +201,8 @@ export function percentOfItemsCalculation(
   metadataKeyValue: MetadataKeyValue | null,
   metadata: MetaData,
   _: Trend[],
-  countersConfigurations: CountersConfigurations
+  countersConfigurations: CountersConfigurations,
+  __: number
 ) {
   if (!metadataKeyValue) return { counter: null, result: 0 };
   const itemCounter = getMetadataKeyValueConfiguration(
@@ -234,7 +241,8 @@ export function percentOfAllItemsCalculation(
   metadataKeyValue: MetadataKeyValue | null,
   metadata: MetaData,
   _: Trend[],
-  countersConfigurations: CountersConfigurations
+  countersConfigurations: CountersConfigurations,
+  totalItems: number
 ) {
   if (!metadataKeyValue) return { counter: null, result: 0 };
   const itemCounter = getMetadataKeyValueConfiguration(
@@ -261,8 +269,14 @@ export function percentOfAllItemsCalculation(
     metadata
   );
 
+  let result;
+  if (metadataKeyValue.key === CUSTOM_METADATA_KEY) {
+    result = totalItems === 0 ? 0 : Math.round((itemCount / totalItems) * 100);
+  } else {
+    result = keyCount === 0 ? 0 : Math.round((itemCount / keyCount) * 100);
+  }
   return {
-    result: keyCount === 0 ? 0 : Math.round((itemCount / keyCount) * 100),
+    result: result,
     counter: itemCounter ?? keyCounter,
     metadataKey: metadataKeyValue.key,
     value: metadataKeyValue.value,

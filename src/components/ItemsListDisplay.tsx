@@ -15,6 +15,7 @@ export const ItemsListDisplay: FC<ItemsDisplayComponentProps> = ({
   countersConfiguration,
   labelClicked,
   translate,
+  totalItems,
 }) => {
   return (
     <div
@@ -52,9 +53,9 @@ export const ItemsListDisplay: FC<ItemsDisplayComponentProps> = ({
               <tr key={i}>
                 <td className="max-w-[60ch] truncate p-1">
                   {translate &&
-                    item.item_translated_text !== undefined &&
-                    item.item_translated_text !== null &&
-                    item.item_translated_text !== ''
+                  item.item_translated_text !== undefined &&
+                  item.item_translated_text !== null &&
+                  item.item_translated_text !== ''
                     ? item.item_translated_text
                     : item.original_text}
                 </td>
@@ -78,6 +79,7 @@ export const ItemsListDisplay: FC<ItemsDisplayComponentProps> = ({
                         countersConfiguration={countersConfiguration}
                         metadata={item.metadata}
                         trends={[]}
+                        totalItems={totalItems}
                       />
                     </td>
                   ))}
