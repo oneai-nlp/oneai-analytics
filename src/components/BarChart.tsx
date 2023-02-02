@@ -1,3 +1,4 @@
+import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { extent, scaleBand, scaleLinear } from 'd3';
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { ColorsAxis } from '../common/components/CountersLabels/ColorsAxis';
@@ -26,7 +27,9 @@ export const BarChart: FC<BarChartProps> = ({
   colorAxis,
   translate,
   totalItems,
+  nodeActionsClicked,
 }) => {
+  const [actionsVisible, setActionsVisible] = useState(null as number | null);
   const barsHeight = dataNodes.length * 40;
 
   const [groups, setGroups] = useState([] as string[]);
@@ -136,14 +139,23 @@ export const BarChart: FC<BarChartProps> = ({
         <foreignObject
           x={x}
           y={y}
-          width={width}
+          width={barWidth}
           height={barHeight}
           opacity={opacity}
           fill={fill}
           fillOpacity={fillOpacity}
           rx={rx}
         >
-          <div className="h-full w-full">
+          <div
+            className="h-full w-full"
+            onMouseEnter={() => {
+              nodeActionsClicked(d);
+              setActionsVisible(i);
+            }}
+            onMouseLeave={() => {
+              setActionsVisible(null);
+            }}
+          >
             <ColorsAxis width={barWidth} colorsConfig={colorsConfig} />
             <div
               className="flex h-full w-full items-center ml-1 relative text-gray-500"
@@ -196,6 +208,16 @@ export const BarChart: FC<BarChartProps> = ({
                   </div>
                 ))}
               </span>
+              <div
+                data-for="global-actions"
+                data-tip
+                data-event="click"
+                className={`self-end mr-1 hover:cursor-pointer hover:text-white ${
+                  actionsVisible === i ? 'visible' : 'invisible'
+                }`}
+              >
+                <EllipsisHorizontalIcon className="h-4 w-4" />
+              </div>
             </div>
           </div>
         </foreignObject>
