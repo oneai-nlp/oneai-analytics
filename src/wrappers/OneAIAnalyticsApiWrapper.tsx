@@ -6,14 +6,21 @@ import {
   OneAIDataNode,
 } from '../common/types/componentsInputs';
 import { MetadataKeyValue } from '../common/types/customizeBarTypes';
-import { Cluster, Item, Phrase, Properties } from '../common/types/modals';
+import {
+  Cluster,
+  Item,
+  MetaCluster,
+  Phrase,
+  Properties,
+} from '../common/types/modals';
 import {
   COLLECTION_TYPE,
   getNodeDetails,
   getNodeId,
+  getNodeOriginalAndTranslatedText,
   getNodeText,
 } from '../common/utils/modalsUtils';
-import { getSecondsDiff } from '../common/utils/utils';
+import { getSecondsDiff, uniqBy } from '../common/utils/utils';
 import { OneAiAnalytics } from '../components/OneAiAnalytics';
 import { PAGE_SIZE } from './OneAIAnalyticsStaticDataWrapper';
 
@@ -55,6 +62,15 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   const [propertiesFilters, setPropertiesFilters] = useState({
     hide: 'true',
   } as Properties);
+  const [metaOptions, setMetaOptions] = useState([] as string[]);
+  const [currentMetaGroup, setCurrentMetaGroup] = useState('text');
+  const runOnce = useRef(false);
+
+  useEffect(() => {
+    if (runOnce.current) return;
+    runOnce.current = true;
+    fetchMetaClusters();
+  }, []);
 
   const previousValues = useRef({
     domain: null as string | null,
@@ -64,7 +80,32 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
     localRefreshToken: null as string | null,
     clickedNodes: null as OneAIDataNode[] | null,
     currentPage: null as number | null,
+    lastMetaGroup: 'text' as string,
   });
+
+  const fetchMetaClusters = async () => {
+    const controller = new AbortController();
+
+    const metaClusters = await fetchMetaClustersApi(
+      controller,
+      domain,
+      collection,
+      apiKey,
+      currentPage,
+      dateRange[0],
+      dateRange[1],
+      labelsFilters,
+      trendPeriods,
+      propertiesFilters
+    );
+
+    const newNodes = metaClusters.data.map((c) => {
+      return { type: 'Meta' as NodeType, data: c };
+    });
+
+    const mappedNodes = newNodes.map((n) => n.data.meta_key);
+    setMetaOptions(mappedNodes);
+  };
 
   useEffect(() => {
     if (
@@ -72,7 +113,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       previousValues.current.apiKey !== apiKey ||
       previousValues.current.collection !== collection ||
       previousValues.current.refreshToken !== refreshToken ||
-      previousValues.current.localRefreshToken !== localRefreshToken
+      previousValues.current.localRefreshToken !== localRefreshToken ||
+      previousValues.current.lastMetaGroup !== currentMetaGroup
     ) {
       setCurrentNodes({ totalItems: 0, nodes: [] });
       setClickedNodes([]);
@@ -87,16 +129,93 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
         localRefreshToken,
         clickedNodes: null,
         currentPage: null,
+        lastMetaGroup: currentMetaGroup,
       };
     }
-  }, [domain, apiKey, collection, refreshToken, localRefreshToken]);
+  }, [
+    domain,
+    apiKey,
+    collection,
+    refreshToken,
+    localRefreshToken,
+    currentMetaGroup,
+  ]);
 
   useEffect(() => {
     const fetchData = async (controller: AbortController) => {
       setLoading(true);
       const currentClicked = clickedNodes.at(-1);
 
-      if (!currentClicked) {
+      if (currentMetaGroup !== 'text' && !currentClicked) {
+        const cached = getNodesFromCache(
+          COLLECTION_TYPE,
+          collection + '_meta',
+          currentPage
+        );
+
+        if (cached) {
+          const newNodes = cached.nodes.map((n) => n.data as MetaCluster);
+          if (currentMetaGroup !== 'text') {
+            setTotalPages(1);
+            setCurrentNodes({
+              totalItems: newNodes.reduce(
+                (acc, curr) => acc + curr.items_count,
+                0
+              ),
+              nodes: newNodes.map((c) => {
+                return { type: 'Meta' as NodeType, data: c };
+              }),
+            });
+          }
+        } else {
+          const metaClusters = await fetchMetaClustersApi(
+            controller,
+            domain,
+            collection,
+            apiKey,
+            currentPage,
+            dateRange[0],
+            dateRange[1],
+            labelsFilters,
+            trendPeriods,
+            propertiesFilters
+          );
+          if (metaClusters.error) {
+            if (metaClusters.error.includes('AbortError')) {
+              return;
+            }
+
+            setError(metaClusters.error);
+            return setLoading(false);
+          }
+          setError(null);
+
+          const newNodes = metaClusters.data.map((c) => {
+            return { type: 'Meta' as NodeType, data: c };
+          });
+
+          const mappedNodes = newNodes.map((n) => n.data as MetaCluster);
+          setTotalPages(1);
+          setCurrentNodes({
+            totalItems: mappedNodes.reduce(
+              (acc, curr) => acc + curr.items_count,
+              0
+            ),
+            nodes: mappedNodes.map((c) => {
+              return { type: 'Meta' as NodeType, data: c };
+            }),
+          });
+
+          setNodesDataInCache(
+            'Collection',
+            collection + '_meta',
+            currentPage,
+            newNodes,
+            1,
+            metaClusters.totalItems
+          );
+        }
+      } else if (!currentClicked) {
         const cached = getNodesFromCache(
           COLLECTION_TYPE,
           collection,
@@ -273,7 +392,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       previousValues.current.apiKey !== apiKey ||
       previousValues.current.collection !== collection ||
       previousValues.current.clickedNodes != clickedNodes ||
-      previousValues.current.currentPage !== currentPage
+      previousValues.current.currentPage !== currentPage ||
+      previousValues.current.lastMetaGroup !== currentMetaGroup
     ) {
       fetchData(controller).catch((e) => {
         console.error(e);
@@ -288,16 +408,32 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
         currentPage,
         refreshToken,
         localRefreshToken,
+        lastMetaGroup: currentMetaGroup,
       };
     }
 
     return () => {
       controller.abort();
     };
-  }, [domain, collection, apiKey, clickedNodes, currentPage]);
+  }, [domain, collection, apiKey, clickedNodes, currentPage, currentMetaGroup]);
 
   const nodeClicked = (node: { type: NodeType; id: string }) => {
     const currentNodeDetails = getNodeDetails(clickedNodes.at(-1), collection);
+
+    if (currentMetaGroup !== 'text') {
+      setLocalRefreshToken((current) => {
+        const [key, value] = node.id.split('$$');
+        setLabelsFilters((labels) => [
+          ...labels.filter(
+            (label) => !(label.key === key && label.value === value)
+          ),
+          { key, value },
+        ]);
+        setCurrentMetaGroup('text');
+        return current.length > 2 ? '1' : current + '1';
+      });
+    }
+
     setNodePageNumberInCache(
       currentNodeDetails.type,
       currentNodeDetails.id,
@@ -362,10 +498,14 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       error={error}
       nodesPath={[
         { text: collection },
-        ...clickedNodes.map((node) => ({
-          text: getNodeText(node),
-          translated: node.data?.item_translated_text,
-        })),
+        ...clickedNodes.map((node) => {
+          const { originalText, translatedText } =
+            getNodeOriginalAndTranslatedText(node);
+          return {
+            text: originalText ?? getNodeText(node),
+            translated: translatedText,
+          };
+        }),
       ]}
       dateRangeChanged={(from, to) =>
         setLocalRefreshToken((current) => {
@@ -445,6 +585,9 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           return current.length > 2 ? '1' : current + '1';
         })
       }
+      metaOptions={['text', ...uniqBy(metaOptions, (m) => m.toLowerCase())]}
+      currentMetaOption={currentMetaGroup}
+      metaOptionsChanged={(metaOptions) => setCurrentMetaGroup(metaOptions)}
       {...rest}
     />
   ) : null;
@@ -545,6 +688,38 @@ async function fetchItems(
   );
 }
 
+async function fetchMetaClustersApi(
+  controller: AbortController,
+  domain: string,
+  collection: string,
+  apiKey: string,
+  page: number,
+  from: Date | null,
+  to: Date | null,
+  labelsFilters: MetadataKeyValue[],
+  trendPeriods: number,
+  propertiesFilters: Properties
+): Promise<{
+  totalPages: number;
+  totalItems: number;
+  data: MetaCluster[];
+  error: string | null;
+}> {
+  return await fetchApi(
+    controller,
+    `${domain}/clustering/v1/collections/${collection}/metadata`,
+    apiKey,
+    'metadata',
+    page,
+    from,
+    to,
+    labelsFilters,
+    trendPeriods,
+    propertiesFilters,
+    '&group-by-meta-value=true'
+  );
+}
+
 async function fetchApi<T>(
   controller: AbortController,
   url: string,
@@ -555,7 +730,8 @@ async function fetchApi<T>(
   to: Date | null,
   labelsFilters: MetadataKeyValue[],
   trendPeriods: number,
-  propertiesFilters: Properties
+  propertiesFilters: Properties,
+  extraParams?: string
 ): Promise<{
   totalPages: number;
   totalItems: number;
@@ -583,17 +759,18 @@ async function fetchApi<T>(
     const res = await fetch(
       encodeURI(
         `${url}?page=${page}&limit=${PAGE_SIZE}&translate=true` +
-        (from ? `&from-date=${format(from, 'yyyy-MM-dd')}` : '') +
-        (to ? `&to-date=${format(to, 'yyyy-MM-dd')}` : '') +
-        (labelsFiltersString.length > 0
-          ? `&item-metadata=${labelsFiltersString.join(' and ')}`
-          : '') +
-        (trendPeriods > 1
-          ? `&include-trends=true&trend-periods-limit=${trendPeriods}`
-          : '') +
-        (propertiesFiltersString.length > 0
-          ? `&properties-query=${propertiesFiltersString.join(' and ')}`
-          : '')
+          (from ? `&from-date=${format(from, 'yyyy-MM-dd')}` : '') +
+          (to ? `&to-date=${format(to, 'yyyy-MM-dd')}` : '') +
+          (labelsFiltersString.length > 0
+            ? `&item-metadata=${labelsFiltersString.join(' and ')}`
+            : '') +
+          (trendPeriods > 1
+            ? `&include-trends=true&trend-periods-limit=${trendPeriods}`
+            : '') +
+          (propertiesFiltersString.length > 0
+            ? `&properties-query=${propertiesFiltersString.join(' and ')}`
+            : '') +
+          (extraParams ? extraParams : '')
       ),
       {
         method: 'GET',
@@ -843,7 +1020,8 @@ async function toggleHide(
     const clusterId =
       node.type === 'Cluster' ? node.id : getNodeId(currentClickedNode!);
     const res = await fetch(
-      `${domain}/clustering/v1/collections/${collection}/clusters/${clusterId}${node.type === 'Phrase' ? `/phrases/${node.id}` : ''
+      `${domain}/clustering/v1/collections/${collection}/clusters/${clusterId}${
+        node.type === 'Phrase' ? `/phrases/${node.id}` : ''
       }/settings`,
       {
         method: 'POST',

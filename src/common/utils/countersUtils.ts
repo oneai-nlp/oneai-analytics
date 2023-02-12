@@ -34,7 +34,7 @@ export function topGroupPercentCalculation(
   const maxGroup = groups[sums.indexOf(max)];
   const groupsSum = sum(sums);
   return {
-    result: groupsSum === 0 ? 0 : Math.round((max / groupsSum) * 100),
+    result: groupsSum === 0 ? 0 : (max / groupsSum) * 100,
     counter: max > 0 ? maxGroup ?? counter : counter,
     metadataKey: maxGroup.label,
     value: undefined,
@@ -71,7 +71,7 @@ export function groupsPercentsCalculation(
 
   return sums.map((groupSum) => {
     return {
-      result: Math.round((groupSum.result / groupsSum) * 100),
+      result: (groupSum.result / groupsSum) * 100,
       counter: groupSum.group ?? counter,
       metadataKey: groupSum.group.label,
       value: undefined,
@@ -130,7 +130,7 @@ export function topValuePercentCalculation(
   );
 
   return {
-    result: sum === 0 ? 0 : Math.round((max.count / sum) * 100),
+    result: sum === 0 ? 0 : (max.count / sum) * 100,
     counter:
       getItemCounterConfiguration(
         max.metadata,
@@ -230,7 +230,7 @@ export function percentOfItemsCalculation(
   );
 
   return {
-    result: keyCount === 0 ? 0 : Math.round((itemCount / keyCount) * 100),
+    result: keyCount === 0 ? 0 : (itemCount / keyCount) * 100,
     counter: itemCounter ?? keyCounter,
     metadataKey: metadataKeyValue.key,
     value: metadataKeyValue.value,
@@ -271,9 +271,9 @@ export function percentOfAllItemsCalculation(
 
   let result;
   if (metadataKeyValue.key === CUSTOM_METADATA_KEY) {
-    result = totalItems === 0 ? 0 : Math.round((itemCount / totalItems) * 100);
+    result = totalItems === 0 ? 0 : (itemCount / totalItems) * 100;
   } else {
-    result = keyCount === 0 ? 0 : Math.round((itemCount / keyCount) * 100);
+    result = keyCount === 0 ? 0 : (itemCount / keyCount) * 100;
   }
   return {
     result: result,

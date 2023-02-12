@@ -1,5 +1,5 @@
 import { OneAIDataNode } from '../types/componentsInputs';
-import { Cluster, Item, Phrase, Trend } from '../types/modals';
+import { Cluster, Item, MetaCluster, Phrase, Trend } from '../types/modals';
 
 export const COLLECTION_TYPE = 'Collection';
 
@@ -8,6 +8,8 @@ export function getNodeText(node: OneAIDataNode): string {
     ? (node.data as Cluster).cluster_phrase
     : node.type === 'Phrase'
     ? (node.data as Phrase).text
+    : node.type === 'Meta'
+    ? (node.data as MetaCluster).meta_value
     : (node.data as Item).original_text;
 }
 
@@ -17,6 +19,10 @@ export function getNodeId(node: OneAIDataNode): string {
       ? (node.data as Cluster).cluster_id
       : node.type === 'Phrase'
       ? (node.data as Phrase).phrase_id
+      : node.type === 'Meta'
+      ? (node.data as MetaCluster).meta_key +
+        '$$' +
+        (node.data as MetaCluster).meta_value
       : (node.data as Item).id
   ).toString();
 }
@@ -26,6 +32,8 @@ export function getNodeItemsCount(node: OneAIDataNode): number {
     ? (node.data as Cluster).items_count
     : node.type === 'Phrase'
     ? (node.data as Phrase).items_count
+    : node.type === 'Meta'
+    ? (node.data as MetaCluster).items_count
     : 1;
 }
 
@@ -45,5 +53,30 @@ export function getNodeTrends(node: OneAIDataNode | undefined): Trend[] {
     ? (node.data as Cluster).trends ?? []
     : node.type === 'Phrase'
     ? (node.data as Phrase).trends ?? []
+    : node.type === 'Meta'
+    ? (node.data as MetaCluster).trends ?? []
     : [];
 }
+
+export const getNodeOriginalAndTranslatedText = (
+  node: OneAIDataNode | undefined
+) => {
+  if (!node) return { originalText: undefined, translatedText: undefined };
+  if (['Cluster', 'Phrase', 'Item'].includes(node.type)) {
+    const cluster = node.data as Cluster;
+    return {
+      originalText: cluster.item_original_text,
+      translatedText:
+        cluster.item_translated_text ?? cluster.item_original_text,
+    };
+  }
+
+  if (node.type === 'Meta') {
+    const item = node.data as MetaCluster;
+    return {
+      originalText: item.meta_value,
+      translatedText: item.meta_value,
+    };
+  }
+  return { originalText: undefined, translatedText: undefined };
+};

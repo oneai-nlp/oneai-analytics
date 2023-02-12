@@ -57,3 +57,17 @@ export interface Cluster {
   trends: Trend[];
   properties: Properties;
 }
+
+export interface MetaCluster {
+  organization_id: string;
+  collection_id: string;
+  meta_key: string;
+  meta_value: string;
+  meta_count: number;
+  clusters_count: number;
+  phrases_count: number;
+  items_count: number;
+  metadata: MetaData;
+  trends: Trend[];
+  properties: Properties;
+}

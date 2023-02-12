@@ -1,5 +1,13 @@
 import { FC } from 'react';
-import { Cluster, Item, MetaData, Phrase, Properties, Trend } from './modals';
+import {
+  Cluster,
+  Item,
+  MetaCluster,
+  MetaData,
+  Phrase,
+  Properties,
+  Trend,
+} from './modals';
 import {
   CountersConfigurations,
   CounterType,
@@ -60,10 +68,10 @@ export interface BarChartProps {
   totalItems: number;
 }
 
-export type NodeType = 'Cluster' | 'Phrase' | 'Item';
+export type NodeType = 'Cluster' | 'Phrase' | 'Item' | 'Meta';
 export interface OneAIDataNode {
   type: NodeType;
-  data: Cluster | Phrase | Item;
+  data: Cluster | Phrase | Item | MetaCluster;
 }
 
 export interface OneAiAnalyticsProps {
@@ -123,6 +131,9 @@ export interface OneAiAnalyticsProps {
   ) => void;
   propertiesFilters?: Properties;
   setPropertiesFilters?: (properties: Properties) => void;
+  metaOptions?: string[];
+  currentMetaOption?: string;
+  metaOptionsChanged?: (option: string) => void;
 }
 
 export type OneAIAnalyticsStaticDataWrapperProps = Omit<

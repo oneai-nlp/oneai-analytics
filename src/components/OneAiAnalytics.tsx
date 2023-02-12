@@ -9,6 +9,7 @@ import { useResizeDetector } from 'react-resize-detector';
 import ReactTooltip from 'react-tooltip';
 import LabelDisplay from '../common/components/CountersLabels/LabelDisplay';
 import LabelsFiltersSelect from '../common/components/CountersLabels/LabelsFiltersSelect';
+import SingleSelect from '../common/components/CountersLabels/SingleSelect';
 import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
 import CustomizeTab from '../common/components/CustomizeTab';
 import DatesFilters from '../common/components/DatesFilters';
@@ -45,6 +46,7 @@ import {
   COLLECTION_TYPE,
   getNodeId,
   getNodeItemsCount,
+  getNodeOriginalAndTranslatedText,
   getNodeText,
   getNodeTrends,
 } from '../common/utils/modalsUtils';
@@ -96,6 +98,9 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   toggleHide = () => {},
   propertiesFilters = {},
   setPropertiesFilters = () => {},
+  metaOptions,
+  currentMetaOption,
+  metaOptionsChanged = () => {},
 }) => {
   const [display, setDisplay] = useState('Treemap' as Displays);
   const { width, height, ref } = useResizeDetector();
@@ -229,12 +234,14 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
       dataNodes.nodes.map((d) => {
         const itemsCount = getNodeItemsCount(d);
         const nodeText = getNodeText(d);
+        const { originalText, translatedText } =
+          getNodeOriginalAndTranslatedText(d);
         return {
           id: getNodeId(d),
           amount: itemsCount,
           text: nodeText,
-          item_original_text: d.data.item_original_text ?? nodeText,
-          item_translated_text: d.data.item_translated_text,
+          item_original_text: originalText ?? nodeText,
+          item_translated_text: translatedText,
           metadata: {
             [CUSTOM_METADATA_KEY]: [
               { value: CUSTOM_METADATA_KEY, count: itemsCount },
@@ -491,14 +498,14 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                   onClick={() => setPropertiesFilters({ hide: 'false' })}
                   data-for="global"
                   data-tip="Show hidden nodes"
-                  className="h-6 w-6 p-1 mr-1 hover:cursor-pointer bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]"
+                  className="h-6 w-6 p-1 mr-1 hover:cursor-pointer text-[#747189] dark:hover:text-white"
                 />
               ) : (
                 <EyeSlashIcon
                   onClick={() => setPropertiesFilters({ hide: 'true' })}
                   data-for="global"
                   data-tip="Hide hidden nodes"
-                  className="h-6 w-6 p-1 mr-1 hover:cursor-pointer text-[#747189] dark:hover:text-white"
+                  className="h-6 w-6 p-1 mr-1 hover:cursor-pointer bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]"
                 />
               )}
               {translationEnabled ? (
@@ -625,6 +632,16 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     </span>
                   )}
                 </div>
+                {metaOptions && nodesPath.length === 1 ? (
+                  <span className="ml-2 flex text-gray-500">
+                    <span className="mr-1">/</span>
+                    <SingleSelect
+                      options={metaOptions}
+                      selectedLabel={currentMetaOption ?? 'text'}
+                      onSelect={metaOptionsChanged}
+                    />
+                  </span>
+                ) : null}
               </div>
               <div>
                 {!loading && (

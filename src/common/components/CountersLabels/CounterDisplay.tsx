@@ -103,7 +103,7 @@ export default function CounterDisplay({
         }`}
         style={{ width, maxWidth }}
       >
-        {getNumberDescription(displayResult.result, 1)}
+        {getNumberDescription(displayResult.result, 2)}
         {counter.calculationConfiguration.type === 'percentage' ||
         counter.calculationConfiguration.type === 'trend'
           ? '%'

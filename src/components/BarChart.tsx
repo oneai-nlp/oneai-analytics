@@ -139,7 +139,7 @@ export const BarChart: FC<BarChartProps> = ({
         <foreignObject
           x={x}
           y={y}
-          width={barWidth}
+          width={width}
           height={barHeight}
           opacity={opacity}
           fill={fill}
