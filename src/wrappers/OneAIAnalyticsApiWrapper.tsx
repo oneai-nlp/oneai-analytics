@@ -202,12 +202,15 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
 
           const mappedNodes = newNodes.map((n) => n.data as MetaCluster);
           setTotalPages(1);
+          const filteredNodes = mappedNodes.filter(
+            (n) => n.meta_key === currentMetaGroup
+          );
           setCurrentNodes({
-            totalItems: mappedNodes.reduce(
+            totalItems: filteredNodes.reduce(
               (acc, curr) => acc + curr.items_count,
               0
             ),
-            nodes: mappedNodes.map((c) => {
+            nodes: filteredNodes.map((c) => {
               return { type: 'Meta' as NodeType, data: c };
             }),
           });
