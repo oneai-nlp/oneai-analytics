@@ -1,5 +1,5 @@
 import { Listbox, Transition } from '@headlessui/react';
-import { ChevronUpDownIcon } from '@heroicons/react/24/outline';
+import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import React, { Fragment } from 'react';
 
 export default function SingleSelect({
@@ -14,13 +14,13 @@ export default function SingleSelect({
   return (
     <Listbox>
       <div className="relative">
-        <Listbox.Button className="relative rounded-lg text-left focus:outline-none text-sm flex">
-          <span className="text-black dark:text-white text-sm">
+        <Listbox.Button className="relative rounded-lg text-left focus:outline-none text-sm flex items-center">
+          <span className="text-[#111111] dark:text-gray-300 text-sm mr-1">
             {selectedLabel}
           </span>
           <span>
-            <ChevronUpDownIcon
-              className="h-5 w-5 text-gray-200"
+            <ChevronDownIcon
+              className="h-4 w-4 text-gray-200"
               aria-hidden="true"
             />
           </span>
@@ -31,7 +31,7 @@ export default function SingleSelect({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="fixed mt-1 z-10 max-h-60 scrollbar-thin scrollbar-thumb-[#747189] scrollbar-track-[#272533] overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full rounded-md bg-gray-600 dark:bg-[#272533] py-1 text-base shadow-lg ring-1 ring-gray-500 dark:ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <Listbox.Options className="fixed mt-1 z-10 p-1 max-h-60 scrollbar-thin scrollbar-thumb-[#747189] scrollbar-track-[#272533] overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full rounded-md bg-gray-600 dark:bg-[#272533] py-1 text-base shadow-lg ring-1 ring-gray-500 dark:ring-black ring-opacity-5 focus:outline-none sm:text-sm">
             {options.map((key, i) => (
               <DropdownOption
                 label={key}
@@ -75,6 +75,7 @@ function DropdownOption({
         <div className="flex items-center">
           <input
             checked={selected}
+            onChange={() => {}}
             type="checkbox"
             className="w-4 h-4 text-[#4D4DFE] bg-gray-100 border-gray-300 focus:ring-[#4D4DFE] dark:ring-offset-gray-800 focus:ring-2 dark:bg-[#322F46] dark:border-[#322F46]"
           />

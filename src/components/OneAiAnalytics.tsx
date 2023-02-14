@@ -603,6 +603,16 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                       )}
                     </div>
                   ))}
+                  {metaOptions && nodesPath.length === 1 ? (
+                    <span className="ml-1 flex text-[#111111] dark:text-gray-300">
+                      <span className="mr-1">/ </span>
+                      <SingleSelect
+                        options={metaOptions}
+                        selectedLabel={currentMetaOption ?? 'text'}
+                        onSelect={metaOptionsChanged}
+                      />
+                    </span>
+                  ) : null}
                   {(labelsFilters?.length ?? 0) > 0 &&
                     labelsFilters
                       ?.filter((label) => label.value)
@@ -632,16 +642,6 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     </span>
                   )}
                 </div>
-                {metaOptions && nodesPath.length === 1 ? (
-                  <span className="ml-2 flex text-gray-500">
-                    <span className="mr-1">/</span>
-                    <SingleSelect
-                      options={metaOptions}
-                      selectedLabel={currentMetaOption ?? 'text'}
-                      onSelect={metaOptionsChanged}
-                    />
-                  </span>
-                ) : null}
               </div>
               <div>
                 {!loading && (

@@ -64,6 +64,9 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   } as Properties);
   const [metaOptions, setMetaOptions] = useState([] as string[]);
   const [currentMetaGroup, setCurrentMetaGroup] = useState('text');
+  const [metaGroupClicked, setMetaGroupClicked] = useState(
+    null as MetadataKeyValue | null
+  );
   const runOnce = useRef(false);
 
   useEffect(() => {
@@ -157,12 +160,15 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           const newNodes = cached.nodes.map((n) => n.data as MetaCluster);
           if (currentMetaGroup !== 'text') {
             setTotalPages(1);
+            const filteredNodes = newNodes.filter(
+              (n) => n.meta_key === currentMetaGroup
+            );
             setCurrentNodes({
-              totalItems: newNodes.reduce(
+              totalItems: filteredNodes.reduce(
                 (acc, curr) => acc + curr.items_count,
                 0
               ),
-              nodes: newNodes.map((c) => {
+              nodes: filteredNodes.map((c) => {
                 return { type: 'Meta' as NodeType, data: c };
               }),
             });
@@ -236,7 +242,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             currentPage,
             dateRange[0],
             dateRange[1],
-            labelsFilters,
+            [...labelsFilters, ...(metaGroupClicked ? [metaGroupClicked] : [])],
             trendPeriods,
             propertiesFilters
           );
@@ -296,7 +302,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             currentPage,
             dateRange[0],
             dateRange[1],
-            labelsFilters,
+            [...labelsFilters, ...(metaGroupClicked ? [metaGroupClicked] : [])],
             trendPeriods,
             propertiesFilters
           );
@@ -352,7 +358,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             currentPage,
             dateRange[0],
             dateRange[1],
-            labelsFilters,
+            [...labelsFilters, ...(metaGroupClicked ? [metaGroupClicked] : [])],
             trendPeriods,
             propertiesFilters
           );
@@ -421,14 +427,9 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
     const currentNodeDetails = getNodeDetails(clickedNodes.at(-1), collection);
 
     if (currentMetaGroup !== 'text') {
-      setLocalRefreshToken((current) => {
+      return setLocalRefreshToken((current) => {
         const [key, value] = node.id.split('$$');
-        setLabelsFilters((labels) => [
-          ...labels.filter(
-            (label) => !(label.key === key && label.value === value)
-          ),
-          { key, value },
-        ]);
+        setMetaGroupClicked({ key, value });
         setCurrentMetaGroup('text');
         return current.length > 2 ? '1' : current + '1';
       });
@@ -466,8 +467,16 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   };
 
   const goBack = (skip: number = 1) => {
-    if (skip === 0) return;
+    if (skip === 0) {
+      if (currentMetaGroup !== 'text') {
+        setMetaGroupClicked(null);
+        setCurrentMetaGroup('text');
+      }
+      return;
+    }
+
     setClickedNodes((clickedClusters) => {
+      const originalClickedAmount = clickedClusters.length;
       for (let i = 0; i < skip; i++) {
         clickedClusters.pop();
       }
@@ -480,6 +489,19 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
         currentNodeDetails.id
       );
       setCurrentPage(nodeCachedPage);
+      const extraBackNodes = originalClickedAmount - skip;
+      if (extraBackNodes < 0) {
+        setLocalRefreshToken((current) => {
+          if (extraBackNodes === -1) {
+            setCurrentMetaGroup(metaGroupClicked?.key ?? 'text');
+            setMetaGroupClicked(null);
+          } else {
+            setMetaGroupClicked(null);
+            setCurrentMetaGroup('text');
+          }
+          return current.length > 2 ? '1' : current + '1';
+        });
+      }
       return [...clickedClusters];
     });
   };
@@ -498,6 +520,12 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       error={error}
       nodesPath={[
         { text: collection },
+        ...(metaGroupClicked
+          ? [
+              { text: metaGroupClicked.key },
+              { text: metaGroupClicked.value ?? '' },
+            ]
+          : []),
         ...clickedNodes.map((node) => {
           const { originalText, translatedText } =
             getNodeOriginalAndTranslatedText(node);
