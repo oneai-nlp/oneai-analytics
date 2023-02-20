@@ -64,8 +64,9 @@ export default function CustomizeTab({
             >
               <Popover.Panel
                 tabIndex={0}
-                className="absolute z-50 mt-3 w-screen max-w-sm transform lg:max-w-4xl"
+                className="absolute z-10 mt-3 w-screen max-w-sm transform lg:max-w-4xl"
               >
+                asdasd
                 <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-gray-500 dark:ring-black ring-opacity-5">
                   <div className="relative bg-white dark:bg-[#1D1C27] p-5 max-h-[85vh] text-gray-500 dark:text-white">
                     <div className="w-full">
