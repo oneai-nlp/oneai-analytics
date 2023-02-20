@@ -6,7 +6,7 @@
   "typings": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/oneai-analytics.esm.js "
+      "import": "./dist/oneai-analytics.esm.js"
     }
   },
   "description": "OneAI analytics package",
