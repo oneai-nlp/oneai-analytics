@@ -1,19 +1,28 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { UploadParams } from '../common/types/componentsInputs';
 import Papa from 'papaparse';
+import SingleSelect from '../common/components/UploadCSVComponents/SingleSelect';
+import {
+  COLUMN_TYPES_OPTIONS,
+  CUSTOM_VALUE_ID,
+  IGNORE_ID,
+} from '../common/components/UploadCSVComponents/constants';
 
 const allowedExtensions = ['csv'];
 
 const OneAiUpload = ({
-  apiKey,
-  domain,
-  collection,
+  domain = 'https://api.oneai.com',
+  apiKey = '',
+  collection = '',
   darkMode = true,
 }: UploadParams) => {
   const [data, setData] = useState([] as string[][]);
   const [error, setError] = useState(null as string | null);
   const [file, setFile] = useState(null as File | null);
   const [parseFinished, setParseFinished] = useState(false);
+  const [columnsConfigurations, setColumnsConfigurations] = useState(
+    [] as { id: string; customText?: string }[]
+  );
   const currentParser = useRef(null as Papa.Parser | null);
 
   useEffect(() => {
@@ -62,13 +71,47 @@ const OneAiUpload = ({
         }
 
         currentParser.current = parser;
-        setData((prev) => [...prev, data as string[]]);
+        setData((prev) => {
+          if (prev.length === 0) {
+            setColumnsConfigurations(
+              (data as string[]).map(() => ({ id: IGNORE_ID }))
+            );
+          }
+
+          return [...prev, data as string[]];
+        });
       },
       complete: function (results, file) {
         console.log('parsing complete read', results, file);
         setParseFinished(true);
       },
     });
+  };
+
+  const handleUpload = async () => {
+    console.log('uploading');
+    if (!file) return;
+    const data = new FormData();
+    data.append('file', file);
+
+    await fetch(
+      encodeURI(
+        `${domain}/api/v0/pipeline/async/file??pipeline={"content_type": "text/csv", "steps":[{"params": {"collection": "${collection}"}}], "csv_params": {"columns": ${columnsConfigurations
+          .map(
+            (cc) =>
+              '"' + (cc.id === CUSTOM_VALUE_ID ? cc.customText : cc.id) + '"'
+          )
+          .join(',')}}}`
+      ),
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'api-key': apiKey ?? '',
+        },
+        body: data,
+      }
+    );
   };
 
   return (
@@ -78,46 +121,103 @@ const OneAiUpload = ({
       }`}
     >
       <div className="h-full w-full overflow-hidden bg-[#272535] flex flex-col items-center text-white">
-        {parseFinished ? (
+        {data.length > 0 ? (
           <div className="w-full h-full p-2">
-            <button
-              type="button"
-              onClick={() => {
-                setFile(null);
-                setError(null);
-                setData([]);
-                setParseFinished(false);
-              }}
-              className="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 shadow-lg shadow-teal-500/50 dark:shadow-lg dark:shadow-teal-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-            >
-              Reset
-            </button>
-            <div className="relative overflow-auto shadow-md sm:rounded-lg h-[90%]">
-              <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase dark:text-gray-400">
-                  <tr>
-                    {data[0].map((header) => (
-                      <th key={header} scope="col" className="px-6 py-3">
-                        {header}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.slice(1).map((row, i) => (
-                    <tr
-                      key={i}
-                      className="border-b border-gray-200 dark:border-gray-700"
-                    >
-                      {row.map((cell, i) => (
-                        <td key={i} className="px-6 py-4">
-                          {cell}
-                        </td>
+            <div className="h-full w-full flex flex-col">
+              <div className="absolute top-5 left-5">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFile(null);
+                    setError(null);
+                    setData([]);
+                    setParseFinished(false);
+                  }}
+                  className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+                >
+                  Reset
+                </button>
+              </div>
+              <div className="absolute top-5 right-4">
+                <button
+                  type="button"
+                  onClick={() => handleUpload()}
+                  className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                >
+                  Upload
+                </button>
+              </div>
+              <div className="h-auto w-full text-center">
+                <span>Here is your CSV file, you can map it and Upload</span>
+              </div>
+              <div className="relative overflow-auto max-h-full block shadow-md sm:rounded-lg grow w-full">
+                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                  <thead className="text-xs text-gray-700 uppercase dark:text-gray-400 sticky top-0">
+                    <tr>
+                      {data[0].map((header, i) => (
+                        <th
+                          key={header + i}
+                          scope="col"
+                          className="px-6 py-3 max-w-[20%]"
+                        >
+                          <div className="w-full flex flex-col">
+                            <div>
+                              <SingleSelect
+                                options={COLUMN_TYPES_OPTIONS}
+                                selectedLabelId={
+                                  columnsConfigurations[i].id ?? null
+                                }
+                                onSelect={(selectedLabelId) => {
+                                  setColumnsConfigurations((prev) => {
+                                    const newColumnsConfigurations = [...prev];
+                                    newColumnsConfigurations[i] = {
+                                      id: selectedLabelId,
+                                    };
+                                    return newColumnsConfigurations;
+                                  });
+                                }}
+                              />
+                              {columnsConfigurations[i].id ===
+                              CUSTOM_VALUE_ID ? (
+                                <input
+                                  type="text"
+                                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                  onChange={(e) =>
+                                    setColumnsConfigurations((prev) => {
+                                      const newColumnsConfigurations = [
+                                        ...prev,
+                                      ];
+                                      newColumnsConfigurations[i].customText =
+                                        e.target.value;
+
+                                      return newColumnsConfigurations;
+                                    })
+                                  }
+                                />
+                              ) : null}
+                            </div>
+                            <span>{header}</span>
+                          </div>
+                        </th>
                       ))}
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="h-96 overflow-y-auto">
+                    {data.slice(1).map((row, i) => (
+                      <tr
+                        key={i}
+                        className="border-b border-gray-200 dark:border-gray-700 max-w-[20%] truncate"
+                      >
+                        {row.map((cell, i) => (
+                          <td key={i} className="px-6 py-4">
+                            {cell}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         ) : (
