@@ -171,3 +171,10 @@ export interface ItemsDisplayComponentProps {
   translate: boolean;
   totalItems: number;
 }
+
+export interface UploadParams {
+  domain?: string;
+  apiKey?: string;
+  collection?: string;
+  darkMode?: boolean;
+}
