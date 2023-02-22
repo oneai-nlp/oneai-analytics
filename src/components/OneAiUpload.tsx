@@ -25,6 +25,8 @@ const OneAiUpload = ({
   );
   const currentParser = useRef(null as Papa.Parser | null);
 
+  console.log('error', error, 'parseFinished', parseFinished);
+
   useEffect(() => {
     handleParse();
   }, [file]);
@@ -96,10 +98,11 @@ const OneAiUpload = ({
 
     await fetch(
       encodeURI(
-        `${domain}/api/v0/pipeline/async/file??pipeline={"content_type": "text/csv", "steps":[{"params": {"collection": "${collection}"}}], "csv_params": {"columns": ${columnsConfigurations
-          .map(
-            (cc) =>
-              '"' + (cc.id === CUSTOM_VALUE_ID ? cc.customText : cc.id) + '"'
+        `${domain}/api/v0/pipeline/async/file??pipeline={"content_type": "text/csv", "steps":[{"skill":"clustering","params": {"collection": "${collection}"}}], "csv_params": {"columns": ${columnsConfigurations
+          .map((cc) =>
+            cc.id === IGNORE_ID
+              ? false
+              : '"' + (cc.id === CUSTOM_VALUE_ID ? cc.customText : cc.id) + '"'
           )
           .join(',')}}}`
       ),
