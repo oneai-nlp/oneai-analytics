@@ -38,7 +38,7 @@
     "analyze": "size-limit --why",
     "sb": "start-storybook -p 6006",
     "dev": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -o docs-build"
+    "build-storybook": "NODE_OPTIONS=--openssl-legacy-provider build-storybook -o docs-build"
   },
   "peerDependencies": {
     "react": ">=16"

@@ -16,7 +16,4 @@ module.exports = {
   typescript: {
     check: true, // type-check stories during Storybook build
   },
-  output: {
-    hashFunction: 'xxhash64',
-  },
 };
