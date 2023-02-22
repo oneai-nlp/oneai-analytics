@@ -23,6 +23,7 @@ const OneAiUpload = ({
   const [columnsConfigurations, setColumnsConfigurations] = useState(
     [] as { id: string; customText?: string }[]
   );
+  const [loading, setLoading] = useState(false);
   const currentParser = useRef(null as Papa.Parser | null);
 
   console.log('error', error, 'parseFinished', parseFinished);
@@ -93,18 +94,19 @@ const OneAiUpload = ({
   const handleUpload = async () => {
     console.log('uploading');
     if (!file) return;
+    setLoading(true);
     const data = new FormData();
     data.append('file', file);
 
     await fetch(
       encodeURI(
-        `${domain}/api/v0/pipeline/async/file??pipeline={"content_type": "text/csv", "steps":[{"skill":"clustering","params": {"collection": "${collection}"}}], "csv_params": {"columns": ${columnsConfigurations
+        `${domain}/api/v0/pipeline/async/file?pipeline={"content_type": "text/csv", "steps":[{"skill":"clustering","params": {"collection": "${collection}"}}], "csv_params": {"columns": [${columnsConfigurations
           .map((cc) =>
             cc.id === IGNORE_ID
               ? false
               : '"' + (cc.id === CUSTOM_VALUE_ID ? cc.customText : cc.id) + '"'
           )
-          .join(',')}}}`
+          .join(',')}]}}`
       ),
       {
         method: 'POST',
@@ -115,6 +117,8 @@ const OneAiUpload = ({
         body: data,
       }
     );
+
+    setLoading(false);
   };
 
   return (
@@ -126,7 +130,41 @@ const OneAiUpload = ({
       <div className="h-full w-full overflow-hidden bg-[#272535] flex flex-col items-center text-white">
         {data.length > 0 ? (
           <div className="w-full h-full p-2">
-            <div className="h-full w-full flex flex-col">
+            {loading ? (
+              <>
+                <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-10">
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <svg
+                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v1a7 7 0 00-7 7h1z"
+                      ></path>
+                    </svg>
+                    <span className="text-white">Loading...</span>
+                  </div>
+                </div>
+              </>
+            ) : null}
+            <div
+              className={
+                'h-full w-full flex flex-col ' +
+                (loading ? 'pointer-events-none' : '')
+              }
+            >
               <div className="absolute top-5 left-5">
                 <button
                   type="button"
