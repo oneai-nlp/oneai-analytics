@@ -24,6 +24,7 @@ const OneAiUpload = ({
     [] as { id: string; customText?: string }[]
   );
   const [loading, setLoading] = useState(false);
+  const [csvHasHeaders, setCsvHasHeaders] = useState(true);
   const currentParser = useRef(null as Papa.Parser | null);
 
   console.log('error', error, 'parseFinished', parseFinished);
@@ -161,48 +162,28 @@ const OneAiUpload = ({
             ) : null}
             <div
               className={
-                'h-full w-full flex flex-col ' +
+                'h-full w-full flex flex-col relative ' +
                 (loading ? 'pointer-events-none' : '')
               }
             >
-              <div className="absolute top-5 left-5">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setFile(null);
-                    setError(null);
-                    setData([]);
-                    setParseFinished(false);
-                  }}
-                  className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
-                >
-                  Reset
-                </button>
-              </div>
-              <div className="absolute top-5 right-4">
-                <button
-                  type="button"
-                  onClick={() => handleUpload()}
-                  className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                >
-                  Upload
-                </button>
-              </div>
-              <div className="h-auto w-full text-center">
-                <span>Here is your CSV file, you can map it and Upload</span>
+              <div className="h-auto w-full">
+                <span className="text-gray-200">
+                  Select columns for upload to{' '}
+                  <span className="text-white">' {collection} '</span>
+                </span>
               </div>
               <div className="relative overflow-auto max-h-full block shadow-md sm:rounded-lg grow w-full">
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                  <thead className="text-xs text-gray-700 uppercase dark:text-gray-400 sticky top-0">
+                  <thead className="text-xs text-gray-700 uppercase dark:text-gray-400 sticky top-0 backdrop-blur-[2px]">
                     <tr>
                       {data[0].map((header, i) => (
                         <th
-                          key={header + i}
+                          key={`${header} - ${i}`}
                           scope="col"
-                          className="px-6 py-3 max-w-[20%]"
+                          className="px-2 py-3 w-max"
                         >
-                          <div className="w-full flex flex-col">
-                            <div>
+                          <div className="w-full flex flex-col items-center">
+                            <div className="w-max mb-2">
                               <SingleSelect
                                 options={COLUMN_TYPES_OPTIONS}
                                 selectedLabelId={
@@ -237,20 +218,25 @@ const OneAiUpload = ({
                                 />
                               ) : null}
                             </div>
-                            <span>{header}</span>
+                            <span className="w-max">
+                              {csvHasHeaders ? header : `Column ${i + 1}`}
+                            </span>
                           </div>
                         </th>
                       ))}
                     </tr>
                   </thead>
                   <tbody className="h-96 overflow-y-auto">
-                    {data.slice(1).map((row, i) => (
+                    {data.slice(csvHasHeaders ? 1 : 0).map((row, i) => (
                       <tr
                         key={i}
-                        className="border-b border-gray-200 dark:border-gray-700 max-w-[20%] truncate"
+                        className="border-b border-gray-200 dark:border-gray-700"
                       >
                         {row.map((cell, i) => (
-                          <td key={i} className="px-6 py-4">
+                          <td
+                            key={i}
+                            className="px-6 py-4 max-w-[200px] truncate"
+                          >
                             {cell}
                           </td>
                         ))}
@@ -258,6 +244,48 @@ const OneAiUpload = ({
                     ))}
                   </tbody>
                 </table>
+              </div>
+              <div className="absolute bottom-0 w-full">
+                <div className="flex justify-between mb-2 p-2 backdrop-blur-[2px]">
+                  <div>
+                    <div className="flex items-center mr-4">
+                      <input
+                        checked={csvHasHeaders}
+                        onChange={(e) => setCsvHasHeaders(e.target.checked)}
+                        id="checkbox"
+                        type="checkbox"
+                        className="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                      />
+                      <label
+                        htmlFor="checkbox"
+                        className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >
+                        CSV has headers
+                      </label>
+                    </div>
+                  </div>
+                  <div className="flex">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setFile(null);
+                        setError(null);
+                        setData([]);
+                        setParseFinished(false);
+                      }}
+                      className="text-gray-400 font-medium px-5 text-center hover:text-gray-300 mr-12"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleUpload()}
+                      className="text-white bg-indigo-500 hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-300 font-medium rounded-sm text-sm px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
+                    >
+                      Upload {data.length} items
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
