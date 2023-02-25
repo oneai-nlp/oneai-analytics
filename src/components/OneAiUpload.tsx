@@ -67,11 +67,11 @@ const OneAiUpload = ({
 
     Papa.parse(file, {
       worker: true, // Don't bog down the main thread if its a big file
+      encoding: 'utf-8',
+      chunkSize: 512,
       step: function ({ data, errors }, parser) {
         if (errors.length > 0) {
           setError(errors[0].message);
-          parser.abort();
-          return;
         }
 
         currentParser.current = parser;
@@ -167,14 +167,14 @@ const OneAiUpload = ({
               }
             >
               <div className="h-auto w-full">
-                <span className="text-gray-200">
+                <span className="text-gray-200 pl-2">
                   Select columns for upload to{' '}
                   <span className="text-white">' {collection} '</span>
                 </span>
               </div>
               <div className="relative overflow-auto max-h-full block shadow-md sm:rounded-lg grow w-full">
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                  <thead className="text-xs text-gray-700 uppercase dark:text-gray-400 sticky top-0 backdrop-blur-[2px]">
+                  <thead className="text-xs text-gray-700 uppercase dark:text-gray-400 sticky top-0 bg-[#2B293B]">
                     <tr>
                       {data[0].map((header, i) => (
                         <th
@@ -182,7 +182,7 @@ const OneAiUpload = ({
                           scope="col"
                           className="px-2 py-3 w-max"
                         >
-                          <div className="w-full flex flex-col items-center">
+                          <div className="w-full flex flex-col items-start">
                             <div className="w-max mb-2">
                               <SingleSelect
                                 options={COLUMN_TYPES_OPTIONS}
@@ -218,8 +218,10 @@ const OneAiUpload = ({
                                 />
                               ) : null}
                             </div>
-                            <span className="w-max">
-                              {csvHasHeaders ? header : `Column ${i + 1}`}
+                            <span className="w-max pl-1">
+                              {csvHasHeaders && header
+                                ? header
+                                : `Column ${i + 1}`}
                             </span>
                           </div>
                         </th>
@@ -235,7 +237,7 @@ const OneAiUpload = ({
                         {row.map((cell, i) => (
                           <td
                             key={i}
-                            className="px-6 py-4 max-w-[200px] truncate"
+                            className="px-2 py-3 max-w-[200px] truncate"
                           >
                             {cell}
                           </td>

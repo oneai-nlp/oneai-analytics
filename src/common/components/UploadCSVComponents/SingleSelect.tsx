@@ -16,8 +16,8 @@ export default function SingleSelect({
 
   return (
     <Listbox>
-      <div className="relative bg-[#36334B] rounded-lg">
-        <Listbox.Button className="relative text-left focus:outline-none text-sm flex items-center px-2 py-2 justify-between">
+      <div className="relative bg-[#36334B] rounded-lg min-w-[100px]">
+        <Listbox.Button className="relative text-left focus:outline-none text-sm flex items-center px-2 py-2 justify-between w-full">
           <span className="text-[#111111] dark:text-gray-300 text-sm mr-1">
             {selected?.label ?? 'Unknown'}
           </span>
