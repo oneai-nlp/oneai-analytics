@@ -114,8 +114,9 @@ const OneAiUpload = ({
         headers: {
           'Content-Type': 'text/csv',
           'api-key': apiKey ?? '',
+          'Content-Disposition': `attachment; filename=${file.name}`,
         },
-        body: data,
+        body: file,
       }
     );
 
