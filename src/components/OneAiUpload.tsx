@@ -112,6 +112,7 @@ const OneAiUpload = ({
   const handleUpload = async () => {
     console.log('uploading');
     if (!file) return;
+    setUploaded(false);
     setLoading(true);
     const fetchFormData = new FormData();
     fetchFormData.append('file', file);
@@ -397,7 +398,7 @@ const OneAiUpload = ({
           </div>
         ) : (
           <>
-            <span className="mt-36">
+            <span className={`${uploaded ? 'mt-4' : 'mt-36'}`}>
               Your collection is empty, add items to populate it
             </span>
             <div className="mt-4 w-96">
