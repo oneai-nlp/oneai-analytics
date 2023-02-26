@@ -15,6 +15,9 @@ const OneAiUpload = ({
   apiKey = '',
   collection = '',
   darkMode = true,
+  steps = '[]',
+  input_skill,
+  resetAfterUpload = true,
 }: UploadParams) => {
   const [data, setData] = useState([] as string[][]);
   const [error, setError] = useState(null as string | null);
@@ -24,7 +27,11 @@ const OneAiUpload = ({
     [] as { id: string; customText?: string }[]
   );
   const [loading, setLoading] = useState(false);
+  const [uploaded, setUploaded] = useState(false);
   const [csvHasHeaders, setCsvHasHeaders] = useState(true);
+  const [numberOfRowsToSkip, setNumberOfRowsToSkip] = useState(0);
+  const [numberOfRowsToDisplay, setNumberOfRowsToDisplay] = useState(100);
+  const [maxRows, setMaxRows] = useState(null as number | null);
   const currentParser = useRef(null as Papa.Parser | null);
 
   console.log('error', error, 'parseFinished', parseFinished);
@@ -92,22 +99,39 @@ const OneAiUpload = ({
     });
   };
 
+  const handleReset = () => {
+    setData([]);
+    setFile(null);
+    setParseFinished(false);
+    setColumnsConfigurations([]);
+    setCsvHasHeaders(true);
+    setNumberOfRowsToSkip(0);
+    setMaxRows(null);
+  };
+
   const handleUpload = async () => {
     console.log('uploading');
     if (!file) return;
     setLoading(true);
-    const data = new FormData();
-    data.append('file', file);
+    const fetchFormData = new FormData();
+    fetchFormData.append('file', file);
+    const appendSteps = steps.charAt(0) === '[' ? steps.slice(1, -1) : steps;
 
     await fetch(
       encodeURI(
-        `${domain}/api/v0/pipeline/async/file?pipeline={"content_type": "text/csv", "steps":[{"skill":"clustering","params": {"collection": "${collection}"}}], "csv_params": {"columns": [${columnsConfigurations
+        `${domain}/api/v0/pipeline/async/file?pipeline={"content_type": "text/csv", "steps":[${
+          appendSteps !== '' ? `${appendSteps},` : ''
+        }{"skill":"clustering","params": {"collection": "${collection}"${
+          input_skill ? `,"input_skill":${input_skill}` : ''
+        }}}], "csv_params": {"columns": [${columnsConfigurations
           .map((cc) =>
             cc.id === IGNORE_ID
               ? false
               : '"' + (cc.id === CUSTOM_VALUE_ID ? cc.customText : cc.id) + '"'
           )
-          .join(',')}]}}`
+          .join(',')}],"skip_rows": ${
+          (csvHasHeaders ? 1 : 0) + numberOfRowsToSkip
+        },"max_rows":${maxRows !== null ? maxRows : data.length}}}`
       ),
       {
         method: 'POST',
@@ -120,6 +144,11 @@ const OneAiUpload = ({
       }
     );
 
+    if (resetAfterUpload) {
+      handleReset();
+    }
+
+    setUploaded(true);
     setLoading(false);
   };
 
@@ -130,12 +159,53 @@ const OneAiUpload = ({
       }`}
     >
       <div className="h-full w-full overflow-hidden bg-[#272535] flex flex-col items-center text-white">
+        {uploaded ? (
+          <div className="w-full p-2 relative h-3/6">
+            <div className="absolute top-0 right-0 p-2">
+              <svg
+                onClick={() => setUploaded(false)}
+                className="w-6 h-6 text-white cursor-pointer"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </div>
+            <div className="w-full h-full flex flex-col items-center justify-center">
+              <svg
+                className="w-20 h-20 text-green-500"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+              <h1 className="text-2xl font-bold mt-4">Upload Complete</h1>
+              <p className="text-lg mt-2">
+                Your data has been uploaded to OneAI
+              </p>
+            </div>
+          </div>
+        ) : null}
         {data.length > 0 ? (
           <div className="w-full h-full p-2">
             {loading ? (
               <>
                 <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-10">
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center text-center">
                     <svg
                       className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
                       xmlns="http://www.w3.org/2000/svg"
@@ -167,11 +237,22 @@ const OneAiUpload = ({
                 (loading ? 'pointer-events-none' : '')
               }
             >
-              <div className="h-auto w-full">
+              <div className="h-auto w-full flex justify-between">
                 <span className="text-gray-200 pl-2">
                   Select columns for upload to{' '}
                   <span className="text-white">' {collection} '</span>
                 </span>
+                <div className="flex items-center">
+                  <span className="text-gray-200 pr-2">Preview rows</span>
+                  <input
+                    className="w-16 h-8 text-center text-gray-700 dark:text-gray-400 bg-gray-200 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
+                    type="number"
+                    value={numberOfRowsToDisplay}
+                    onChange={(e) =>
+                      setNumberOfRowsToDisplay(Number(e.target.value))
+                    }
+                  />
+                </div>
               </div>
               <div className="relative overflow-auto max-h-full block shadow-md sm:rounded-lg grow w-full">
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -184,7 +265,7 @@ const OneAiUpload = ({
                           className="px-2 py-3 w-max"
                         >
                           <div className="w-full flex flex-col items-start">
-                            <div className="w-max mb-2">
+                            <div className="w-max">
                               <SingleSelect
                                 options={COLUMN_TYPES_OPTIONS}
                                 selectedLabelId={
@@ -200,24 +281,19 @@ const OneAiUpload = ({
                                   });
                                 }}
                               />
-                              {columnsConfigurations[i].id ===
-                              CUSTOM_VALUE_ID ? (
-                                <input
-                                  type="text"
-                                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                                  onChange={(e) =>
-                                    setColumnsConfigurations((prev) => {
-                                      const newColumnsConfigurations = [
-                                        ...prev,
-                                      ];
-                                      newColumnsConfigurations[i].customText =
-                                        e.target.value;
-
-                                      return newColumnsConfigurations;
-                                    })
-                                  }
-                                />
-                              ) : null}
+                              <div className="w-max h-6">
+                                {columnsConfigurations[i].id ===
+                                CUSTOM_VALUE_ID ? (
+                                  <input
+                                    type="text"
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                    onChange={(e) =>
+                                      (columnsConfigurations[i].customText =
+                                        e.target.value)
+                                    }
+                                  />
+                                ) : null}
+                              </div>
                             </div>
                             <span className="w-max pl-1">
                               {csvHasHeaders && header
@@ -230,28 +306,36 @@ const OneAiUpload = ({
                     </tr>
                   </thead>
                   <tbody className="h-96 overflow-y-auto">
-                    {data.slice(csvHasHeaders ? 1 : 0).map((row, i) => (
-                      <tr
-                        key={i}
-                        className="border-b border-gray-200 dark:border-gray-700"
-                      >
-                        {row.map((cell, i) => (
-                          <td
-                            key={i}
-                            className="px-2 py-3 max-w-[200px] truncate"
-                          >
-                            {cell}
-                          </td>
-                        ))}
-                      </tr>
-                    ))}
+                    {data
+                      .slice(csvHasHeaders ? 1 : 0, numberOfRowsToDisplay)
+                      .map((row, i) => (
+                        <tr
+                          key={i}
+                          className="border-b border-gray-200 dark:border-gray-700"
+                        >
+                          {row.map((cell, i) => (
+                            <td
+                              key={i}
+                              className="px-2 py-3 max-w-[200px] truncate"
+                            >
+                              {cell}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
               </div>
               <div className="absolute bottom-0 w-full">
                 <div className="flex justify-between mb-2 p-2 backdrop-blur-[2px]">
-                  <div>
+                  <div className="flex">
                     <div className="flex items-center mr-4">
+                      <label
+                        htmlFor="checkbox"
+                        className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >
+                        CSV has headers
+                      </label>
                       <input
                         checked={csvHasHeaders}
                         onChange={(e) => setCsvHasHeaders(e.target.checked)}
@@ -259,23 +343,42 @@ const OneAiUpload = ({
                         type="checkbox"
                         className="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                       />
+                    </div>
+                    <div className="flex items-center">
                       <label
                         htmlFor="checkbox"
                         className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                       >
-                        CSV has headers
+                        Max rows
                       </label>
+                      <input
+                        value={maxRows ?? data.length}
+                        onChange={(e) => setMaxRows(Number(e.target.value))}
+                        type="number"
+                        className="w-16 h-8 text-center text-gray-700 dark:text-gray-400 bg-gray-200 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
+                      />
+                    </div>
+                    <div className="flex items-center">
+                      <label
+                        htmlFor="checkbox"
+                        className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >
+                        Rows to skip
+                      </label>
+                      <input
+                        value={numberOfRowsToSkip}
+                        onChange={(e) =>
+                          setNumberOfRowsToSkip(Number(e.target.value))
+                        }
+                        type="number"
+                        className="w-16 h-8 text-center text-gray-700 dark:text-gray-400 bg-gray-200 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
+                      />
                     </div>
                   </div>
                   <div className="flex">
                     <button
                       type="button"
-                      onClick={() => {
-                        setFile(null);
-                        setError(null);
-                        setData([]);
-                        setParseFinished(false);
-                      }}
+                      onClick={handleReset}
                       className="text-gray-400 font-medium px-5 text-center hover:text-gray-300 mr-12"
                     >
                       Cancel

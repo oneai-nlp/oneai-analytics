@@ -177,4 +177,7 @@ export interface UploadParams {
   apiKey?: string;
   collection?: string;
   darkMode?: boolean;
+  steps?: string;
+  input_skill?: string;
+  resetAfterUpload?: boolean;
 }
