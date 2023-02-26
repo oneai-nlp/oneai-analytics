@@ -112,7 +112,7 @@ const OneAiUpload = ({
       {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'text/csv',
           'api-key': apiKey ?? '',
         },
         body: data,
