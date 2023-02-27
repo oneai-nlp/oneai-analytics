@@ -96,10 +96,10 @@ export const Treemap: FC<TreemapProps> = ({
     return scale([bigColor, smallColor]).domain([0, len]);
   }, [root, bigColor, smallColor]);
 
-  const [actionsVisible, setActionsVisible] = useState(null as number | null);
-
   const shapes = useMemo(() => {
-    console.log(55);
+    const [actionsVisible, setActionsVisible] = useState(null as number | null);
+
+    console.log(11111);
 
     const allShapes = root.leaves().map((leaf, index) => {
       const height = leaf.y1 - leaf.y0;
@@ -216,7 +216,7 @@ export const Treemap: FC<TreemapProps> = ({
     });
 
     return allShapes;
-  }, []);
+  }, [root]);
 
   return (
     <svg width={width} height={height}>
