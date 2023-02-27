@@ -36,12 +36,33 @@ export default function CustomizeTab({
   colorsAxisChanged: (counters: CounterType[]) => void;
   sizeAxisChanged: (metadataKeyValue: MetadataKeyValue) => void;
 }) {
+  const [position, setPosition] = React.useState(false);
+
+  const onClick = () => {
+    let popover;
+
+    if (typeof window !== "undefined") {
+      setTimeout(() => {
+        popover = document.querySelector("#popover_customize");
+
+        if (popover) {
+          popover = popover.getBoundingClientRect();
+
+          if (popover.bottom >= screen.height) {
+            setPosition(true);
+          }
+        }
+      }, 100)
+    }
+  }
+
   return (
     <div className="max-w-sm">
       <Popover className="relative">
         {({ open }) => (
           <>
             <Popover.Button
+              onClick={onClick}
               className={`
                 ${open ? '' : 'text-opacity-90'}
                 group inline-flex items-center rounded-md px-3 py-2 text-base font-medium text-gray-500 dark:text-white hover:text-opacity-100 focus:outline-none `}
@@ -63,8 +84,9 @@ export default function CustomizeTab({
               leaveTo="opacity-0 translate-y-1"
             >
               <Popover.Panel
+                id="popover_customize"
                 tabIndex={0}
-                className="fixed z-10 mt-3 w-screen max-w-sm transform lg:max-w-4xl"
+                className={`fixed z-10 ${position ? "-mt-[400px]" : "mt-3"} w-screen max-w-sm transform lg:max-w-4xl`}
               >
                 <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-gray-500 dark:ring-black ring-opacity-5">
                   <div className="relative bg-white dark:bg-[#1D1C27] p-5 max-h-[85vh] text-gray-500 dark:text-white">

@@ -22,11 +22,32 @@ export default function DatesFilters({
   trendPeriods?: number;
   trendPeriodsChanged?: (index: number) => void;
 }) {
+  const [position, setPosition] = React.useState(false);
+
+  const onClick = () => {
+    let popover;
+
+    if (typeof window !== "undefined") {
+      setTimeout(() => {
+        popover = document.querySelector("#popover_date");
+
+        if (popover) {
+          popover = popover.getBoundingClientRect();
+
+          if (popover.bottom >= screen.height) {
+            setPosition(true);
+          }
+        }
+      }, 100)
+    }
+  }
+
   return (
     <Popover className="relative">
       {({ open }) => (
         <>
           <Popover.Button
+            onClick={onClick}
             className={`
                 ${open ? '' : 'text-opacity-90'}
                 group inline-flex items-center rounded-md px-3 py-2 text-base font-medium text-gray-500 dark:text-white hover:text-opacity-100 focus:outline-none `}
@@ -48,8 +69,9 @@ export default function DatesFilters({
             leaveTo="opacity-0 translate-y-1"
           >
             <Popover.Panel
+              id="popover_date"
               tabIndex={0}
-              className="fixed z-10 mt-3 transform max-w-md"
+              className={`fixed z-10 ${position ? "-mt-[300px]" : "mt-3"} transform max-w-md`}
             >
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-gray-500 dark:ring-black ring-opacity-5">
                 <div className="relative bg-white dark:bg-[#272535] p-5">

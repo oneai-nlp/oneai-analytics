@@ -23,10 +23,30 @@ export default function LabelsFiltersSelect({
   ) => void;
   countersConfigurations: CountersConfigurations;
 }) {
+  const [position, setPosition] = useState(false);
+
+  const onClick = () => {
+    let popover;
+
+    if (typeof window !== "undefined") {
+      setTimeout(() => {
+        popover = document.querySelector("#popover_filter");
+
+        if (popover) {
+          popover = popover.getBoundingClientRect();
+
+          if (popover.bottom >= screen.height) {
+            setPosition(true);
+          }
+        }
+      }, 100)
+    }
+  }
+
   return (
     <Listbox>
       <div className="relative testtest">
-        <Listbox.Button className="relative rounded-lg  py-2 pl-3 pr-10 text-left focus:outline-none sm:text-sm">
+        <Listbox.Button className="relative rounded-lg  py-2 pl-3 pr-10 text-left focus:outline-none sm:text-sm" onClick={onClick}>
           <span
             className="block truncate lowercase first-letter:uppercase text-black dark:text-white !text-xl"
             style={{ width: '1em', height: '1em' }}
@@ -46,7 +66,11 @@ export default function LabelsFiltersSelect({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="fixed mt-1 z-10 max-h-60 scrollbar-thin scrollbar-thumb-[#747189] scrollbar-track-[#272533] overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full rounded-md bg-gray-600 dark:bg-[#272533] py-1 text-base shadow-lg ring-1 ring-gray-500 dark:ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <Listbox.Options
+            id="popover_filter"
+            className={`fixed ${position ? "-mt-[200px]" : "mt-3"} z-10 max-h-60 scrollbar-thin scrollbar-thumb-[#747189] scrollbar-track-[#272533] 
+          overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full rounded-md bg-gray-600 
+          dark:bg-[#272533] py-1 text-base shadow-lg ring-1 ring-gray-500 dark:ring-black ring-opacity-5 focus:outline-none sm:text-sm`}>
             {uniqBy(
               Object.keys(countersConfigurations).sort((a, b) =>
                 a < b ? -1 : a > b ? 1 : 0
