@@ -7,6 +7,7 @@ import {
   CUSTOM_VALUE_ID,
   IGNORE_ID,
 } from '../common/components/UploadCSVComponents/constants';
+import ReactTooltip from 'react-tooltip';
 
 const allowedExtensions = ['csv'];
 
@@ -155,12 +156,21 @@ const OneAiUpload = ({
     setLoading(false);
   };
 
+  useEffect(() => {
+    ReactTooltip.hide();
+    ReactTooltip.rebuild();
+  });
+
+  const uploadDisabled =
+    columnsConfigurations.filter((c) => c.id === 'input').length !== 1;
+
   return (
     <div
       className={`oneai-analytics-namespace h-full w-full p-2 ${
         darkMode ? 'dark' : ''
       }`}
     >
+      <ReactTooltip id="global" />
       <div className="h-full w-full overflow-hidden bg-[#272535] flex flex-col items-center text-white">
         {uploaded ? (
           <div className="w-full p-2 relative h-2/6">
@@ -328,7 +338,7 @@ const OneAiUpload = ({
                   </tbody>
                 </table>
               </div>
-              <div className="absolute bottom-0 w-full">
+              <div className="absolute bottom-4 w-full">
                 <div className="flex justify-between mb-2 p-4 backdrop-blur-[2px]">
                   <div className="flex">
                     <div className="flex items-center mr-4">
@@ -349,6 +359,8 @@ const OneAiUpload = ({
                     <div className="flex items-center">
                       <label
                         htmlFor="checkbox"
+                        data-for="global"
+                        data-tip="Limit number of rows to upload"
                         className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                       >
                         Upload rows
@@ -385,13 +397,27 @@ const OneAiUpload = ({
                     >
                       Cancel
                     </button>
-                    <button
-                      type="button"
-                      onClick={() => handleUpload()}
-                      className="text-white bg-indigo-500 hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-300 font-medium rounded-sm text-sm px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
+                    <span
+                      data-for="global"
+                      data-tip={
+                        uploadDisabled
+                          ? 'You must select one column for text'
+                          : 'Upload items'
+                      }
                     >
-                      Upload {maxRows ?? data.length} items
-                    </button>
+                      <button
+                        type="button"
+                        onClick={() => handleUpload()}
+                        disabled={uploadDisabled}
+                        className={`font-medium rounded-sm text-sm px-5 py-2.5 text-center ${
+                          uploadDisabled
+                            ? 'bg-gray-500 text-gray-200'
+                            : 'text-white bg-indigo-500 hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800'
+                        }`}
+                      >
+                        Upload {maxRows ?? data.length} items
+                      </button>
+                    </span>
                   </div>
                 </div>
               </div>
