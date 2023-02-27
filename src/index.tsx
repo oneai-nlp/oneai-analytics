@@ -4,6 +4,7 @@ import { OneAIAnalyticsApiWrapper } from './wrappers/OneAIAnalyticsApiWrapper';
 import { OneAIAnalyticsStaticDataWrapper } from './wrappers/OneAIAnalyticsStaticDataWrapper';
 export { OneAIAnalyticsApiWrapper, OneAIAnalyticsStaticDataWrapper };
 export { OneAiAnalytics } from './components/OneAiAnalytics';
+export { OneAiUpload } from './components/OneAiUpload';
 export {
   TreemapProps,
   BarChartProps,
