@@ -38,6 +38,8 @@ export const Treemap: FC<TreemapProps> = ({
   totalItems,
 }) => {
   const mainNode: TreemapNode = useMemo(() => {
+    console.log(44);
+
     return {
       id: '',
       children: dataNodes.map((c) => {
@@ -47,12 +49,12 @@ export const Treemap: FC<TreemapProps> = ({
             sizeAxis?.key === CUSTOM_METADATA_KEY
               ? c.amount
               : totalSumCalculation(
-                  sizeAxis,
-                  c.metadata,
-                  c.trends,
-                  countersConfiguration,
-                  totalItems
-                ).result,
+                sizeAxis,
+                c.metadata,
+                c.trends,
+                countersConfiguration,
+                totalItems
+              ).result,
           children: [],
         };
       }),
@@ -65,6 +67,8 @@ export const Treemap: FC<TreemapProps> = ({
   }, [dataNodes, sizeAxis]);
 
   const treeHierarchy = useMemo(() => {
+    console.log(11);
+
     const elementsValues = mainNode.children!.map((item) => item.amount);
     const maxElementValue = Math.max(...elementsValues);
     const elementsSum = elementsValues.reduce(
@@ -84,11 +88,15 @@ export const Treemap: FC<TreemapProps> = ({
   }, [mainNode]);
 
   const root = useMemo(() => {
+    console.log(22);
+
     const treeGenerator = treemap<DataNode>().size([width, height]).padding(0);
     return treeGenerator(treeHierarchy);
   }, [treeHierarchy, width, height]);
 
   const colors = useMemo(() => {
+    console.log(33);
+
     const len = root.leaves().length;
     if (!bigColor || !smallColor || !(valid(bigColor) && valid(smallColor)))
       return scale([BIG_COLOR_DEFAULT, SMALL_COLOR_DEFAULT]).domain([0, len]);
@@ -99,6 +107,8 @@ export const Treemap: FC<TreemapProps> = ({
   const [actionsVisible, setActionsVisible] = useState(null as number | null);
 
   const allShapes = root.leaves().map((leaf, index) => {
+    console.log(55);
+
     const height = leaf.y1 - leaf.y0;
     const width = leaf.x1 - leaf.x0;
     const fontSize = calculateFontSize(height, width);
@@ -189,9 +199,9 @@ export const Treemap: FC<TreemapProps> = ({
                   }}
                 >
                   {translate &&
-                  leaf.data.item_translated_text !== undefined &&
-                  leaf.data.item_translated_text !== null &&
-                  leaf.data.item_translated_text !== ''
+                    leaf.data.item_translated_text !== undefined &&
+                    leaf.data.item_translated_text !== null &&
+                    leaf.data.item_translated_text !== ''
                     ? leaf.data.item_translated_text
                     : leaf.data.item_original_text}
                 </span>
@@ -200,9 +210,8 @@ export const Treemap: FC<TreemapProps> = ({
                 data-for="global-actions"
                 data-tip
                 data-event="click"
-                className={`self-end hover:cursor-pointer hover:text-white ${
-                  actionsVisible === index ? 'visible' : 'invisible'
-                }`}
+                className={`self-end hover:cursor-pointer hover:text-white ${actionsVisible === index ? 'visible' : 'invisible'
+                  }`}
               >
                 <EllipsisHorizontalIcon className="h-4 w-4" />
               </div>
