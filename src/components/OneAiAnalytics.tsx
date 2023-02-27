@@ -514,8 +514,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     translate ? 'Disable translation' : 'Enable translation'
                   }
                   className={`h-6 w-6 p-1 mr-1 hover:cursor-pointer ${translate
-                      ? 'bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]'
-                      : 'text-[#747189] hover:cursor-pointer dark:hover:text-white'
+                    ? 'bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]'
+                    : 'text-[#747189] hover:cursor-pointer dark:hover:text-white'
                     }`}
                 />
               ) : null}
@@ -549,8 +549,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                   onClick={() => goBackClicked(1)}
                   disabled={currentNode === null}
                   className={`rounded-lg inline-flex ${currentNode
-                      ? 'hover:bg-[#EFEFEF] dark:hover:bg-slate-700'
-                      : 'hover:cursor-default'
+                    ? 'hover:bg-[#EFEFEF] dark:hover:bg-slate-700'
+                    : 'hover:cursor-default'
                     }`}
                 >
                   {currentNode ? (
@@ -666,7 +666,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               </div>
             </div>
           </div>
-          sfs
+          {currentCollection.current === "Pipeline" ? "sfs" : "asdad"}{/**check */}
+
           <div className="w-full h-full flex flex-col overflow-x-hidden">
             {loading && (
               <div className="grow w-full justify-center items-center flex">
@@ -694,8 +695,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
             )}
             <div
               className={`flex flex-row flex-grow ${loading
-                  ? 'invisible pointer-events-none w-0 h-0'
-                  : 'w-full h-full'
+                ? 'invisible pointer-events-none w-0 h-0'
+                : 'w-full h-full'
                 }`}
             >
               {currentPage > 0 && (
@@ -872,8 +873,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
 
 function getVisualizationLogoClasses(active: boolean) {
   return `h-7 w-7 mr-1 p-1 rounded-md ${active
-      ? 'bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]'
-      : 'text-[#747189] hover:cursor-pointer dark:hover:text-white'
+    ? 'bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]'
+    : 'text-[#747189] hover:cursor-pointer dark:hover:text-white'
     }`;
 }
 
