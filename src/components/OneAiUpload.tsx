@@ -126,7 +126,7 @@ const OneAiUpload = ({
         }, "steps":[${
           appendSteps !== '' ? `${appendSteps},` : ''
         }{"skill":"clustering","params": {"collection": "${collection}"${
-          input_skill ? `,"input_skill":${input_skill}` : ''
+          input_skill ? `,"input_skill":"${input_skill}"` : ''
         }}}], "csv_params": {"columns": [${columnsConfigurations
           .map((cc) =>
             cc.id === IGNORE_ID
