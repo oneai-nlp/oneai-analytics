@@ -49,7 +49,7 @@ export default function DatesFilters({
           >
             <Popover.Panel
               tabIndex={0}
-              className="absolute z-10 mt-3 transform max-w-md"
+              className="fixed z-10 mt-3 transform max-w-md"
             >
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-gray-500 dark:ring-black ring-opacity-5">
                 <div className="relative bg-white dark:bg-[#272535] p-5">
