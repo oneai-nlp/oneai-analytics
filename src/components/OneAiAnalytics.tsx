@@ -666,8 +666,12 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               </div>
             </div>
           </div>
-          {currentCollection.current === "Pipeline" ? "sfs" : "asdad"}{/**check */}
-
+          {/**check */}
+          {currentCollection.current === "Pipeline" ?
+            "sfs"
+            :
+            null
+          }
           <div className="w-full h-full flex flex-col overflow-x-hidden">
             {loading && (
               <div className="grow w-full justify-center items-center flex">
