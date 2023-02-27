@@ -35,6 +35,8 @@ export default function LabelsFiltersSelect({
         if (popover) {
           popover = popover.getBoundingClientRect();
 
+          console.log(popover, 111);
+
           if (popover.bottom >= screen.height) {
             setPosition(true);
           }
@@ -45,7 +47,7 @@ export default function LabelsFiltersSelect({
 
   return (
     <Listbox>
-      <div className="relative testtest1">
+      <div className="relative">
         <Listbox.Button className="relative rounded-lg  py-2 pl-3 pr-10 text-left focus:outline-none sm:text-sm" onClick={onClick}>
           <span
             className="block truncate lowercase first-letter:uppercase text-black dark:text-white !text-xl"

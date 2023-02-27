@@ -48,6 +48,8 @@ export default function CustomizeTab({
         if (popover) {
           popover = popover.getBoundingClientRect();
 
+          console.log(popover, 333);
+
           if (popover.bottom >= screen.height) {
             setPosition(true);
           }
