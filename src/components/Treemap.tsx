@@ -106,125 +106,129 @@ export const Treemap: FC<TreemapProps> = ({
 
   const [actionsVisible, setActionsVisible] = useState(null as number | null);
 
-  const allShapes = root.leaves().map((leaf, index) => {
-    console.log(55);
+  const shapes = useMemo(() => {
+    const allShapes = root.leaves().map((leaf, index) => {
+      console.log(55);
 
-    const height = leaf.y1 - leaf.y0;
-    const width = leaf.x1 - leaf.x0;
-    const fontSize = calculateFontSize(height, width);
-    const lineHeight = fontSize * 1.1 + 5;
-    const paddingY = 10;
-    const lines = Math.max(
-      1,
-      Math.floor((height - paddingY + 20) / lineHeight) - 3
-    ); // -2 is for the d.data.value and <br />, 20 is for the value absolute top padding
+      const height = leaf.y1 - leaf.y0;
+      const width = leaf.x1 - leaf.x0;
+      const fontSize = calculateFontSize(height, width);
+      const lineHeight = fontSize * 1.1 + 5;
+      const paddingY = 10;
+      const lines = Math.max(
+        1,
+        Math.floor((height - paddingY + 20) / lineHeight) - 3
+      ); // -2 is for the d.data.value and <br />, 20 is for the value absolute top padding
 
-    const colorsConfig = getBackgroundColorLayers(
-      colorAxis,
-      leaf.data.metadata,
-      leaf.data.trends,
-      countersConfiguration,
-      totalItems
-    );
+      const colorsConfig = getBackgroundColorLayers(
+        colorAxis,
+        leaf.data.metadata,
+        leaf.data.trends,
+        countersConfiguration,
+        totalItems
+      );
 
-    return (
-      <g key={index}>
-        <rect
-          x={leaf.x0}
-          y={leaf.y0}
-          width={width}
-          height={height}
-          stroke="transparent"
-          fill={colors(index).hex()}
-        />
-        <foreignObject x={leaf.x0} y={leaf.y0} width={width} height={height}>
-          <div
-            className="h-full w-full"
-            onMouseEnter={() => {
-              nodeActionsClicked(leaf.data);
-              setActionsVisible(index);
-            }}
-            onMouseLeave={() => {
-              setActionsVisible(null);
-            }}
-          >
-            <ColorsAxis width={width} colorsConfig={colorsConfig} />
+      return (
+        <g key={index}>
+          <rect
+            x={leaf.x0}
+            y={leaf.y0}
+            width={width}
+            height={height}
+            stroke="transparent"
+            fill={colors(index).hex()}
+          />
+          <foreignObject x={leaf.x0} y={leaf.y0} width={width} height={height}>
             <div
-              className="flex flex-col h-full w-full p-1 relative border-slate-500 dark:border-[#272535] text-black dark:text-white"
-              style={{
-                fontFamily: fontFamily,
-                fontWeight: 300,
-                fontStyle: 'normal',
-                color: textColor,
-                borderRightWidth: `${borderWidth}px`,
-                borderLeftWidth: `${borderWidth}px`,
-                borderBottomWidth: `${borderWidth}px`,
-                borderColor: borderColor,
+              className="h-full w-full"
+              onMouseEnter={() => {
+                nodeActionsClicked(leaf.data);
+                setActionsVisible(index);
+              }}
+              onMouseLeave={() => {
+                setActionsVisible(null);
               }}
             >
+              <ColorsAxis width={width} colorsConfig={colorsConfig} />
               <div
-                className="flex"
+                className="flex flex-col h-full w-full p-1 relative border-slate-500 dark:border-[#272535] text-black dark:text-white"
                 style={{
-                  fontSize: `${countFontSize}px`,
+                  fontFamily: fontFamily,
+                  fontWeight: 300,
+                  fontStyle: 'normal',
+                  color: textColor,
+                  borderRightWidth: `${borderWidth}px`,
+                  borderLeftWidth: `${borderWidth}px`,
+                  borderBottomWidth: `${borderWidth}px`,
+                  borderColor: borderColor,
                 }}
               >
-                <CountersLabelsDisplay
-                  counters={counters}
-                  labels={labels}
-                  metadata={leaf.data.metadata}
-                  trends={leaf.data.trends}
-                  countersConfiguration={countersConfiguration}
-                  labelClicked={labelClicked}
-                  totalItems={totalItems}
-                />
-              </div>
-              <span
-                className="items-center flex justify-center h-full hover:cursor-pointer"
-                onClick={() => nodeClicked(leaf.data)}
-                style={{
-                  fontSize: `${fontSize}px`,
-                }}
-              >
-                <span
-                  data-element="rect-text"
-                  className="overflow-hidden text-center"
-                  dir="auto"
+                <div
+                  className="flex"
                   style={{
-                    lineHeight: `${lineHeight}px`,
-                    wordBreak: 'break-word',
-                    WebkitLineClamp: lines,
-                    WebkitTouchCallout: 'none',
-                    display: '-webkit-box',
-                    WebkitBoxOrient: 'vertical',
+                    fontSize: `${countFontSize}px`,
                   }}
                 >
-                  {translate &&
-                    leaf.data.item_translated_text !== undefined &&
-                    leaf.data.item_translated_text !== null &&
-                    leaf.data.item_translated_text !== ''
-                    ? leaf.data.item_translated_text
-                    : leaf.data.item_original_text}
+                  <CountersLabelsDisplay
+                    counters={counters}
+                    labels={labels}
+                    metadata={leaf.data.metadata}
+                    trends={leaf.data.trends}
+                    countersConfiguration={countersConfiguration}
+                    labelClicked={labelClicked}
+                    totalItems={totalItems}
+                  />
+                </div>
+                <span
+                  className="items-center flex justify-center h-full hover:cursor-pointer"
+                  onClick={() => nodeClicked(leaf.data)}
+                  style={{
+                    fontSize: `${fontSize}px`,
+                  }}
+                >
+                  <span
+                    data-element="rect-text"
+                    className="overflow-hidden text-center"
+                    dir="auto"
+                    style={{
+                      lineHeight: `${lineHeight}px`,
+                      wordBreak: 'break-word',
+                      WebkitLineClamp: lines,
+                      WebkitTouchCallout: 'none',
+                      display: '-webkit-box',
+                      WebkitBoxOrient: 'vertical',
+                    }}
+                  >
+                    {translate &&
+                      leaf.data.item_translated_text !== undefined &&
+                      leaf.data.item_translated_text !== null &&
+                      leaf.data.item_translated_text !== ''
+                      ? leaf.data.item_translated_text
+                      : leaf.data.item_original_text}
+                  </span>
                 </span>
-              </span>
-              <div
-                data-for="global-actions"
-                data-tip
-                data-event="click"
-                className={`self-end hover:cursor-pointer hover:text-white ${actionsVisible === index ? 'visible' : 'invisible'
-                  }`}
-              >
-                <EllipsisHorizontalIcon className="h-4 w-4" />
+                <div
+                  data-for="global-actions"
+                  data-tip
+                  data-event="click"
+                  className={`self-end hover:cursor-pointer hover:text-white ${actionsVisible === index ? 'visible' : 'invisible'
+                    }`}
+                >
+                  <EllipsisHorizontalIcon className="h-4 w-4" />
+                </div>
               </div>
             </div>
-          </div>
-        </foreignObject>
-      </g>
-    );
-  });
+          </foreignObject>
+        </g>
+      );
+    });
+
+    return allShapes;
+  }, [root]);
 
   return (
     <svg width={width} height={height}>
-      {allShapes}
+      {shapes}
     </svg>
   );
 };
