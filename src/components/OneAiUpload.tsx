@@ -43,6 +43,7 @@ const OneAiUpload = ({
   const handleFileChange = (e: { target: { files: FileList | null } }) => {
     setError(null);
     setParseFinished(false);
+    setUploaded(false);
     try {
       currentParser.current?.abort();
     } catch (e) {
@@ -112,7 +113,6 @@ const OneAiUpload = ({
   const handleUpload = async () => {
     console.log('uploading');
     if (!file) return;
-    setUploaded(false);
     setLoading(true);
     const fetchFormData = new FormData();
     fetchFormData.append('file', file);
@@ -120,7 +120,9 @@ const OneAiUpload = ({
 
     await fetch(
       encodeURI(
-        `${domain}/api/v0/pipeline/async/file?pipeline={"content_type": "text/csv", "steps":[${
+        `${domain}/api/v0/pipeline/async/file?pipeline={"content_type": "text/csv","multilingual": {
+          "enabled": true
+        }, "steps":[${
           appendSteps !== '' ? `${appendSteps},` : ''
         }{"skill":"clustering","params": {"collection": "${collection}"${
           input_skill ? `,"input_skill":${input_skill}` : ''
@@ -155,13 +157,13 @@ const OneAiUpload = ({
 
   return (
     <div
-      className={`oneai-analytics-namespace h-full w-full ${
+      className={`oneai-analytics-namespace h-full w-full p-2 ${
         darkMode ? 'dark' : ''
       }`}
     >
       <div className="h-full w-full overflow-hidden bg-[#272535] flex flex-col items-center text-white">
         {uploaded ? (
-          <div className="w-full p-2 relative h-3/6">
+          <div className="w-full p-2 relative h-2/6">
             <div className="absolute top-0 right-0 p-2">
               <svg
                 onClick={() => setUploaded(false)}
@@ -196,41 +198,40 @@ const OneAiUpload = ({
               </svg>
               <h1 className="text-2xl font-bold mt-4">Upload Complete</h1>
               <p className="text-lg mt-2">
-                Your data has been uploaded to OneAI
+                {data.length > 0 ? (maxRows ?? data.length) + ' items' : 'Data'}{' '}
+                has been uploaded to ' {collection} '
               </p>
             </div>
           </div>
         ) : null}
         {data.length > 0 ? (
-          <div className="w-full h-full p-2">
+          <div className={`w-full p-2 ${uploaded ? 'h-4/6' : 'h-full'}`}>
             {loading ? (
-              <>
-                <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-10">
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center text-center">
-                    <svg
-                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      ></circle>
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8v1a7 7 0 00-7 7h1z"
-                      ></path>
-                    </svg>
-                    <span className="text-white">Loading...</span>
-                  </div>
+              <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-10">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center text-center">
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v1a7 7 0 00-7 7h1z"
+                    ></path>
+                  </svg>
+                  <span className="text-white">Loading...</span>
                 </div>
-              </>
+              </div>
             ) : null}
             <div
               className={
@@ -255,7 +256,7 @@ const OneAiUpload = ({
                   />
                 </div>
               </div>
-              <div className="relative overflow-auto max-h-full block shadow-md sm:rounded-lg grow w-full">
+              <div className="relative overflow-auto max-h-full block shadow-md sm:rounded-lg grow w-full scrollbar-upload">
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                   <thead className="text-xs text-gray-700 uppercase dark:text-gray-400 sticky top-0 bg-[#2B293B]">
                     <tr>
@@ -328,7 +329,7 @@ const OneAiUpload = ({
                 </table>
               </div>
               <div className="absolute bottom-0 w-full">
-                <div className="flex justify-between mb-2 p-2 backdrop-blur-[2px]">
+                <div className="flex justify-between mb-2 p-4 backdrop-blur-[2px]">
                   <div className="flex">
                     <div className="flex items-center mr-4">
                       <label
@@ -350,7 +351,7 @@ const OneAiUpload = ({
                         htmlFor="checkbox"
                         className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                       >
-                        Max rows
+                        Upload rows
                       </label>
                       <input
                         value={maxRows ?? data.length}
@@ -364,7 +365,7 @@ const OneAiUpload = ({
                         htmlFor="checkbox"
                         className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                       >
-                        Rows to skip
+                        Skip rows
                       </label>
                       <input
                         value={numberOfRowsToSkip}
@@ -389,7 +390,7 @@ const OneAiUpload = ({
                       onClick={() => handleUpload()}
                       className="text-white bg-indigo-500 hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-300 font-medium rounded-sm text-sm px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
                     >
-                      Upload {data.length} items
+                      Upload {maxRows ?? data.length} items
                     </button>
                   </div>
                 </div>
