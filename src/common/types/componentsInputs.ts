@@ -180,6 +180,6 @@ export interface UploadParams {
   steps?: string;
   input_skill?: string;
   resetAfterUpload?: boolean;
-  expected_languages?: string[];
+  expected_languages?: string;
   override_language_detection?: boolean;
 }
