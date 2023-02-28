@@ -120,18 +120,21 @@ const OneAiUpload = ({
     fetchFormData.append('file', file);
 
     const appendSteps = steps.charAt(0) !== '[' ? `[${steps}]` : steps;
-    const expectedLanguages = JSON.parse(
-      expected_languages?.charAt(0) !== '['
-        ? `[${expected_languages}]`
-        : expected_languages
-    );
+    const expectedLanguages =
+      expected_languages && expected_languages.length > 0
+        ? JSON.parse(
+            expected_languages?.charAt(0) !== '['
+              ? `[${expected_languages}]`
+              : expected_languages
+          )
+        : undefined;
 
     try {
       const pipelineJson = {
         content_type: 'text/csv',
         multilingual: {
           enabled: true,
-          ...(expected_languages && { expected_languages: expectedLanguages }),
+          ...(expectedLanguages && { expected_languages: expectedLanguages }),
           ...(override_language_detection && { override_language_detection }),
         },
         steps: [
