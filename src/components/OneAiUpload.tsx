@@ -19,6 +19,8 @@ const OneAiUpload = ({
   steps = '[]',
   input_skill,
   resetAfterUpload = true,
+  expected_languages = '[]',
+  override_language_detection = false,
 }: UploadParams) => {
   const [data, setData] = useState([] as string[][]);
   const [error, setError] = useState(null as string | null);
@@ -123,6 +125,16 @@ const OneAiUpload = ({
       encodeURI(
         `${domain}/api/v0/pipeline/async/file?pipeline={"content_type": "text/csv","multilingual": {
           "enabled": true
+          ${
+            expected_languages.length > 0
+              ? `,"expected_languages":${expected_languages}`
+              : ''
+          }
+          ${
+            override_language_detection
+              ? ',"override_language_detection":true'
+              : ''
+          }
         }, "steps":[${
           appendSteps !== '' ? `${appendSteps},` : ''
         }{"skill":"clustering","params": {"collection": "${collection}"${
