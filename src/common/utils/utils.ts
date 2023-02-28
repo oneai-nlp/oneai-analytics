@@ -70,7 +70,7 @@ export function percentageIncrease(previous: number, current: number): number {
 export const numberToFixed = (num: number) =>
   Math.round((num + Number.EPSILON) * 100) / 100;
 
-const customNumberToFixed = (num: number): number => {
+export const customNumberToFixed = (num: number): number => {
   const str = Math.abs(num).toString();
   const [integer, _] = str.split('.');
   if (integer.length < 3) {

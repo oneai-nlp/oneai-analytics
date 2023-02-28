@@ -10,7 +10,7 @@ import {
 } from '../../types/customizeBarTypes';
 import { MetaData, Trend } from '../../types/modals';
 import { getMetadataKeyValueDisplay } from '../../utils/displayUtils';
-import { getNumberDescription } from '../../utils/utils';
+import { customNumberToFixed, getNumberDescription } from '../../utils/utils';
 
 export default function CounterDisplay({
   counter,
@@ -46,7 +46,9 @@ export default function CounterDisplay({
         `${getMetadataKeyValueDisplay(metadataKeyValue)} - ${
           counter.calculationConfiguration.name
         }` +
-        getMetadataValueTitle(displayResult.metadataKey, displayResult.value)
+        getMetadataValueTitle(displayResult.metadataKey, displayResult.value) +
+        ' - ' +
+        customNumberToFixed(displayResult.result)
       }
       data-for="global"
       className={`flex items-center text-sm ${

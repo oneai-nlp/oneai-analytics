@@ -740,7 +740,7 @@ async function fetchMetaClustersApi(
     controller,
     `${domain}/clustering/v1/collections/${collection}/metadata`,
     apiKey,
-    'metadata',
+    'content',
     page,
     from,
     to,
