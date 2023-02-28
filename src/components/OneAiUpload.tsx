@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { UploadParams } from '../common/types/componentsInputs';
 import Papa from 'papaparse';
-import SingleSelect from '../common/components/UploadCSVComponents/SingleSelect';
+import React, { useEffect, useRef, useState } from 'react';
+import ReactTooltip from 'react-tooltip';
 import {
   COLUMN_TYPES_OPTIONS,
   CUSTOM_VALUE_ID,
   IGNORE_ID,
 } from '../common/components/UploadCSVComponents/constants';
-import ReactTooltip from 'react-tooltip';
+import SingleSelect from '../common/components/UploadCSVComponents/SingleSelect';
+import { UploadParams } from '../common/types/componentsInputs';
 
 const allowedExtensions = ['csv'];
 
@@ -36,8 +36,6 @@ const OneAiUpload = ({
   const [numberOfRowsToDisplay, setNumberOfRowsToDisplay] = useState(100);
   const [maxRows, setMaxRows] = useState(null as number | null);
   const currentParser = useRef(null as Papa.Parser | null);
-
-  console.log('error', error, 'parseFinished', parseFinished);
 
   useEffect(() => {
     handleParse();
@@ -84,6 +82,7 @@ const OneAiUpload = ({
         if (errors.length > 0) {
           setError(errors[0].message);
         }
+        console.log('error', error, 'parseFinished', parseFinished);
 
         currentParser.current = parser;
         setData((prev) => {
@@ -119,46 +118,68 @@ const OneAiUpload = ({
     setLoading(true);
     const fetchFormData = new FormData();
     fetchFormData.append('file', file);
-    const appendSteps = steps.charAt(0) === '[' ? steps.slice(1, -1) : steps;
 
-    await fetch(
-      encodeURI(
-        `${domain}/api/v0/pipeline/async/file?pipeline={"content_type": "text/csv","multilingual": {
-          "enabled": true
-          ${
-            expected_languages
-              ? `,"expected_languages":${expected_languages}`
-              : ''
-          }
-          ${
-            override_language_detection
-              ? ',"override_language_detection":true'
-              : ''
-          }
-        }, "steps":[${
-          appendSteps !== '' ? `${appendSteps},` : ''
-        }{"skill":"clustering","params": {"collection": "${collection}"${
-          input_skill ? `,"input_skill":"${input_skill}"` : ''
-        }}}], "csv_params": {"columns": [${columnsConfigurations
-          .map((cc) =>
+    const appendSteps = steps.charAt(0) !== '[' ? `[${steps}]` : steps;
+    const expectedLanguages = JSON.parse(
+      expected_languages?.charAt(0) !== '['
+        ? `[${expected_languages}]`
+        : expected_languages
+    );
+
+    try {
+      const pipelineJson = {
+        content_type: 'text/csv',
+        multilingual: {
+          enabled: true,
+          ...(expected_languages && { expected_languages: expectedLanguages }),
+          ...(override_language_detection && { override_language_detection }),
+        },
+        steps: [
+          ...(appendSteps !== '' ? JSON.parse(appendSteps) : []),
+          {
+            skill: 'clustering',
+            params: {
+              collection,
+              ...(input_skill && { input_skill }),
+            },
+          },
+        ],
+        csv_params: {
+          columns: columnsConfigurations.map((cc) =>
             cc.id === IGNORE_ID
               ? false
-              : '"' + (cc.id === CUSTOM_VALUE_ID ? cc.customText : cc.id) + '"'
-          )
-          .join(',')}],"skip_rows": ${
-          (csvHasHeaders ? 1 : 0) + numberOfRowsToSkip
-        },"max_rows":${maxRows !== null ? maxRows : data.length}}}`
-      ),
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'text/csv',
-          'api-key': apiKey ?? '',
-          'Content-Disposition': `attachment; filename=${file.name}`,
+              : cc.id === CUSTOM_VALUE_ID
+              ? cc.customText
+              : cc.id
+          ),
+          skip_rows: (csvHasHeaders ? 1 : 0) + numberOfRowsToSkip,
+          max_rows: maxRows !== null ? maxRows : data.length,
         },
-        body: file,
-      }
-    );
+      };
+      console.log('pipelineJson', pipelineJson);
+
+      await fetch(
+        encodeURI(
+          `${domain}/api/v0/pipeline/async/file?pipeline=${JSON.stringify(
+            pipelineJson
+          )}`
+        ),
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/csv',
+            'api-key': apiKey ?? '',
+            'Content-Disposition': `attachment; filename=${encodeURI(
+              file.name
+            )}`,
+          },
+          body: file,
+        }
+      );
+    } catch (e) {
+      console.error(e);
+      setLoading(false);
+    }
 
     if (resetAfterUpload) {
       handleReset();
@@ -300,6 +321,12 @@ const OneAiUpload = ({
                                     const newColumnsConfigurations = [...prev];
                                     newColumnsConfigurations[i] = {
                                       id: selectedLabelId,
+                                      ...(selectedLabelId ===
+                                        CUSTOM_VALUE_ID && {
+                                        customText: csvHasHeaders
+                                          ? header
+                                          : `Column ${i + 1}`,
+                                      }),
                                     };
                                     return newColumnsConfigurations;
                                   });
@@ -311,9 +338,16 @@ const OneAiUpload = ({
                                   <input
                                     type="text"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                    placeholder={
+                                      columnsConfigurations[i].customText
+                                    }
                                     onChange={(e) =>
                                       (columnsConfigurations[i].customText =
-                                        e.target.value)
+                                        e.target.value.length > 0
+                                          ? e.target.value
+                                          : csvHasHeaders
+                                          ? header
+                                          : `Column ${i + 1}`)
                                     }
                                   />
                                 ) : null}

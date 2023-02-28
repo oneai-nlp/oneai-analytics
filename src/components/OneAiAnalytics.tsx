@@ -1,5 +1,6 @@
 import { HomeIcon, XMarkIcon } from '@heroicons/react/20/solid';
 import {
+  ArrowPathIcon,
   EyeIcon,
   EyeSlashIcon,
   LanguageIcon,
@@ -101,6 +102,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   metaOptions,
   currentMetaOption,
   metaOptionsChanged = () => {},
+  refresh = () => {},
 }) => {
   const [display, setDisplay] = useState('Treemap' as Displays);
   const { width, height, ref } = useResizeDetector();
@@ -493,6 +495,12 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
               </div>
             </div>
             <div className="flex flex-row w-full justify-end items-center">
+              <ArrowPathIcon
+                onClick={refresh}
+                data-for="global"
+                data-tip="Refresh data"
+                className="h-6 w-6 p-1 mr-1 hover:cursor-pointer text-[#747189] dark:hover:text-white"
+              />
               {propertiesFilters['hide'] === 'true' ? (
                 <EyeIcon
                   onClick={() => setPropertiesFilters({ hide: 'false' })}

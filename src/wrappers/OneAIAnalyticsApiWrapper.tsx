@@ -619,6 +619,11 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       metaOptions={['text', ...uniqBy(metaOptions, (m) => m.toLowerCase())]}
       currentMetaOption={currentMetaGroup}
       metaOptionsChanged={(metaOptions) => setCurrentMetaGroup(metaOptions)}
+      refresh={() =>
+        setLocalRefreshToken((current) => {
+          return current.length > 2 ? '1' : current + '1';
+        })
+      }
       {...rest}
     />
   ) : null;
