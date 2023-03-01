@@ -499,21 +499,21 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 onClick={refresh}
                 data-for="global"
                 data-tip="Refresh data"
-                className="h-6 w-6 p-1 mr-1 hover:cursor-pointer text-[#747189] dark:hover:text-white"
+                className="h-6 w-6 p-1 mr-1 hover:cursor-pointer focus:outline-none text-[#747189] dark:hover:text-white"
               />
               {propertiesFilters['hide'] === 'true' ? (
                 <EyeIcon
                   onClick={() => setPropertiesFilters({ hide: 'false' })}
                   data-for="global"
                   data-tip="Show hidden nodes"
-                  className="h-6 w-6 p-1 mr-1 hover:cursor-pointer text-[#747189] dark:hover:text-white"
+                  className="h-6 w-6 p-1 mr-1 hover:cursor-pointer focus:outline-none text-[#747189] dark:hover:text-white"
                 />
               ) : (
                 <EyeSlashIcon
                   onClick={() => setPropertiesFilters({ hide: 'true' })}
                   data-for="global"
                   data-tip="Hide hidden nodes"
-                  className="h-6 w-6 p-1 mr-1 hover:cursor-pointer bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]"
+                  className="h-6 w-6 p-1 mr-1 hover:cursor-pointer focus:outline-none bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]"
                 />
               )}
               {translationEnabled ? (
@@ -523,7 +523,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                   data-tip={
                     translate ? 'Disable translation' : 'Enable translation'
                   }
-                  className={`h-6 w-6 p-1 mr-1 hover:cursor-pointer ${
+                  className={`h-6 w-6 p-1 mr-1 hover:cursor-pointer focus:outline-none ${
                     translate
                       ? 'bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]'
                       : 'text-[#747189] hover:cursor-pointer dark:hover:text-white'

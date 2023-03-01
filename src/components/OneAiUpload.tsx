@@ -21,6 +21,8 @@ const OneAiUpload = ({
   resetAfterUpload = true,
   expected_languages,
   override_language_detection = false,
+  createCollection = false,
+  collectionDomain = 'survey',
 }: UploadParams) => {
   const [data, setData] = useState([] as string[][]);
   const [error, setError] = useState(null as string | null);
@@ -116,6 +118,39 @@ const OneAiUpload = ({
     console.log('uploading');
     if (!file) return;
     setLoading(true);
+    if (createCollection) {
+      try {
+        await fetch(
+          encodeURI(`${domain}/clustering/v1/collections/${collection}/create`),
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'api-key': apiKey ?? '',
+            },
+            body: JSON.stringify({
+              access: {
+                all: {
+                  query: true,
+                  list_clusters: true,
+                  list_items: true,
+                  add_items: true,
+                  edit_clusters: true,
+                  discoverable: true,
+                },
+              },
+              allowed_org_api_keys: apiKey ? [apiKey] : [],
+              domain: collectionDomain,
+            }),
+          }
+        );
+      } catch (e) {
+        console.error(e);
+        setLoading(false);
+        return;
+      }
+    }
+
     const fetchFormData = new FormData();
     fetchFormData.append('file', file);
 
