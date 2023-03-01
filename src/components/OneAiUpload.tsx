@@ -27,7 +27,6 @@ const OneAiUpload = ({
   const [data, setData] = useState([] as string[][]);
   const [error, setError] = useState(null as string | null);
   const [file, setFile] = useState(null as File | null);
-  const [parseFinished, setParseFinished] = useState(false);
   const [columnsConfigurations, setColumnsConfigurations] = useState(
     [] as { id: string; customText?: string }[]
   );
@@ -39,13 +38,8 @@ const OneAiUpload = ({
   const [maxRows, setMaxRows] = useState(null as number | null);
   const currentParser = useRef(null as Papa.Parser | null);
 
-  useEffect(() => {
-    handleParse();
-  }, [file]);
-
   const handleFileChange = (e: { target: { files: FileList | null } }) => {
     setError(null);
-    setParseFinished(false);
     setUploaded(false);
     try {
       currentParser.current?.abort();
@@ -69,9 +63,10 @@ const OneAiUpload = ({
 
     // If input type is correct set the state
     setFile(inputFile);
+    handleParse(inputFile);
   };
 
-  const handleParse = () => {
+  const handleParse = (file: File) => {
     // If user clicks the parse button without
     // a file we show a error
     if (!file) return setError('Enter a valid file');
@@ -82,9 +77,8 @@ const OneAiUpload = ({
       chunkSize: 512,
       step: function ({ data, errors }, parser) {
         if (errors.length > 0) {
-          setError(errors[0].message);
+          console.log('errors', errors[0]);
         }
-        console.log('error', error, 'parseFinished', parseFinished);
 
         currentParser.current = parser;
         setData((prev) => {
@@ -99,7 +93,6 @@ const OneAiUpload = ({
       },
       complete: function (results, file) {
         console.log('parsing complete read', results, file);
-        setParseFinished(true);
       },
     });
   };
@@ -107,7 +100,6 @@ const OneAiUpload = ({
   const handleReset = () => {
     setData([]);
     setFile(null);
-    setParseFinished(false);
     setColumnsConfigurations([]);
     setCsvHasHeaders(true);
     setNumberOfRowsToSkip(0);
@@ -120,8 +112,10 @@ const OneAiUpload = ({
     setLoading(true);
     if (createCollection) {
       try {
-        await fetch(
-          encodeURI(`${domain}/clustering/v1/collections/${collection}/create`),
+        const res = await fetch(
+          encodeURI(
+            `${domain}/clusteringg/v1/collections/${collection}/create`
+          ),
           {
             method: 'POST',
             headers: {
@@ -144,11 +138,21 @@ const OneAiUpload = ({
             }),
           }
         );
+
+        if (!res.ok) {
+          const error = await res.json();
+          console.error('error', error);
+          setLoading(false);
+          setError("Couldn't create collection");
+          return;
+        }
       } catch (e) {
         console.error(e);
         setLoading(false);
+        setError("Couldn't create collection");
         return;
       }
+      console.log('collection created');
     }
 
     const fetchFormData = new FormData();
@@ -196,7 +200,7 @@ const OneAiUpload = ({
       };
       console.log('pipelineJson', pipelineJson);
 
-      await fetch(
+      const uploadRes = await fetch(
         encodeURI(
           `${domain}/api/v0/pipeline/async/file?pipeline=${JSON.stringify(
             pipelineJson
@@ -214,9 +218,19 @@ const OneAiUpload = ({
           body: file,
         }
       );
+
+      if (!uploadRes.ok) {
+        const error = await uploadRes.json();
+        console.error('error', error);
+        setLoading(false);
+        setError("Couldn't upload file");
+        return;
+      }
     } catch (e) {
       console.error(e);
       setLoading(false);
+      setError("Couldn't upload file");
+      return;
     }
 
     if (resetAfterUpload) {
@@ -243,6 +257,46 @@ const OneAiUpload = ({
     >
       <ReactTooltip id="global" />
       <div className="h-full w-full overflow-hidden bg-[#272535] flex flex-col items-center text-white">
+        {error ? (
+          <div className="w-full p-2 relative h-2/6">
+            <div className="absolute top-0 right-0 p-2">
+              <svg
+                onClick={() => setError(null)}
+                className="w-6 h-6 text-white cursor-pointer"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </div>
+            <div className="w-full h-full flex flex-col items-center justify-center">
+              <svg
+                className="w-20 h-20 text-red-500"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+              <div className="text-2xl font-bold mt-2">{error}</div>
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
         {uploaded ? (
           <div className="w-full p-2 relative h-2/6">
             <div className="absolute top-0 right-0 p-2">
@@ -286,7 +340,9 @@ const OneAiUpload = ({
           </div>
         ) : null}
         {data.length > 0 ? (
-          <div className={`w-full p-2 ${uploaded ? 'h-4/6' : 'h-full'}`}>
+          <div
+            className={`w-full p-2 ${uploaded || error ? 'h-4/6' : 'h-full'}`}
+          >
             {loading ? (
               <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-10">
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center text-center">

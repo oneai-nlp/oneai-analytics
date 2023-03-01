@@ -6,6 +6,8 @@ import {
 import { MetaData, Trend } from '../types/modals';
 import { getMetadataKeyValueGroups, hasMultipleMembers } from './countersUtils';
 
+export const numberFormatter = new Intl.NumberFormat('en-US');
+
 export function getMetadataKeyValueDisplay(metadataKeyValue: MetadataKeyValue) {
   if (!metadataKeyValue.value) return metadataKeyValue.key;
   return `${metadataKeyValue.key}.${metadataKeyValue.value}`;
