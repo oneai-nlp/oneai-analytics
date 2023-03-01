@@ -113,9 +113,7 @@ const OneAiUpload = ({
     if (createCollection) {
       try {
         const res = await fetch(
-          encodeURI(
-            `${domain}/clusteringg/v1/collections/${collection}/create`
-          ),
+          encodeURI(`${domain}/clustering/v1/collections/${collection}/create`),
           {
             method: 'POST',
             headers: {
