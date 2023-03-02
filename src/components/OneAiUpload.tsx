@@ -223,6 +223,8 @@ const OneAiUpload = ({
         setError("Couldn't upload file");
         return;
       }
+
+      console.log('file uploaded', await uploadRes.json());
     } catch (e) {
       console.error(e);
       setLoading(false);
