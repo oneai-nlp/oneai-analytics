@@ -131,7 +131,6 @@ const OneAiUpload = ({
                   discoverable: true,
                 },
               },
-              allowed_org_api_keys: apiKey ? [apiKey] : [],
               domain: collectionDomain,
             }),
           }
