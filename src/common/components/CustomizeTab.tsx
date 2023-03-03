@@ -37,16 +37,14 @@ export default function CustomizeTab({
   sizeAxisChanged: (metadataKeyValue: MetadataKeyValue) => void;
 }) {
   const [position, setPosition] = React.useState(false);
+  const ref = React.useRef(null);
 
   const onClick = () => {
-    let popover;
-
     if (typeof window !== "undefined") {
       setTimeout(() => {
-        popover = document.querySelector("#popover_customize");
-
-        if (popover) {
-          popover = popover.getBoundingClientRect();
+        if (ref.current) {
+          //@ts-ignore
+          const popover = ref.current.getBoundingClientRect();
 
           if (popover.bottom >= screen.height) {
             setPosition(true);
@@ -86,7 +84,7 @@ export default function CustomizeTab({
               leaveTo="opacity-0 translate-y-1"
             >
               <Popover.Panel
-                id="popover_customize"
+                ref={ref}
                 tabIndex={0}
                 className={`fixed z-10 ${position ? "-mt-[400px]" : "mt-3"} w-screen max-w-sm transform lg:max-w-4xl`}
               >

@@ -5,7 +5,7 @@ import {
   ChevronUpIcon,
   FunnelIcon,
 } from '@heroicons/react/24/outline';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useRef, useState } from 'react';
 import {
   CountersConfigurations,
   MetadataKeyValue,
@@ -23,17 +23,15 @@ export default function LabelsFiltersSelect({
   ) => void;
   countersConfigurations: CountersConfigurations;
 }) {
-  const [position, setPosition] = useState(false);
+  const [position, setPosition] = React.useState(false);
+  const ref = useRef(null);
 
   const onClick = () => {
-    let popover;
-
     if (typeof window !== "undefined") {
       setTimeout(() => {
-        popover = document.querySelector("#popover_filter");
-
-        if (popover) {
-          popover = popover.getBoundingClientRect();
+        if (ref.current) {
+          //@ts-ignore
+          const popover = ref.current.getBoundingClientRect();
 
           if (popover.bottom >= screen.height) {
             setPosition(true);
@@ -69,7 +67,7 @@ export default function LabelsFiltersSelect({
           leaveTo="opacity-0"
         >
           <Listbox.Options
-            id="popover_filter"
+            ref={ref}
             className={`fixed ${position ? "-mt-[200px]" : "mt-3"} z-10 max-h-60 scrollbar-thin scrollbar-thumb-[#747189] scrollbar-track-[#272533] 
           overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full rounded-md bg-gray-600 
           dark:bg-[#272533] py-1 text-base shadow-lg ring-1 ring-gray-500 dark:ring-black ring-opacity-5 focus:outline-none sm:text-sm`}>
