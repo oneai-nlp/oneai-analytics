@@ -67,13 +67,6 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   const [metaGroupClicked, setMetaGroupClicked] = useState(
     null as MetadataKeyValue | null
   );
-  const runOnce = useRef(false);
-
-  useEffect(() => {
-    if (runOnce.current) return;
-    runOnce.current = true;
-    fetchMetaClusters();
-  }, []);
 
   const previousValues = useRef({
     domain: null as string | null,
@@ -86,9 +79,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
     lastMetaGroup: 'text' as string,
   });
 
-  const fetchMetaClusters = async () => {
-    const controller = new AbortController();
-
+  const fetchMetaClusters = async (controller: AbortController) => {
     const metaClusters = await fetchMetaClustersApi(
       controller,
       domain,
@@ -404,6 +395,9 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       previousValues.current.currentPage !== currentPage ||
       previousValues.current.lastMetaGroup !== currentMetaGroup
     ) {
+      fetchMetaClusters(controller).catch((e) => {
+        console.error(e);
+      });
       fetchData(controller).catch((e) => {
         console.error(e);
         setLoading(false);

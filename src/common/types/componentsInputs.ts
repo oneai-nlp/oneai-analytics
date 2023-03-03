@@ -183,4 +183,6 @@ export interface UploadParams {
   resetAfterUpload?: boolean;
   expected_languages?: string;
   override_language_detection?: boolean;
+  createCollection?: boolean;
+  collectionDomain?: string;
 }
