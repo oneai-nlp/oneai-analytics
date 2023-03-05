@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import React, { FC, useEffect, useRef, useState } from 'react';
+import { PAGE_SIZE } from '../common/configurations/commonConfigurations';
 import {
   NodeType,
   OneAIAnalyticsApiWrapperProps,
@@ -22,7 +23,6 @@ import {
 } from '../common/utils/modalsUtils';
 import { getSecondsDiff, uniqBy } from '../common/utils/utils';
 import { OneAiAnalytics } from '../components/OneAiAnalytics';
-import { PAGE_SIZE } from './OneAIAnalyticsStaticDataWrapper';
 
 const cache: Map<
   string,
@@ -85,7 +85,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       domain,
       collection,
       apiKey,
-      currentPage,
+      0,
       dateRange[0],
       dateRange[1],
       labelsFilters,
@@ -148,34 +148,24 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
         );
 
         if (cached) {
-          const newNodes = cached.nodes.map((n) => n.data as MetaCluster);
-          if (currentMetaGroup !== 'text') {
-            setTotalPages(1);
-            const filteredNodes = newNodes.filter(
-              (n) => n.meta_key === currentMetaGroup
-            );
-            setCurrentNodes({
-              totalItems: filteredNodes.reduce(
-                (acc, curr) => acc + curr.items_count,
-                0
-              ),
-              nodes: filteredNodes.map((c) => {
-                return { type: 'Meta' as NodeType, data: c };
-              }),
-            });
-          }
+          setCurrentNodes({
+            totalItems: cached.totalItems,
+            nodes: cached.nodes,
+          });
+          setTotalPages(cached.totalPages);
         } else {
           const metaClusters = await fetchMetaClustersApi(
             controller,
             domain,
             collection,
             apiKey,
-            currentPage,
+            0,
             dateRange[0],
             dateRange[1],
             labelsFilters,
             trendPeriods,
-            propertiesFilters
+            propertiesFilters,
+            currentMetaGroup
           );
           if (metaClusters.error) {
             if (metaClusters.error.includes('AbortError')) {
@@ -187,32 +177,37 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           }
           setError(null);
 
-          const newNodes = metaClusters.data.map((c) => {
-            return { type: 'Meta' as NodeType, data: c };
-          });
-
-          const mappedNodes = newNodes.map((n) => n.data as MetaCluster);
-          setTotalPages(1);
-          const filteredNodes = mappedNodes.filter(
-            (n) => n.meta_key === currentMetaGroup
-          );
-          setCurrentNodes({
-            totalItems: filteredNodes.reduce(
-              (acc, curr) => acc + curr.items_count,
-              0
-            ),
-            nodes: filteredNodes.map((c) => {
+          const newNodes = metaClusters.data
+            .sort((m1, m2) => m2.items_count - m1.items_count)
+            .map((c) => {
               return { type: 'Meta' as NodeType, data: c };
-            }),
-          });
+            });
+          const totalPages = Math.ceil(metaClusters.data.length / PAGE_SIZE);
+          const totalItems = metaClusters.data.reduce(
+            (prev, current) => prev + current.items_count,
+            0
+          );
+          const slicedNodes = newNodes.slice(
+            currentPage * PAGE_SIZE,
+            (currentPage + 1) * PAGE_SIZE
+          );
+
+          if (clickedNodes.at(-1) == currentClicked) {
+            setCurrentNodes({
+              totalItems: totalItems,
+              nodes: slicedNodes,
+            });
+
+            setTotalPages(totalPages);
+          }
 
           setNodesDataInCache(
             'Collection',
             collection + '_meta',
             currentPage,
-            newNodes,
-            1,
-            metaClusters.totalItems
+            slicedNodes,
+            totalPages,
+            totalItems
           );
         }
       } else if (!currentClicked) {
@@ -728,7 +723,8 @@ async function fetchMetaClustersApi(
   to: Date | null,
   labelsFilters: MetadataKeyValue[],
   trendPeriods: number,
-  propertiesFilters: Properties
+  propertiesFilters: Properties,
+  metaGroup?: string
 ): Promise<{
   totalPages: number;
   totalItems: number;
@@ -737,7 +733,9 @@ async function fetchMetaClustersApi(
 }> {
   return await fetchApi(
     controller,
-    `${domain}/clustering/v1/collections/${collection}/metadata`,
+    `${domain}/clustering/v1/collections/${collection}/metadata${
+      metaGroup ? `/${metaGroup}` : ''
+    }`,
     apiKey,
     'content',
     page,
@@ -746,7 +744,8 @@ async function fetchMetaClustersApi(
     labelsFilters,
     trendPeriods,
     propertiesFilters,
-    '&group-by-meta-value=true'
+    `&group-by-meta-value=true${metaGroup ? '&include-metadata=true' : ''}`,
+    1000
   );
 }
 
@@ -761,7 +760,8 @@ async function fetchApi<T>(
   labelsFilters: MetadataKeyValue[],
   trendPeriods: number,
   propertiesFilters: Properties,
-  extraParams?: string
+  extraParams?: string,
+  limit?: number
 ): Promise<{
   totalPages: number;
   totalItems: number;
@@ -788,7 +788,9 @@ async function fetchApi<T>(
   try {
     const res = await fetch(
       encodeURI(
-        `${url}?page=${page}&limit=${PAGE_SIZE}&translate=true` +
+        `${url}?page=${page}&limit=${
+          limit !== undefined ? limit : PAGE_SIZE
+        }&translate=true` +
           (from ? `&from-date=${format(from, 'yyyy-MM-dd')}` : '') +
           (to ? `&to-date=${format(to, 'yyyy-MM-dd')}` : '') +
           (labelsFiltersString.length > 0

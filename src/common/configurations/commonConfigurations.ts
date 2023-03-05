@@ -24,3 +24,4 @@ export const defaultCalculations = [
   percentOfAllItemsCalculationConfiguration,
   trendCalculationConfiguration,
 ];
+export const PAGE_SIZE = 25;
