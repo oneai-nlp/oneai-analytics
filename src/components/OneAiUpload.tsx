@@ -16,10 +16,10 @@ const OneAiUpload = ({
   apiKey = '',
   collection = '',
   darkMode = true,
-  steps = '[]',
+  steps = '',
   input_skill,
   resetAfterUpload = true,
-  expected_languages,
+  expected_languages = '',
   override_language_detection = false,
   createCollection = false,
   collectionDomain = 'survey',
@@ -155,24 +155,32 @@ const OneAiUpload = ({
     const fetchFormData = new FormData();
     fetchFormData.append('file', file);
 
-    const appendSteps: string[] = JSON.parse(
-      steps.charAt(0) !== '[' ? `[${steps}]` : steps
-    );
+    const appendSteps: string[] =
+      steps.length > 0
+        ? steps
+            .replaceAll('[', '')
+            .replaceAll(']', '')
+            .replaceAll(' ', '')
+            .split(',')
+        : [];
+
     const expectedLanguages =
-      expected_languages && expected_languages.length > 0
-        ? JSON.parse(
-            expected_languages?.charAt(0) !== '['
-              ? `[${expected_languages}]`
-              : expected_languages
-          )
-        : undefined;
+      expected_languages.length > 0
+        ? expected_languages
+            .replaceAll('[', '')
+            .replaceAll(']', '')
+            .replaceAll(' ', '')
+            .split(',')
+        : [];
 
     try {
       const pipelineJson = {
         content_type: 'text/csv',
         multilingual: {
           enabled: true,
-          ...(expectedLanguages && { expected_languages: expectedLanguages }),
+          ...(expectedLanguages.length > 0 && {
+            expected_languages: expectedLanguages,
+          }),
           ...(override_language_detection && { override_language_detection }),
         },
         steps: [
