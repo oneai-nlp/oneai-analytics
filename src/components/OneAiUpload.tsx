@@ -155,7 +155,9 @@ const OneAiUpload = ({
     const fetchFormData = new FormData();
     fetchFormData.append('file', file);
 
-    const appendSteps = steps.charAt(0) !== '[' ? `[${steps}]` : steps;
+    const appendSteps: string[] = JSON.parse(
+      steps.charAt(0) !== '[' ? `[${steps}]` : steps
+    );
     const expectedLanguages =
       expected_languages && expected_languages.length > 0
         ? JSON.parse(
@@ -174,7 +176,9 @@ const OneAiUpload = ({
           ...(override_language_detection && { override_language_detection }),
         },
         steps: [
-          ...(appendSteps !== '' ? JSON.parse(appendSteps) : []),
+          ...(appendSteps.length > 0
+            ? appendSteps.map((step) => ({ skill: step }))
+            : []),
           {
             skill: 'clustering',
             params: {
