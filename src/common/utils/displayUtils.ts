@@ -22,17 +22,16 @@ export function getBackgroundColorLayers(
 ) {
   return groupCounters(colorAxis, countersConfiguration)
     .map((countersGroup) => {
-      const groups = countersGroup
-        .map((counter) =>
-          counter.calculationConfiguration.calculate(
-            counter.metadataKeyValue,
-            metadata,
-            trends,
-            countersConfiguration,
-            totalItems
-          )
+      const groups = countersGroup.map((counter) =>
+        counter.calculationConfiguration.calculate(
+          counter.metadataKeyValue,
+          metadata,
+          trends,
+          countersConfiguration,
+          totalItems
         )
-        .sort((group1, group2) => (group2.result ?? 0) - (group1.result ?? 0));
+      );
+
       if (!groups.some((group) => group.result && group.result > 0)) return '';
       let backgroundString = '';
       let totalPercentage = 0;
