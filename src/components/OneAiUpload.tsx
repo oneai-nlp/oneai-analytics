@@ -23,6 +23,7 @@ const OneAiUpload = ({
   override_language_detection = false,
   createCollection = false,
   collectionDomain = 'survey',
+  isPublic = false,
 }: UploadParams) => {
   const [data, setData] = useState([] as string[][]);
   const [error, setError] = useState(null as string | null);
@@ -36,7 +37,41 @@ const OneAiUpload = ({
   const [numberOfRowsToSkip, setNumberOfRowsToSkip] = useState(0);
   const [numberOfRowsToDisplay, setNumberOfRowsToDisplay] = useState(100);
   const [maxRows, setMaxRows] = useState(null as number | null);
+  const [taskId, setTaskId] = useState(null as string | null);
+  const [uploadStatus, setUploadStatus] = useState(null as string | null);
   const currentParser = useRef(null as Papa.Parser | null);
+
+  useEffect(() => {
+    if (!taskId || !uploaded) return;
+    const interval = setInterval(async () => {
+      const res = await fetch(
+        encodeURI(`${domain}/clustering/v1/collections/status/${taskId}`),
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'api-key': apiKey ?? '',
+          },
+        }
+      );
+      const data = await res.json();
+      console.log('data status', data);
+      if (data.status === 'success') {
+        setUploaded(true);
+        setUploadStatus('completed');
+        if (resetAfterUpload) {
+          handleReset();
+        }
+        clearInterval(interval);
+      } else if (data.status === 'failed') {
+        setUploadStatus('failed');
+        clearInterval(interval);
+      } else {
+        setUploadStatus('in progress');
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [taskId, uploaded]);
 
   const handleFileChange = (e: { target: { files: FileList | null } }) => {
     setError(null);
@@ -122,14 +157,16 @@ const OneAiUpload = ({
             },
             body: JSON.stringify({
               access: {
-                all: {
-                  query: true,
-                  list_clusters: true,
-                  list_items: true,
-                  add_items: true,
-                  edit_clusters: true,
-                  discoverable: true,
-                },
+                ...(isPublic && {
+                  all: {
+                    query: true,
+                    list_clusters: true,
+                    list_items: true,
+                    add_items: false,
+                    edit_clusters: false,
+                    discoverable: true,
+                  },
+                }),
               },
               domain: collectionDomain,
             }),
@@ -236,13 +273,18 @@ const OneAiUpload = ({
         return;
       }
 
-      console.log('file uploaded', await uploadRes.json());
+      const statusData = await uploadRes.json();
+      console.log('file uploaded', statusData);
+      setUploadStatus(statusData['status']);
+      setTaskId(statusData['task_id']);
     } catch (e) {
       console.error(e);
       setLoading(false);
       setError("Couldn't upload file");
       return;
     }
+
+    setError(null);
 
     if (resetAfterUpload) {
       handleReset();
@@ -347,6 +389,7 @@ const OneAiUpload = ({
                 {data.length > 0 ? (maxRows ?? data.length) + ' items' : 'Data'}{' '}
                 has been uploaded to ' {collection} '
               </p>
+              <p>Upload status: {uploadStatus}</p>
             </div>
           </div>
         ) : null}
