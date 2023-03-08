@@ -185,4 +185,5 @@ export interface UploadParams {
   override_language_detection?: boolean;
   createCollection?: boolean;
   collectionDomain?: string;
+  isPublic?: boolean;
 }

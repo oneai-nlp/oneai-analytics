@@ -16,8 +16,9 @@ import CustomizeTab from '../common/components/CustomizeTab';
 import DatesFilters from '../common/components/DatesFilters';
 import ItemActions from '../common/components/ItemActions';
 import {
+  percentOfAllCalculationName,
   percentOfItemsCalculationName,
-  topValuePercentCalculationName,
+  topGroupCalculationName,
   totalSumCalculationName,
 } from '../common/configurations/calculationsConfigurations';
 import {
@@ -155,11 +156,15 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
         [
           {
             metadataKeyValue: { key: CUSTOM_METADATA_KEY },
+            calculationName: percentOfAllCalculationName,
+          },
+          {
+            metadataKeyValue: { key: CUSTOM_METADATA_KEY },
             calculationName: totalSumCalculationName,
           },
           {
             metadataKeyValue: { key: 'signals' },
-            calculationName: topValuePercentCalculationName,
+            calculationName: topGroupCalculationName,
           },
         ],
         currentCollection.current,
@@ -183,7 +188,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
             calculationName: percentOfItemsCalculationName,
           },
           {
-            metadataKeyValue: { key: 'signals', value: 'positive' },
+            metadataKeyValue: { key: 'signals', value: 'negative' },
             calculationName: percentOfItemsCalculationName,
           },
         ],
