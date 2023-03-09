@@ -55,6 +55,7 @@ import {
 import { BarChart } from './BarChart';
 import { ItemsListDisplay } from './ItemsListDisplay';
 import { Treemap } from './Treemap';
+import { extractShtrudelSuffix } from '../common/utils/utils';
 
 export type Displays = 'Treemap' | 'BarChart';
 
@@ -607,8 +608,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                           dir="auto"
                         >
                           {translate && node.translated
-                            ? node.translated
-                            : node.text}
+                            ? extractShtrudelSuffix(node.translated)
+                            : extractShtrudelSuffix(node.text)}
                         </span>
                       </div>
                       {nodesPath.length - 1 !== i && (
