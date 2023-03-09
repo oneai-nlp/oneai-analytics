@@ -425,7 +425,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
             fontFamily: fontFamily,
           }}
         >
-          <div className="flex flex-row items-center py-5 ml-[24px] h-full">
+          <div className="flex flex-row items-center py-6 ml-[24px] h-full">
             <div className="flex flex-row w-5/12 justify-start items-center">
               <div className="h-full flex">
                 <svg
