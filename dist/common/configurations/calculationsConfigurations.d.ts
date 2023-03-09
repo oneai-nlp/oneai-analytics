@@ -1,0 +1,17 @@
+import { CalculationConfiguration } from '../types/customizeBarTypes';
+export declare const totalSumCalculationName = "Total SUM";
+export declare const topValueCalculationName = "Top value total sum";
+export declare const topValuePercentCalculationName = "Top value %";
+export declare const topGroupCalculationName = "Top group total";
+export declare const topGroupPercentCalculationName = "Top group %";
+export declare const percentOfItemsCalculationName = "% of items";
+export declare const percentOfAllCalculationName = "% of all items";
+export declare const trendCalculationName = "trend";
+export declare const totalSumCalculationConfiguration: CalculationConfiguration;
+export declare const topValueCalculationConfiguration: CalculationConfiguration;
+export declare const topValuePercentCalculationConfiguration: CalculationConfiguration;
+export declare const topGroupCalculationConfiguration: CalculationConfiguration;
+export declare const topGroupPercentCalculationConfiguration: CalculationConfiguration;
+export declare const percentOfItemsCalculationConfiguration: CalculationConfiguration;
+export declare const percentOfAllItemsCalculationConfiguration: CalculationConfiguration;
+export declare const trendCalculationConfiguration: CalculationConfiguration;
