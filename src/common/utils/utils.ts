@@ -132,7 +132,7 @@ export const objectToLowerCase = <T>(obj: Record<string, T>) => {
   );
 };
 
-export const extractShtrudelSuffix = (str: string): string => {
+export const extractAtSuffix = (str: string): string => {
   const index = str.lastIndexOf('@');
   return index >= 0 ? str.substring(0, index) : str;
 };
