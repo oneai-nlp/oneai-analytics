@@ -147,6 +147,7 @@ export type OneAIAnalyticsApiWrapperProps = Omit<
     domain?: string;
     apiKey?: string;
     collection?: string;
+    collectionName?: string;
     refreshToken?: string;
   },
   'dataNodes' | 'totalPagesAmount' | 'currentPage'
