@@ -40,6 +40,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   domain = 'https://api.oneai.com',
   apiKey = '',
   collection = '',
+  collectionName = collection,
   refreshToken = '',
   ...rest
 }) => {
@@ -511,7 +512,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       loading={loading}
       error={error}
       nodesPath={[
-        { text: collection },
+        { text: collectionName },
         ...(metaGroupClicked
           ? [
               { text: metaGroupClicked.key },
