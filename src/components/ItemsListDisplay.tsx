@@ -48,7 +48,7 @@ export const ItemsListDisplay: FC<ItemsDisplayComponentProps> = ({
         </thead>
         <tbody>
           {items.map((item, i) => {
-            const item_date = parseDate(item.create_date);
+            const item_date = parseDate(item.item_timestamp);
             return (
               <tr key={i}>
                 <td className="max-w-[60ch] truncate p-1">

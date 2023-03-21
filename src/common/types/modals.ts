@@ -18,6 +18,7 @@ export interface Trend {
 export interface Item {
   id: number;
   create_date: string;
+  item_timestamp: string;
   original_text: string;
   distance_to_phrase: number;
   metadata: MetaData;
