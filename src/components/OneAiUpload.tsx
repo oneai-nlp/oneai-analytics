@@ -39,6 +39,7 @@ const OneAiUpload = ({
   const [maxRows, setMaxRows] = useState(null as number | null);
   const [taskId, setTaskId] = useState(null as string | null);
   const [uploadStatus, setUploadStatus] = useState(null as string | null);
+  const [totalNumberOfRows, setTotalNumberOfRows] = useState(0);
   const currentParser = useRef(null as Papa.Parser | null);
 
   useEffect(() => {
@@ -106,6 +107,8 @@ const OneAiUpload = ({
     // a file we show a error
     if (!file) return setError('Enter a valid file');
 
+    let finished = false;
+
     Papa.parse(file, {
       worker: true, // Don't bog down the main thread if its a big file
       encoding: 'utf-8',
@@ -116,15 +119,23 @@ const OneAiUpload = ({
         }
 
         currentParser.current = parser;
-        setData((prev) => {
-          if (prev.length === 0) {
-            setColumnsConfigurations(
-              (data as string[]).map(() => ({ id: IGNORE_ID }))
-            );
-          }
+        if (!finished) {
+          setData((prev) => {
+            if (prev.length === 0) {
+              setColumnsConfigurations(
+                (data as string[]).map(() => ({ id: IGNORE_ID }))
+              );
+            }
 
-          return [...prev, data as string[]];
-        });
+            if (prev.length > 200) {
+              finished = true;
+            }
+
+            return [...prev, data as string[]];
+          });
+        }
+
+        setTotalNumberOfRows((prev) => prev + 1);
       },
       complete: function (results, file) {
         console.log('parsing complete read', results, file);
@@ -241,7 +252,7 @@ const OneAiUpload = ({
               : cc.id
           ),
           skip_rows: (csvHasHeaders ? 1 : 0) + numberOfRowsToSkip,
-          max_rows: maxRows !== null ? maxRows : data.length,
+          max_rows: maxRows !== null ? maxRows : totalNumberOfRows,
         },
       };
       console.log('pipelineJson', pipelineJson);
@@ -386,7 +397,9 @@ const OneAiUpload = ({
               </svg>
               <h1 className="text-2xl font-bold mt-4">Upload Complete</h1>
               <p className="text-lg mt-2">
-                {data.length > 0 ? (maxRows ?? data.length) + ' items' : 'Data'}{' '}
+                {data.length > 0
+                  ? (maxRows ?? totalNumberOfRows) + ' items'
+                  : 'Data'}{' '}
                 has been uploaded to ' {collection} '
               </p>
               <p>Upload status: {uploadStatus}</p>
@@ -560,8 +573,12 @@ const OneAiUpload = ({
                         Upload rows
                       </label>
                       <input
-                        value={maxRows ?? data.length}
-                        onChange={(e) => setMaxRows(Number(e.target.value))}
+                        value={maxRows ?? totalNumberOfRows}
+                        onChange={(e) =>
+                          setMaxRows(
+                            Number(e.target.value || totalNumberOfRows)
+                          )
+                        }
                         type="number"
                         className="w-16 h-8 text-center text-gray-700 dark:text-gray-400 bg-gray-200 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
                       />
@@ -609,7 +626,7 @@ const OneAiUpload = ({
                             : 'text-white bg-indigo-500 hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800'
                         }`}
                       >
-                        Upload {maxRows ?? data.length} items
+                        Upload {maxRows ?? totalNumberOfRows} items
                       </button>
                     </span>
                   </div>
