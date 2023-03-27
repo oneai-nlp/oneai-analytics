@@ -73,6 +73,7 @@ export const numberToFixed = (num: number) =>
 export const customNumberToFixed = (num: number): number => {
   const str = Math.abs(num).toString();
   const [integer, _] = str.split('.');
+  console.log('integer', integer);
   if (integer.length < 3) {
     return numberToFixed(parseFloat(num.toFixed(2)));
   } else if (integer.length < 4) {
@@ -82,17 +83,19 @@ export const customNumberToFixed = (num: number): number => {
   }
 };
 
-export function getNumberDescription(numIn: number, decPlaces: number): string {
+export function getNumberDescription(numIn: number): string {
   const num = customNumberToFixed(numIn);
   const prefix = num < 0 ? '-' : '';
-  // 2 decimal places => 100, 3 => 1000, etc
-  decPlaces = Math.pow(10, decPlaces);
 
   // Enumerate num abbreviations
   let abbrev = ['k', 'm', 'b', 't'];
 
   let strResult: string = num.toString();
   let result: number = Math.abs(num);
+  let decPlaces = strResult.length > 3 ? 1 : 2;
+
+  // 2 decimal places => 100, 3 => 1000, etc
+  decPlaces = Math.pow(10, decPlaces);
 
   // Go through the array backwards, so we do the largest first
   for (let i = abbrev.length - 1; i >= 0; i--) {
