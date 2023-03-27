@@ -73,9 +73,9 @@ export const numberToFixed = (num: number) =>
 export const customNumberToFixed = (num: number): number => {
   const str = Math.abs(num).toString();
   const [integer, _] = str.split('.');
-  if (integer.length < 3) {
+  if (integer.length < 4) {
     return numberToFixed(parseFloat(num.toFixed(2)));
-  } else if (integer.length < 4) {
+  } else if (integer.length < 5) {
     return numberToFixed(parseFloat(num.toFixed(1)));
   } else {
     return parseFloat(num.toFixed(0));
