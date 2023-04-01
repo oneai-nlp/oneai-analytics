@@ -416,14 +416,14 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
           translationEnabled={translate}
         />
         <div
-          className="w-full mb-1 rounded-md bg-white dark:bg-[#272535]"
+          className="w-full rounded-t-md border-b border-[#322F46] bg-white dark:bg-[#272535]"
           style={{
             height: '65px',
             background: navbarColor,
             fontFamily: fontFamily,
           }}
         >
-          <div className="flex flex-row items-center py-5 ml-[24px] h-full">
+          <div className="flex flex-row items-center py-6 ml-[24px] h-full">
             <div className="flex flex-row w-5/12 justify-start items-center">
               <div className="h-full flex">
                 <svg
@@ -461,23 +461,6 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 </svg>
               </div>
               <div>
-                <CustomizeTab
-                  currentCounters={counters}
-                  selectedLabels={labels}
-                  countersConfigurations={countersConfigurations}
-                  labelsOptions={Object.keys(metaData).filter(
-                    (key) => key !== CUSTOM_METADATA_KEY
-                  )}
-                  calculationsConfigurations={defaultCalculations}
-                  countersChanged={setCounters}
-                  labelsChanged={setLabels}
-                  selectedSizeAxis={sizeAxis}
-                  sizeAxisChanged={setSizeAxis}
-                  currentColorsAxis={colorAxis}
-                  colorsAxisChanged={setColorAxis}
-                />
-              </div>
-              <div>
                 <DatesFilters
                   fromDate={fromDate}
                   fromDateChanged={setFromDate}
@@ -496,7 +479,25 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                   }
                 />
               </div>
+              <div>
+                <CustomizeTab
+                  currentCounters={counters}
+                  selectedLabels={labels}
+                  countersConfigurations={countersConfigurations}
+                  labelsOptions={Object.keys(metaData).filter(
+                    (key) => key !== CUSTOM_METADATA_KEY
+                  )}
+                  calculationsConfigurations={defaultCalculations}
+                  countersChanged={setCounters}
+                  labelsChanged={setLabels}
+                  selectedSizeAxis={sizeAxis}
+                  sizeAxisChanged={setSizeAxis}
+                  currentColorsAxis={colorAxis}
+                  colorsAxisChanged={setColorAxis}
+                />
+              </div>
             </div>
+
             <div className="flex flex-row w-full justify-end items-center">
               <ArrowPathIcon
                 onClick={refresh}
@@ -538,7 +539,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
         </div>
 
         <div
-          className="w-full rounded-md grow flex flex-col overflow-hidden bg-white dark:bg-[#272535]"
+          className="w-full grow flex flex-col overflow-hidden bg-white dark:bg-[#272535]"
           style={{ background: navbarColor }}
         >
           <div
