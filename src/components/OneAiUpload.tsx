@@ -1,5 +1,5 @@
 import Papa from 'papaparse';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import ReactTooltip from 'react-tooltip';
 import {
   COLUMN_TYPES_OPTIONS,
@@ -11,7 +11,7 @@ import { UploadParams } from '../common/types/componentsInputs';
 
 const allowedExtensions = ['csv'];
 
-const OneAiUpload = ({
+const OneAiUpload: FC<UploadParams> = ({
   domain = 'https://api.oneai.com',
   apiKey = '',
   collection = '',
@@ -319,8 +319,12 @@ const OneAiUpload = ({
         darkMode ? 'dark' : ''
       }`}
     >
-      <ReactTooltip id="global" />
-      <div className="h-full w-full overflow-hidden bg-[#272535] flex flex-col items-center text-white">
+      <div
+        className={`h-full w-full overflow-hidden bg-[#272535] flex flex-col items-center text-white ${
+          darkMode ? 'dark' : ''
+        }`}
+      >
+        <ReactTooltip id="global" />
         {error ? (
           <div className="w-full p-2 relative h-2/6">
             <div className="absolute top-0 right-0 p-2">

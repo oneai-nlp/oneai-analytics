@@ -25,7 +25,6 @@ import {
   colorAxisStorageKey,
   countersStorageKey,
   CUSTOM_METADATA_KEY,
-  defaultCalculations,
   labelsStorageKey,
   sizeAxisStorageKey,
 } from '../common/configurations/commonConfigurations';
@@ -55,6 +54,7 @@ import {
 import { BarChart } from './BarChart';
 import { ItemsListDisplay } from './ItemsListDisplay';
 import { Treemap } from './Treemap';
+import { defaultCalculations } from '../common/configurations/defaultConfigurations';
 
 export type Displays = 'Treemap' | 'BarChart';
 
@@ -365,7 +365,6 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
       }`}
     >
       <div
-        id="headlessui-portal-root"
         className={`h-full w-full flex flex-col overflow-hidden bg-[#f3e5e5] dark:bg-[#161414] p-1 ${
           darkMode ? 'dark' : ''
         }`}
