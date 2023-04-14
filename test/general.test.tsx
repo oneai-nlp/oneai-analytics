@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import * as ResizeObserverModule from 'resize-observer-polyfill';
-import '../src/common/utils/polyfill';
+import '../src/common/patches/polyfill';
 import { OneAiAnalytics } from '../src/components/OneAiAnalytics';
 
 global.ResizeObserver = ResizeObserverModule.default;

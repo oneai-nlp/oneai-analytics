@@ -94,11 +94,11 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       propertiesFilters
     );
 
-    const newNodes = metaClusters.data.map((c) => {
+    const newNodes = metaClusters?.data?.map((c) => {
       return { type: 'Meta' as NodeType, data: c };
     });
 
-    const mappedNodes = newNodes.map((n) => n.data.meta_key);
+    const mappedNodes = newNodes?.map((n) => n.data.meta_key) ?? [];
     setMetaOptions(mappedNodes);
   };
 
