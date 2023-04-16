@@ -187,4 +187,5 @@ export interface UploadParams {
   createCollection?: boolean;
   collectionDomain?: string;
   isPublic?: boolean;
+  goToCollection?: () => void;
 }

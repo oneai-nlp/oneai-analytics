@@ -747,9 +747,24 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                 ref={ref}
                 className="h-full w-full overflow-y-auto no-scrollbar overflow-x-hidden"
               >
-                {error !== null ? (
-                  <p className="h-full w-full text-center dark:text-white">
+                {error !== null || dataNodes.totalItems === 0 ? (
+                  <p className="h-full w-full ml-[24px] dark:text-white">
                     {error}
+                    {dataNodes.totalItems === 0 ? (
+                      (labelsFilters?.length ?? 0) > 0 ? (
+                        <span className="flex flex-col">
+                          <span>No items match your filter:</span>
+                          {labelsFilters?.map((labelFilter) => (
+                            <span>
+                              {labelFilter.key}
+                              {labelFilter.value ? `=${labelFilter.value}` : ''}
+                            </span>
+                          ))}
+                        </span>
+                      ) : (
+                        'Collection is empty'
+                      )
+                    ) : null}
                   </p>
                 ) : currentNode && currentNode.type === 'Phrase' ? (
                   itemsDisplay({
