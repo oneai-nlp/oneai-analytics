@@ -24,6 +24,7 @@ const OneAiUpload: FC<UploadParams> = ({
   createCollection = false,
   collectionDomain = 'survey',
   isPublic = false,
+  goToCollection,
 }: UploadParams) => {
   const [data, setData] = useState([] as string[][]);
   const [error, setError] = useState(null as string | null);
@@ -31,7 +32,7 @@ const OneAiUpload: FC<UploadParams> = ({
   const [columnsConfigurations, setColumnsConfigurations] = useState(
     [] as { id: string; customText?: string }[]
   );
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [uploaded, setUploaded] = useState(false);
   const [csvHasHeaders, setCsvHasHeaders] = useState(true);
   const [numberOfRowsToSkip, setNumberOfRowsToSkip] = useState(0);
@@ -40,7 +41,11 @@ const OneAiUpload: FC<UploadParams> = ({
   const [taskId, setTaskId] = useState(null as string | null);
   const [uploadStatus, setUploadStatus] = useState(null as string | null);
   const [totalNumberOfRows, setTotalNumberOfRows] = useState(0);
+  const [collectionItemsAmount, setCollectionItemsAmount] = useState(
+    null as number | null
+  );
   const currentParser = useRef(null as Papa.Parser | null);
+  const initiated = useRef(false);
 
   useEffect(() => {
     if (!taskId || !uploaded) return;
@@ -73,6 +78,40 @@ const OneAiUpload: FC<UploadParams> = ({
     }, 1000);
     return () => clearInterval(interval);
   }, [taskId, uploaded]);
+
+  useEffect(() => {
+    if (initiated.current) return;
+    initiated.current = true;
+    const fetchData = async (abortController: AbortController) => {
+      const res = await fetch(
+        encodeURI(
+          `${domain}/clustering/v1/collections/${collection}/clusters?limit=1`
+        ),
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'api-key': apiKey ?? '',
+          },
+          signal: abortController.signal,
+        }
+      );
+
+      const data = await res.json();
+      setCollectionItemsAmount(() => {
+        setLoading(false);
+        return data.total_items;
+      });
+      console.log('collection clusters', data);
+    };
+    const controller = new AbortController();
+    if (domain.length === 0 || apiKey.length === 0 || collection.length === 0)
+      return;
+
+    fetchData(controller);
+
+    return () => controller.abort();
+  }, [domain, apiKey, collection]);
 
   const handleFileChange = (e: { target: { files: FileList | null } }) => {
     setError(null);
@@ -366,24 +405,7 @@ const OneAiUpload: FC<UploadParams> = ({
           <></>
         )}
         {uploaded ? (
-          <div className="w-full p-2 relative h-2/6">
-            <div className="absolute top-0 right-0 p-2">
-              <svg
-                onClick={() => setUploaded(false)}
-                className="w-6 h-6 text-white cursor-pointer"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </div>
+          <div className="w-full p-2 h-full">
             <div className="w-full h-full flex flex-col items-center justify-center">
               <svg
                 className="w-20 h-20 text-green-500"
@@ -407,10 +429,29 @@ const OneAiUpload: FC<UploadParams> = ({
                 has been uploaded to ' {collection} '
               </p>
               <p>Upload status: {uploadStatus}</p>
+              <div className="flex flex-col w-full justify-center items-center">
+                <button
+                  className="bg-[#1E1E2F] text-white text-lg font-bold py-2 px-4 rounded mt-4"
+                  onClick={() => {
+                    setUploaded(false);
+                    setUploadStatus(null);
+                    setTaskId(null);
+                  }}
+                >
+                  Upload another file
+                </button>
+                {goToCollection ? (
+                  <button
+                    className="bg-[#1E1E2F] text-white text-lg font-bold py-2 px-4 rounded mt-4"
+                    onClick={() => goToCollection()}
+                  >
+                    Go to collection
+                  </button>
+                ) : null}
+              </div>
             </div>
           </div>
-        ) : null}
-        {data.length > 0 ? (
+        ) : data.length > 0 ? (
           <div
             className={`w-full p-2 ${uploaded || error ? 'h-4/6' : 'h-full'}`}
           >
@@ -641,7 +682,9 @@ const OneAiUpload: FC<UploadParams> = ({
         ) : (
           <>
             <span className={`${uploaded ? 'mt-4' : 'mt-36'}`}>
-              Your collection is empty, add items to populate it
+              {collectionItemsAmount && collectionItemsAmount > 0
+                ? `Select file to add items to your collection: ${collection}`
+                : 'Your collection is empty, add items to populate it'}
             </span>
             <div className="mt-4 w-96">
               <div className="flex items-center justify-center w-full">
