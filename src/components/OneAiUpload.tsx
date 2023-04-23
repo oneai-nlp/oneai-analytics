@@ -32,7 +32,7 @@ const OneAiUpload: FC<UploadParams> = ({
   const [columnsConfigurations, setColumnsConfigurations] = useState(
     [] as { id: string; customText?: string }[]
   );
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [uploaded, setUploaded] = useState(false);
   const [csvHasHeaders, setCsvHasHeaders] = useState(true);
   const [numberOfRowsToSkip, setNumberOfRowsToSkip] = useState(0);
