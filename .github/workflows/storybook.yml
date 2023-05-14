@@ -16,10 +16,10 @@ jobs:
       - name: Install deps and build (with cache)
         uses: bahmutov/npm-install@v1
         with:
-          install-command: pnpm i --ignore-engines
+          install-command: yarn install --ignore-engines
       - name: Build 🔧
         run: | # Install npm packages and build the Storybook files
-          pnpm build-storybook
+          yarn build-storybook
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.6.2
         with:

@@ -22,13 +22,13 @@ jobs:
       - name: Install deps and build (with cache)
         uses: bahmutov/npm-install@v1
         with:
-          install-command: pnpm i --ignore-engines
+          install-command: yarn --ignore-engines
 
       - name: Lint
-        run: pnpm lint
+        run: yarn lint
 
       - name: Test
-        run: pnpm test --ci --coverage --maxWorkers=2
+        run: yarn test --ci --coverage --maxWorkers=2
 
       - name: Build
-        run: pnpm build
+        run: yarn build
