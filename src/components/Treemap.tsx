@@ -84,7 +84,9 @@ export const Treemap: FC<TreemapProps> = ({
   }, [mainNode]);
 
   const root = useMemo(() => {
-    const treeGenerator = treemap<DataNode>().size([width, height]).padding(0);
+    const treeGenerator = treemap<TreemapNode>()
+      .size([width, height])
+      .padding(0);
     return treeGenerator(treeHierarchy);
   }, [treeHierarchy, width, height]);
 

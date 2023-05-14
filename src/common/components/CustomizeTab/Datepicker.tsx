@@ -135,7 +135,7 @@ export default function Datepicker({
         <input
           type="text"
           readOnly
-          className="cursor-pointer w-full pl-4 pr-10 py-3 leading-none rounded-lg shadow-sm focus:outline-none focus:shadow-outline bg-gray-300 dark:bg-[#2C293D] text-gray-600 dark:text-white font-medium"
+          className="cursor-pointer w-full pl-4 pr-10 py-3 leading-none rounded-lg shadow-sm focus:outline-none focus:shadow-outline bg-gray-200 dark:bg-[#2C293D] text-gray-700 dark:text-white font-medium"
           placeholder="Select date"
           value={selectedDate ? format(selectedDate, 'dd/MM/yyyy') : ''}
           onClick={toggleDatepicker}
@@ -160,7 +160,7 @@ export default function Datepicker({
         </div>
         {showDatepicker && (
           <div
-            className="bg-gray-300 dark:bg-[#272535] mt-1 rounded-lg shadow p-4 fixed z-10 overflow-auto"
+            className="bg-gray-200 dark:bg-[#272535] mt-1 rounded-lg shadow p-4 fixed z-10 overflow-auto"
             style={{ width: '16rem' }}
           >
             <div className="flex justify-between items-center mb-2">

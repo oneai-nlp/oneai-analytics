@@ -33,8 +33,8 @@ export default function KeyValueSingleSelect({
       by={(a, b) => a?.key === b?.key && a?.value === b?.value}
     >
       <div className="relative">
-        <Listbox.Button className="relative rounded-lg bg-gray-600 dark:bg-[#272535] py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-          <span className="block truncate lowercase first-letter:uppercase text-white">
+        <Listbox.Button className="relative rounded-lg bg-gray-200 dark:bg-[#272535] py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+          <span className="block truncate lowercase first-letter:uppercase text-gray-700 dark:text-white">
             {metadataKeyValue
               ? getMetadataKeyValueDisplay(metadataKeyValue)
               : placeholder}
@@ -52,7 +52,7 @@ export default function KeyValueSingleSelect({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="fixed mt-1 z-10 max-h-60 scrollbar-thin scrollbar-thumb-[#747189] scrollbar-track-[#272533] overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full rounded-md bg-gray-600 dark:bg-[#272533] py-1 text-base shadow-lg ring-1 ring-gray-500 dark:ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <Listbox.Options className="fixed mt-1 z-10 max-h-60 scrollbar-thin scrollbar-thumb-[#747189] scrollbar-track-[#272533] overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full rounded-md bg-gray-200 dark:bg-[#272533] py-1 text-base shadow-lg ring-1 ring-gray-500 dark:ring-black ring-opacity-5 focus:outline-none sm:text-sm">
             {uniqBy(
               Object.keys(countersConfigurations).sort((a, b) =>
                 a < b ? -1 : a > b ? 1 : 0
@@ -107,9 +107,9 @@ function CascadedOption({
             onClick={() => setOpened((opened) => !opened)}
           >
             {opened ? (
-              <ChevronUpIcon className="h-4 w-4 text-gray-300 " />
+              <ChevronUpIcon className="h-4 w-4 text-gray-500 dark:text-gray-300 " />
             ) : (
-              <ChevronDownIcon className="h-4 w-4 text-gray-300 " />
+              <ChevronDownIcon className="h-4 w-4 text-gray-500 dark:text-gray-300 " />
             )}
             <span className="sr-only">Open or Close metadata</span>
           </button>
