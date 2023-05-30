@@ -37,7 +37,7 @@ const nodeToPageCache: Map<string, number> = new Map();
  * One AI Analytics api wrapper component
  */
 export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
-  domain = 'https://staging.oneai.com',
+  domain = 'https://api.oneai.com',
   apiKey = '',
   collection = '',
   collectionName = collection,
