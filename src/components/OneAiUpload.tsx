@@ -1,5 +1,5 @@
 import Papa from 'papaparse';
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { DragEvent, FC, useEffect, useRef, useState } from 'react';
 import ReactTooltip from 'react-tooltip';
 import {
   COLUMN_TYPES_OPTIONS,
@@ -51,7 +51,7 @@ const OneAiUpload: FC<UploadParams> = ({
     if (!taskId || !uploaded) return;
     const interval = setInterval(async () => {
       const res = await fetch(
-        encodeURI(`${domain}/clustering/v1/collections/status/${taskId}`),
+        encodeURI(`${domain}/api/v0/pipeline/async/tasks/${taskId}`),
         {
           method: 'GET',
           headers: {
@@ -61,15 +61,14 @@ const OneAiUpload: FC<UploadParams> = ({
         }
       );
       const data = await res.json();
-      console.log('data status', data);
-      if (data.status === 'success') {
+      if (data.status === 'COMPLETED') {
         setUploaded(true);
         setUploadStatus('completed');
         if (resetAfterUpload) {
           handleReset();
         }
         clearInterval(interval);
-      } else if (data.status === 'failed') {
+      } else if (data.status === 'FAILED') {
         setUploadStatus('failed');
         clearInterval(interval);
       } else {
@@ -102,7 +101,6 @@ const OneAiUpload: FC<UploadParams> = ({
         setLoading(false);
         return data.total_items;
       });
-      console.log('collection clusters', data);
     };
     const controller = new AbortController();
     if (domain.length === 0 || apiKey.length === 0 || collection.length === 0)
@@ -119,14 +117,12 @@ const OneAiUpload: FC<UploadParams> = ({
     try {
       currentParser.current?.abort();
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
 
     const inputFile = e.target.files?.item(0);
     if (!inputFile) return;
-
     // Check if user has entered the file
-
     // Check the file extensions, if it not
     // included in the allowed extensions
     // we show the error
@@ -192,7 +188,6 @@ const OneAiUpload: FC<UploadParams> = ({
   };
 
   const handleUpload = async () => {
-    console.log('uploading');
     if (!file) return;
     setLoading(true);
     if (createCollection) {
@@ -236,11 +231,7 @@ const OneAiUpload: FC<UploadParams> = ({
         setError("Couldn't create collection");
         return;
       }
-      console.log('collection created');
     }
-
-    const fetchFormData = new FormData();
-    fetchFormData.append('file', file);
 
     const appendSteps: string[] =
       steps.length > 0
@@ -294,7 +285,9 @@ const OneAiUpload: FC<UploadParams> = ({
           max_rows: maxRows !== null ? maxRows : totalNumberOfRows,
         },
       };
-      console.log('pipelineJson', pipelineJson);
+
+      const fetchFormData = new FormData();
+      fetchFormData.append('file', file);
 
       const uploadRes = await fetch(
         encodeURI(
@@ -351,6 +344,23 @@ const OneAiUpload: FC<UploadParams> = ({
 
   const uploadDisabled =
     columnsConfigurations.filter((c) => c.id === 'input').length !== 1;
+
+  const handleDragOver = (e: DragEvent) => {
+    e.preventDefault();
+  };
+
+  const handleDragAndDrop = (event: DragEvent) => {
+    const target = event.dataTransfer;
+    event.preventDefault();
+
+    if (target && target.files.length > 0) {
+      handleFileChange({
+        target: {
+          files: target.files,
+        },
+      });
+    }
+  };
 
   return (
     <div
@@ -440,7 +450,7 @@ const OneAiUpload: FC<UploadParams> = ({
                 >
                   Upload another file
                 </button>
-                {goToCollection ? (
+                {goToCollection && uploadStatus !== 'in progress' ? (
                   <button
                     className="bg-[#1E1E2F] text-white text-lg font-bold py-2 px-4 rounded mt-4"
                     onClick={() => goToCollection()}
@@ -691,6 +701,8 @@ const OneAiUpload: FC<UploadParams> = ({
                 <label
                   htmlFor="dropzone-file"
                   className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                  onDrop={handleDragAndDrop}
+                  onDragOver={handleDragOver}
                 >
                   <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <svg
@@ -725,6 +737,7 @@ const OneAiUpload: FC<UploadParams> = ({
                     </ul>
                   </div>
                   <input
+                    onDrop={handleDragOver}
                     onChange={handleFileChange}
                     id="dropzone-file"
                     type="file"
