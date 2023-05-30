@@ -289,7 +289,6 @@ const OneAiUpload: FC<UploadParams> = ({
       const fetchFormData = new FormData();
       fetchFormData.append('file', file);
 
-      console.log('PipelineJSON :: ', pipelineJson);
       const uploadRes = await fetch(
         encodeURI(
           `${domain}/api/v0/pipeline/async/file?pipeline=${JSON.stringify(
