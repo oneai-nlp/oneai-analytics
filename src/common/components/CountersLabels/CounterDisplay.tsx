@@ -34,6 +34,7 @@ export default function CounterDisplay({
 }) {
   const metadataKeyValue = counter.metadataKeyValue;
   if (!metadataKeyValue) return <></>;
+
   const displayResult = counter.calculationConfiguration.calculate(
     metadataKeyValue,
     metadata,
