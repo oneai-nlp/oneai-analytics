@@ -424,23 +424,20 @@ const OneAiUpload: FC<UploadParams> = ({
           <div className="w-full p-2 h-full">
             <div className="w-full h-full flex flex-col items-center justify-center">
               {uploadStatus === 'completed' ? (
-                <>
-                  {' '}
-                  <svg
-                    className="w-20 h-20 text-green-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </>
+                <svg
+                  className="w-20 h-20 text-green-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
               ) : null}
               <h1 className="text-2xl font-bold mt-4">
                 {uploadStatus === 'completed'
