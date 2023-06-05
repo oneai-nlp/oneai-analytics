@@ -350,6 +350,10 @@ const OneAiUpload: FC<UploadParams> = ({
   };
 
   const handleDragAndDrop = (event: DragEvent) => {
+    if (uploaded || file) {
+      return;
+    }
+
     const target = event.dataTransfer;
     event.preventDefault();
 
@@ -364,6 +368,8 @@ const OneAiUpload: FC<UploadParams> = ({
 
   return (
     <div
+      onDrop={handleDragAndDrop}
+      onDragOver={handleDragOver}
       className={`oneai-analytics-namespace h-full w-full p-2 ${
         darkMode ? 'dark' : ''
       }`}
@@ -417,27 +423,38 @@ const OneAiUpload: FC<UploadParams> = ({
         {uploaded ? (
           <div className="w-full p-2 h-full">
             <div className="w-full h-full flex flex-col items-center justify-center">
-              <svg
-                className="w-20 h-20 text-green-500"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-              <h1 className="text-2xl font-bold mt-4">Upload Complete</h1>
-              <p className="text-lg mt-2">
-                {data.length > 0
-                  ? (maxRows ?? totalNumberOfRows) + ' items'
-                  : 'Data'}{' '}
-                has been uploaded to ' {collection} '
-              </p>
+              {uploadStatus === 'completed' ? (
+                <svg
+                  className="w-20 h-20 text-green-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              ) : null}
+              <h1 className="text-2xl font-bold mt-4">
+                {uploadStatus === 'completed'
+                  ? 'Upload Complete'
+                  : 'Uploading...'}
+              </h1>
+              {uploadStatus === 'completed' ? (
+                <>
+                  <p className="text-lg mt-2">
+                    {data.length > 0
+                      ? (maxRows ?? totalNumberOfRows) + ' items'
+                      : 'Data'}{' '}
+                    has been uploaded to '{collection}'
+                  </p>
+                </>
+              ) : null}
+
               <p>Upload status: {uploadStatus}</p>
               <div className="flex flex-col w-full justify-center items-center">
                 <button
@@ -701,8 +718,6 @@ const OneAiUpload: FC<UploadParams> = ({
                 <label
                   htmlFor="dropzone-file"
                   className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-                  onDrop={handleDragAndDrop}
-                  onDragOver={handleDragOver}
                 >
                   <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <svg
