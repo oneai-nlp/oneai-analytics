@@ -46,6 +46,9 @@ export function uniqBy<T, K>(arr: T[], getKey: (item: T) => K) {
 }
 
 export function toLowerKeys(obj: { [key: string]: {} }) {
+  if (typeof obj === 'undefined') {
+    return {};
+  }
   return Object.keys(obj).reduce((accumulator, key) => {
     accumulator[key.toLowerCase()] = obj[key];
     return accumulator;
@@ -73,7 +76,7 @@ export const numberToFixed = (num: number) =>
 export const customNumberToFixed = (num: number): number => {
   const str = Math.abs(num).toString();
   const [integer, _] = str.split('.');
-  console.log('integer', integer);
+
   if (integer.length < 3) {
     return numberToFixed(parseFloat(num.toFixed(2)));
   } else if (integer.length < 4) {
