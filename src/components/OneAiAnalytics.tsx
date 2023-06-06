@@ -365,6 +365,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
       }`}
     >
       <div
+        id="headlessui-portal-root"
         className={`h-full w-full flex flex-col overflow-hidden bg-[#f3e5e5] dark:bg-[#161414] p-1 ${
           darkMode ? 'dark' : ''
         }`}
