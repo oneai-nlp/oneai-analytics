@@ -13,6 +13,7 @@ import {
   MetaCluster,
   Phrase,
   Properties,
+  UniqueItemsStats,
 } from '../common/types/modals';
 import {
   COLLECTION_TYPE,
@@ -26,7 +27,13 @@ import { OneAiAnalytics } from '../components/OneAiAnalytics';
 
 const cache: Map<
   string,
-  { nodes: OneAIDataNode[]; totalItems: number; totalPages: number; time: Date }
+  {
+    nodes: OneAIDataNode[];
+    totalItems: number;
+    uniqueItemsStats?: UniqueItemsStats;
+    totalPages: number;
+    time: Date;
+  }
 > = new Map();
 
 const nodeToPageCache: Map<string, number> = new Map();
@@ -42,6 +49,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   collection = '',
   collectionName = collection,
   refreshToken = '',
+  uniquePropertyName,
   ...rest
 }) => {
   const [loading, setLoading] = useState(true);
@@ -49,7 +57,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   const [currentNodes, setCurrentNodes] = useState({
     totalItems: 0,
     nodes: [],
-  } as { totalItems: number; nodes: OneAIDataNode[] });
+  } as { totalItems: number; uniqueItemsStats?: UniqueItemsStats; nodes: OneAIDataNode[] });
   const [clickedNodes, setClickedNodes] = useState([] as OneAIDataNode[]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -61,7 +69,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   const [localRefreshToken, setLocalRefreshToken] = useState(refreshToken);
   const [trendPeriods, setTrendPeriods] = useState(0);
   const [propertiesFilters, setPropertiesFilters] = useState({
-    hide: 'true',
+    // hide: 'true', TODO: uncomment when the API is ready
   } as Properties);
   const [metaOptions, setMetaOptions] = useState([] as string[]);
   const [currentMetaGroup, setCurrentMetaGroup] = useState('text');
@@ -234,7 +242,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             dateRange[1],
             [...labelsFilters, ...(metaGroupClicked ? [metaGroupClicked] : [])],
             trendPeriods,
-            propertiesFilters
+            propertiesFilters,
+            uniquePropertyName ? [uniquePropertyName] : []
           );
           if (clusters.error) {
             if (clusters.error.includes('AbortError')) {
@@ -253,6 +262,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           if (clickedNodes.at(-1) == currentClicked) {
             setCurrentNodes({
               totalItems: clusters.totalItems,
+              uniqueItemsStats: clusters.uniqueItemsStats,
               nodes: newNodes,
             });
             setTotalPages(clusters.totalPages);
@@ -264,7 +274,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             currentPage,
             newNodes,
             clusters.totalPages,
-            clusters.totalItems
+            clusters.totalItems,
+            clusters.uniqueItemsStats
           );
         }
       } else if (currentClicked.type === 'Cluster') {
@@ -280,6 +291,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           setTotalPages(cached.totalPages);
           setCurrentNodes({
             totalItems: cached.totalItems,
+            uniqueItemsStats: cached.uniqueItemsStats,
             nodes: cached.nodes,
           });
         } else {
@@ -614,6 +626,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           return current.length > 2 ? '1' : current + '1';
         })
       }
+      uniquePropertyName={uniquePropertyName}
       {...rest}
     />
   ) : null;
@@ -629,10 +642,12 @@ async function fetchClusters(
   to: Date | null,
   labelsFilters: MetadataKeyValue[],
   trendPeriods: number,
-  propertiesFilters: Properties
+  propertiesFilters: Properties,
+  uniqueMetaData: string[]
 ): Promise<{
   totalPages: number;
   totalItems: number;
+  uniqueItemsStats?: UniqueItemsStats;
   data: Cluster[];
   error: string | null;
 }> {
@@ -646,7 +661,11 @@ async function fetchClusters(
     to,
     labelsFilters,
     trendPeriods,
-    propertiesFilters
+    propertiesFilters,
+    uniqueMetaData.length > 0
+      ? '&include-metadata-stats=true&include-metadata-stats-names=' +
+          uniqueMetaData.join(',')
+      : ''
   );
 }
 
@@ -766,6 +785,7 @@ async function fetchApi<T>(
 ): Promise<{
   totalPages: number;
   totalItems: number;
+  uniqueItemsStats?: UniqueItemsStats;
   data: T[];
   error: string | null;
 }> {
@@ -829,6 +849,7 @@ async function fetchApi<T>(
     return {
       totalPages: json['total_pages'],
       totalItems: json['total_items'],
+      uniqueItemsStats: json['total_metadata_stats'],
       data: json[accessor],
       error: null,
     };
@@ -854,6 +875,7 @@ function getNodesFromCache(
   totalItems: number;
   totalPages: number;
   time: Date;
+  uniqueItemsStats?: UniqueItemsStats;
 } | null {
   const cached = cache.get(assembleCacheId(parentType, parentId, page));
   if (cached && getSecondsDiff(cached.time, new Date()) < 90) {
@@ -869,13 +891,15 @@ function setNodesDataInCache(
   page: number,
   nodes: OneAIDataNode[],
   totalPages: number,
-  totalItems: number
+  totalItems: number,
+  uniqueItemsStats?: UniqueItemsStats
 ) {
   cache.set(assembleCacheId(parentType, parentId, page), {
     nodes: nodes,
     totalPages: totalPages,
     time: new Date(),
     totalItems: totalItems,
+    uniqueItemsStats: uniqueItemsStats,
   });
 }
 

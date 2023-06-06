@@ -1,12 +1,14 @@
 import { CalculationConfiguration } from '../types/customizeBarTypes';
 import {
   percentOfAllItemsCalculation,
+  percentOfAllUniqueItemsCalculation,
   percentOfItemsCalculation,
   topGroupCalculation,
   topGroupPercentCalculation,
   topValueCalculation,
   topValuePercentCalculation,
   totalSumCalculation,
+  totalUniqueItemsCalculation,
   trendCalculation,
 } from '../utils/countersUtils';
 
@@ -18,6 +20,8 @@ export const topGroupPercentCalculationName = 'Top group %';
 export const percentOfItemsCalculationName = '% of items';
 export const percentOfAllCalculationName = '% of all items';
 export const trendCalculationName = 'trend';
+export const percentOfTotalUniqueItemsCalculationName = '% of all unique items';
+export const totalUniqueItemsCalculationName = 'Total unique items';
 
 export const totalSumCalculationConfiguration: CalculationConfiguration = {
   name: totalSumCalculationName,
@@ -86,3 +90,21 @@ export const trendCalculationConfiguration: CalculationConfiguration = {
   type: 'trend',
   calculate: trendCalculation,
 };
+
+export const percentOfTotalUniqueItemsCalculationConfiguration: CalculationConfiguration =
+  {
+    name: percentOfTotalUniqueItemsCalculationName,
+    hasGroups: false,
+    hasMultipleMembers: false,
+    type: 'percentage',
+    calculate: percentOfAllUniqueItemsCalculation,
+  };
+
+export const totalUniqueItemsCalculationConfiguration: CalculationConfiguration =
+  {
+    name: totalUniqueItemsCalculationName,
+    hasGroups: false,
+    hasMultipleMembers: false,
+    type: 'number',
+    calculate: totalUniqueItemsCalculation,
+  };

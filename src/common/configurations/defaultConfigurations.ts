@@ -1,11 +1,13 @@
 import {
   percentOfAllItemsCalculationConfiguration,
   percentOfItemsCalculationConfiguration,
+  percentOfTotalUniqueItemsCalculationConfiguration,
   topGroupCalculationConfiguration,
   topGroupPercentCalculationConfiguration,
   topValueCalculationConfiguration,
   topValuePercentCalculationConfiguration,
   totalSumCalculationConfiguration,
+  totalUniqueItemsCalculationConfiguration,
   trendCalculationConfiguration,
 } from './calculationsConfigurations';
 
@@ -18,4 +20,6 @@ export const defaultCalculations = [
   percentOfItemsCalculationConfiguration,
   percentOfAllItemsCalculationConfiguration,
   trendCalculationConfiguration,
+  percentOfTotalUniqueItemsCalculationConfiguration,
+  totalUniqueItemsCalculationConfiguration,
 ];

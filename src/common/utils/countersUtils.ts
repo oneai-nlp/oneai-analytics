@@ -5,7 +5,7 @@ import {
   GroupMembers,
   MetadataKeyValue,
 } from '../types/customizeBarTypes';
-import { MetaData, Trend } from '../types/modals';
+import { MetaData, Trend, UniqueItemsStats } from '../types/modals';
 import {
   objectToLowerCase,
   percentageIncrease,
@@ -319,6 +319,99 @@ export function trendCalculation(
   return {
     result: trend,
     counter: itemCounter ?? keyCounter,
+    metadataKey: metadataKeyValue.key,
+    value: metadataKeyValue.value,
+  };
+}
+
+export function percentOfAllUniqueItemsCalculation(
+  metadataKeyValue: MetadataKeyValue | null,
+  metadata: MetaData,
+  __: Trend[],
+  countersConfigurations: CountersConfigurations,
+  totalItems: number,
+  totalUniqueItemsStats?: UniqueItemsStats,
+  _?: UniqueItemsStats,
+  uniquePropertyName?: string
+) {
+  if (!metadataKeyValue || !totalUniqueItemsStats || !uniquePropertyName)
+    return { counter: null, result: 0 };
+  const itemCounter = getMetadataKeyValueConfiguration(
+    metadataKeyValue,
+    countersConfigurations
+  );
+
+  if (!itemCounter) return { counter: null, result: 0 };
+
+  const itemCount = calculateSumItemsInMetadata(
+    itemCounter.members,
+    itemCounter.items,
+    metadata
+  );
+
+  const keyCount =
+    totalUniqueItemsStats.unique_values_count.find(
+      (uv) => uv.meta_key === uniquePropertyName
+    )?.unique_values_count ?? 0;
+
+  console.log(
+    'totalUniqueItemsStats',
+    totalUniqueItemsStats,
+    'uniquePropertyName',
+    uniquePropertyName,
+    'keyCount',
+    keyCount,
+    'itemCount',
+    itemCount
+  );
+
+  let result;
+  if (metadataKeyValue.key === CUSTOM_METADATA_KEY) {
+    result = totalItems === 0 ? 0 : (itemCount / totalItems) * 100;
+  } else {
+    result = keyCount === 0 ? 0 : (itemCount / keyCount) * 100;
+  }
+  return {
+    result: result,
+    counter: itemCounter,
+    metadataKey: metadataKeyValue.key,
+    value: metadataKeyValue.value,
+  };
+}
+
+export function totalUniqueItemsCalculation(
+  metadataKeyValue: MetadataKeyValue | null,
+  ____: MetaData,
+  __: Trend[],
+  countersConfigurations: CountersConfigurations,
+  ___: number,
+  _?: UniqueItemsStats,
+  uniqueItemsStats?: UniqueItemsStats,
+  uniquePropertyName?: string
+) {
+  if (
+    !metadataKeyValue ||
+    !uniqueItemsStats ||
+    !uniquePropertyName ||
+    metadataKeyValue.key === CUSTOM_METADATA_KEY
+  )
+    return { counter: null, result: 0 };
+
+  const itemCounter = getMetadataKeyValueConfiguration(
+    metadataKeyValue,
+    countersConfigurations
+  );
+
+  if (!itemCounter) return { counter: null, result: 0 };
+
+  const keyCount =
+    uniqueItemsStats.unique_values_count.find(
+      (uv) => uv.meta_key === metadataKeyValue.key
+    )?.unique_values_count ?? 0;
+
+  return {
+    result: keyCount,
+    counter: itemCounter,
     metadataKey: metadataKeyValue.key,
     value: metadataKeyValue.value,
   };

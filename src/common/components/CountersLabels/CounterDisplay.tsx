@@ -8,7 +8,7 @@ import {
   CountersConfigurations,
   CounterType,
 } from '../../types/customizeBarTypes';
-import { MetaData, Trend } from '../../types/modals';
+import { MetaData, Trend, UniqueItemsStats } from '../../types/modals';
 import {
   getMetadataKeyValueDisplay,
   numberFormatter,
@@ -23,6 +23,9 @@ export default function CounterDisplay({
   totalItems,
   width,
   maxWidth = '6ch',
+  totalUniqueItemsStats,
+  uniqueItemsStats,
+  uniquePropertyName,
 }: {
   counter: CounterType;
   metadata: MetaData;
@@ -31,6 +34,9 @@ export default function CounterDisplay({
   totalItems: number;
   width?: string;
   maxWidth?: string;
+  totalUniqueItemsStats?: UniqueItemsStats;
+  uniqueItemsStats?: UniqueItemsStats;
+  uniquePropertyName?: string;
 }) {
   const metadataKeyValue = counter.metadataKeyValue;
   if (!metadataKeyValue) return <></>;
@@ -40,7 +46,10 @@ export default function CounterDisplay({
     metadata,
     trends,
     countersConfiguration,
-    totalItems
+    totalItems,
+    totalUniqueItemsStats,
+    uniqueItemsStats,
+    uniquePropertyName
   );
   if (!displayResult.counter) return <></>;
 
