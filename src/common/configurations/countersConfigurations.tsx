@@ -15,7 +15,11 @@ import {
   KeyIcon,
 } from '@heroicons/react/24/outline';
 import React from 'react';
-import { FilmIcon, HashtagIcon } from '@heroicons/react/20/solid';
+import {
+  FilmIcon,
+  GlobeAmericasIcon,
+  HashtagIcon,
+} from '@heroicons/react/20/solid';
 
 export const defaultCountersConfigurations: CountersConfigurations = {
   signals: {
@@ -254,5 +258,11 @@ export const defaultCountersConfigurations: CountersConfigurations = {
         isGroup: true,
       },
     ],
+  },
+  city: {
+    display: {
+      color: 'white',
+      icon: <GlobeAmericasIcon />,
+    },
   },
 };

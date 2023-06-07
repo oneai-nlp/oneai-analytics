@@ -42,7 +42,13 @@ import {
   CounterType,
   MetadataKeyValue,
 } from '../common/types/customizeBarTypes';
-import { Item, MetaData, Properties, Trend } from '../common/types/modals';
+import {
+  Cluster,
+  Item,
+  MetaData,
+  Properties,
+  Trend,
+} from '../common/types/modals';
 import {
   COLLECTION_TYPE,
   getNodeId,
@@ -104,6 +110,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   currentMetaOption,
   metaOptionsChanged = () => {},
   refresh = () => {},
+  uniquePropertyName,
 }) => {
   const [display, setDisplay] = useState('Treemap' as Displays);
   const { width, height, ref } = useResizeDetector();
@@ -258,6 +265,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
           trends: getNodeTrends(d),
           type: d.type,
           properties: d.data.properties,
+          metadata_stats: (d.data as Cluster).metadata_stats,
         };
       })
     );
@@ -679,6 +687,9 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     countersConfiguration={countersConfigurations}
                     labelClicked={labelClicked}
                     totalItems={dataNodes.totalItems}
+                    totalUniqueItemsStats={dataNodes.uniqueItemsStats}
+                    uniqueItemsStats={dataNodes.uniqueItemsStats}
+                    uniquePropertyName={uniquePropertyName}
                   />
                 )}
               </div>
@@ -824,6 +835,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     }}
                     translate={translate}
                     totalItems={dataNodes.totalItems}
+                    totalUniqueItemsStats={dataNodes.uniqueItemsStats}
+                    uniquePropertyName={uniquePropertyName}
                   />
                 ) : (
                   <BarChart
@@ -864,6 +877,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     }}
                     translate={translate}
                     totalItems={dataNodes.totalItems}
+                    totalUniqueItemsStats={dataNodes.uniqueItemsStats}
+                    uniquePropertyName={uniquePropertyName}
                   />
                 )}
               </div>
