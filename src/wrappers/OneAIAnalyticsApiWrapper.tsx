@@ -69,7 +69,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   const [localRefreshToken, setLocalRefreshToken] = useState(refreshToken);
   const [trendPeriods, setTrendPeriods] = useState(0);
   const [propertiesFilters, setPropertiesFilters] = useState({
-    // hide: 'true', TODO: uncomment when the API is ready
+    hide: 'true',
   } as Properties);
   const [metaOptions, setMetaOptions] = useState([] as string[]);
   const [currentMetaGroup, setCurrentMetaGroup] = useState('text');
