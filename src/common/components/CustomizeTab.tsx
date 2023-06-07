@@ -46,7 +46,7 @@ export default function CustomizeTab({
           //@ts-ignore
           const popover = ref.current.getBoundingClientRect();
 
-          if (popover.bottom >= screen.height) {
+          if (popover.bottom >= window.innerHeight) {
             setPosition(true);
           } else {
             setPosition(false);
