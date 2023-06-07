@@ -18,4 +18,6 @@ export const defaultCalculations = [
   percentOfItemsCalculationConfiguration,
   percentOfAllItemsCalculationConfiguration,
   trendCalculationConfiguration,
+  // percentOfTotalUniqueItemsCalculationConfiguration,
+  // totalUniqueItemsCalculationConfiguration,
 ];

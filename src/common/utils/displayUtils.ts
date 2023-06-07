@@ -3,7 +3,7 @@ import {
   CounterType,
   MetadataKeyValue,
 } from '../types/customizeBarTypes';
-import { MetaData, Trend } from '../types/modals';
+import { MetaData, Trend, UniqueItemsStats } from '../types/modals';
 import { getMetadataKeyValueGroups, hasMultipleMembers } from './countersUtils';
 
 export const numberFormatter = new Intl.NumberFormat('en-US');
@@ -18,7 +18,10 @@ export function getBackgroundColorLayers(
   metadata: MetaData,
   trends: Trend[],
   countersConfiguration: CountersConfigurations,
-  totalItems: number
+  totalItems: number,
+  totalUniqueItemsStats?: UniqueItemsStats,
+  uniqueItemsStats?: UniqueItemsStats,
+  uniquePropertyName?: string
 ) {
   return groupCounters(colorAxis, countersConfiguration)
     .map((countersGroup) => {
@@ -28,7 +31,10 @@ export function getBackgroundColorLayers(
           metadata,
           trends,
           countersConfiguration,
-          totalItems
+          totalItems,
+          totalUniqueItemsStats,
+          uniqueItemsStats,
+          uniquePropertyName
         )
       );
 

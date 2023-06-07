@@ -36,6 +36,8 @@ export const Treemap: FC<TreemapProps> = ({
   nodeActionsClicked,
   translate,
   totalItems,
+  totalUniqueItemsStats,
+  uniquePropertyName,
 }) => {
   const mainNode: TreemapNode = useMemo(() => {
     return {
@@ -116,7 +118,10 @@ export const Treemap: FC<TreemapProps> = ({
       leaf.data.metadata,
       leaf.data.trends,
       countersConfiguration,
-      totalItems
+      totalItems,
+      totalUniqueItemsStats,
+      leaf.data.metadata_stats,
+      uniquePropertyName
     );
 
     return (
@@ -168,6 +173,9 @@ export const Treemap: FC<TreemapProps> = ({
                   countersConfiguration={countersConfiguration}
                   labelClicked={labelClicked}
                   totalItems={totalItems}
+                  totalUniqueItemsStats={totalUniqueItemsStats}
+                  uniquePropertyName={uniquePropertyName}
+                  uniqueItemsStats={leaf.data.metadata_stats}
                 />
               </div>
               <span

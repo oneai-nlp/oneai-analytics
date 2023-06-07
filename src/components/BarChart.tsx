@@ -28,6 +28,8 @@ export const BarChart: FC<BarChartProps> = ({
   translate,
   totalItems,
   nodeActionsClicked,
+  totalUniqueItemsStats,
+  uniquePropertyName,
 }) => {
   const [actionsVisible, setActionsVisible] = useState(null as number | null);
   const barsHeight = dataNodes.length * 40;
@@ -121,7 +123,10 @@ export const BarChart: FC<BarChartProps> = ({
       d.metadata,
       d.trends,
       countersConfiguration,
-      totalItems
+      totalItems,
+      totalUniqueItemsStats,
+      d.metadata_stats,
+      uniquePropertyName
     );
 
     return (
@@ -179,6 +184,9 @@ export const BarChart: FC<BarChartProps> = ({
                         trends={d.trends}
                         width="6ch"
                         totalItems={totalItems}
+                        totalUniqueItemsStats={totalUniqueItemsStats}
+                        uniquePropertyName={uniquePropertyName}
+                        uniqueItemsStats={d.metadata_stats}
                       />
                     </div>
                   ))}

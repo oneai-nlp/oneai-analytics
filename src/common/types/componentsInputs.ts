@@ -7,6 +7,7 @@ import {
   Phrase,
   Properties,
   Trend,
+  UniqueItemsStats,
 } from './modals';
 import {
   CountersConfigurations,
@@ -24,6 +25,7 @@ export interface DataNode {
   properties: { [key: string]: string };
   trends: Trend[];
   type: string;
+  metadata_stats?: UniqueItemsStats;
 }
 
 export interface TreemapProps {
@@ -47,6 +49,8 @@ export interface TreemapProps {
   nodeActionsClicked: (node: DataNode) => void;
   translate: boolean;
   totalItems: number;
+  totalUniqueItemsStats?: UniqueItemsStats;
+  uniquePropertyName?: string;
 }
 
 export interface BarChartProps {
@@ -66,6 +70,8 @@ export interface BarChartProps {
   nodeActionsClicked: (node: DataNode) => void;
   translate: boolean;
   totalItems: number;
+  totalUniqueItemsStats?: UniqueItemsStats;
+  uniquePropertyName?: string;
 }
 
 export type NodeType = 'Cluster' | 'Phrase' | 'Item' | 'Meta';
@@ -75,7 +81,11 @@ export interface OneAIDataNode {
 }
 
 export interface OneAiAnalyticsProps {
-  dataNodes: { totalItems: number; nodes: OneAIDataNode[] };
+  dataNodes: {
+    totalItems: number;
+    uniqueItemsStats?: UniqueItemsStats;
+    nodes: OneAIDataNode[];
+  };
   currentNode?: OneAIDataNode;
   totalPagesAmount?: number;
   currentPage?: number;
@@ -135,6 +145,7 @@ export interface OneAiAnalyticsProps {
   currentMetaOption?: string;
   metaOptionsChanged?: (option: string) => void;
   refresh?: () => void;
+  uniquePropertyName?: string;
 }
 
 export type OneAIAnalyticsStaticDataWrapperProps = Omit<
