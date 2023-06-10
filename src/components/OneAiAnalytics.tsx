@@ -110,7 +110,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   currentMetaOption,
   metaOptionsChanged = () => {},
   refresh = () => {},
-  uniquePropertyName,
+  uniqueMetaKey: uniquePropertyName,
 }) => {
   const [display, setDisplay] = useState('Treemap' as Displays);
   const { width, height, ref } = useResizeDetector();

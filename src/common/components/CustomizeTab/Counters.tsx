@@ -179,7 +179,7 @@ function Counter({
           </div>
         </Listbox>
         <button type="button" className="ml-1" onClick={counterDeleted}>
-          <XMarkIcon className="h-4 w-4 text-gray-200 dark:text-gray-600 hover:scale-125 transition duration-100 ease-linear" />
+          <XMarkIcon className="h-4 w-4 text-gray-400 dark:text-gray-600 hover:scale-125 transition duration-100 ease-linear" />
           <span className="sr-only">Delete counter</span>
         </button>
       </div>

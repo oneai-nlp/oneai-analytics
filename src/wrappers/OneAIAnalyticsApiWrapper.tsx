@@ -49,7 +49,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   collection = '',
   collectionName = collection,
   refreshToken = '',
-  uniquePropertyName,
+  uniqueMetaKey: uniquePropertyName,
   ...rest
 }) => {
   const [loading, setLoading] = useState(true);
@@ -626,7 +626,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           return current.length > 2 ? '1' : current + '1';
         })
       }
-      uniquePropertyName={uniquePropertyName}
+      uniqueMetaKey={uniquePropertyName}
       {...rest}
     />
   ) : null;

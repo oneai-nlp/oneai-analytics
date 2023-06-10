@@ -145,7 +145,7 @@ export interface OneAiAnalyticsProps {
   currentMetaOption?: string;
   metaOptionsChanged?: (option: string) => void;
   refresh?: () => void;
-  uniquePropertyName?: string;
+  uniqueMetaKey?: string;
 }
 
 export type OneAIAnalyticsStaticDataWrapperProps = Omit<
