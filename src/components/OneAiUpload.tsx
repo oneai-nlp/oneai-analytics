@@ -8,11 +8,12 @@ import {
 } from '../common/components/UploadCSVComponents/constants';
 import SingleSelect from '../common/components/UploadCSVComponents/SingleSelect';
 import { UploadParams } from '../common/types/componentsInputs';
+import { resolveDomain } from '../common/utils/externalInputs';
 
 const allowedExtensions = ['csv'];
 
 const OneAiUpload: FC<UploadParams> = ({
-  domain = 'https://api.oneai.com',
+  domain = 'prod',
   apiKey = '',
   collection = '',
   darkMode = true,
@@ -26,6 +27,7 @@ const OneAiUpload: FC<UploadParams> = ({
   isPublic = false,
   goToCollection,
 }: UploadParams) => {
+  domain = resolveDomain(domain);
   const [data, setData] = useState([] as string[][]);
   const [error, setError] = useState(null as string | null);
   const [file, setFile] = useState(null as File | null);
