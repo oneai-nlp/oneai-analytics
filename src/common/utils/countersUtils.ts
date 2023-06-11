@@ -329,7 +329,7 @@ export function percentOfAllUniqueItemsCalculation(
   metadata: MetaData,
   __: Trend[],
   countersConfigurations: CountersConfigurations,
-  totalItems: number,
+  ___: number,
   totalUniqueItemsStats?: UniqueItemsStats,
   _?: UniqueItemsStats,
   uniquePropertyName?: string
@@ -354,23 +354,8 @@ export function percentOfAllUniqueItemsCalculation(
       (uv) => uv.meta_key === uniquePropertyName
     )?.unique_values_count ?? 0;
 
-  console.log(
-    'totalUniqueItemsStats',
-    totalUniqueItemsStats,
-    'uniquePropertyName',
-    uniquePropertyName,
-    'keyCount',
-    keyCount,
-    'itemCount',
-    itemCount
-  );
-
-  let result;
-  if (metadataKeyValue.key === CUSTOM_METADATA_KEY) {
-    result = totalItems === 0 ? 0 : (itemCount / totalItems) * 100;
-  } else {
-    result = keyCount === 0 ? 0 : (itemCount / keyCount) * 100;
-  }
+  const result = keyCount === 0 ? 0 : (itemCount / keyCount) * 100;
+  console.log('result', result);
   return {
     result: result,
     counter: itemCounter,
