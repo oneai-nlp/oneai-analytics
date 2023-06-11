@@ -44,6 +44,7 @@ export interface Phrase {
   item_translated_text?: string | null;
   trends: Trend[];
   properties: Properties;
+  metadata_stats: UniqueItemsStats;
 }
 
 export interface Cluster {

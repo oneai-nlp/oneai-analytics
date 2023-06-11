@@ -355,7 +355,7 @@ export function percentOfAllUniqueItemsCalculation(
     )?.unique_values_count ?? 0;
 
   const result = keyCount === 0 ? 0 : (itemCount / keyCount) * 100;
-  console.log('result', result);
+
   return {
     result: result,
     counter: itemCounter,

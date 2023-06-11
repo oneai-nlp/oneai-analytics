@@ -229,6 +229,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           setTotalPages(cached.totalPages);
           setCurrentNodes({
             totalItems: cached.totalItems,
+            uniqueItemsStats: cached.uniqueItemsStats,
             nodes: cached.nodes,
           });
         } else {
@@ -306,7 +307,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             dateRange[1],
             [...labelsFilters, ...(metaGroupClicked ? [metaGroupClicked] : [])],
             trendPeriods,
-            propertiesFilters
+            propertiesFilters,
+            uniquePropertyName ? [uniquePropertyName] : []
           );
           if (phrases.error) {
             if (phrases.error.includes('AbortError')) {
@@ -324,6 +326,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           if (clickedNodes.at(-1) == currentClicked) {
             setCurrentNodes({
               totalItems: phrases.totalItems,
+              uniqueItemsStats: phrases.uniqueItemsStats,
               nodes: newNodes,
             });
             setTotalPages(phrases.totalPages);
@@ -334,7 +337,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             currentPage,
             newNodes,
             phrases.totalPages,
-            phrases.totalItems
+            phrases.totalItems,
+            phrases.uniqueItemsStats
           );
         }
       } else if (currentClicked.type === 'Phrase') {
@@ -680,10 +684,12 @@ async function fetchPhrases(
   to: Date | null,
   labelsFilters: MetadataKeyValue[],
   trendPeriods: number,
-  propertiesFilters: Properties
+  propertiesFilters: Properties,
+  uniqueMetaData: string[]
 ): Promise<{
   totalPages: number;
   totalItems: number;
+  uniqueItemsStats?: UniqueItemsStats;
   data: Phrase[];
   error: string | null;
 }> {
@@ -697,7 +703,11 @@ async function fetchPhrases(
     to,
     labelsFilters,
     trendPeriods,
-    propertiesFilters
+    propertiesFilters,
+    uniqueMetaData.length > 0
+      ? '&include-metadata-stats=true&include-metadata-stats-names=' +
+          uniqueMetaData.join(',')
+      : ''
   );
 }
 
