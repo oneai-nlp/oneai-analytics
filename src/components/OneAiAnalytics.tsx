@@ -773,7 +773,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                           ))}
                         </span>
                       ) : (
-                        'Collection is empty'
+                        ' Collection is empty'
                       )
                     ) : null}
                   </p>

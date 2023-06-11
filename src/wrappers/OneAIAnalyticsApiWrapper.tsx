@@ -24,6 +24,7 @@ import {
 } from '../common/utils/modalsUtils';
 import { getSecondsDiff, uniqBy } from '../common/utils/utils';
 import { OneAiAnalytics } from '../components/OneAiAnalytics';
+import { resolveDomain } from '../common/utils/externalInputs';
 
 const cache: Map<
   string,
@@ -44,14 +45,15 @@ const nodeToPageCache: Map<string, number> = new Map();
  * One AI Analytics api wrapper component
  */
 export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
-  domain = 'https://api.oneai.com',
+  domain = 'prod',
   apiKey = '',
   collection = '',
-  collectionName = collection,
+  collectionDisplayName = collection,
   refreshToken = '',
   uniqueMetaKey: uniquePropertyName,
   ...rest
 }) => {
+  domain = resolveDomain(domain);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null as string | null);
   const [currentNodes, setCurrentNodes] = useState({
@@ -528,7 +530,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       loading={loading}
       error={error}
       nodesPath={[
-        { text: collectionName },
+        { text: collectionDisplayName },
         ...(metaGroupClicked
           ? [
               { text: metaGroupClicked.key },
