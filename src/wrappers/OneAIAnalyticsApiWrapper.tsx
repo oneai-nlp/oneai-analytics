@@ -804,7 +804,7 @@ async function fetchApi<T>(
   const labelsFiltersString = labelsFilters
     .map((metadataKeyValue) =>
       metadataKeyValue.key && metadataKeyValue.value
-        ? `${metadataKeyValue.key} eq '${metadataKeyValue.value}'`
+        ? `'${metadataKeyValue.key}' eq '${metadataKeyValue.value}'`
         : ''
     )
     .filter((str) => str !== '');
@@ -812,7 +812,7 @@ async function fetchApi<T>(
   const propertiesFiltersString = Object.keys(propertiesFilters).map((key) => {
     const value = propertiesFilters[key];
     if (value) {
-      return `${key} neq '${value}'`;
+      return `'${key}' neq '${value}'`;
     }
 
     return '';

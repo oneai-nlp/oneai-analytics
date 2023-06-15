@@ -190,6 +190,7 @@ function DropdownOption({
         <div className="flex items-center">
           <input
             checked={selected}
+            onChange={() => {}} // to avoid warning
             type="checkbox"
             className="w-4 h-4 text-[#4D4DFE] bg-gray-100 border-gray-300 focus:ring-[#4D4DFE] dark:ring-offset-gray-800 focus:ring-2 dark:bg-[#322F46] dark:border-[#322F46]"
           />
