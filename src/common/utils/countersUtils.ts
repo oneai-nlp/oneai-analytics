@@ -327,13 +327,22 @@ export function trendCalculation(
 export function percentOfAllUniqueItemsCalculation(
   metadataKeyValue: MetadataKeyValue | null,
   metadata: MetaData,
-  __: Trend[],
+  trend: Trend[],
   countersConfigurations: CountersConfigurations,
-  ___: number,
+  totalItems: number,
   totalUniqueItemsStats?: UniqueItemsStats,
   _?: UniqueItemsStats,
   uniquePropertyName?: string
 ) {
+  if (!uniquePropertyName)
+    return percentOfAllItemsCalculation(
+      metadataKeyValue,
+      metadata,
+      trend,
+      countersConfigurations,
+      totalItems
+    );
+
   if (!metadataKeyValue || !totalUniqueItemsStats || !uniquePropertyName)
     return { counter: null, result: 0 };
   const itemCounter = getMetadataKeyValueConfiguration(
@@ -366,15 +375,24 @@ export function percentOfAllUniqueItemsCalculation(
 
 export function totalUniqueItemsCalculation(
   metadataKeyValue: MetadataKeyValue | null,
-  ____: MetaData,
-  __: Trend[],
+  metadata: MetaData,
+  trend: Trend[],
   countersConfigurations: CountersConfigurations,
-  ___: number,
+  totalItems: number,
   _?: UniqueItemsStats,
   uniqueItemsStats?: UniqueItemsStats,
   uniquePropertyName?: string
 ) {
-  if (!metadataKeyValue || !uniqueItemsStats || !uniquePropertyName)
+  if (!uniquePropertyName)
+    return totalSumCalculation(
+      metadataKeyValue,
+      metadata,
+      trend,
+      countersConfigurations,
+      totalItems
+    );
+
+  if (!metadataKeyValue || !uniqueItemsStats)
     return { counter: null, result: 0 };
 
   let itemCounter;

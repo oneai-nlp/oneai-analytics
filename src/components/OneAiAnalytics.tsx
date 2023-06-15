@@ -16,19 +16,20 @@ import CustomizeTab from '../common/components/CustomizeTab';
 import DatesFilters from '../common/components/DatesFilters';
 import ItemActions from '../common/components/ItemActions';
 import {
-  percentOfAllCalculationName,
   percentOfItemsCalculationName,
-  topGroupCalculationName,
-  totalSumCalculationName,
+  percentOfTotalUniqueItemsCalculationName,
+  topGroupPercentCalculationName,
+  totalUniqueItemsCalculationName,
 } from '../common/configurations/calculationsConfigurations';
 import {
+  CUSTOM_METADATA_KEY,
   colorAxisStorageKey,
   countersStorageKey,
-  CUSTOM_METADATA_KEY,
   labelsStorageKey,
   sizeAxisStorageKey,
 } from '../common/configurations/commonConfigurations';
 import { defaultCountersConfigurations } from '../common/configurations/countersConfigurations';
+import { defaultCalculations } from '../common/configurations/defaultConfigurations';
 import {
   DataNode,
   NodeType,
@@ -37,9 +38,9 @@ import {
 import {
   CalculationConfiguration,
   CounterConfiguration,
+  CounterType,
   CountersConfigurations,
   CountersLocalStorageObject,
-  CounterType,
   MetadataKeyValue,
 } from '../common/types/customizeBarTypes';
 import {
@@ -60,7 +61,6 @@ import {
 import { BarChart } from './BarChart';
 import { ItemsListDisplay } from './ItemsListDisplay';
 import { Treemap } from './Treemap';
-import { defaultCalculations } from '../common/configurations/defaultConfigurations';
 
 export type Displays = 'Treemap' | 'BarChart';
 
@@ -163,15 +163,15 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
         [
           {
             metadataKeyValue: { key: CUSTOM_METADATA_KEY },
-            calculationName: percentOfAllCalculationName,
+            calculationName: percentOfTotalUniqueItemsCalculationName,
           },
           {
             metadataKeyValue: { key: CUSTOM_METADATA_KEY },
-            calculationName: totalSumCalculationName,
+            calculationName: totalUniqueItemsCalculationName,
           },
           {
             metadataKeyValue: { key: 'signals' },
-            calculationName: topGroupCalculationName,
+            calculationName: topGroupPercentCalculationName,
           },
         ],
         currentCollection.current,
