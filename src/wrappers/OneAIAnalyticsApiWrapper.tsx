@@ -118,7 +118,6 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       previousValues.current.apiKey !== apiKey ||
       previousValues.current.collection !== collection ||
       previousValues.current.refreshToken !== refreshToken ||
-      previousValues.current.localRefreshToken !== localRefreshToken ||
       previousValues.current.lastMetaGroup !== currentMetaGroup
     ) {
       setCurrentNodes({ totalItems: 0, nodes: [] });
@@ -127,24 +126,17 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       cache.clear();
 
       previousValues.current = {
+        ...previousValues.current,
         domain,
         apiKey,
         collection,
         refreshToken,
-        localRefreshToken,
         clickedNodes: null,
         currentPage: null,
         lastMetaGroup: currentMetaGroup,
       };
     }
-  }, [
-    domain,
-    apiKey,
-    collection,
-    refreshToken,
-    localRefreshToken,
-    currentMetaGroup,
-  ]);
+  }, [domain, apiKey, collection, refreshToken, currentMetaGroup]);
 
   useEffect(() => {
     const fetchData = async (controller: AbortController) => {
@@ -407,8 +399,10 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       previousValues.current.collection !== collection ||
       previousValues.current.clickedNodes != clickedNodes ||
       previousValues.current.currentPage !== currentPage ||
+      previousValues.current.localRefreshToken !== localRefreshToken ||
       previousValues.current.lastMetaGroup !== currentMetaGroup
     ) {
+      cache.clear();
       fetchMetaClusters(controller).catch((e) => {
         console.error(e);
       });
@@ -418,13 +412,13 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       });
 
       previousValues.current = {
+        ...previousValues.current,
         domain,
-        apiKey,
         collection,
+        apiKey,
+        localRefreshToken,
         clickedNodes,
         currentPage,
-        refreshToken,
-        localRefreshToken,
         lastMetaGroup: currentMetaGroup,
       };
     }
@@ -432,7 +426,15 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
     return () => {
       controller.abort();
     };
-  }, [domain, collection, apiKey, clickedNodes, currentPage, currentMetaGroup]);
+  }, [
+    domain,
+    collection,
+    apiKey,
+    localRefreshToken,
+    clickedNodes,
+    currentPage,
+    currentMetaGroup,
+  ]);
 
   const nodeClicked = (node: { type: NodeType; id: string }) => {
     const currentNodeDetails = getNodeDetails(clickedNodes.at(-1), collection);
