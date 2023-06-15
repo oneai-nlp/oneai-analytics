@@ -374,24 +374,32 @@ export function totalUniqueItemsCalculation(
   uniqueItemsStats?: UniqueItemsStats,
   uniquePropertyName?: string
 ) {
-  if (
-    !metadataKeyValue ||
-    !uniqueItemsStats ||
-    !uniquePropertyName ||
-    metadataKeyValue.key === CUSTOM_METADATA_KEY
-  )
+  if (!metadataKeyValue || !uniqueItemsStats || !uniquePropertyName)
     return { counter: null, result: 0 };
 
-  const itemCounter = getMetadataKeyValueConfiguration(
-    metadataKeyValue,
-    countersConfigurations
-  );
+  let itemCounter;
+
+  if (metadataKeyValue.key === CUSTOM_METADATA_KEY) {
+    itemCounter = getMetadataKeyValueConfiguration(
+      { key: uniquePropertyName },
+      countersConfigurations
+    );
+  } else {
+    itemCounter = getMetadataKeyValueConfiguration(
+      metadataKeyValue,
+      countersConfigurations
+    );
+  }
 
   if (!itemCounter) return { counter: null, result: 0 };
 
   const keyCount =
     uniqueItemsStats.unique_values_count.find(
-      (uv) => uv.meta_key === metadataKeyValue.key
+      (uv) =>
+        uv.meta_key ===
+        (metadataKeyValue.key === CUSTOM_METADATA_KEY
+          ? uniquePropertyName
+          : metadataKeyValue.key)
     )?.unique_values_count ?? 0;
 
   return {
