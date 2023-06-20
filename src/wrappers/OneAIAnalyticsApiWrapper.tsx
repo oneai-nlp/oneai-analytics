@@ -450,7 +450,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       return;
     }
     setLoading(false);
-  }, [currentNodes]);
+  }, [currentNodes, labelsFilters, error]);
 
   const nodeClicked = (node: { type: NodeType; id: string }) => {
     const currentNodeDetails = getNodeDetails(clickedNodes.at(-1), collection);
