@@ -117,6 +117,7 @@
     "core-js": "^3.30.2",
     "d3": "7.8.4",
     "date-fns": "^2.30.0",
+    "lottie-web": "^5.12.2",
     "moment": "^2.29.4",
     "react-app-polyfill": "^3.0.0",
     "react-focus-on": "^3.8.1",

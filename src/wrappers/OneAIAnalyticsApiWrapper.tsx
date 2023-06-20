@@ -78,6 +78,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   const [metaGroupClicked, setMetaGroupClicked] = useState(
     null as MetadataKeyValue | null
   );
+  const shouldRefetch = useRef(false);
 
   const previousValues = useRef({
     domain: null as string | null,
@@ -227,51 +228,66 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             nodes: cached.nodes,
           });
         } else {
-          const clusters = await fetchClusters(
-            controller,
-            domain,
-            collection,
-            apiKey,
-            currentPage,
-            dateRange[0],
-            dateRange[1],
-            [...labelsFilters, ...(metaGroupClicked ? [metaGroupClicked] : [])],
-            trendPeriods,
-            propertiesFilters,
-            uniquePropertyName ? [uniquePropertyName] : []
-          );
-          if (clusters.error) {
-            if (clusters.error.includes('AbortError')) {
-              return;
+          const fetchClustersInterval = setInterval(async () => {
+            const clusters = await fetchClusters(
+              controller,
+              domain,
+              collection,
+              apiKey,
+              currentPage,
+              dateRange[0],
+              dateRange[1],
+              [
+                ...labelsFilters,
+                ...(metaGroupClicked ? [metaGroupClicked] : []),
+              ],
+              trendPeriods,
+              propertiesFilters,
+              uniquePropertyName ? [uniquePropertyName] : []
+            );
+
+            if (clusters.error) {
+              if (clusters.error.includes('AbortError')) {
+                return;
+              }
+
+              setError(clusters.error);
+              return setLoading(false);
             }
 
-            setError(clusters.error);
-            return setLoading(false);
-          }
-          setError(null);
-
-          const newNodes = clusters.data.map((c) => {
-            return { type: 'Cluster' as NodeType, data: c };
-          });
-
-          if (clickedNodes.at(-1) == currentClicked) {
-            setCurrentNodes({
-              totalItems: clusters.totalItems,
-              uniqueItemsStats: clusters.uniqueItemsStats,
-              nodes: newNodes,
+            if (labelsFilters.length === 0 && clusters.totalItems === 0) {
+              return;
+            }
+            const newNodes = clusters.data.map((c) => {
+              return { type: 'Cluster' as NodeType, data: c };
             });
-            setTotalPages(clusters.totalPages);
-          }
 
-          setNodesDataInCache(
-            'Collection',
-            collection,
-            currentPage,
-            newNodes,
-            clusters.totalPages,
-            clusters.totalItems,
-            clusters.uniqueItemsStats
-          );
+            if (clickedNodes.at(-1) == currentClicked) {
+              setCurrentNodes({
+                totalItems: clusters.totalItems,
+                uniqueItemsStats: clusters.uniqueItemsStats,
+                nodes: newNodes,
+              });
+              setTotalPages(clusters.totalPages);
+            }
+            setNodesDataInCache(
+              'Collection',
+              collection,
+              currentPage,
+              newNodes,
+              clusters.totalPages,
+              clusters.totalItems,
+              clusters.uniqueItemsStats
+            );
+
+            clearInterval(fetchClustersInterval);
+            shouldRefetch.current = false;
+            setError(null);
+          }, 2000);
+
+          if (shouldRefetch.current === true) {
+            return;
+          }
         }
       } else if (currentClicked.type === 'Cluster') {
         const clusterId = (
@@ -304,6 +320,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             propertiesFilters,
             uniquePropertyName ? [uniquePropertyName] : []
           );
+
           if (phrases.error) {
             if (phrases.error.includes('AbortError')) {
               return;

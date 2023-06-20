@@ -9,6 +9,7 @@ import {
 import SingleSelect from '../common/components/UploadCSVComponents/SingleSelect';
 import { UploadParams } from '../common/types/componentsInputs';
 import { resolveDomain } from '../common/utils/externalInputs';
+import { OneAiLoader } from '../common/components/OneAiLoader';
 
 const allowedExtensions = ['csv'];
 
@@ -77,6 +78,7 @@ const OneAiUpload: FC<UploadParams> = ({
         setUploadStatus('in progress');
       }
     }, 1000);
+
     return () => clearInterval(interval);
   }, [taskId, uploaded]);
 
@@ -441,11 +443,18 @@ const OneAiUpload: FC<UploadParams> = ({
                   />
                 </svg>
               ) : null}
-              <h1 className="text-2xl font-bold mt-4">
-                {uploadStatus === 'completed'
-                  ? 'Upload Complete'
-                  : 'Uploading...'}
-              </h1>
+
+              {uploadStatus === 'completed' ? (
+                <h1 className="text-2xl font-bold mt-4">Upload Complete</h1>
+              ) : (
+                <div className="grid grid-flow-row-dense justify-center items-center">
+                  <OneAiLoader />
+                  <p className="font-medium text-center text-lg">
+                    Processing...
+                  </p>
+                </div>
+              )}
+
               {uploadStatus === 'completed' ? (
                 <>
                   <p className="text-lg mt-2">
@@ -456,8 +465,6 @@ const OneAiUpload: FC<UploadParams> = ({
                   </p>
                 </>
               ) : null}
-
-              <p>Upload status: {uploadStatus}</p>
               <div className="flex flex-col w-full justify-center items-center">
                 <button
                   className="bg-[#1E1E2F] text-white text-lg font-bold py-2 px-4 rounded mt-4"
