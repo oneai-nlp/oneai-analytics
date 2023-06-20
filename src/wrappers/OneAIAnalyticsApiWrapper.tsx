@@ -78,7 +78,6 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   const [metaGroupClicked, setMetaGroupClicked] = useState(
     null as MetadataKeyValue | null
   );
-  const shouldRefetch = useRef(false);
 
   const previousValues = useRef({
     domain: null as string | null,
@@ -142,6 +141,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   useEffect(() => {
     const fetchData = async (controller: AbortController) => {
       setLoading(true);
+
       const currentClicked = clickedNodes.at(-1);
 
       if (currentMetaGroup !== 'text' && !currentClicked) {
@@ -254,7 +254,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
               setError(clusters.error);
               return setLoading(false);
             }
-
+            setError(null);
             if (labelsFilters.length === 0 && clusters.totalItems === 0) {
               return;
             }
@@ -279,15 +279,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
               clusters.totalItems,
               clusters.uniqueItemsStats
             );
-
             clearInterval(fetchClustersInterval);
-            shouldRefetch.current = false;
-            setError(null);
-          }, 2000);
-
-          if (shouldRefetch.current === true) {
-            return;
-          }
+          }, 1000);
         }
       } else if (currentClicked.type === 'Cluster') {
         const clusterId = (
@@ -407,7 +400,6 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           );
         }
       }
-      setLoading(false);
     };
     const controller = new AbortController();
     if (
@@ -452,6 +444,13 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
     currentPage,
     currentMetaGroup,
   ]);
+
+  useEffect(() => {
+    if (currentNodes.totalItems === 0 && labelsFilters.length === 0 && !error) {
+      return;
+    }
+    setLoading(false);
+  }, [currentNodes]);
 
   const nodeClicked = (node: { type: NodeType; id: string }) => {
     const currentNodeDetails = getNodeDetails(clickedNodes.at(-1), collection);

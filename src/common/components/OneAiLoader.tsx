@@ -1,13 +1,12 @@
 import type { LottiePlayer } from 'lottie-web';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
+import { loader } from '../assets/lottie/loader';
+import { OneAiLoaderProps } from '../types/componentsInputs';
 
-export const OneAiLoader = ({
+export const OneAiLoader: FC<OneAiLoaderProps> = ({
   height = '220px',
   width = '180px',
-}: {
-  height?: string;
-  width?: string;
-}) => {
+}: OneAiLoaderProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [lottie, setLottie] = useState<LottiePlayer | null>(null);
 
@@ -22,7 +21,7 @@ export const OneAiLoader = ({
         renderer: 'svg',
         loop: true,
         autoplay: true,
-        animationData: require('../assets/lottie/loader.json'),
+        animationData: loader,
       });
 
       return () => animation.destroy();
@@ -30,5 +29,7 @@ export const OneAiLoader = ({
     return;
   }, [lottie]);
 
-  return <div ref={ref} style={{ height, width }} />;
+  return (
+    <div ref={ref} role="alert" aria-busy="true" style={{ height, width }} />
+  );
 };

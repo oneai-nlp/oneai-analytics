@@ -15,6 +15,11 @@ import {
   MetadataKeyValue,
 } from './customizeBarTypes';
 
+export interface OneAiLoaderProps {
+  height?: string;
+  width?: string;
+}
+
 export interface DataNode {
   id: string;
   amount: number;

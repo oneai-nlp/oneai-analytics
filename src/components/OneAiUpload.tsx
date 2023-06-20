@@ -467,7 +467,7 @@ const OneAiUpload: FC<UploadParams> = ({
               ) : null}
               <div className="flex flex-col w-full justify-center items-center">
                 <button
-                  className="bg-[#1E1E2F] text-white text-lg font-bold py-2 px-4 rounded mt-4"
+                  className="bg-[#4D4DFE] text-white text-lg font-normal py-2 px-4 rounded-md mt-4"
                   onClick={() => {
                     setUploaded(false);
                     setUploadStatus(null);
@@ -476,12 +476,14 @@ const OneAiUpload: FC<UploadParams> = ({
                 >
                   Upload another file
                 </button>
-                {goToCollection && uploadStatus !== 'in progress' ? (
+                {goToCollection &&
+                uploadStatus !== 'in progress' &&
+                uploadStatus !== null ? (
                   <button
-                    className="bg-[#1E1E2F] text-white text-lg font-bold py-2 px-4 rounded mt-4"
+                    className="bg-[#4D4DFE] text-white text-lg font-normal py-2 px-4 rounded-md mt-4"
                     onClick={() => goToCollection()}
                   >
-                    Go to collection
+                    Go back to collection
                   </button>
                 ) : null}
               </div>

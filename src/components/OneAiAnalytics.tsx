@@ -244,12 +244,6 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   }, [currentNode, nodes]);
 
   useEffect(() => {
-    if (dataNodes.totalItems === 0 && labelsFilters?.length === 0) {
-      setLabels([]);
-    }
-  }, [dataNodes, labelsFilters]);
-
-  useEffect(() => {
     setNodes(
       dataNodes.nodes.map((d) => {
         const itemsCount = getNodeItemsCount(d);
@@ -382,7 +376,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
         className={`h-full w-full flex flex-col overflow-hidden bg-[#f3e5e5] dark:bg-[#161414] p-1 ${
           darkMode ? 'dark' : ''
         }`}
-        style={{ background: background }}
+        style={{ background }}
       >
         <ReactTooltip id="global" />
         <ReactTooltip
