@@ -610,7 +610,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                         <span
                           className="cursor-pointer hover:text-gray-600 dark:hover:text-gray-50"
                           onClick={() =>
-                            goBackClicked(nodesPath.length - 1 - i)
+                            goBackClicked(nodesPath.length - 1 - i || 1)
                           }
                           dir="auto"
                         >
