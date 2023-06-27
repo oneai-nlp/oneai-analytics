@@ -36,8 +36,8 @@
     "prepare": "dts build",
     "size": "size-limit",
     "analyze": "size-limit --why",
-    "sb": "storybook dev -p 6006",
-    "dev": "storybook dev -p 6006",
+    "sb": "storybook dev -p 6006 --no-open",
+    "dev": "storybook dev -p 6006 --no-open",
     "build-storybook": "NODE_OPTIONS=--openssl-legacy-provider storybook build -o docs-build"
   },
   "peerDependencies": {

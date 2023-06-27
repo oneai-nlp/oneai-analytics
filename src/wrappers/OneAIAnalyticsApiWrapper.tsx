@@ -24,6 +24,7 @@ import {
 } from '../common/utils/modalsUtils';
 import { getSecondsDiff, uniqBy } from '../common/utils/utils';
 import { OneAiAnalytics } from '../components/OneAiAnalytics';
+import { resolveDomain } from '../common/utils/externalInputs';
 
 const cache: Map<
   string,
@@ -44,14 +45,15 @@ const nodeToPageCache: Map<string, number> = new Map();
  * One AI Analytics api wrapper component
  */
 export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
-  domain = 'https://api.oneai.com',
+  domain = 'prod',
   apiKey = '',
   collection = '',
-  collectionName = collection,
+  collectionDisplayName = collection,
   refreshToken = '',
-  uniquePropertyName,
+  uniqueMetaKey: uniquePropertyName,
   ...rest
 }) => {
+  domain = resolveDomain(domain);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null as string | null);
   const [currentNodes, setCurrentNodes] = useState({
@@ -114,7 +116,6 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       previousValues.current.apiKey !== apiKey ||
       previousValues.current.collection !== collection ||
       previousValues.current.refreshToken !== refreshToken ||
-      previousValues.current.localRefreshToken !== localRefreshToken ||
       previousValues.current.lastMetaGroup !== currentMetaGroup
     ) {
       setCurrentNodes({ totalItems: 0, nodes: [] });
@@ -123,24 +124,17 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       cache.clear();
 
       previousValues.current = {
+        ...previousValues.current,
         domain,
         apiKey,
         collection,
         refreshToken,
-        localRefreshToken,
         clickedNodes: null,
         currentPage: null,
         lastMetaGroup: currentMetaGroup,
       };
     }
-  }, [
-    domain,
-    apiKey,
-    collection,
-    refreshToken,
-    localRefreshToken,
-    currentMetaGroup,
-  ]);
+  }, [domain, apiKey, collection, refreshToken, currentMetaGroup]);
 
   useEffect(() => {
     const fetchData = async (controller: AbortController) => {
@@ -227,6 +221,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           setTotalPages(cached.totalPages);
           setCurrentNodes({
             totalItems: cached.totalItems,
+            uniqueItemsStats: cached.uniqueItemsStats,
             nodes: cached.nodes,
           });
         } else {
@@ -304,7 +299,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             dateRange[1],
             [...labelsFilters, ...(metaGroupClicked ? [metaGroupClicked] : [])],
             trendPeriods,
-            propertiesFilters
+            propertiesFilters,
+            uniquePropertyName ? [uniquePropertyName] : []
           );
           if (phrases.error) {
             if (phrases.error.includes('AbortError')) {
@@ -322,6 +318,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           if (clickedNodes.at(-1) == currentClicked) {
             setCurrentNodes({
               totalItems: phrases.totalItems,
+              uniqueItemsStats: phrases.uniqueItemsStats,
               nodes: newNodes,
             });
             setTotalPages(phrases.totalPages);
@@ -332,7 +329,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             currentPage,
             newNodes,
             phrases.totalPages,
-            phrases.totalItems
+            phrases.totalItems,
+            phrases.uniqueItemsStats
           );
         }
       } else if (currentClicked.type === 'Phrase') {
@@ -399,8 +397,10 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       previousValues.current.collection !== collection ||
       previousValues.current.clickedNodes != clickedNodes ||
       previousValues.current.currentPage !== currentPage ||
+      previousValues.current.localRefreshToken !== localRefreshToken ||
       previousValues.current.lastMetaGroup !== currentMetaGroup
     ) {
+      cache.clear();
       fetchMetaClusters(controller).catch((e) => {
         console.error(e);
       });
@@ -410,13 +410,13 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       });
 
       previousValues.current = {
+        ...previousValues.current,
         domain,
-        apiKey,
         collection,
+        apiKey,
+        localRefreshToken,
         clickedNodes,
         currentPage,
-        refreshToken,
-        localRefreshToken,
         lastMetaGroup: currentMetaGroup,
       };
     }
@@ -424,7 +424,15 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
     return () => {
       controller.abort();
     };
-  }, [domain, collection, apiKey, clickedNodes, currentPage, currentMetaGroup]);
+  }, [
+    domain,
+    collection,
+    apiKey,
+    localRefreshToken,
+    clickedNodes,
+    currentPage,
+    currentMetaGroup,
+  ]);
 
   const nodeClicked = (node: { type: NodeType; id: string }) => {
     const currentNodeDetails = getNodeDetails(clickedNodes.at(-1), collection);
@@ -522,7 +530,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       loading={loading}
       error={error}
       nodesPath={[
-        { text: collectionName },
+        { text: collectionDisplayName },
         ...(metaGroupClicked
           ? [
               { text: metaGroupClicked.key },
@@ -624,7 +632,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           return current.length > 2 ? '1' : current + '1';
         })
       }
-      uniquePropertyName={uniquePropertyName}
+      uniqueMetaKey={uniquePropertyName}
       {...rest}
     />
   ) : null;
@@ -678,10 +686,12 @@ async function fetchPhrases(
   to: Date | null,
   labelsFilters: MetadataKeyValue[],
   trendPeriods: number,
-  propertiesFilters: Properties
+  propertiesFilters: Properties,
+  uniqueMetaData: string[]
 ): Promise<{
   totalPages: number;
   totalItems: number;
+  uniqueItemsStats?: UniqueItemsStats;
   data: Phrase[];
   error: string | null;
 }> {
@@ -695,7 +705,11 @@ async function fetchPhrases(
     to,
     labelsFilters,
     trendPeriods,
-    propertiesFilters
+    propertiesFilters,
+    uniqueMetaData.length > 0
+      ? '&include-metadata-stats=true&include-metadata-stats-names=' +
+          uniqueMetaData.join(',')
+      : ''
   );
 }
 
@@ -790,7 +804,7 @@ async function fetchApi<T>(
   const labelsFiltersString = labelsFilters
     .map((metadataKeyValue) =>
       metadataKeyValue.key && metadataKeyValue.value
-        ? `${metadataKeyValue.key} eq '${metadataKeyValue.value}'`
+        ? `'${metadataKeyValue.key}' eq '${metadataKeyValue.value}'`
         : ''
     )
     .filter((str) => str !== '');
@@ -798,7 +812,7 @@ async function fetchApi<T>(
   const propertiesFiltersString = Object.keys(propertiesFilters).map((key) => {
     const value = propertiesFilters[key];
     if (value) {
-      return `${key} neq '${value}'`;
+      return `'${key}' neq '${value}'`;
     }
 
     return '';

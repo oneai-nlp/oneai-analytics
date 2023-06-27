@@ -1,7 +1,7 @@
 import './common/patches/polyfill';
 import './index.css';
 import { OneAIAnalyticsApiWrapper } from './wrappers/OneAIAnalyticsApiWrapper';
-import { OneAIAnalyticsStaticDataWrapper } from './wrappers/OneAIAnalyticsStaticDataWrapper';
+import { OneAIAnalyticsStaticDataWrapper } from './wrappers/deprecated/OneAIAnalyticsStaticDataWrapper';
 export {
   BarChartProps,
   DataNode,

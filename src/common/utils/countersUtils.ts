@@ -327,13 +327,22 @@ export function trendCalculation(
 export function percentOfAllUniqueItemsCalculation(
   metadataKeyValue: MetadataKeyValue | null,
   metadata: MetaData,
-  __: Trend[],
+  trend: Trend[],
   countersConfigurations: CountersConfigurations,
   totalItems: number,
   totalUniqueItemsStats?: UniqueItemsStats,
   _?: UniqueItemsStats,
   uniquePropertyName?: string
 ) {
+  if (!uniquePropertyName)
+    return percentOfAllItemsCalculation(
+      metadataKeyValue,
+      metadata,
+      trend,
+      countersConfigurations,
+      totalItems
+    );
+
   if (!metadataKeyValue || !totalUniqueItemsStats || !uniquePropertyName)
     return { counter: null, result: 0 };
   const itemCounter = getMetadataKeyValueConfiguration(
@@ -354,23 +363,8 @@ export function percentOfAllUniqueItemsCalculation(
       (uv) => uv.meta_key === uniquePropertyName
     )?.unique_values_count ?? 0;
 
-  console.log(
-    'totalUniqueItemsStats',
-    totalUniqueItemsStats,
-    'uniquePropertyName',
-    uniquePropertyName,
-    'keyCount',
-    keyCount,
-    'itemCount',
-    itemCount
-  );
+  const result = keyCount === 0 ? 0 : (itemCount / keyCount) * 100;
 
-  let result;
-  if (metadataKeyValue.key === CUSTOM_METADATA_KEY) {
-    result = totalItems === 0 ? 0 : (itemCount / totalItems) * 100;
-  } else {
-    result = keyCount === 0 ? 0 : (itemCount / keyCount) * 100;
-  }
   return {
     result: result,
     counter: itemCounter,
@@ -381,32 +375,49 @@ export function percentOfAllUniqueItemsCalculation(
 
 export function totalUniqueItemsCalculation(
   metadataKeyValue: MetadataKeyValue | null,
-  ____: MetaData,
-  __: Trend[],
+  metadata: MetaData,
+  trend: Trend[],
   countersConfigurations: CountersConfigurations,
-  ___: number,
+  totalItems: number,
   _?: UniqueItemsStats,
   uniqueItemsStats?: UniqueItemsStats,
   uniquePropertyName?: string
 ) {
-  if (
-    !metadataKeyValue ||
-    !uniqueItemsStats ||
-    !uniquePropertyName ||
-    metadataKeyValue.key === CUSTOM_METADATA_KEY
-  )
+  if (!uniquePropertyName)
+    return totalSumCalculation(
+      metadataKeyValue,
+      metadata,
+      trend,
+      countersConfigurations,
+      totalItems
+    );
+
+  if (!metadataKeyValue || !uniqueItemsStats)
     return { counter: null, result: 0 };
 
-  const itemCounter = getMetadataKeyValueConfiguration(
-    metadataKeyValue,
-    countersConfigurations
-  );
+  let itemCounter;
+
+  if (metadataKeyValue.key === CUSTOM_METADATA_KEY) {
+    itemCounter = getMetadataKeyValueConfiguration(
+      { key: uniquePropertyName },
+      countersConfigurations
+    );
+  } else {
+    itemCounter = getMetadataKeyValueConfiguration(
+      metadataKeyValue,
+      countersConfigurations
+    );
+  }
 
   if (!itemCounter) return { counter: null, result: 0 };
 
   const keyCount =
     uniqueItemsStats.unique_values_count.find(
-      (uv) => uv.meta_key === metadataKeyValue.key
+      (uv) =>
+        uv.meta_key ===
+        (metadataKeyValue.key === CUSTOM_METADATA_KEY
+          ? uniquePropertyName
+          : metadataKeyValue.key)
     )?.unique_values_count ?? 0;
 
   return {

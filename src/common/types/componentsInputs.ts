@@ -80,7 +80,23 @@ export interface OneAIDataNode {
   data: Cluster | Phrase | Item | MetaCluster;
 }
 
-export interface OneAiAnalyticsProps {
+export interface OneAIUserInput {
+  darkMode?: boolean;
+  background?: string;
+  treemapBigColor?: string;
+  treemapSmallColor?: string;
+  treemapCountFontSize?: number;
+  fontFamily?: string;
+  textColor?: string;
+  treemapBorderWidth?: number;
+  treemapBorderColor?: string;
+  navbarColor?: string;
+  barColor?: string;
+  translationEnabled?: boolean;
+  uniqueMetaKey?: string;
+}
+
+export interface OneAiAnalyticsProps extends OneAIUserInput {
   dataNodes: {
     totalItems: number;
     uniqueItemsStats?: UniqueItemsStats;
@@ -93,17 +109,6 @@ export interface OneAiAnalyticsProps {
   goBackClicked?: (skip: number) => void;
   nextPageClicked?: () => void;
   prevPageClicked?: () => void;
-  darkMode?: boolean;
-  background?: string;
-  treemapBigColor?: string;
-  treemapSmallColor?: string;
-  treemapCountFontSize?: number;
-  fontFamily?: string;
-  textColor?: string;
-  treemapBorderWidth?: number;
-  treemapBorderColor?: string;
-  navbarColor?: string;
-  barColor?: string;
   itemsDisplay?: FC<ItemsDisplayComponentProps>;
   loading?: boolean;
   error?: string | null;
@@ -129,7 +134,6 @@ export interface OneAiAnalyticsProps {
     destination: string,
     controller: AbortController
   ) => Promise<{ status: 'Success' | 'error'; message: string }>;
-  translationEnabled?: boolean;
   toggleHide?: (
     node: {
       type: NodeType;
@@ -145,24 +149,20 @@ export interface OneAiAnalyticsProps {
   currentMetaOption?: string;
   metaOptionsChanged?: (option: string) => void;
   refresh?: () => void;
-  uniquePropertyName?: string;
 }
 
 export type OneAIAnalyticsStaticDataWrapperProps = Omit<
-  OneAiAnalyticsProps & { exampleNodes: ExampleNode[]; collection?: string },
+  OneAIUserInput & { exampleNodes: ExampleNode[]; collection?: string },
   'dataNodes' | 'totalPagesAmount' | 'currentPage'
 >;
 
-export type OneAIAnalyticsApiWrapperProps = Omit<
-  OneAiAnalyticsProps & {
-    domain?: string;
-    apiKey?: string;
-    collection?: string;
-    collectionName?: string;
-    refreshToken?: string;
-  },
-  'dataNodes' | 'totalPagesAmount' | 'currentPage'
->;
+export type OneAIAnalyticsApiWrapperProps = {
+  domain?: string | 'prod' | 'staging';
+  apiKey?: string;
+  collection?: string;
+  collectionDisplayName?: string;
+  refreshToken?: string;
+} & OneAIUserInput;
 
 export interface ExampleNode {
   type: NodeType;

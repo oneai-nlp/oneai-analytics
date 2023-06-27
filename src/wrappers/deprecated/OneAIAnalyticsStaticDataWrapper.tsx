@@ -1,14 +1,14 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
-import { PAGE_SIZE } from '../common/configurations/commonConfigurations';
+import { PAGE_SIZE } from '../../common/configurations/commonConfigurations';
 import {
   ExampleNode,
   NodeType,
   OneAIAnalyticsStaticDataWrapperProps,
   OneAIDataNode,
-} from '../common/types/componentsInputs';
-import { Cluster, Item, Phrase } from '../common/types/modals';
-import { chunks } from '../common/utils/utils';
-import { OneAiAnalytics } from '../components/OneAiAnalytics';
+} from '../../common/types/componentsInputs';
+import { Cluster, Item, Phrase } from '../../common/types/modals';
+import { chunks } from '../../common/utils/utils';
+import { OneAiAnalytics } from '../../components/OneAiAnalytics';
 
 // Please do not use types off of a default export module or else Storybook Docs will suffer.
 // see: https://github.com/storybookjs/storybook/issues/9556
