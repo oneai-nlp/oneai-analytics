@@ -377,7 +377,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
         className={`h-full w-full flex flex-col overflow-hidden bg-[#f3e5e5] dark:bg-[#161414] p-1 ${
           darkMode ? 'dark' : ''
         }`}
-        style={{ background: background }}
+        style={{ background }}
       >
         <ReactTooltip id="global" />
         <ReactTooltip

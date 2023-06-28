@@ -141,6 +141,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   useEffect(() => {
     const fetchData = async (controller: AbortController) => {
       setLoading(true);
+
       const currentClicked = clickedNodes.at(-1);
 
       if (currentMetaGroup !== 'text' && !currentClicked) {
@@ -227,51 +228,59 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             nodes: cached.nodes,
           });
         } else {
-          const clusters = await fetchClusters(
-            controller,
-            domain,
-            collection,
-            apiKey,
-            currentPage,
-            dateRange[0],
-            dateRange[1],
-            [...labelsFilters, ...(metaGroupClicked ? [metaGroupClicked] : [])],
-            trendPeriods,
-            propertiesFilters,
-            uniquePropertyName ? [uniquePropertyName] : []
-          );
-          if (clusters.error) {
-            if (clusters.error.includes('AbortError')) {
+          const fetchClustersInterval = setInterval(async () => {
+            const clusters = await fetchClusters(
+              controller,
+              domain,
+              collection,
+              apiKey,
+              currentPage,
+              dateRange[0],
+              dateRange[1],
+              [
+                ...labelsFilters,
+                ...(metaGroupClicked ? [metaGroupClicked] : []),
+              ],
+              trendPeriods,
+              propertiesFilters,
+              uniquePropertyName ? [uniquePropertyName] : []
+            );
+
+            if (clusters.error) {
+              if (clusters.error.includes('AbortError')) {
+                return;
+              }
+
+              setError(clusters.error);
+              return setLoading(false);
+            }
+            setError(null);
+            if (labelsFilters.length === 0 && clusters.totalItems === 0) {
               return;
             }
-
-            setError(clusters.error);
-            return setLoading(false);
-          }
-          setError(null);
-
-          const newNodes = clusters.data.map((c) => {
-            return { type: 'Cluster' as NodeType, data: c };
-          });
-
-          if (clickedNodes.at(-1) == currentClicked) {
-            setCurrentNodes({
-              totalItems: clusters.totalItems,
-              uniqueItemsStats: clusters.uniqueItemsStats,
-              nodes: newNodes,
+            const newNodes = clusters.data.map((c) => {
+              return { type: 'Cluster' as NodeType, data: c };
             });
-            setTotalPages(clusters.totalPages);
-          }
 
-          setNodesDataInCache(
-            'Collection',
-            collection,
-            currentPage,
-            newNodes,
-            clusters.totalPages,
-            clusters.totalItems,
-            clusters.uniqueItemsStats
-          );
+            if (clickedNodes.at(-1) == currentClicked) {
+              setCurrentNodes({
+                totalItems: clusters.totalItems,
+                uniqueItemsStats: clusters.uniqueItemsStats,
+                nodes: newNodes,
+              });
+              setTotalPages(clusters.totalPages);
+            }
+            setNodesDataInCache(
+              'Collection',
+              collection,
+              currentPage,
+              newNodes,
+              clusters.totalPages,
+              clusters.totalItems,
+              clusters.uniqueItemsStats
+            );
+            clearInterval(fetchClustersInterval);
+          }, 1000);
         }
       } else if (currentClicked.type === 'Cluster') {
         const clusterId = (
@@ -304,6 +313,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             propertiesFilters,
             uniquePropertyName ? [uniquePropertyName] : []
           );
+
           if (phrases.error) {
             if (phrases.error.includes('AbortError')) {
               return;
@@ -390,7 +400,6 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           );
         }
       }
-      setLoading(false);
     };
     const controller = new AbortController();
     if (
@@ -435,6 +444,13 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
     currentPage,
     currentMetaGroup,
   ]);
+
+  useEffect(() => {
+    if (currentNodes.totalItems === 0 && labelsFilters.length === 0 && !error) {
+      return;
+    }
+    setLoading(false);
+  }, [currentNodes, labelsFilters, error]);
 
   const nodeClicked = (node: { type: NodeType; id: string }) => {
     const currentNodeDetails = getNodeDetails(clickedNodes.at(-1), collection);
