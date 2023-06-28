@@ -5,7 +5,7 @@ import {
   ChevronUpIcon,
   FunnelIcon,
 } from '@heroicons/react/24/outline';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useRef, useState } from 'react';
 import {
   CountersConfigurations,
   MetadataKeyValue,
@@ -23,10 +23,33 @@ export default function LabelsFiltersSelect({
   ) => void;
   countersConfigurations: CountersConfigurations;
 }) {
+  const [position, setPosition] = React.useState(false);
+  const ref = useRef(null);
+
+  const onClick = () => {
+    if (typeof window !== 'undefined') {
+      setTimeout(() => {
+        if (ref.current) {
+          //@ts-ignore
+          const popover = ref.current.getBoundingClientRect();
+
+          if (popover.bottom >= window.innerHeight) {
+            setPosition(true);
+          } else {
+            setPosition(false);
+          }
+        }
+      }, 100);
+    }
+  };
+
   return (
     <Listbox>
       <div className="relative">
-        <Listbox.Button className="relative rounded-lg  py-2 pl-3 pr-10 text-left focus:outline-none sm:text-sm">
+        <Listbox.Button
+          className="relative rounded-lg  py-2 pl-3 pr-10 text-left focus:outline-none sm:text-sm"
+          onClick={onClick}
+        >
           <span
             className="block truncate lowercase first-letter:uppercase text-black dark:text-white !text-xl"
             style={{ width: '1em', height: '1em' }}
@@ -46,7 +69,14 @@ export default function LabelsFiltersSelect({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="fixed mt-1 z-10 max-h-60 scrollbar-thin scrollbar-thumb-[#747189] scrollbar-track-[#272533] overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full rounded-md bg-gray-200 dark:bg-[#272533] py-1 text-base shadow-lg ring-1 ring-gray-500 dark:ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <Listbox.Options
+            ref={ref}
+            className={`fixed ${
+              position ? '-mt-[200px]' : 'mt-3'
+            } z-10 max-h-60 scrollbar-thin scrollbar-thumb-[#747189] scrollbar-track-[#272533] 
+          overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full rounded-md bg-gray-600 
+          dark:bg-[#272533] py-1 text-base shadow-lg ring-1 ring-gray-500 dark:ring-black ring-opacity-5 focus:outline-none sm:text-sm`}
+          >
             {uniqBy(
               Object.keys(countersConfigurations).sort((a, b) =>
                 a < b ? -1 : a > b ? 1 : 0
@@ -102,9 +132,9 @@ function CascadedOption({
             onClick={() => setOpened((opened) => !opened)}
           >
             {opened ? (
-              <ChevronUpIcon className="h-4 w-4 text-gray-500 dark:text-gray-300 " />
+              <ChevronUpIcon className="h-4 w-4 text-gray-500 dark:text-gray-300" />
             ) : (
-              <ChevronDownIcon className="h-4 w-4 text-gray-500 dark:text-gray-300 " />
+              <ChevronDownIcon className="h-4 w-4 text-gray-500 dark:text-gray-300" />
             )}
             <span className="sr-only">Open or Close metadata</span>
           </button>

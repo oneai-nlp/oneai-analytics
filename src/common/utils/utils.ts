@@ -112,7 +112,7 @@ export function getNumberDescription(numIn: number): string {
       result = Math.round((result * decPlaces) / size) / decPlaces;
 
       // Handle special case where we round up to the next abbreviation
-      if (result == 1000 && i < abbrev.length - 1) {
+      if (result === 1000 && i < abbrev.length - 1) {
         result = 1;
         i++;
       }
