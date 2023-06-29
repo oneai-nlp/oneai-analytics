@@ -1,7 +1,7 @@
-import type { LottiePlayer } from 'lottie-web';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { loader } from '../assets/lottie/loader';
 import { OneAiLoaderProps } from '../types/componentsInputs';
+import { LottiePlayer } from 'lottie-web';
 
 export const OneAiLoader: FC<OneAiLoaderProps> = ({
   height = '220px',
