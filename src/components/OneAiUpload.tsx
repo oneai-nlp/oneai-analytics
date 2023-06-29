@@ -755,7 +755,7 @@ const OneAiUpload: FC<UploadParams> = ({
                       }}
                       className="py-3 px-4 bg-[#435BFF] rounded-md"
                     >
-                      Browse File
+                      Browse file
                     </button>
                     <div className="flex flex-row items-center justify-items-center space-x-8 text-xs w-[60%]">
                       <ul className="flex-1 flex-wrap list-disc list-inside text-gray-500 dark:text-gray-400">
