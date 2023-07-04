@@ -228,59 +228,51 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             nodes: cached.nodes,
           });
         } else {
-          const fetchClustersInterval = setInterval(async () => {
-            const clusters = await fetchClusters(
-              controller,
-              domain,
-              collection,
-              apiKey,
-              currentPage,
-              dateRange[0],
-              dateRange[1],
-              [
-                ...labelsFilters,
-                ...(metaGroupClicked ? [metaGroupClicked] : []),
-              ],
-              trendPeriods,
-              propertiesFilters,
-              uniquePropertyName ? [uniquePropertyName] : []
-            );
+          const clusters = await fetchClusters(
+            controller,
+            domain,
+            collection,
+            apiKey,
+            currentPage,
+            dateRange[0],
+            dateRange[1],
+            [...labelsFilters, ...(metaGroupClicked ? [metaGroupClicked] : [])],
+            trendPeriods,
+            propertiesFilters,
+            uniquePropertyName ? [uniquePropertyName] : []
+          );
 
-            if (clusters.error) {
-              if (clusters.error.includes('AbortError')) {
-                return;
-              }
-
-              setError(clusters.error);
-              return setLoading(false);
-            }
-            setError(null);
-            if (labelsFilters.length === 0 && clusters.totalItems === 0) {
+          if (clusters.error) {
+            if (clusters.error.includes('AbortError')) {
               return;
             }
-            const newNodes = clusters.data.map((c) => {
-              return { type: 'Cluster' as NodeType, data: c };
-            });
 
-            if (clickedNodes.at(-1) == currentClicked) {
-              setCurrentNodes({
-                totalItems: clusters.totalItems,
-                uniqueItemsStats: clusters.uniqueItemsStats,
-                nodes: newNodes,
-              });
-              setTotalPages(clusters.totalPages);
-            }
-            setNodesDataInCache(
-              'Collection',
-              collection,
-              currentPage,
-              newNodes,
-              clusters.totalPages,
-              clusters.totalItems,
-              clusters.uniqueItemsStats
-            );
-            clearInterval(fetchClustersInterval);
-          }, 1000);
+            setError(clusters.error);
+            return setLoading(false);
+          }
+          setError(null);
+
+          const newNodes = clusters.data.map((c) => {
+            return { type: 'Cluster' as NodeType, data: c };
+          });
+
+          if (clickedNodes.at(-1) == currentClicked) {
+            setCurrentNodes({
+              totalItems: clusters.totalItems,
+              uniqueItemsStats: clusters.uniqueItemsStats,
+              nodes: newNodes,
+            });
+            setTotalPages(clusters.totalPages);
+          }
+          setNodesDataInCache(
+            'Collection',
+            collection,
+            currentPage,
+            newNodes,
+            clusters.totalPages,
+            clusters.totalItems,
+            clusters.uniqueItemsStats
+          );
         }
       } else if (currentClicked.type === 'Cluster') {
         const clusterId = (
@@ -400,7 +392,9 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           );
         }
       }
+      setLoading(false);
     };
+
     const controller = new AbortController();
     if (
       previousValues.current.domain !== domain ||
@@ -444,13 +438,6 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
     currentPage,
     currentMetaGroup,
   ]);
-
-  useEffect(() => {
-    if (currentNodes.totalItems === 0 && labelsFilters.length === 0 && !error) {
-      return;
-    }
-    setLoading(false);
-  }, [currentNodes, labelsFilters, error]);
 
   const nodeClicked = (node: { type: NodeType; id: string }) => {
     const currentNodeDetails = getNodeDetails(clickedNodes.at(-1), collection);
