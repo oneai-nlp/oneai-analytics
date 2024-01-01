@@ -1,16 +1,38 @@
 import { format } from 'date-fns';
-import React, { FC, useEffect, useRef, useState } from 'react';
-import { PAGE_SIZE } from '../common/configurations/commonConfigurations';
+import React, {
+  FC,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import {
+  CUSTOM_METADATA_KEY,
+  PAGE_SIZE,
+  colorAxisStorageKey,
+  countersStorageKey,
+  labelsStorageKey,
+  sizeAxisStorageKey,
+} from '../common/configurations/commonConfigurations';
 import {
   NodeType,
   OneAIAnalyticsApiWrapperProps,
   OneAIDataNode,
 } from '../common/types/componentsInputs';
-import { MetadataKeyValue } from '../common/types/customizeBarTypes';
+import {
+  CalculationConfiguration,
+  CounterConfiguration,
+  CounterType,
+  CountersConfigurations,
+  CountersLocalStorageObject,
+  MetadataKeyValue,
+} from '../common/types/customizeBarTypes';
 import {
   Cluster,
   Item,
   MetaCluster,
+  MetaData,
   Phrase,
   Properties,
   UniqueItemsStats,
@@ -21,10 +43,19 @@ import {
   getNodeId,
   getNodeOriginalAndTranslatedText,
   getNodeText,
+  mergeMetadata,
 } from '../common/utils/modalsUtils';
 import { getSecondsDiff, uniqBy } from '../common/utils/utils';
 import { OneAiAnalytics } from '../components/OneAiAnalytics';
 import { resolveDomain } from '../common/utils/externalInputs';
+import { defaultCountersConfigurations } from '../common/configurations/countersConfigurations';
+import { defaultCalculations } from '../common/configurations/defaultConfigurations';
+import {
+  percentOfItemsCalculationName,
+  percentOfTotalUniqueItemsCalculationName,
+  topGroupPercentCalculationName,
+  totalUniqueItemsCalculationName,
+} from '../common/configurations/calculationsConfigurations';
 
 const cache: Map<
   string,
@@ -78,6 +109,55 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   const [metaGroupClicked, setMetaGroupClicked] = useState(
     null as MetadataKeyValue | null
   );
+  const [collectionMetadata, setCollectionMetadata] = useState({} as MetaData);
+  const [countersConfigurations, setCountersConfigurations] = useState(
+    {} as CountersConfigurations
+  );
+  const [labels, setLabels] = useState([] as string[]);
+  const [counters, setCounters] = useState([] as CounterType[]);
+  const [sizeAxis, setSizeAxis] = useState(null as MetadataKeyValue | null);
+  const [colorAxis, setColorAxis] = useState([] as CounterType[]);
+
+  const getMetadataKeys = useCallback(
+    (metadata: MetadataKeyValue) => {
+      if (metadata.key === CUSTOM_METADATA_KEY) return [];
+      if (!countersConfigurations[metadata.key]) return [metadata.key];
+
+      const counterConfiguration = countersConfigurations[metadata.key];
+      if (!counterConfiguration.isGroup) return [metadata.key];
+
+      return (
+        counterConfiguration.items
+          ?.map(
+            (item) =>
+              item.members?.map((member) => member.metadataName ?? '') ?? []
+          )
+          .flat() ?? []
+      );
+    },
+    [countersConfigurations]
+  );
+
+  const whitelistMetadata = useMemo(() => {
+    return Array.from(
+      new Set([
+        ...counters.flatMap((counter) =>
+          counter.metadataKeyValue
+            ? getMetadataKeys(counter.metadataKeyValue)
+            : []
+        ),
+        ...colorAxis.flatMap((counter) =>
+          counter.metadataKeyValue
+            ? getMetadataKeys(counter.metadataKeyValue)
+            : []
+        ),
+        ...labels.flatMap((label) => getMetadataKeys({ key: label })),
+        ...(uniquePropertyName ? [uniquePropertyName] : []),
+      ])
+    );
+  }, [labels, counters, sizeAxis, colorAxis, uniquePropertyName]);
+
+  console.log(whitelistMetadata);
 
   const previousValues = useRef({
     domain: null as string | null,
@@ -110,7 +190,161 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
 
     const mappedNodes = newNodes?.map((n) => n.data.meta_key) ?? [];
     setMetaOptions(mappedNodes);
+    setCollectionMetadata(
+      newNodes.reduce(
+        (finalMetadata, currentNode) =>
+          mergeMetadata(
+            finalMetadata,
+            currentNode.data.metadata,
+            currentNode.data.items_count
+          ),
+        {}
+      )
+    );
   };
+
+  useEffect(() => {
+    setLabels(
+      JSON.parse(
+        localStorage.getItem(
+          getCurrentStorageKey(labelsStorageKey, collection)
+        ) ?? '[]'
+      )
+    );
+
+    setCounters(
+      getInitialCounterTypes(
+        defaultCalculations,
+        [
+          {
+            metadataKeyValue: { key: CUSTOM_METADATA_KEY },
+            calculationName: percentOfTotalUniqueItemsCalculationName,
+          },
+          {
+            metadataKeyValue: { key: CUSTOM_METADATA_KEY },
+            calculationName: totalUniqueItemsCalculationName,
+          },
+          {
+            metadataKeyValue: { key: 'signals' },
+            calculationName: topGroupPercentCalculationName,
+          },
+        ],
+        collection,
+        countersStorageKey
+      ) as CounterType[]
+    );
+
+    const storedSizeAxis = localStorage.getItem(
+      getCurrentStorageKey(sizeAxisStorageKey, collection)
+    );
+    setSizeAxis(
+      storedSizeAxis ? JSON.parse(storedSizeAxis) : { key: CUSTOM_METADATA_KEY }
+    );
+
+    setColorAxis(
+      getInitialCounterTypes(
+        defaultCalculations,
+        [
+          {
+            metadataKeyValue: { key: 'signals', value: 'positive' },
+            calculationName: percentOfItemsCalculationName,
+          },
+          {
+            metadataKeyValue: { key: 'signals', value: 'negative' },
+            calculationName: percentOfItemsCalculationName,
+          },
+        ],
+        collection,
+        colorAxisStorageKey
+      ) as CounterType[]
+    );
+  }, [collection]);
+
+  useEffect(() => {
+    const storedCounters = counters.map((counter) => {
+      return {
+        metadataKeyValue: counter.metadataKeyValue,
+        calculationName: counter.calculationConfiguration.name,
+      } as CountersLocalStorageObject;
+    });
+
+    const storedColorAxis = colorAxis.map((counter) => {
+      return {
+        metadataKeyValue: counter.metadataKeyValue,
+        calculationName: counter.calculationConfiguration.name,
+      } as CountersLocalStorageObject;
+    });
+
+    if (collection) {
+      localStorage.setItem(
+        getCurrentStorageKey(countersStorageKey, collection),
+        JSON.stringify(storedCounters)
+      );
+      localStorage.setItem(
+        getCurrentStorageKey(labelsStorageKey, collection),
+        JSON.stringify(labels)
+      );
+      localStorage.setItem(
+        getCurrentStorageKey(colorAxisStorageKey, collection),
+        JSON.stringify(storedColorAxis)
+      );
+      localStorage.setItem(
+        getCurrentStorageKey(sizeAxisStorageKey, collection),
+        JSON.stringify(sizeAxis)
+      );
+    }
+  }, [counters, labels, sizeAxis, colorAxis]);
+
+  useEffect(() => {
+    const newCountersConfigurations: CountersConfigurations = {};
+    Object.keys(collectionMetadata)
+      .concat(Object.keys(defaultCountersConfigurations))
+      .forEach((key) => {
+        const defaultConfig = defaultCountersConfigurations[key];
+        const valuesConfigured =
+          defaultConfig?.items?.map((group) => group.label) ?? [];
+        const counterConfiguration: CounterConfiguration = {
+          label: (defaultConfig?.label ?? key).toLowerCase(),
+          display: defaultConfig?.display,
+          members: defaultConfig?.members ?? [{ metadataName: key }],
+          isGroup: defaultConfig?.isGroup ?? false,
+          items:
+            key === CUSTOM_METADATA_KEY
+              ? undefined
+              : (
+                  defaultConfig?.items?.map((group) => {
+                    return {
+                      label: group.label,
+                      display: group.display,
+                      isGroup: group.isGroup,
+                      members: group.members?.map((member) => {
+                        return {
+                          metadataName: member.metadataName ?? key,
+                          values: member.values,
+                        };
+                      }) ?? [
+                        { metadataName: key, values: [group.label ?? ''] },
+                      ],
+                    };
+                  }) ?? []
+                ).concat(
+                  collectionMetadata[key]
+                    ?.filter((meta) => !valuesConfigured.includes(meta.value))
+                    .map((meta) => {
+                      return {
+                        label: meta.value,
+                        members: [{ metadataName: key, values: [meta.value] }],
+                        display: undefined,
+                        isGroup: false,
+                      };
+                    }) ?? []
+                ),
+        };
+        newCountersConfigurations[key] = counterConfiguration;
+      });
+
+    setCountersConfigurations(newCountersConfigurations);
+  }, [collectionMetadata]);
 
   useEffect(() => {
     if (
@@ -239,7 +473,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             [...labelsFilters, ...(metaGroupClicked ? [metaGroupClicked] : [])],
             trendPeriods,
             propertiesFilters,
-            uniquePropertyName ? [uniquePropertyName] : []
+            uniquePropertyName ? [uniquePropertyName] : [],
+            whitelistMetadata
           );
 
           if (clusters.error) {
@@ -303,7 +538,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             [...labelsFilters, ...(metaGroupClicked ? [metaGroupClicked] : [])],
             trendPeriods,
             propertiesFilters,
-            uniquePropertyName ? [uniquePropertyName] : []
+            uniquePropertyName ? [uniquePropertyName] : [],
+            whitelistMetadata
           );
 
           if (phrases.error) {
@@ -362,7 +598,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
             dateRange[1],
             [...labelsFilters, ...(metaGroupClicked ? [metaGroupClicked] : [])],
             trendPeriods,
-            propertiesFilters
+            propertiesFilters,
+            whitelistMetadata
           );
           if (items.error) {
             if (items.error.includes('AbortError')) {
@@ -638,6 +875,16 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
         })
       }
       uniqueMetaKey={uniquePropertyName}
+      collectionMetadata={collectionMetadata}
+      countersConfigurations={countersConfigurations}
+      labels={labels}
+      setLabels={(labels) => setLabels(labels)}
+      counters={counters}
+      setCounters={(counters) => setCounters(counters)}
+      sizeAxis={sizeAxis}
+      setSizeAxis={(sizeAxis) => setSizeAxis(sizeAxis)}
+      colorAxis={colorAxis}
+      setColorAxis={(colorAxis) => setColorAxis(colorAxis)}
       {...rest}
     />
   ) : null;
@@ -654,7 +901,8 @@ async function fetchClusters(
   labelsFilters: MetadataKeyValue[],
   trendPeriods: number,
   propertiesFilters: Properties,
-  uniqueMetaData: string[]
+  uniqueMetaData: string[],
+  whitelistMetadata?: string[]
 ): Promise<{
   totalPages: number;
   totalItems: number;
@@ -673,10 +921,13 @@ async function fetchClusters(
     labelsFilters,
     trendPeriods,
     propertiesFilters,
-    uniqueMetaData.length > 0
+    (uniqueMetaData.length > 0
       ? '&include-metadata-stats=true&include-metadata-stats-names=' +
-          uniqueMetaData.join(',')
-      : ''
+        uniqueMetaData.join(',')
+      : '') +
+      (whitelistMetadata
+        ? '&metadata-whitelist=' + whitelistMetadata.join(',')
+        : '')
   );
 }
 
@@ -692,7 +943,8 @@ async function fetchPhrases(
   labelsFilters: MetadataKeyValue[],
   trendPeriods: number,
   propertiesFilters: Properties,
-  uniqueMetaData: string[]
+  uniqueMetaData: string[],
+  whitelistMetadata?: string[]
 ): Promise<{
   totalPages: number;
   totalItems: number;
@@ -711,10 +963,13 @@ async function fetchPhrases(
     labelsFilters,
     trendPeriods,
     propertiesFilters,
-    uniqueMetaData.length > 0
+    (uniqueMetaData.length > 0
       ? '&include-metadata-stats=true&include-metadata-stats-names=' +
-          uniqueMetaData.join(',')
-      : ''
+        uniqueMetaData.join(',')
+      : '') +
+      (whitelistMetadata
+        ? '&metadata-whitelist=' + whitelistMetadata.join(',')
+        : '')
   );
 }
 
@@ -729,7 +984,8 @@ async function fetchItems(
   to: Date | null,
   labelsFilters: MetadataKeyValue[],
   trendPeriods: number,
-  propertiesFilters: Properties
+  propertiesFilters: Properties,
+  whitelistMetadata?: string[]
 ): Promise<{
   totalPages: number;
   totalItems: number;
@@ -746,7 +1002,10 @@ async function fetchItems(
     to,
     labelsFilters,
     trendPeriods,
-    propertiesFilters
+    propertiesFilters,
+    whitelistMetadata
+      ? '&metadata-whitelist=' + whitelistMetadata.join(',')
+      : undefined
   );
 }
 
@@ -809,7 +1068,7 @@ async function fetchApi<T>(
   const labelsFiltersString = labelsFilters
     .map((metadataKeyValue) =>
       metadataKeyValue.key && metadataKeyValue.value
-        ? `'${metadataKeyValue.key}' eq '${metadataKeyValue.value}'`
+        ? `"${metadataKeyValue.key}" eq "${metadataKeyValue.value}"`
         : ''
     )
     .filter((str) => str !== '');
@@ -817,7 +1076,7 @@ async function fetchApi<T>(
   const propertiesFiltersString = Object.keys(propertiesFilters).map((key) => {
     const value = propertiesFilters[key];
     if (value) {
-      return `'${key}' neq '${value}'`;
+      return `"${key}" neq "${value}"`;
     }
 
     return '';
@@ -1124,4 +1383,31 @@ async function toggleHide(
   } catch (e) {
     console.error('error occurred ->', e);
   }
+}
+
+function getInitialCounterTypes(
+  calculationConfiguration: CalculationConfiguration[],
+  defaultCounters: CountersLocalStorageObject[],
+  collection: string,
+  storageKey: string
+): CounterType[] {
+  const storedCounters: CountersLocalStorageObject[] = JSON.parse(
+    localStorage.getItem(getCurrentStorageKey(storageKey, collection)) ?? '[]'
+  );
+  const counters = storedCounters.length > 0 ? storedCounters : defaultCounters;
+
+  return counters
+    .map((counter) => {
+      return {
+        calculationConfiguration: calculationConfiguration.find(
+          (calc) => calc.name === counter.calculationName
+        ),
+        metadataKeyValue: counter.metadataKeyValue,
+      } as CounterType;
+    })
+    .filter((calc) => calc.calculationConfiguration !== undefined);
+}
+
+function getCurrentStorageKey(prefix: string, collection: string) {
+  return `${prefix}-${collection}`;
 }

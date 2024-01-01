@@ -5,7 +5,7 @@ import {
   EyeSlashIcon,
   LanguageIcon,
 } from '@heroicons/react/24/outline';
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 import ReactTooltip from 'react-tooltip';
 import LabelDisplay from '../common/components/CountersLabels/LabelDisplay';
@@ -15,19 +15,7 @@ import CountersLabelsDisplay from '../common/components/CountersLabelsDisplay';
 import CustomizeTab from '../common/components/CustomizeTab';
 import DatesFilters from '../common/components/DatesFilters';
 import ItemActions from '../common/components/ItemActions';
-import {
-  percentOfItemsCalculationName,
-  percentOfTotalUniqueItemsCalculationName,
-  topGroupPercentCalculationName,
-  totalUniqueItemsCalculationName,
-} from '../common/configurations/calculationsConfigurations';
-import {
-  CUSTOM_METADATA_KEY,
-  colorAxisStorageKey,
-  countersStorageKey,
-  labelsStorageKey,
-  sizeAxisStorageKey,
-} from '../common/configurations/commonConfigurations';
+import { CUSTOM_METADATA_KEY } from '../common/configurations/commonConfigurations';
 import { defaultCountersConfigurations } from '../common/configurations/countersConfigurations';
 import { defaultCalculations } from '../common/configurations/defaultConfigurations';
 import {
@@ -35,28 +23,14 @@ import {
   NodeType,
   OneAiAnalyticsProps,
 } from '../common/types/componentsInputs';
+import { Cluster, Item, Properties, Trend } from '../common/types/modals';
 import {
-  CalculationConfiguration,
-  CounterConfiguration,
-  CounterType,
-  CountersConfigurations,
-  CountersLocalStorageObject,
-  MetadataKeyValue,
-} from '../common/types/customizeBarTypes';
-import {
-  Cluster,
-  Item,
-  MetaData,
-  Properties,
-  Trend,
-} from '../common/types/modals';
-import {
-  COLLECTION_TYPE,
   getNodeId,
   getNodeItemsCount,
   getNodeOriginalAndTranslatedText,
   getNodeText,
   getNodeTrends,
+  mergeMetadata,
 } from '../common/utils/modalsUtils';
 import { BarChart } from './BarChart';
 import { ItemsListDisplay } from './ItemsListDisplay';
@@ -111,26 +85,27 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   metaOptionsChanged = () => {},
   refresh = () => {},
   uniqueMetaKey: uniquePropertyName,
+  collectionMetadata = {},
+  countersConfigurations = defaultCountersConfigurations,
+  labels = [],
+  setLabels = () => {},
+  counters = [],
+  setCounters = () => {},
+  sizeAxis = null,
+  setSizeAxis = () => {},
+  colorAxis = [],
+  setColorAxis = () => {},
 }) => {
   const [display, setDisplay] = useState('Treemap' as Displays);
   const { width, height, ref } = useResizeDetector();
-  const [metaData, setMetaData] = useState({} as MetaData);
   const [nodes, setNodes] = useState([] as DataNode[]);
-  const [labels, setLabels] = useState([] as string[]);
-  const [counters, setCounters] = useState([] as CounterType[]);
-  const [sizeAxis, setSizeAxis] = useState(null as MetadataKeyValue | null);
-  const [colorAxis, setColorAxis] = useState([] as CounterType[]);
-  const [countersConfigurations, setCountersConfigurations] = useState(
-    {} as CountersConfigurations
-  );
   const [currentNodeActions, setCurrentNodeActions] = useState(
     null as { type: NodeType; id: string; text: string } | null
   );
   const [translate, setTranslate] = useState(false);
   const [fromDate, setFromDate] = useState(null as Date | null);
   const [toDate, setToDate] = useState(null as Date | null);
-  const loadedNodes = useRef([] as { type: string; id: string }[]);
-  const currentCollection = useRef(null as string | null);
+  // const loadedNodes = useRef([] as { type: string; id: string }[]);
   const [currentHoveredNode, setCurrentHoveredNode] = useState(
     null as {
       type: NodeType;
@@ -139,109 +114,6 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
       properties: Properties;
     } | null
   );
-
-  useEffect(() => {
-    if (
-      !nodesPath ||
-      nodesPath.length === 0 ||
-      currentCollection.current === nodesPath[0].text
-    )
-      return;
-
-    currentCollection.current = nodesPath[0].text;
-    setLabels(
-      JSON.parse(
-        localStorage.getItem(
-          getCurrentStorageKey(labelsStorageKey, currentCollection.current)
-        ) ?? '[]'
-      )
-    );
-
-    setCounters(
-      getInitialCounterTypes(
-        defaultCalculations,
-        [
-          {
-            metadataKeyValue: { key: CUSTOM_METADATA_KEY },
-            calculationName: percentOfTotalUniqueItemsCalculationName,
-          },
-          {
-            metadataKeyValue: { key: CUSTOM_METADATA_KEY },
-            calculationName: totalUniqueItemsCalculationName,
-          },
-          {
-            metadataKeyValue: { key: 'signals' },
-            calculationName: topGroupPercentCalculationName,
-          },
-        ],
-        currentCollection.current,
-        countersStorageKey
-      ) as CounterType[]
-    );
-
-    const storedSizeAxis = localStorage.getItem(
-      getCurrentStorageKey(sizeAxisStorageKey, currentCollection.current)
-    );
-    setSizeAxis(
-      storedSizeAxis ? JSON.parse(storedSizeAxis) : { key: CUSTOM_METADATA_KEY }
-    );
-
-    setColorAxis(
-      getInitialCounterTypes(
-        defaultCalculations,
-        [
-          {
-            metadataKeyValue: { key: 'signals', value: 'positive' },
-            calculationName: percentOfItemsCalculationName,
-          },
-          {
-            metadataKeyValue: { key: 'signals', value: 'negative' },
-            calculationName: percentOfItemsCalculationName,
-          },
-        ],
-        currentCollection.current,
-        colorAxisStorageKey
-      ) as CounterType[]
-    );
-  }, [nodesPath]);
-
-  useEffect(() => {
-    setMetaData((currentMetadata) => {
-      const newMetadata = currentNode
-        ? loadedNodes.current.some(
-            (loadedNode) =>
-              loadedNode.type === currentNode.type &&
-              loadedNode.id === getNodeId(currentNode)
-          )
-          ? currentMetadata
-          : mergeMetadata(currentMetadata, currentNode?.data.metadata ?? {})
-        : nodes
-            .filter(
-              (node) =>
-                !loadedNodes.current.some(
-                  (loadedNode) =>
-                    loadedNode.id === node.id && loadedNode.type === node.type
-                )
-            )
-            .reduce(
-              (finalMetadata, currentNode) =>
-                mergeMetadata(finalMetadata, currentNode.metadata),
-              currentMetadata
-            );
-      loadedNodes.current.push({
-        type: currentNode?.type ?? COLLECTION_TYPE,
-        id: currentNode ? getNodeId(currentNode) : COLLECTION_TYPE,
-      });
-
-      if (!currentNode)
-        loadedNodes.current.push(
-          ...nodes.map((node) => {
-            return { type: node.type, id: node.id };
-          })
-        );
-      return newMetadata;
-    });
-  }, [currentNode, nodes]);
 
   useEffect(() => {
     setNodes(
@@ -270,92 +142,6 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
       })
     );
   }, [dataNodes]);
-
-  useEffect(() => {
-    const newCountersConfigurations: CountersConfigurations = {};
-    Object.keys(metaData)
-      .concat(Object.keys(defaultCountersConfigurations))
-      .forEach((key) => {
-        const defaultConfig = defaultCountersConfigurations[key];
-        const valuesConfigured =
-          defaultConfig?.items?.map((group) => group.label) ?? [];
-        const counterConfiguration: CounterConfiguration = {
-          label: (defaultConfig?.label ?? key).toLowerCase(),
-          display: defaultConfig?.display,
-          members: defaultConfig?.members ?? [{ metadataName: key }],
-          isGroup: defaultConfig?.isGroup ?? false,
-          items:
-            key === CUSTOM_METADATA_KEY
-              ? undefined
-              : (
-                  defaultConfig?.items?.map((group) => {
-                    return {
-                      label: group.label,
-                      display: group.display,
-                      isGroup: group.isGroup,
-                      members: group.members?.map((member) => {
-                        return {
-                          metadataName: member.metadataName ?? key,
-                          values: member.values,
-                        };
-                      }) ?? [
-                        { metadataName: key, values: [group.label ?? ''] },
-                      ],
-                    };
-                  }) ?? []
-                ).concat(
-                  metaData[key]
-                    ?.filter((meta) => !valuesConfigured.includes(meta.value))
-                    .map((meta) => {
-                      return {
-                        label: meta.value,
-                        members: [{ metadataName: key, values: [meta.value] }],
-                        display: undefined,
-                        isGroup: false,
-                      };
-                    }) ?? []
-                ),
-        };
-        newCountersConfigurations[key] = counterConfiguration;
-      });
-
-    setCountersConfigurations(newCountersConfigurations);
-  }, [metaData]);
-
-  useEffect(() => {
-    const storedCounters = counters.map((counter) => {
-      return {
-        metadataKeyValue: counter.metadataKeyValue,
-        calculationName: counter.calculationConfiguration.name,
-      } as CountersLocalStorageObject;
-    });
-
-    const storedColorAxis = colorAxis.map((counter) => {
-      return {
-        metadataKeyValue: counter.metadataKeyValue,
-        calculationName: counter.calculationConfiguration.name,
-      } as CountersLocalStorageObject;
-    });
-
-    if (currentCollection.current) {
-      localStorage.setItem(
-        getCurrentStorageKey(countersStorageKey, currentCollection.current),
-        JSON.stringify(storedCounters)
-      );
-      localStorage.setItem(
-        getCurrentStorageKey(labelsStorageKey, currentCollection.current),
-        JSON.stringify(labels)
-      );
-      localStorage.setItem(
-        getCurrentStorageKey(colorAxisStorageKey, currentCollection.current),
-        JSON.stringify(storedColorAxis)
-      );
-      localStorage.setItem(
-        getCurrentStorageKey(sizeAxisStorageKey, currentCollection.current),
-        JSON.stringify(sizeAxis)
-      );
-    }
-  }, [counters, labels, sizeAxis, colorAxis]);
 
   useEffect(() => {
     dateRangeChanged(fromDate, toDate);
@@ -494,7 +280,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                   currentCounters={counters}
                   selectedLabels={labels}
                   countersConfigurations={countersConfigurations}
-                  labelsOptions={Object.keys(metaData).filter(
+                  labelsOptions={Object.keys(collectionMetadata).filter(
                     (key) => key !== CUSTOM_METADATA_KEY
                   )}
                   calculationsConfigurations={defaultCalculations}
@@ -930,27 +716,6 @@ function getVisualizationLogoClasses(active: boolean) {
   }`;
 }
 
-function mergeMetadata(
-  metadata1: MetaData,
-  metadata2: MetaData,
-  totalItems?: number
-): MetaData {
-  const newMetadata: MetaData = {};
-  Array.from(
-    new Set([...Object.keys(metadata1), ...Object.keys(metadata2)])
-  ).forEach((key) => {
-    if (totalItems === undefined || key !== CUSTOM_METADATA_KEY)
-      newMetadata[key] = [...(metadata1[key] ?? []), ...(metadata2[key] ?? [])];
-  });
-
-  if (totalItems === undefined) return newMetadata;
-  newMetadata[CUSTOM_METADATA_KEY] = [
-    { value: CUSTOM_METADATA_KEY, count: totalItems },
-  ];
-
-  return newMetadata;
-}
-
 function mergeTrends(trends1?: Trend[], trends2?: Trend[]): Trend[] {
   if (!trends1 || !trends2) return [];
   const newTrends: Trend[] = [];
@@ -973,31 +738,4 @@ function mergeTrends(trends1?: Trend[], trends2?: Trend[]): Trend[] {
   });
 
   return newTrends;
-}
-
-function getInitialCounterTypes(
-  calculationConfiguration: CalculationConfiguration[],
-  defaultCounters: CountersLocalStorageObject[],
-  collection: string,
-  storageKey: string
-): CounterType[] {
-  const storedCounters: CountersLocalStorageObject[] = JSON.parse(
-    localStorage.getItem(getCurrentStorageKey(storageKey, collection)) ?? '[]'
-  );
-  const counters = storedCounters.length > 0 ? storedCounters : defaultCounters;
-
-  return counters
-    .map((counter) => {
-      return {
-        calculationConfiguration: calculationConfiguration.find(
-          (calc) => calc.name === counter.calculationName
-        ),
-        metadataKeyValue: counter.metadataKeyValue,
-      } as CounterType;
-    })
-    .filter((calc) => calc.calculationConfiguration !== undefined);
-}
-
-function getCurrentStorageKey(prefix: string, collection: string) {
-  return `${prefix}-${collection}`;
 }

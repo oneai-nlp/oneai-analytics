@@ -58,6 +58,7 @@ export const defaultCountersConfigurations: CountersConfigurations = {
         isGroup: true,
       },
     ],
+    isGroup: true,
   },
   person: {
     display: {

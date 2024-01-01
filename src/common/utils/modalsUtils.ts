@@ -1,5 +1,13 @@
+import { CUSTOM_METADATA_KEY } from '../configurations/commonConfigurations';
 import { OneAIDataNode } from '../types/componentsInputs';
-import { Cluster, Item, MetaCluster, Phrase, Trend } from '../types/modals';
+import {
+  Cluster,
+  Item,
+  MetaCluster,
+  MetaData,
+  Phrase,
+  Trend,
+} from '../types/modals';
 
 export const COLLECTION_TYPE = 'Collection';
 
@@ -80,3 +88,24 @@ export const getNodeOriginalAndTranslatedText = (
   }
   return { originalText: undefined, translatedText: undefined };
 };
+
+export function mergeMetadata(
+  metadata1: MetaData,
+  metadata2: MetaData,
+  totalItems?: number
+): MetaData {
+  const newMetadata: MetaData = {};
+  Array.from(
+    new Set([...Object.keys(metadata1), ...Object.keys(metadata2)])
+  ).forEach((key) => {
+    if (totalItems === undefined || key !== CUSTOM_METADATA_KEY)
+      newMetadata[key] = [...(metadata1[key] ?? []), ...(metadata2[key] ?? [])];
+  });
+
+  if (totalItems === undefined) return newMetadata;
+  newMetadata[CUSTOM_METADATA_KEY] = [
+    { value: CUSTOM_METADATA_KEY, count: totalItems },
+  ];
+
+  return newMetadata;
+}

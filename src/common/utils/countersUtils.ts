@@ -402,6 +402,11 @@ export function totalUniqueItemsCalculation(
       { key: uniquePropertyName },
       countersConfigurations
     );
+    if (!itemCounter)
+      itemCounter = itemCounter = getMetadataKeyValueConfiguration(
+        { key: CUSTOM_METADATA_KEY },
+        countersConfigurations
+      );
   } else {
     itemCounter = getMetadataKeyValueConfiguration(
       metadataKeyValue,

@@ -46,7 +46,9 @@ export const Treemap: FC<TreemapProps> = ({
         return {
           ...c,
           amount:
-            sizeAxis?.key === CUSTOM_METADATA_KEY
+            sizeAxis === null
+              ? c.amount
+              : sizeAxis?.key === CUSTOM_METADATA_KEY
               ? c.amount
               : totalSumCalculation(
                   sizeAxis,
@@ -101,7 +103,6 @@ export const Treemap: FC<TreemapProps> = ({
   }, [root, bigColor, smallColor]);
 
   const [actionsVisible, setActionsVisible] = useState(null as number | null);
-
   const allShapes = root.leaves().map((leaf, index) => {
     const height = leaf.y1 - leaf.y0;
     const width = leaf.x1 - leaf.x0;

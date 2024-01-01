@@ -154,6 +154,16 @@ export interface OneAiAnalyticsProps extends OneAIUserInput {
   currentMetaOption?: string;
   metaOptionsChanged?: (option: string) => void;
   refresh?: () => void;
+  collectionMetadata?: MetaData;
+  countersConfigurations?: CountersConfigurations;
+  labels?: string[];
+  setLabels?: (labels: string[]) => void;
+  counters?: CounterType[];
+  setCounters?: (counters: CounterType[]) => void;
+  sizeAxis?: MetadataKeyValue | null;
+  setSizeAxis?: (sizeAxis: MetadataKeyValue | null) => void;
+  colorAxis?: CounterType[];
+  setColorAxis?: (colorAxis: CounterType[]) => void;
 }
 
 export type OneAIAnalyticsStaticDataWrapperProps = Omit<
