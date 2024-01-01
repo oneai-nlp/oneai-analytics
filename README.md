@@ -116,6 +116,12 @@ Test:
 yarn test
 ```
 
+Publish:
+
+```bash
+yarn publish
+```
+
 Run the exmaple:
 
 ```bash
