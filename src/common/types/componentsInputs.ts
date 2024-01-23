@@ -1,4 +1,9 @@
-import { FC } from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
+import {
+  CounterType,
+  CountersConfigurations,
+  MetadataKeyValue,
+} from './customizeBarTypes';
 import {
   Cluster,
   Item,
@@ -9,11 +14,6 @@ import {
   Trend,
   UniqueItemsStats,
 } from './modals';
-import {
-  CountersConfigurations,
-  CounterType,
-  MetadataKeyValue,
-} from './customizeBarTypes';
 
 export interface OneAiLoaderProps {
   height?: string;
@@ -120,6 +120,7 @@ export interface OneAiAnalyticsProps extends OneAIUserInput {
   nodesPath?: { text: string; translated?: string | null }[];
   dateRangeChanged?: (from: Date | null, to: Date | null) => void;
   labelsFilters?: MetadataKeyValue[];
+  setLabelsFilters?: Dispatch<SetStateAction<MetadataKeyValue[]>>;
   labelClicked?: (key: string, value: string) => void;
   labelFilterDeleted?: (index: number) => void;
   trendPeriods?: number;

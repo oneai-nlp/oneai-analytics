@@ -1,25 +1,25 @@
-import { CountersConfigurations } from '../types/customizeBarTypes';
-import {
-  FaceFrownIcon,
-  FaceSmileIcon,
-  UserIcon,
-  HandThumbDownIcon,
-  HandThumbUpIcon,
-  GlobeAltIcon,
-  BuildingOffice2Icon,
-  MapPinIcon,
-  UsersIcon,
-  ScaleIcon,
-  CalendarIcon,
-  HeartIcon,
-  KeyIcon,
-} from '@heroicons/react/24/outline';
-import React from 'react';
 import {
   FilmIcon,
   GlobeAmericasIcon,
   HashtagIcon,
 } from '@heroicons/react/20/solid';
+import {
+  BuildingOffice2Icon,
+  CalendarIcon,
+  FaceFrownIcon,
+  FaceSmileIcon,
+  GlobeAltIcon,
+  HandThumbDownIcon,
+  HandThumbUpIcon,
+  HeartIcon,
+  KeyIcon,
+  MapPinIcon,
+  ScaleIcon,
+  UserIcon,
+  UsersIcon,
+} from '@heroicons/react/24/outline';
+import React from 'react';
+import { CountersConfigurations } from '../types/customizeBarTypes';
 
 export const defaultCountersConfigurations: CountersConfigurations = {
   signals: {
