@@ -140,7 +140,7 @@ function CascadedOption({
       {configData.items && configData.items.length > 0 ? (
         <button
           type="button"
-          className="ml-auto w-full pr-3 flex items-center justify-between hover:bg-[#444154]"
+          className="ml-auto w-full pr-3 flex items-center justify-between hover:bg-gray-400 hover:dark:bg-[#444154]"
           onClick={onClickLabel}
         >
           <MetadataTitle
