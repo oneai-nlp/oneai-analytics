@@ -5,7 +5,13 @@ import {
   ChevronUpIcon,
   FunnelIcon,
 } from '@heroicons/react/24/outline';
-import React, { Fragment, useRef, useState } from 'react';
+import React, {
+  Dispatch,
+  Fragment,
+  SetStateAction,
+  useRef,
+  useState,
+} from 'react';
 import {
   CountersConfigurations,
   MetadataKeyValue,
@@ -14,10 +20,12 @@ import { uniqBy } from '../../utils/utils';
 
 export default function LabelsFiltersSelect({
   selectedLabels,
+  labelFilterDeleted,
   countersConfigurations,
   selectedMetadataKeyValueChange,
 }: {
   selectedLabels: MetadataKeyValue[];
+  labelFilterDeleted: (labelIndex: number) => void;
   selectedMetadataKeyValueChange: (
     newMetadataKeyValue: MetadataKeyValue
   ) => void;
@@ -92,6 +100,7 @@ export default function LabelsFiltersSelect({
                   optionName={key}
                   index={i}
                   selected={selectedLabels ?? []}
+                  labelFilterDeleted={labelFilterDeleted}
                   labelClicked={selectedMetadataKeyValueChange}
                   key={i}
                 />
@@ -109,78 +118,95 @@ function CascadedOption({
   index,
   selected,
   labelClicked,
+  labelFilterDeleted,
 }: {
   countersConfigurations: CountersConfigurations;
   optionName: string;
   index: number;
   selected: MetadataKeyValue[];
   labelClicked: (newMetadataKeyValue: MetadataKeyValue) => void;
+  labelFilterDeleted: (labelIndex: number) => void;
 }) {
   const keySelected = selected.some((s) => s.key === optionName);
   const [opened, setOpened] = useState(keySelected);
   const configData = countersConfigurations[optionName];
 
+  const onClickLabel = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    setOpened(!opened);
+  };
   return (
     <Fragment key={index}>
-      <div className="w-full flex">
-        <MetadataTitle label={optionName} key={optionName} />
+      {configData.items && configData.items.length > 0 ? (
+        <button
+          type="button"
+          className="ml-auto w-full pr-3 flex items-center justify-between hover:bg-[#444154]"
+          onClick={onClickLabel}
+        >
+          <MetadataTitle
+            label={optionName}
+            key={optionName}
+            setOpened={setOpened}
+          />
 
-        {configData.items && configData.items.length > 0 && (
-          <button
-            type="button"
-            className="ml-auto mr-3"
-            onClick={() => setOpened((opened) => !opened)}
-          >
-            {opened ? (
-              <ChevronUpIcon className="h-4 w-4 text-gray-500 dark:text-gray-300" />
-            ) : (
-              <ChevronDownIcon className="h-4 w-4 text-gray-500 dark:text-gray-300" />
-            )}
-            <span className="sr-only">Open or Close metadata</span>
-          </button>
-        )}
-      </div>
-      {opened &&
-        uniqBy(configData.items ?? [], (group) => group.label).map(
-          (group, i) => {
-            return (
-              <DropdownOption
-                label={group.label ?? ''}
-                value={
-                  { key: optionName, value: group.label } as MetadataKeyValue
-                }
-                selected={selected.some(
-                  (keyVal) =>
-                    keyVal.key === optionName && keyVal.value === group.label
-                )}
-                labelClicked={labelClicked}
-                pl={2}
-                key={optionName + group.label + i.toString()}
-              />
-            );
-          }
-        )}
+          {opened ? (
+            <ChevronUpIcon className="h-4 w-4 text-gray-500 dark:text-gray-300" />
+          ) : (
+            <ChevronDownIcon className="h-4 w-4 text-gray-500 dark:text-gray-300" />
+          )}
+          <span className="sr-only">Open or Close metadata</span>
+        </button>
+      ) : null}
+      {opened
+        ? uniqBy(configData.items ?? [], (group) => group.label).map(
+            (group, i) => {
+              return (
+                <DropdownOption
+                  label={group.label ?? ''}
+                  value={
+                    { key: optionName, value: group.label } as MetadataKeyValue
+                  }
+                  selected={selected.some(
+                    (keyVal) =>
+                      keyVal.key === optionName && keyVal.value === group.label
+                  )}
+                  labelFilters={selected}
+                  labelClicked={labelClicked}
+                  labelFilterDeleted={labelFilterDeleted}
+                  pl={2}
+                  key={optionName + group.label + i.toString()}
+                />
+              );
+            }
+          )
+        : null}
     </Fragment>
   );
 }
 
-function MetadataTitle({ label }: { label: string }) {
+function MetadataTitle({
+  label,
+  setOpened,
+}: {
+  label: string;
+  setOpened: Dispatch<SetStateAction<boolean>>;
+}) {
+  const onClickLabel = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    setOpened(true);
+  };
+
   return (
     <Listbox.Option
       style={{ paddingLeft: '1rem' }}
-      className={({ active }) =>
-        `relative cursor-default select-none py-2 pr-4 ${
-          active
-            ? 'bg-gray-400 dark:bg-[#444154] text-white'
-            : 'text-gray-300 dark:text-[#747189]'
-        }`
-      }
+      className={'relative select-none py-2 pr-4 cursor-pointer'}
+      onClick={onClickLabel}
       value={label}
     >
       <span className="w-full flex">
         <div className="flex items-center">
           <label
-            className={`text-sm ml-2 font-medium text-gray-900 dark:text-gray-300 block truncate lowercase first-letter:uppercase`}
+            className={`text-sm ml-2 font-medium text-gray-900 dark:text-gray-300 block truncate lowercase first-letter:uppercase cursor-pointer`}
           >
             {label}
           </label>
@@ -194,13 +220,17 @@ function DropdownOption({
   label,
   value,
   selected,
+  labelFilters,
   labelClicked,
+  labelFilterDeleted,
   pl = 1,
 }: {
   label: string;
   value: MetadataKeyValue;
+  labelFilters: MetadataKeyValue[];
   selected: boolean;
   labelClicked: (newMetadataKeyValue: MetadataKeyValue) => void;
+  labelFilterDeleted: (labelIndex: number) => void;
   pl?: number;
 }) {
   return (
@@ -213,7 +243,18 @@ function DropdownOption({
             : 'text-gray-300 dark:text-[#747189]'
         }`
       }
-      onClick={() => labelClicked(value)}
+      onClick={() => {
+        if (selected) {
+          const index = labelFilters.findIndex(
+            (s) => s.key === value.key && s.value === value.value
+          );
+          if (index >= 0) {
+            labelFilterDeleted(index);
+          }
+          return;
+        }
+        labelClicked(value);
+      }}
       value={value}
     >
       <span className="w-full flex">

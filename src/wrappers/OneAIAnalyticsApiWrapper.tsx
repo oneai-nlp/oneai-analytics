@@ -15,6 +15,7 @@ import {
   Properties,
   UniqueItemsStats,
 } from '../common/types/modals';
+import { resolveDomain } from '../common/utils/externalInputs';
 import {
   COLLECTION_TYPE,
   getNodeDetails,
@@ -24,7 +25,6 @@ import {
 } from '../common/utils/modalsUtils';
 import { getSecondsDiff, uniqBy } from '../common/utils/utils';
 import { OneAiAnalytics } from '../components/OneAiAnalytics';
-import { resolveDomain } from '../common/utils/externalInputs';
 
 const cache: Map<
   string,
@@ -558,6 +558,7 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
         })
       }
       labelsFilters={labelsFilters}
+      setLabelsFilters={setLabelsFilters}
       labelClicked={(key, value) => {
         if (
           !labelsFilters.some(
