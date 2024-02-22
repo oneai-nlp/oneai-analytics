@@ -98,6 +98,11 @@ export interface OneAIUserInput {
   navbarColor?: string;
   barColor?: string;
   translationEnabled?: boolean;
+  customizeEnabled?: boolean;
+  filterOnlySkills?: boolean;
+  datePickerEnabled?: boolean;
+  startDate?: string | undefined;
+  endDate?: string | undefined;
   uniqueMetaKey?: string;
 }
 
