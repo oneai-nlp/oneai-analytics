@@ -103,6 +103,11 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   mergeClusters,
   searchSimilarClusters,
   translationEnabled = true,
+  customizeEnabled = true,
+  filterOnlySkills = false,
+  datePickerEnabled = true,
+  startDate = null,
+  endDate = null,
   toggleHide = () => {},
   propertiesFilters = {},
   setPropertiesFilters = () => {},
@@ -127,8 +132,13 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
     null as { type: NodeType; id: string; text: string } | null
   );
   const [translate, setTranslate] = useState(false);
-  const [fromDate, setFromDate] = useState(null as Date | null);
-  const [toDate, setToDate] = useState(null as Date | null);
+
+  const [fromDate, setFromDate] = useState(
+    startDate ? (new Date(startDate) as Date) : null
+  );
+  const [toDate, setToDate] = useState(
+    endDate ? (new Date(endDate) as Date) : null
+  );
   const loadedNodes = useRef([] as { type: string; id: string }[]);
   const currentCollection = useRef(null as string | null);
   const [currentHoveredNode, setCurrentHoveredNode] = useState(
@@ -470,18 +480,22 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                   <path d="M12.75 14.25V18.75H3.75" />
                 </svg>
               </div>
-              <div>
-                <DatesFilters
-                  fromDate={fromDate}
-                  fromDateChanged={setFromDate}
-                  toDate={toDate}
-                  toDateChanged={setToDate}
-                  trendPeriods={trendPeriods}
-                  trendPeriodsChanged={trendPeriodsChanged}
-                />
-              </div>
+              {datePickerEnabled ? (
+                <div>
+                  <DatesFilters
+                    fromDate={fromDate}
+                    fromDateChanged={setFromDate}
+                    toDate={toDate}
+                    toDateChanged={setToDate}
+                    trendPeriods={trendPeriods}
+                    trendPeriodsChanged={trendPeriodsChanged}
+                  />
+                </div>
+              ) : null}
+
               <div>
                 <LabelsFiltersSelect
+                  filterOnlySkills={filterOnlySkills}
                   selectedLabels={labelsFilters ?? []}
                   countersConfigurations={countersConfigurations}
                   labelFilterDeleted={labelFilterDeleted}
@@ -490,23 +504,25 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                   }
                 />
               </div>
-              <div>
-                <CustomizeTab
-                  currentCounters={counters}
-                  selectedLabels={labels}
-                  countersConfigurations={countersConfigurations}
-                  labelsOptions={Object.keys(metaData).filter(
-                    (key) => key !== CUSTOM_METADATA_KEY
-                  )}
-                  calculationsConfigurations={defaultCalculations}
-                  countersChanged={setCounters}
-                  labelsChanged={setLabels}
-                  selectedSizeAxis={sizeAxis}
-                  sizeAxisChanged={setSizeAxis}
-                  currentColorsAxis={colorAxis}
-                  colorsAxisChanged={setColorAxis}
-                />
-              </div>
+              {customizeEnabled ? (
+                <div>
+                  <CustomizeTab
+                    currentCounters={counters}
+                    selectedLabels={labels}
+                    countersConfigurations={countersConfigurations}
+                    labelsOptions={Object.keys(metaData).filter(
+                      (key) => key !== CUSTOM_METADATA_KEY
+                    )}
+                    calculationsConfigurations={defaultCalculations}
+                    countersChanged={setCounters}
+                    labelsChanged={setLabels}
+                    selectedSizeAxis={sizeAxis}
+                    sizeAxisChanged={setSizeAxis}
+                    currentColorsAxis={colorAxis}
+                    colorsAxisChanged={setColorAxis}
+                  />
+                </div>
+              ) : null}
             </div>
 
             <div className="flex flex-row w-full justify-end items-center">
