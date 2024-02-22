@@ -3,8 +3,8 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import React, { Fragment } from 'react';
 import {
   CalculationConfiguration,
-  CountersConfigurations,
   CounterType,
+  CountersConfigurations,
   MetadataKeyValue,
 } from '../types/customizeBarTypes';
 import KeyValueSingleSelect from './CountersLabels/KeyValueSingleSelect';

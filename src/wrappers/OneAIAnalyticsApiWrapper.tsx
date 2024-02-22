@@ -51,6 +51,11 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   collectionDisplayName = collection,
   refreshToken = '',
   uniqueMetaKey: uniquePropertyName,
+  datePickerEnabled = true,
+  customizeEnabled = true,
+  filterOnlySkills = false,
+  startDate = undefined,
+  endDate = undefined,
   ...rest
 }) => {
   domain = resolveDomain(domain);
@@ -64,9 +69,10 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [dateRange, setDateRange] = useState([
-    null,
-    null,
+    startDate ? new Date(startDate) : null,
+    endDate ? new Date(endDate) : null,
   ] as Array<Date | null>);
+
   const [labelsFilters, setLabelsFilters] = useState([] as MetadataKeyValue[]);
   const [localRefreshToken, setLocalRefreshToken] = useState(refreshToken);
   const [trendPeriods, setTrendPeriods] = useState(0);
@@ -88,6 +94,8 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
     clickedNodes: null as OneAIDataNode[] | null,
     currentPage: null as number | null,
     lastMetaGroup: 'text' as string,
+    startDate: '' as string | undefined,
+    endDate: '' as string | undefined,
   });
 
   const fetchMetaClusters = async (controller: AbortController) => {
@@ -118,9 +126,15 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       previousValues.current.apiKey !== apiKey ||
       previousValues.current.collection !== collection ||
       previousValues.current.refreshToken !== refreshToken ||
-      previousValues.current.lastMetaGroup !== currentMetaGroup
+      previousValues.current.lastMetaGroup !== currentMetaGroup ||
+      previousValues.current.startDate !== startDate ||
+      previousValues.current.endDate !== endDate
     ) {
       setCurrentNodes({ totalItems: 0, nodes: [] });
+      setDateRange([
+        startDate ? new Date(startDate) : null,
+        endDate ? new Date(endDate) : null,
+      ]);
       setClickedNodes([]);
       setCurrentPage(0);
       cache.clear();
@@ -134,9 +148,19 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
         clickedNodes: null,
         currentPage: null,
         lastMetaGroup: currentMetaGroup,
+        startDate,
+        endDate,
       };
     }
-  }, [domain, apiKey, collection, refreshToken, currentMetaGroup]);
+  }, [
+    domain,
+    apiKey,
+    collection,
+    refreshToken,
+    currentMetaGroup,
+    startDate,
+    endDate,
+  ]);
 
   useEffect(() => {
     const fetchData = async (controller: AbortController) => {
@@ -638,7 +662,12 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
           return current.length > 2 ? '1' : current + '1';
         })
       }
+      customizeEnabled={customizeEnabled}
+      datePickerEnabled={datePickerEnabled}
+      startDate={startDate}
+      endDate={endDate}
       uniqueMetaKey={uniquePropertyName}
+      filterOnlySkills={filterOnlySkills}
       {...rest}
     />
   ) : null;

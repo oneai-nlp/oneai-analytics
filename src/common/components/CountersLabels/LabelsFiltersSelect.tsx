@@ -16,13 +16,14 @@ import {
   CountersConfigurations,
   MetadataKeyValue,
 } from '../../types/customizeBarTypes';
-import { uniqBy } from '../../utils/utils';
+import { skillsArray, uniqBy } from '../../utils/utils';
 
 export default function LabelsFiltersSelect({
   selectedLabels,
   labelFilterDeleted,
   countersConfigurations,
   selectedMetadataKeyValueChange,
+  filterOnlySkills,
 }: {
   selectedLabels: MetadataKeyValue[];
   labelFilterDeleted: (labelIndex: number) => void;
@@ -30,6 +31,7 @@ export default function LabelsFiltersSelect({
     newMetadataKeyValue: MetadataKeyValue
   ) => void;
   countersConfigurations: CountersConfigurations;
+  filterOnlySkills?: boolean;
 }) {
   const [position, setPosition] = React.useState(false);
   const ref = useRef(null);
@@ -91,9 +93,15 @@ export default function LabelsFiltersSelect({
               ),
               (key) => key
             )
-              .filter(
-                (meta) => (countersConfigurations[meta]?.items?.length ?? 0) > 0
-              )
+              .filter((meta) => {
+                if (filterOnlySkills) {
+                  return (
+                    (countersConfigurations[meta]?.items?.length ?? 0) > 0 &&
+                    skillsArray.includes(meta)
+                  );
+                }
+                return (countersConfigurations[meta]?.items?.length ?? 0) > 0;
+              })
               .map((key, i) => (
                 <CascadedOption
                   countersConfigurations={countersConfigurations}
