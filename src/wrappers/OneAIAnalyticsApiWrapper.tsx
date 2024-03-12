@@ -860,7 +860,9 @@ async function fetchApi<T>(
           limit !== undefined ? limit : PAGE_SIZE
         }&translate=true` +
           (from ? `&from-date=${format(from, 'yyyy-MM-dd')}` : '') +
-          (to ? `&to-date=${format(to, 'yyyy-MM-dd')}` : '') +
+          (to
+            ? `&to-date=${format(to, 'yyyy-MM-dd') + 'T23:59:59.999Z'}`
+            : '') +
           (labelsFiltersString.length > 0
             ? `&item-metadata=${labelsFiltersString.join(' and ')}`
             : '') +
