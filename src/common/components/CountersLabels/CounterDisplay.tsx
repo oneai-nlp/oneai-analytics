@@ -26,6 +26,7 @@ export default function CounterDisplay({
   totalUniqueItemsStats,
   uniqueItemsStats,
   uniquePropertyName,
+  signalsEnabled,
 }: {
   counter: CounterType;
   metadata: MetaData;
@@ -37,6 +38,7 @@ export default function CounterDisplay({
   totalUniqueItemsStats?: UniqueItemsStats;
   uniqueItemsStats?: UniqueItemsStats;
   uniquePropertyName?: string;
+  signalsEnabled?: boolean;
 }) {
   const metadataKeyValue = counter.metadataKeyValue;
   if (!metadataKeyValue) return <></>;
@@ -53,6 +55,15 @@ export default function CounterDisplay({
   );
   if (!displayResult.counter) return <></>;
 
+  const keysToHide = ['positive', 'negative'];
+
+  if (
+    signalsEnabled === false &&
+    keysToHide.includes(displayResult.metadataKey || '')
+  ) {
+    return <></>;
+  }
+  //
   return (
     <span
       data-tip={

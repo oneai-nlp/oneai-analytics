@@ -56,6 +56,9 @@ export interface TreemapProps {
   totalItems: number;
   totalUniqueItemsStats?: UniqueItemsStats;
   uniquePropertyName?: string;
+  itemPercentageEnabled?: boolean;
+  mergeMenuEnabled?: boolean;
+  signalsEnabled?: boolean;
 }
 
 export interface BarChartProps {
@@ -104,6 +107,15 @@ export interface OneAIUserInput {
   startDate?: string | undefined;
   endDate?: string | undefined;
   uniqueMetaKey?: string;
+  headerEnabled?: boolean;
+  breadCrumbsEnabled?: boolean;
+  itemPercentageEnabled?: boolean;
+  mergeMenuEnabled?: boolean;
+  headerFiltersEnabled?: boolean;
+  signalsEnabled?: boolean;
+  navigationDropDownEnabled?: boolean;
+  tooltipOffsetLeft?: number;
+  tooltipOffsetTop?: number;
 }
 
 export interface OneAiAnalyticsProps extends OneAIUserInput {
