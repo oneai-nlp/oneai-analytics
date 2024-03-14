@@ -104,6 +104,8 @@ export interface OneAIUserInput {
   startDate?: string | undefined;
   endDate?: string | undefined;
   uniqueMetaKey?: string;
+  hideToolBar?: boolean;
+  hideNavBar?: boolean;
 }
 
 export interface OneAiAnalyticsProps extends OneAIUserInput {
