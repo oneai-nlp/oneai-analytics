@@ -418,7 +418,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
             };
           }}
           clickable={true}
-          className="!p-1 !fixed"
+          className="!p-1"
         >
           <div className="flex flex-col w-full h-full items-baseline">
             <button
