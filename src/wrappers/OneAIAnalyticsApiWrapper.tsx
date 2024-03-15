@@ -56,13 +56,13 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   filterOnlySkills = false,
   startDate = undefined,
   endDate = undefined,
-  headerEnabled = true,
-  breadCrumbsEnabled = true,
-  itemPercentageEnabled = true,
-  mergeMenuEnabled = true,
-  headerFiltersEnabled = true,
-  signalsEnabled = true,
-  navigationDropDownEnabled = true,
+  hideNavBar = false,
+  hideToolBar = false,
+  hideLeafHeader = false,
+  hideActionsMenu = false,
+  hideNavFilters = false,
+  hideSignals = false,
+  hideNavigationMenu = false,
   ...rest
 }) => {
   domain = resolveDomain(domain);
@@ -675,13 +675,13 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       endDate={endDate}
       uniqueMetaKey={uniquePropertyName}
       filterOnlySkills={filterOnlySkills}
-      headerEnabled={headerEnabled}
-      breadCrumbsEnabled={breadCrumbsEnabled}
-      itemPercentageEnabled={itemPercentageEnabled}
-      mergeMenuEnabled={mergeMenuEnabled}
-      headerFiltersEnabled={headerFiltersEnabled}
-      signalsEnabled={signalsEnabled}
-      navigationDropDownEnabled={navigationDropDownEnabled}
+      hideNavBar={hideNavBar}
+      hideToolBar={hideToolBar}
+      hideLeafHeader={hideLeafHeader}
+      hideActionsMenu={hideActionsMenu}
+      hideNavFilters={hideNavFilters}
+      hideSignals={hideSignals}
+      hideNavigationMenu={hideNavigationMenu}
       {...rest}
     />
   ) : null;
