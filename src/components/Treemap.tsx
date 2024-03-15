@@ -212,7 +212,7 @@ export const Treemap: FC<TreemapProps> = ({
                     : leaf.data.item_original_text}
                 </span>
               </span>
-              {hideActionsMenu ? (
+              {hideActionsMenu ? null : (
                 <div
                   data-for="global-actions"
                   data-tip
@@ -223,7 +223,7 @@ export const Treemap: FC<TreemapProps> = ({
                 >
                   <EllipsisHorizontalIcon className="h-4 w-4" />
                 </div>
-              ) : null}
+              )}
             </div>
           </div>
         </foreignObject>
