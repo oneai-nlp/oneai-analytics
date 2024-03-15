@@ -387,13 +387,13 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
 
   return (
     <div
-      className={`oneai-analytics-namespace h-full w-full  overflow-hidden ${
+      className={`oneai-analytics-namespace h-full w-full overflow-hidden ${
         darkMode ? 'dark' : ''
       }`}
     >
       <div
         id="headlessui-portal-root"
-        className={`h-full w-full flex flex-col relative overflow-hidden bg-[#f3e5e5] dark:bg-[#161414] p-1 ${
+        className={`h-full w-full flex flex-col overflow-hidden bg-[#f3e5e5] dark:bg-[#161414] p-1 ${
           darkMode ? 'dark' : ''
         }`}
         style={{ background }}
@@ -567,7 +567,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                   <EyeIcon
                     onClick={() => setPropertiesFilters({ hide: 'false' })}
                     data-for="global"
-                    data-tip="Show hidden nodes"
+                    data-tip="Refresh data"
                     className="h-6 w-6 p-1 mr-1 hover:cursor-pointer focus:outline-none text-[#747189] dark:hover:text-white"
                   />
                 ) : (
@@ -598,7 +598,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
         ) : null}
 
         <div
-          className="w-full grow flex flex-col overflow-hidden bg-white relative dark:bg-[#272535]"
+          className="w-full grow flex flex-col overflow-hidden bg-white dark:bg-[#272535]"
           style={{ background: navbarColor }}
         >
           {breadCrumbsEnabled ? (

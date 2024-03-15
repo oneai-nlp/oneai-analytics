@@ -63,7 +63,6 @@ export default function CounterDisplay({
   ) {
     return <></>;
   }
-  //
   return (
     <span
       data-tip={
