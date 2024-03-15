@@ -6,6 +6,7 @@ import {
 import {
   BuildingOffice2Icon,
   CalendarIcon,
+  ChatBubbleOvalLeftEllipsisIcon,
   FaceFrownIcon,
   FaceSmileIcon,
   GlobeAltIcon,
@@ -20,6 +21,7 @@ import {
 } from '@heroicons/react/24/outline';
 import React from 'react';
 import { CountersConfigurations } from '../types/customizeBarTypes';
+import { CUSTOM_METADATA_KEY } from './commonConfigurations';
 
 export const defaultCountersConfigurations: CountersConfigurations = {
   signals: {
@@ -263,6 +265,12 @@ export const defaultCountersConfigurations: CountersConfigurations = {
     display: {
       color: 'white',
       icon: <GlobeAmericasIcon />,
+    },
+  },
+  [CUSTOM_METADATA_KEY]: {
+    display: {
+      color: 'white',
+      icon: <ChatBubbleOvalLeftEllipsisIcon />,
     },
   },
 };

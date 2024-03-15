@@ -116,6 +116,15 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   metaOptionsChanged = () => {},
   refresh = () => {},
   uniqueMetaKey: uniquePropertyName,
+  hideNavBar = false,
+  hideToolBar = false,
+  hideLeafHeader = false,
+  hideActionsMenu = false,
+  hideNavFilters = false,
+  hideSignals = false,
+  hideNavigationMenu = false,
+  tooltipOffsetLeft = 0,
+  tooltipOffsetTop = 0,
 }) => {
   const [display, setDisplay] = useState('Treemap' as Displays);
   const { width, height, ref } = useResizeDetector();
@@ -389,11 +398,25 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
         }`}
         style={{ background }}
       >
-        <ReactTooltip id="global" />
+        <ReactTooltip
+          id="global"
+          overridePosition={({ left, top }) => {
+            return {
+              left: left - tooltipOffsetLeft,
+              top: top - tooltipOffsetTop,
+            };
+          }}
+        />
         <ReactTooltip
           id="global-actions"
           place="top"
           effect="solid"
+          overridePosition={({ left, top }) => {
+            return {
+              left: left - tooltipOffsetLeft,
+              top: top - tooltipOffsetTop,
+            };
+          }}
           clickable={true}
           className="!p-1"
         >
@@ -435,287 +458,339 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
           searchSimilarClusters={searchSimilarClusters}
           translationEnabled={translate}
         />
-        <div
-          className="w-full rounded-t-md border-b border-[#322F46] bg-white dark:bg-[#272535]"
-          style={{
-            height: '65px',
-            background: navbarColor,
-            fontFamily: fontFamily,
-          }}
-        >
-          <div className="flex flex-row items-center py-6 ml-[24px] h-full">
-            <div className="flex flex-row w-5/12 justify-start items-center">
-              <div className="h-full flex">
-                <svg
-                  className={getVisualizationLogoClasses(display === 'Treemap')}
-                  onClick={() => setDisplay('Treemap')}
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M3.5 5.89477C3.5 5.06635 4.17157 4.39478 5 4.39478H19C19.8284 4.39478 20.5 5.06635 20.5 5.89478V11.9211H3.5V5.89477Z" />
-                  <path d="M3.5 11.9736H13.8684V19.4999H5C4.17157 19.4999 3.5 18.8284 3.5 17.9999V11.9736Z" />
-                  <path d="M13.9211 11.9736H20.5001V17.9999C20.5001 18.8284 19.8285 19.4999 19.0001 19.4999H13.9211V11.9736Z" />
-                  <path d="M8.68433 4.36841V11.4737" />
-                </svg>
-
-                <svg
-                  className={getVisualizationLogoClasses(
-                    display === 'BarChart'
-                  )}
-                  onClick={() => setDisplay('BarChart')}
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M3.75 20.25V3.75" />
-                  <path d="M3.75 9.75H15.75C15.75 11.5074 15.75 12.4926 15.75 14.25H3.75" />
-                  <path d="M20.25 5.25H3.75V9.75H20.25V5.25Z" />
-                  <path d="M12.75 14.25V18.75H3.75" />
-                </svg>
-              </div>
-              {datePickerEnabled ? (
-                <div>
-                  <DatesFilters
-                    fromDate={fromDate}
-                    fromDateChanged={setFromDate}
-                    toDate={toDate}
-                    toDateChanged={setToDate}
-                    trendPeriods={trendPeriods}
-                    trendPeriodsChanged={trendPeriodsChanged}
-                  />
-                </div>
-              ) : null}
-
-              <div>
-                <LabelsFiltersSelect
-                  filterOnlySkills={filterOnlySkills}
-                  selectedLabels={labelsFilters ?? []}
-                  countersConfigurations={countersConfigurations}
-                  labelFilterDeleted={labelFilterDeleted}
-                  selectedMetadataKeyValueChange={(metadataKeyValue) =>
-                    labelClicked(metadataKeyValue.key, metadataKeyValue.value!)
-                  }
-                />
-              </div>
-              {customizeEnabled ? (
-                <div>
-                  <CustomizeTab
-                    currentCounters={counters}
-                    selectedLabels={labels}
-                    countersConfigurations={countersConfigurations}
-                    labelsOptions={Object.keys(metaData).filter(
-                      (key) => key !== CUSTOM_METADATA_KEY
-                    )}
-                    calculationsConfigurations={defaultCalculations}
-                    countersChanged={setCounters}
-                    labelsChanged={setLabels}
-                    selectedSizeAxis={sizeAxis}
-                    sizeAxisChanged={setSizeAxis}
-                    currentColorsAxis={colorAxis}
-                    colorsAxisChanged={setColorAxis}
-                  />
-                </div>
-              ) : null}
-            </div>
-
-            <div className="flex flex-row w-full justify-end items-center">
-              <ArrowPathIcon
-                onClick={refresh}
-                data-for="global"
-                data-tip="Refresh data"
-                className="h-6 w-6 p-1 mr-1 hover:cursor-pointer focus:outline-none text-[#747189] dark:hover:text-white"
-              />
-              {propertiesFilters['hide'] === 'true' ? (
-                <EyeIcon
-                  onClick={() => setPropertiesFilters({ hide: 'false' })}
-                  data-for="global"
-                  data-tip="Show hidden nodes"
-                  className="h-6 w-6 p-1 mr-1 hover:cursor-pointer focus:outline-none text-[#747189] dark:hover:text-white"
-                />
-              ) : (
-                <EyeSlashIcon
-                  onClick={() => setPropertiesFilters({ hide: 'true' })}
-                  data-for="global"
-                  data-tip="Hide hidden nodes"
-                  className="h-6 w-6 p-1 mr-1 hover:cursor-pointer focus:outline-none bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]"
-                />
-              )}
-              {translationEnabled ? (
-                <LanguageIcon
-                  onClick={() => setTranslate((translate) => !translate)}
-                  data-for="global"
-                  data-tip={
-                    translate ? 'Disable translation' : 'Enable translation'
-                  }
-                  className={`h-6 w-6 p-1 mr-1 hover:cursor-pointer focus:outline-none ${
-                    translate
-                      ? 'bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]'
-                      : 'text-[#747189] hover:cursor-pointer dark:hover:text-white'
-                  }`}
-                />
-              ) : null}
-            </div>
-          </div>
-        </div>
-
-        <div
-          className="w-full grow flex flex-col overflow-hidden bg-white dark:bg-[#272535]"
-          style={{ background: navbarColor }}
-        >
-          <div
-            className="w-full"
-            style={{
-              height: '65px',
-              fontFamily: fontFamily,
-            }}
-          >
-            <div className="flex flex-row items-center ml-[24px] h-full">
-              <div
-                className="flex flex-row justify-start mr-4 items-center w-full"
-                style={{
-                  fontFamily: fontFamily,
-                  fontWeight: 300,
-                  fontStyle: 'normal',
-                  fontSize: '14px',
-                }}
-              >
-                <button
-                  type="button"
-                  onClick={() => goBackClicked(1)}
-                  disabled={currentNode === null}
-                  className={`rounded-lg inline-flex ${
-                    currentNode
-                      ? 'hover:bg-[#EFEFEF] dark:hover:bg-slate-700'
-                      : 'hover:cursor-default'
-                  }`}
-                >
-                  {currentNode ? (
+        {hideToolBar ? null : (
+          <>
+            <div
+              className="w-full rounded-t-md border-b border-[#322F46] bg-white dark:bg-[#272535]"
+              style={{
+                height: '65px',
+                background: navbarColor,
+                fontFamily: fontFamily,
+              }}
+            >
+              <div className="flex flex-row items-center py-6 ml-[24px] h-full">
+                <div className="flex flex-row w-5/12 justify-start items-center">
+                  <div className="h-full flex">
                     <svg
-                      className="h-[1em] w-[1em] self-center text-[#111111] dark:text-white"
+                      className={getVisualizationLogoClasses(
+                        display === 'Treemap'
+                      )}
+                      onClick={() => setDisplay('Treemap')}
                       width="24"
                       height="24"
                       viewBox="0 0 24 24"
-                      strokeWidth="2"
+                      fill="none"
+                      stroke="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M3.5 5.89477C3.5 5.06635 4.17157 4.39478 5 4.39478H19C19.8284 4.39478 20.5 5.06635 20.5 5.89478V11.9211H3.5V5.89477Z" />
+                      <path d="M3.5 11.9736H13.8684V19.4999H5C4.17157 19.4999 3.5 18.8284 3.5 17.9999V11.9736Z" />
+                      <path d="M13.9211 11.9736H20.5001V17.9999C20.5001 18.8284 19.8285 19.4999 19.0001 19.4999H13.9211V11.9736Z" />
+                      <path d="M8.68433 4.36841V11.4737" />
+                    </svg>
+
+                    <svg
+                      className={getVisualizationLogoClasses(
+                        display === 'BarChart'
+                      )}
+                      onClick={() => setDisplay('BarChart')}
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
                       stroke="currentColor"
                       fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      {' '}
-                      <path stroke="none" d="M0 0h24v24H0z" />{' '}
-                      <line x1="5" y1="12" x2="19" y2="12" />{' '}
-                      <line x1="5" y1="12" x2="9" y2="16" />{' '}
-                      <line x1="5" y1="12" x2="9" y2="8" />
+                      <path d="M3.75 20.25V3.75" />
+                      <path d="M3.75 9.75H15.75C15.75 11.5074 15.75 12.4926 15.75 14.25H3.75" />
+                      <path d="M20.25 5.25H3.75V9.75H20.25V5.25Z" />
+                      <path d="M12.75 14.25V18.75H3.75" />
                     </svg>
-                  ) : (
-                    <HomeIcon className="h-[0.9em] w-[1em] text-[#111111] dark:text-white" />
-                  )}
-
-                  <span className="sr-only">Go back</span>
-                </button>
-
-                <div className="ml-1 text-[#111111] dark:text-gray-300 truncate flex items-center">
-                  {nodesPath.map((node, i) => (
-                    <div key={i} className="flex">
-                      <div className="max-w-[50ch] truncate">
-                        <span
-                          className="cursor-pointer hover:text-gray-600 dark:hover:text-gray-50"
-                          onClick={() =>
-                            goBackClicked(
-                              i === 0
-                                ? nodesPath.length
-                                : nodesPath.length - 1 - i
-                            )
-                          }
-                          dir="auto"
-                        >
-                          {translate && node.translated
-                            ? node.translated
-                            : node.text}
-                        </span>
-                      </div>
-                      {nodesPath.length - 1 !== i && (
-                        <span className="ml-1 mr-1">/</span>
-                      )}
-                    </div>
-                  ))}
-                  {metaOptions && nodesPath.length === 1 ? (
-                    <span className="ml-1 flex text-[#111111] dark:text-gray-300">
-                      <span className="mr-1">/ </span>
-                      <SingleSelect
-                        options={metaOptions}
-                        selectedLabel={currentMetaOption ?? 'text'}
-                        onSelect={metaOptionsChanged}
+                  </div>
+                  {datePickerEnabled ? (
+                    <div>
+                      <DatesFilters
+                        fromDate={fromDate}
+                        fromDateChanged={setFromDate}
+                        toDate={toDate}
+                        toDateChanged={setToDate}
+                        trendPeriods={trendPeriods}
+                        trendPeriodsChanged={trendPeriodsChanged}
                       />
-                    </span>
+                    </div>
                   ) : null}
-                  {(labelsFilters?.length ?? 0) > 0 &&
-                    labelsFilters
-                      ?.filter((label) => label.value)
-                      .map((keyValue, i) => (
-                        <span key={i} className="flex items-center">
-                          <span className="text-gray-500 ml-1">/ </span>
-                          <LabelDisplay
-                            metadataKey={keyValue.key}
-                            value={keyValue.value ?? ''}
-                            countersConfiguration={countersConfigurations}
-                            labelClicked={() => {}}
-                            maxWidth="20ch"
-                            color="#747189"
-                          />
-                          <button
-                            type="button"
-                            onClick={() => labelFilterDeleted(i)}
-                          >
-                            <XMarkIcon className="h-4 w-4 text-gray-400 hover:scale-125 transition duration-100 ease-linear" />
-                            <span className="sr-only">Delete label filter</span>
-                          </button>
-                        </span>
-                      ))}
-                  {totalPagesAmount > 1 && currentPage > 0 && (
-                    <span className="ml-1 text-gray-500">
-                      / {currentPage + 1}
-                    </span>
+
+                  {hideNavFilters ? null : (
+                    <div>
+                      <LabelsFiltersSelect
+                        filterOnlySkills={filterOnlySkills}
+                        selectedLabels={labelsFilters ?? []}
+                        countersConfigurations={countersConfigurations}
+                        labelFilterDeleted={labelFilterDeleted}
+                        selectedMetadataKeyValueChange={(metadataKeyValue) =>
+                          labelClicked(
+                            metadataKeyValue.key,
+                            metadataKeyValue.value!
+                          )
+                        }
+                      />
+                    </div>
                   )}
+                  {customizeEnabled ? (
+                    <div>
+                      <CustomizeTab
+                        currentCounters={counters}
+                        selectedLabels={labels}
+                        countersConfigurations={countersConfigurations}
+                        labelsOptions={Object.keys(metaData).filter(
+                          (key) => key !== CUSTOM_METADATA_KEY
+                        )}
+                        calculationsConfigurations={defaultCalculations}
+                        countersChanged={setCounters}
+                        labelsChanged={setLabels}
+                        selectedSizeAxis={sizeAxis}
+                        sizeAxisChanged={setSizeAxis}
+                        currentColorsAxis={colorAxis}
+                        colorsAxisChanged={setColorAxis}
+                      />
+                    </div>
+                  ) : null}
+                </div>
+
+                <div className="flex flex-row w-full justify-end items-center">
+                  <ArrowPathIcon
+                    onClick={refresh}
+                    data-for="global"
+                    data-tip="Refresh data"
+                    className="h-6 w-6 p-1 mr-1 hover:cursor-pointer focus:outline-none text-[#747189] dark:hover:text-white"
+                  />
+                  {propertiesFilters['hide'] === 'true' ? (
+                    <EyeIcon
+                      onClick={() => setPropertiesFilters({ hide: 'false' })}
+                      data-for="global"
+                      data-tip="Show hidden nodes"
+                      className="h-6 w-6 p-1 mr-1 hover:cursor-pointer focus:outline-none text-[#747189] dark:hover:text-white"
+                    />
+                  ) : (
+                    <EyeSlashIcon
+                      onClick={() => setPropertiesFilters({ hide: 'true' })}
+                      data-for="global"
+                      data-tip="Hide hidden nodes"
+                      className="h-6 w-6 p-1 mr-1 hover:cursor-pointer focus:outline-none bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]"
+                    />
+                  )}
+                  {translationEnabled ? (
+                    <LanguageIcon
+                      onClick={() => setTranslate((translate) => !translate)}
+                      data-for="global"
+                      data-tip={
+                        translate ? 'Disable translation' : 'Enable translation'
+                      }
+                      className={`h-6 w-6 p-1 mr-1 hover:cursor-pointer focus:outline-none ${
+                        translate
+                          ? 'bg-[#EFEFEF] dark:text-white dark:bg-[#322F46]'
+                          : 'text-[#747189] hover:cursor-pointer dark:hover:text-white'
+                      }`}
+                    />
+                  ) : null}
                 </div>
               </div>
-              <div>
-                {!loading && (
-                  <CountersLabelsDisplay
-                    counters={counters}
-                    labels={labels}
-                    metadata={nodes.reduce(
-                      (finalMetadata, currentNode) =>
-                        mergeMetadata(
-                          finalMetadata,
-                          currentNode.metadata,
-                          dataNodes.totalItems
-                        ),
-                      {}
-                    )}
-                    trends={nodes.reduce(
-                      (finalMetadata, currentNode) =>
-                        mergeTrends(finalMetadata, currentNode.trends),
-                      [] as Trend[]
-                    )}
-                    countersConfiguration={countersConfigurations}
-                    labelClicked={labelClicked}
-                    totalItems={dataNodes.totalItems}
-                    totalUniqueItemsStats={dataNodes.uniqueItemsStats}
-                    uniqueItemsStats={dataNodes.uniqueItemsStats}
-                    uniquePropertyName={uniquePropertyName}
-                  />
-                )}
-              </div>
             </div>
-          </div>
+          </>
+        )}
+
+        <div
+          className="w-full grow flex flex-col relative overflow-hidden bg-white dark:bg-[#272535]"
+          style={{ background: navbarColor }}
+        >
+          {hideNavBar ? (
+            <button
+              type="button"
+              onClick={() => goBackClicked(1)}
+              disabled={currentNode === null}
+              className={`rounded-lg absolute z-[50000] left-2 top-2 inline-flex ${
+                currentNode
+                  ? 'hover:bg-[#EFEFEF] dark:hover:bg-slate-700'
+                  : 'hover:cursor-default'
+              }`}
+            >
+              {currentNode ? (
+                <svg
+                  className="h-[1em] w-[1em] self-center text-[#111111] dark:text-white"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  {' '}
+                  <path stroke="none" d="M0 0h24v24H0z" />{' '}
+                  <line x1="5" y1="12" x2="19" y2="12" />{' '}
+                  <line x1="5" y1="12" x2="9" y2="16" />{' '}
+                  <line x1="5" y1="12" x2="9" y2="8" />
+                </svg>
+              ) : null}
+
+              <span className="sr-only">Go back</span>
+            </button>
+          ) : (
+            <>
+              <div
+                className="w-full"
+                style={{
+                  height: '65px',
+                  fontFamily: fontFamily,
+                }}
+              >
+                <div className="flex flex-row items-center ml-[24px] h-full">
+                  <div
+                    className="flex flex-row justify-start mr-4 items-center w-full"
+                    style={{
+                      fontFamily: fontFamily,
+                      fontWeight: 300,
+                      fontStyle: 'normal',
+                      fontSize: '14px',
+                    }}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => goBackClicked(1)}
+                      disabled={currentNode === null}
+                      className={`rounded-lg inline-flex ${
+                        currentNode
+                          ? 'hover:bg-[#EFEFEF] dark:hover:bg-slate-700'
+                          : 'hover:cursor-default'
+                      }`}
+                    >
+                      {currentNode ? (
+                        <svg
+                          className="h-[1em] w-[1em] self-center text-[#111111] dark:text-white"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          strokeWidth="2"
+                          stroke="currentColor"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          {' '}
+                          <path stroke="none" d="M0 0h24v24H0z" />{' '}
+                          <line x1="5" y1="12" x2="19" y2="12" />{' '}
+                          <line x1="5" y1="12" x2="9" y2="16" />{' '}
+                          <line x1="5" y1="12" x2="9" y2="8" />
+                        </svg>
+                      ) : (
+                        <HomeIcon className="h-[0.9em] w-[1em] text-[#111111] dark:text-white" />
+                      )}
+
+                      <span className="sr-only">Go back</span>
+                    </button>
+
+                    <div className="ml-1 text-[#111111] dark:text-gray-300 truncate flex items-center">
+                      {nodesPath.map((node, i) => (
+                        <div key={i} className="flex">
+                          <div className="max-w-[50ch] truncate">
+                            <span
+                              className="cursor-pointer hover:text-gray-600 dark:hover:text-gray-50"
+                              onClick={() =>
+                                goBackClicked(
+                                  i === 0
+                                    ? nodesPath.length
+                                    : nodesPath.length - 1 - i
+                                )
+                              }
+                              dir="auto"
+                            >
+                              {translate && node.translated
+                                ? node.translated
+                                : node.text}
+                            </span>
+                          </div>
+                          {nodesPath.length - 1 !== i && (
+                            <span className="ml-1 mr-1">/</span>
+                          )}
+                        </div>
+                      ))}
+                      {metaOptions && nodesPath.length === 1 ? (
+                        <span className="ml-1 flex text-[#111111] dark:text-gray-300">
+                          <span className="mr-1">/ </span>
+                          <SingleSelect
+                            hideNavigationMenu={hideNavigationMenu}
+                            options={metaOptions}
+                            selectedLabel={currentMetaOption ?? 'text'}
+                            onSelect={metaOptionsChanged}
+                          />
+                        </span>
+                      ) : null}
+                      {(labelsFilters?.length ?? 0) > 0 &&
+                        labelsFilters
+                          ?.filter((label) => label.value)
+                          .map((keyValue, i) => (
+                            <span key={i} className="flex items-center">
+                              <span className="text-gray-500 ml-1">/ </span>
+                              <LabelDisplay
+                                metadataKey={keyValue.key}
+                                value={keyValue.value ?? ''}
+                                countersConfiguration={countersConfigurations}
+                                labelClicked={() => {}}
+                                maxWidth="20ch"
+                                color="#747189"
+                              />
+                              <button
+                                type="button"
+                                onClick={() => labelFilterDeleted(i)}
+                              >
+                                <XMarkIcon className="h-4 w-4 text-gray-400 hover:scale-125 transition duration-100 ease-linear" />
+                                <span className="sr-only">
+                                  Delete label filter
+                                </span>
+                              </button>
+                            </span>
+                          ))}
+                      {totalPagesAmount > 1 && currentPage > 0 && (
+                        <span className="ml-1 text-gray-500">
+                          / {currentPage + 1}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <div>
+                    {!loading && (
+                      <CountersLabelsDisplay
+                        counters={counters}
+                        labels={labels}
+                        metadata={nodes.reduce(
+                          (finalMetadata, currentNode) =>
+                            mergeMetadata(
+                              finalMetadata,
+                              currentNode.metadata,
+                              dataNodes.totalItems
+                            ),
+                          {}
+                        )}
+                        trends={nodes.reduce(
+                          (finalMetadata, currentNode) =>
+                            mergeTrends(finalMetadata, currentNode.trends),
+                          [] as Trend[]
+                        )}
+                        countersConfiguration={countersConfigurations}
+                        labelClicked={labelClicked}
+                        totalItems={dataNodes.totalItems}
+                        totalUniqueItemsStats={dataNodes.uniqueItemsStats}
+                        uniqueItemsStats={dataNodes.uniqueItemsStats}
+                        uniquePropertyName={uniquePropertyName}
+                        hideSignals={hideSignals}
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
           <div className="w-full h-full flex flex-col overflow-x-hidden">
             {loading && (
               <div className="grow w-full justify-center items-center flex">
@@ -858,6 +933,9 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     totalItems={dataNodes.totalItems}
                     totalUniqueItemsStats={dataNodes.uniqueItemsStats}
                     uniquePropertyName={uniquePropertyName}
+                    hideLeafHeader={hideLeafHeader}
+                    hideActionsMenu={hideActionsMenu}
+                    hideSignals={hideSignals}
                   />
                 ) : (
                   <BarChart

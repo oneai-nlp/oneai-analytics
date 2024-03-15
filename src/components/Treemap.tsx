@@ -38,6 +38,9 @@ export const Treemap: FC<TreemapProps> = ({
   totalItems,
   totalUniqueItemsStats,
   uniquePropertyName,
+  hideLeafHeader,
+  hideActionsMenu,
+  hideSignals,
 }) => {
   const mainNode: TreemapNode = useMemo(() => {
     return {
@@ -159,25 +162,28 @@ export const Treemap: FC<TreemapProps> = ({
                 borderColor: borderColor,
               }}
             >
-              <div
-                className="flex"
-                style={{
-                  fontSize: `${countFontSize}px`,
-                }}
-              >
-                <CountersLabelsDisplay
-                  counters={counters}
-                  labels={labels}
-                  metadata={leaf.data.metadata}
-                  trends={leaf.data.trends}
-                  countersConfiguration={countersConfiguration}
-                  labelClicked={labelClicked}
-                  totalItems={totalItems}
-                  totalUniqueItemsStats={totalUniqueItemsStats}
-                  uniquePropertyName={uniquePropertyName}
-                  uniqueItemsStats={leaf.data.metadata_stats}
-                />
-              </div>
+              {hideLeafHeader ? null : (
+                <div
+                  className="flex"
+                  style={{
+                    fontSize: `${countFontSize}px`,
+                  }}
+                >
+                  <CountersLabelsDisplay
+                    counters={counters}
+                    labels={labels}
+                    metadata={leaf.data.metadata}
+                    trends={leaf.data.trends}
+                    countersConfiguration={countersConfiguration}
+                    labelClicked={labelClicked}
+                    totalItems={totalItems}
+                    totalUniqueItemsStats={totalUniqueItemsStats}
+                    uniquePropertyName={uniquePropertyName}
+                    uniqueItemsStats={leaf.data.metadata_stats}
+                    hideSignals={hideSignals}
+                  />
+                </div>
+              )}
               <span
                 className="items-center flex justify-center h-full hover:cursor-pointer"
                 onClick={() => nodeClicked(leaf.data)}
@@ -206,16 +212,18 @@ export const Treemap: FC<TreemapProps> = ({
                     : leaf.data.item_original_text}
                 </span>
               </span>
-              <div
-                data-for="global-actions"
-                data-tip
-                data-event="click"
-                className={`self-end hover:cursor-pointer hover:text-white ${
-                  actionsVisible === index ? 'visible' : 'invisible'
-                }`}
-              >
-                <EllipsisHorizontalIcon className="h-4 w-4" />
-              </div>
+              {hideActionsMenu ? null : (
+                <div
+                  data-for="global-actions"
+                  data-tip
+                  data-event="click"
+                  className={`self-end hover:cursor-pointer hover:text-white ${
+                    actionsVisible === index ? 'visible' : 'invisible'
+                  }`}
+                >
+                  <EllipsisHorizontalIcon className="h-4 w-4" />
+                </div>
+              )}
             </div>
           </div>
         </foreignObject>

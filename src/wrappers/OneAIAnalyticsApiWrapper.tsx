@@ -56,6 +56,13 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   filterOnlySkills = false,
   startDate = undefined,
   endDate = undefined,
+  hideNavBar = false,
+  hideToolBar = false,
+  hideLeafHeader = false,
+  hideActionsMenu = false,
+  hideNavFilters = false,
+  hideSignals = false,
+  hideNavigationMenu = false,
   ...rest
 }) => {
   domain = resolveDomain(domain);
@@ -668,6 +675,13 @@ export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
       endDate={endDate}
       uniqueMetaKey={uniquePropertyName}
       filterOnlySkills={filterOnlySkills}
+      hideNavBar={hideNavBar}
+      hideToolBar={hideToolBar}
+      hideLeafHeader={hideLeafHeader}
+      hideActionsMenu={hideActionsMenu}
+      hideNavFilters={hideNavFilters}
+      hideSignals={hideSignals}
+      hideNavigationMenu={hideNavigationMenu}
       {...rest}
     />
   ) : null;
