@@ -6,12 +6,12 @@ export default function SingleSelect({
   options,
   selectedLabel,
   onSelect,
-  navigationDropDownEnabled = true,
+  hideNavigationMenu = true,
 }: {
   options: string[];
   selectedLabel: string;
   onSelect: (selectedLabel: string) => void;
-  navigationDropDownEnabled?: boolean;
+  hideNavigationMenu?: boolean;
 }) {
   return (
     <Listbox>
@@ -20,7 +20,7 @@ export default function SingleSelect({
           <span className="text-[#111111] dark:text-gray-300 text-sm mr-1">
             {selectedLabel}
           </span>
-          {navigationDropDownEnabled ? (
+          {hideNavigationMenu ? (
             <span>
               <ChevronDownIcon
                 className="h-4 w-4 text-gray-500 dark:text-gray-200"
@@ -29,7 +29,7 @@ export default function SingleSelect({
             </span>
           ) : null}
         </Listbox.Button>
-        {navigationDropDownEnabled ? (
+        {hideNavigationMenu ? (
           <Transition
             as={Fragment}
             leave="transition ease-in duration-100"

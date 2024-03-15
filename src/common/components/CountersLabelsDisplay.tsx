@@ -22,7 +22,7 @@ export default function CountersLabelsDisplay({
   totalUniqueItemsStats,
   uniqueItemsStats,
   uniquePropertyName,
-  signalsEnabled,
+  hideSignals,
 }: {
   counters: CounterType[];
   labels: string[];
@@ -38,7 +38,7 @@ export default function CountersLabelsDisplay({
   totalUniqueItemsStats?: UniqueItemsStats;
   uniqueItemsStats?: UniqueItemsStats;
   uniquePropertyName?: string;
-  signalsEnabled?: boolean;
+  hideSignals?: boolean;
 }) {
   return (
     <span className="truncate flex items-center">
@@ -57,7 +57,7 @@ export default function CountersLabelsDisplay({
               totalUniqueItemsStats={totalUniqueItemsStats}
               uniqueItemsStats={uniqueItemsStats}
               uniquePropertyName={uniquePropertyName}
-              signalsEnabled={signalsEnabled}
+              hideSignals={hideSignals}
             />
           </div>
         ))}
