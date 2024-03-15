@@ -116,8 +116,15 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   metaOptionsChanged = () => {},
   refresh = () => {},
   uniqueMetaKey: uniquePropertyName,
-  hideNavBar,
-  hideToolBar,
+  hideNavBar = false,
+  hideToolBar = false,
+  hideLeafHeader = false,
+  hideActionsMenu = false,
+  hideNavFilters = true,
+  hideSignals = true,
+  hideNavigationMenu = true,
+  tooltipOffsetLeft = 0,
+  tooltipOffsetTop = 0,
 }) => {
   const [display, setDisplay] = useState('Treemap' as Displays);
   const { width, height, ref } = useResizeDetector();
@@ -391,11 +398,25 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
         }`}
         style={{ background }}
       >
-        <ReactTooltip id="global" />
+        <ReactTooltip
+          id="global"
+          overridePosition={({ left, top }) => {
+            return {
+              left: left - tooltipOffsetLeft,
+              top: top - tooltipOffsetTop,
+            };
+          }}
+        />
         <ReactTooltip
           id="global-actions"
           place="top"
           effect="solid"
+          overridePosition={({ left, top }) => {
+            return {
+              left: left - tooltipOffsetLeft,
+              top: top - tooltipOffsetTop,
+            };
+          }}
           clickable={true}
           className="!p-1"
         >
@@ -437,7 +458,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
           searchSimilarClusters={searchSimilarClusters}
           translationEnabled={translate}
         />
-        {!hideToolBar && (
+        {hideToolBar ? null : (
           <>
             <div
               className="w-full rounded-t-md border-b border-[#322F46] bg-white dark:bg-[#272535]"
@@ -499,20 +520,22 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     </div>
                   ) : null}
 
-                  <div>
-                    <LabelsFiltersSelect
-                      filterOnlySkills={filterOnlySkills}
-                      selectedLabels={labelsFilters ?? []}
-                      countersConfigurations={countersConfigurations}
-                      labelFilterDeleted={labelFilterDeleted}
-                      selectedMetadataKeyValueChange={(metadataKeyValue) =>
-                        labelClicked(
-                          metadataKeyValue.key,
-                          metadataKeyValue.value!
-                        )
-                      }
-                    />
-                  </div>
+                  {hideNavFilters ? null : (
+                    <div>
+                      <LabelsFiltersSelect
+                        filterOnlySkills={filterOnlySkills}
+                        selectedLabels={labelsFilters ?? []}
+                        countersConfigurations={countersConfigurations}
+                        labelFilterDeleted={labelFilterDeleted}
+                        selectedMetadataKeyValueChange={(metadataKeyValue) =>
+                          labelClicked(
+                            metadataKeyValue.key,
+                            metadataKeyValue.value!
+                          )
+                        }
+                      />
+                    </div>
+                  )}
                   {customizeEnabled ? (
                     <div>
                       <CustomizeTab
@@ -577,10 +600,43 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
         )}
 
         <div
-          className="w-full grow flex flex-col overflow-hidden bg-white dark:bg-[#272535]"
+          className="w-full grow flex flex-col relative overflow-hidden bg-white dark:bg-[#272535]"
           style={{ background: navbarColor }}
         >
-          {!hideNavBar && (
+          {hideNavBar ? (
+            <button
+              type="button"
+              onClick={() => goBackClicked(1)}
+              disabled={currentNode === null}
+              className={`rounded-lg absolute z-[50000] left-2 top-2 inline-flex ${
+                currentNode
+                  ? 'hover:bg-[#EFEFEF] dark:hover:bg-slate-700'
+                  : 'hover:cursor-default'
+              }`}
+            >
+              {currentNode ? (
+                <svg
+                  className="h-[1em] w-[1em] self-center text-[#111111] dark:text-white"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  {' '}
+                  <path stroke="none" d="M0 0h24v24H0z" />{' '}
+                  <line x1="5" y1="12" x2="19" y2="12" />{' '}
+                  <line x1="5" y1="12" x2="9" y2="16" />{' '}
+                  <line x1="5" y1="12" x2="9" y2="8" />
+                </svg>
+              ) : null}
+
+              <span className="sr-only">Go back</span>
+            </button>
+          ) : (
             <>
               <div
                 className="w-full"
@@ -663,6 +719,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                         <span className="ml-1 flex text-[#111111] dark:text-gray-300">
                           <span className="mr-1">/ </span>
                           <SingleSelect
+                            hideNavigationMenu={hideNavigationMenu}
                             options={metaOptions}
                             selectedLabel={currentMetaOption ?? 'text'}
                             onSelect={metaOptionsChanged}
@@ -726,6 +783,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                         totalUniqueItemsStats={dataNodes.uniqueItemsStats}
                         uniqueItemsStats={dataNodes.uniqueItemsStats}
                         uniquePropertyName={uniquePropertyName}
+                        hideSignals={hideSignals}
                       />
                     )}
                   </div>
@@ -875,6 +933,9 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     totalItems={dataNodes.totalItems}
                     totalUniqueItemsStats={dataNodes.uniqueItemsStats}
                     uniquePropertyName={uniquePropertyName}
+                    hideLeafHeader={hideLeafHeader}
+                    hideActionsMenu={hideActionsMenu}
+                    hideSignals={hideSignals}
                   />
                 ) : (
                   <BarChart
