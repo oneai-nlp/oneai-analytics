@@ -458,7 +458,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
           searchSimilarClusters={searchSimilarClusters}
           translationEnabled={translate}
         />
-        {!hideToolBar && (
+        {hideToolBar ? null : (
           <>
             <div
               className="w-full rounded-t-md border-b border-[#322F46] bg-white dark:bg-[#272535]"
@@ -600,7 +600,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
         )}
 
         <div
-          className="w-full grow flex flex-col overflow-hidden bg-white dark:bg-[#272535]"
+          className="w-full grow flex flex-col relative overflow-hidden bg-white dark:bg-[#272535]"
           style={{ background: navbarColor }}
         >
           {hideNavBar ? (
