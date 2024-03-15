@@ -46,8 +46,8 @@ const nodeToPageCache: Map<string, number> = new Map();
  */
 export const OneAIAnalyticsApiWrapper: FC<OneAIAnalyticsApiWrapperProps> = ({
   domain = 'prod',
-  apiKey = 'b31b6b0c-8473-4631-8158-ddd2d4d524f7',
-  collection = 'NewsNYC@xvtxPIowx0SbgNY6lVoCaLwuiAW2',
+  apiKey = '',
+  collection = '',
   collectionDisplayName = collection,
   refreshToken = '',
   uniqueMetaKey: uniquePropertyName,
