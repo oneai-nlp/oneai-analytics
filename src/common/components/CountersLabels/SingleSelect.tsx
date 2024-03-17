@@ -20,14 +20,14 @@ export default function SingleSelect({
           <span className="text-[#111111] dark:text-gray-300 text-sm mr-1">
             {selectedLabel}
           </span>
-          {hideNavigationMenu ? (
+          {hideNavigationMenu ? null : (
             <span>
               <ChevronDownIcon
                 className="h-4 w-4 text-gray-500 dark:text-gray-200"
                 aria-hidden="true"
               />
             </span>
-          ) : null}
+          )}
         </Listbox.Button>
         {hideNavigationMenu ? null : (
           <Transition
