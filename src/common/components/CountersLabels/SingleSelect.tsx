@@ -6,7 +6,7 @@ export default function SingleSelect({
   options,
   selectedLabel,
   onSelect,
-  hideNavigationMenu = true,
+  hideNavigationMenu = false,
 }: {
   options: string[];
   selectedLabel: string;
@@ -29,7 +29,7 @@ export default function SingleSelect({
             </span>
           ) : null}
         </Listbox.Button>
-        {hideNavigationMenu ? (
+        {hideNavigationMenu ? null : (
           <Transition
             as={Fragment}
             leave="transition ease-in duration-100"
@@ -48,7 +48,7 @@ export default function SingleSelect({
               ))}
             </Listbox.Options>
           </Transition>
-        ) : null}
+        )}
       </div>
     </Listbox>
   );
