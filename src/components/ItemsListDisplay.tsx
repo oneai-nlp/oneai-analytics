@@ -53,11 +53,10 @@ export const ItemsListDisplay: FC<ItemsDisplayComponentProps> = ({
 
             const onClickRow = () => {
               if (chatLogEnabled) {
-                console.log('Clicked ::', item);
                 try {
                   window.postMessage(
                     {
-                      type: 'chatLog',
+                      event: 'OPEN_CHAT_LOG',
                       payload: {
                         item,
                       },
