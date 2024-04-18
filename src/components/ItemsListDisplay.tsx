@@ -15,6 +15,7 @@ export const ItemsListDisplay: FC<ItemsDisplayComponentProps> = ({
   countersConfiguration,
   labelClicked,
   translate,
+  chatLogEnabled,
   totalItems,
 }) => {
   return (
@@ -49,8 +50,35 @@ export const ItemsListDisplay: FC<ItemsDisplayComponentProps> = ({
         <tbody>
           {items.map((item, i) => {
             const item_date = parseDate(item.item_timestamp);
+
+            const onClickRow = () => {
+              if (chatLogEnabled) {
+                console.log('Clicked ::', item);
+                try {
+                  window.postMessage(
+                    {
+                      type: 'chatLog',
+                      payload: {
+                        item,
+                      },
+                    },
+                    '*'
+                  );
+                } catch (e) {}
+              }
+            };
+
             return (
-              <tr key={i}>
+              <tr
+                key={i}
+                role={chatLogEnabled ? 'button' : undefined}
+                onClick={chatLogEnabled ? onClickRow : undefined}
+                className={
+                  chatLogEnabled
+                    ? 'hover:bg-slate-500 dark:hover:bg-slate-800 cursor-pointer'
+                    : ''
+                }
+              >
                 <td className="max-w-[60ch] truncate p-1">
                   {translate &&
                   item.item_translated_text !== undefined &&

@@ -116,6 +116,7 @@ export interface OneAIUserInput {
   hideSignals?: boolean;
   tooltipOffsetLeft?: number;
   tooltipOffsetTop?: number;
+  chatLogEnabled?: boolean;
 }
 
 export interface OneAiAnalyticsProps extends OneAIUserInput {
@@ -206,6 +207,7 @@ export interface ItemsDisplayComponentProps {
   labelClicked: (key: string, value: string) => void;
   translate: boolean;
   totalItems: number;
+  chatLogEnabled: boolean;
 }
 
 export interface UploadParams {
