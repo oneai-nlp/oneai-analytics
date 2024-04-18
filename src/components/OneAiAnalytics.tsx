@@ -79,6 +79,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
   nextPageClicked = () => {},
   prevPageClicked = () => {},
   itemsDisplay = ItemsListDisplay,
+  chatLogEnabled = false,
   darkMode = true,
   background,
   treemapBigColor = darkMode ? '#322F46' : '#F7F7F7',
@@ -879,6 +880,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                     items: dataNodes.nodes.map(
                       (dataNode) => dataNode.data as Item
                     ),
+                    chatLogEnabled: chatLogEnabled,
                     bgColor: navbarColor,
                     textColor: textColor,
                     counters: counters,
