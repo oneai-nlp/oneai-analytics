@@ -900,11 +900,7 @@ async function fetchApi<T>(
         totalPages: 0,
         totalItems: 0,
         data: [],
-        error:
-          'Error fetching data, status: ' +
-          res.status +
-          ': ' +
-          (await res.text()),
+        error: '',
       };
 
     const json = await res.json();
@@ -924,7 +920,7 @@ async function fetchApi<T>(
       totalPages: 0,
       totalItems: 0,
       data: [],
-      error: `Error fetching data, ${error}`,
+      error: `${error}`,
     };
   }
 }
