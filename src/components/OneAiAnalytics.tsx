@@ -901,8 +901,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                         type: !currentNode
                           ? 'Cluster'
                           : currentNode.type === 'Cluster'
-                          ? 'Phrase'
-                          : 'Item',
+                            ? 'Phrase'
+                            : 'Item',
                         id: node.id,
                       });
                     }}
@@ -924,8 +924,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                         type: !currentNode
                           ? 'Cluster'
                           : currentNode.type === 'Cluster'
-                          ? 'Phrase'
-                          : 'Item',
+                            ? 'Phrase'
+                            : 'Item',
                         id: node.id,
                         text: node.text ?? '',
                         properties: node.properties,
@@ -950,8 +950,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                         type: !currentNode
                           ? 'Cluster'
                           : currentNode.type === 'Cluster'
-                          ? 'Phrase'
-                          : 'Item',
+                            ? 'Phrase'
+                            : 'Item',
                         id: node.id,
                       });
                     }}
@@ -969,8 +969,8 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                         type: !currentNode
                           ? 'Cluster'
                           : currentNode.type === 'Cluster'
-                          ? 'Phrase'
-                          : 'Item',
+                            ? 'Phrase'
+                            : 'Item',
                         id: node.id,
                         text: node.text ?? '',
                         properties: node.properties,
@@ -1034,10 +1034,13 @@ function mergeMetadata(
 ): MetaData {
   const newMetadata: MetaData = {};
   Array.from(
-    new Set([...Object.keys(metadata1), ...Object.keys(metadata2)])
+    new Set([...Object.keys(metadata1 || {}), ...Object.keys(metadata2 || {})])
   ).forEach((key) => {
-    if (totalItems === undefined || key !== CUSTOM_METADATA_KEY)
-      newMetadata[key] = [...(metadata1[key] ?? []), ...(metadata2[key] ?? [])];
+    if (totalItems === undefined || key !== CUSTOM_METADATA_KEY) {
+      const value1 = Array.isArray(metadata1[key]) ? metadata1[key] : [];
+      const value2 = Array.isArray(metadata2[key]) ? metadata2[key] : [];
+      newMetadata[key] = [...value1, ...value2];
+    }
   });
 
   if (totalItems === undefined) return newMetadata;
