@@ -871,7 +871,7 @@ export const OneAiAnalytics: FC<OneAiAnalyticsProps> = ({
                           ))}
                         </span>
                       ) : (
-                        ' Collection is empty'
+                        "Collection wasn't found. Please verify the details are correct or reach out of assistance"
                       )
                     ) : null}
                   </p>

@@ -10,6 +10,7 @@ import SingleSelect from '../common/components/UploadCSVComponents/SingleSelect'
 import { UploadParams } from '../common/types/componentsInputs';
 import { resolveDomain } from '../common/utils/externalInputs';
 import { OneAiLoader } from '../common/components/OneAiLoader';
+import { renderToStaticMarkup } from 'react-dom/server';
 
 const allowedExtensions = ['csv'];
 
@@ -49,6 +50,7 @@ const OneAiUpload: FC<UploadParams> = ({
   );
   const currentParser = useRef(null as Papa.Parser | null);
   const initiated = useRef(false);
+  const fileInputRef = useRef(null as HTMLInputElement | null);
 
   useEffect(() => {
     if (!taskId || !uploaded) return;
@@ -321,7 +323,6 @@ const OneAiUpload: FC<UploadParams> = ({
       }
 
       const statusData = await uploadRes.json();
-      console.log('file uploaded', statusData);
       setUploadStatus(statusData['status']);
       setTaskId(statusData['task_id']);
     } catch (e) {
@@ -369,6 +370,10 @@ const OneAiUpload: FC<UploadParams> = ({
       });
     }
   };
+
+  const svgString = renderToStaticMarkup(<UploadCSVBorder />);
+  const svgBlob = new Blob([svgString], { type: 'image/svg+xml' });
+  const svgUrl = URL.createObjectURL(svgBlob);
 
   return (
     <div
@@ -719,48 +724,49 @@ const OneAiUpload: FC<UploadParams> = ({
           </div>
         ) : (
           <>
-            <span className={`${uploaded ? 'mt-4' : 'mt-36'}`}>
+            <span className={`text-2xl pb-16 ${uploaded ? 'mt-4' : 'mt-36'}`}>
               {collectionItemsAmount && collectionItemsAmount > 0
                 ? `Select file to add items to your collection: ${collection}`
                 : 'Your collection is empty, add items to populate it'}
             </span>
-            <div className="mt-4 w-96">
+            <div className="mt-4">
               <div className="flex items-center justify-center w-full">
                 <label
+                  style={{
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: '100% 100%',
+                    backgroundImage: `url("${svgUrl}")`,
+                  }}
                   htmlFor="dropzone-file"
-                  className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                  className="flex relative flex-col items-center justify-center h-[126px]  w-[300px] md:w-[670px] md:h-[282px] rounded-lg cursor-pointer bg-[#4D4DFE] hover:bg-opacity-10 bg-opacity-5"
                 >
-                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                    <svg
-                      aria-hidden="true"
-                      className="w-10 h-10 mb-3 text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                      ></path>
-                    </svg>
-                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                      <span className="font-semibold">Click to upload CSV</span>{' '}
-                      or drag and drop
+                  <div className="flex flex-col items-center justify-center space-y-6 pt-5 pb-6 w-full">
+                    <p className="mb-2 text-sm text-white">
+                      <span className="text-2xl">Upload CSV file</span>
                     </p>
-                    <ul className="w-full flex-wrap list-disc">
-                      <li className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-                        Up to 255 characters per cell
-                      </li>
-                      <li className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-                        Up to 1GB
-                      </li>
-                      <li className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-                        Up to 250 columns
-                      </li>
-                    </ul>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (!fileInputRef.current) {
+                          return;
+                        }
+                        fileInputRef.current.click();
+                      }}
+                      className="py-3 px-4 bg-[#435BFF] rounded-md"
+                    >
+                      Browse file
+                    </button>
+                    <div className="flex flex-row items-center justify-items-center space-x-8 text-xs w-[60%]">
+                      <ul className="flex-1 flex-wrap list-disc list-inside text-gray-500 dark:text-gray-400">
+                        <li className="mt-2">Up to 255 characters per cell</li>
+                        <li className="mt-2">Up to 250 columns</li>
+                      </ul>
+                      <ul className="flex-1 flex-wrap list-disc list-inside text-gray-500 dark:text-gray-400">
+                        <li className="mt-2">Up to 1GB</li>
+                        <li className="mt-2">The date in a supported format</li>
+                      </ul>
+                    </div>
                   </div>
                   <input
                     onDrop={handleDragOver}
@@ -768,6 +774,7 @@ const OneAiUpload: FC<UploadParams> = ({
                     id="dropzone-file"
                     type="file"
                     className="hidden"
+                    ref={fileInputRef}
                   />
                 </label>
               </div>
@@ -776,6 +783,30 @@ const OneAiUpload: FC<UploadParams> = ({
         )}
       </div>
     </div>
+  );
+};
+
+const UploadCSVBorder = () => {
+  return (
+    <svg
+      width="669"
+      height="282"
+      viewBox="0 0 669 282"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect
+        x="0.5"
+        y="0.5"
+        width="668"
+        height="281"
+        rx="9.5"
+        fill="#4D4DFE"
+        fill-opacity="0.05"
+        stroke="#4D4DFE"
+        stroke-dasharray="19 19"
+      />
+    </svg>
   );
 };
 
